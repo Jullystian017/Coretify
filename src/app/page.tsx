@@ -200,12 +200,12 @@ export default function Home() {
         <div className="relative z-10 w-full bg-[#08080a]/35">
           <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
             {/* Left spacer column with dashed border on the right */}
-            <div className="col-span-1 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-1 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
 
             {/* Ask Coretify tab */}
             <button
               onClick={() => setActiveSectionTab("agent")}
-              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "agent"
+              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "agent"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
                 }`}
@@ -216,7 +216,7 @@ export default function Home() {
             {/* Data model tab */}
             <button
               onClick={() => setActiveSectionTab("data")}
-              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "data"
+              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "data"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
                 }`}
@@ -227,7 +227,7 @@ export default function Home() {
             {/* Workflows tab */}
             <button
               onClick={() => setActiveSectionTab("tools")}
-              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "tools"
+              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "tools"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
                 }`}
@@ -238,7 +238,7 @@ export default function Home() {
             {/* Reporting tab with dashed border on the right */}
             <button
               onClick={() => setActiveSectionTab("governance")}
-              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "governance"
+              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "governance"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
                 }`}
@@ -253,8 +253,8 @@ export default function Home() {
 
           {/* Extension row to project vertical lines down to the dashboard */}
           <div className="mx-auto max-w-[1360px] grid grid-cols-10 h-8">
-            <div className="col-span-1 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
-            <div className="col-span-8 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-1 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-8 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
             <div className="col-span-1" />
           </div>
         </div>
@@ -540,9 +540,9 @@ export default function Home() {
 
       </section>
 
-      {/* BRAND LOGOS SECTION (No side grid lines, full width) */}
-      <section className="relative border-b border-slate-900 w-full bg-[#070708]/20 py-10">
-        <div className="mx-auto max-w-[1360px] px-8">
+      {/* BRAND LOGOS SECTION (Inside the vertical grid lines) */}
+      <section className="relative w-full bg-[#070708]/20 py-10">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/80 px-8">
           <div className="flex flex-wrap items-center justify-between gap-x-12 gap-y-6 w-full text-white">
             {/* Vercel */}
             <div className="flex items-center gap-2 select-none">
@@ -611,10 +611,10 @@ export default function Home() {
 
       {/* SECTION: Tab Switcher (Introducing Default clone) */}
       <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
 
           {/* Section Header Band */}
-          <div className="border-b border-slate-850/40 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
               <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
@@ -629,164 +629,177 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Section Content Area */}
-          <div className="p-8 sm:p-12 lg:p-16">
-            {/* Section Header */}
-            <div className="text-left mb-12 space-y-4">
-              <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
-                The intelligent system that never sleeps.
-              </h2>
-              <p className="text-lg sm:text-2xl text-zinc-400 font-normal max-w-3xl leading-relaxed">
-                Picks up leads at 2am. Catches renewals before they slip. Hands you the answer before you ask.
+          {/* Section Title Block (spanning full width) */}
+          <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4 bg-transparent">
+            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
+              The intelligent system that never sleeps.
+            </h2>
+            <p className="text-lg sm:text-2xl text-zinc-400 font-normal max-w-3xl leading-relaxed">
+              Picks up leads at 2am. Catches renewals before they slip. Hands you the answer before you ask.
+            </p>
+          </div>
+
+          {/* 3-Column Visual Features Layout (Dark Mode Playbook version - Grid integrated with outer vertical borders and spacer stripes) */}
+          <div className="grid grid-cols-1 lg:grid-cols-[45px_3.1fr_5.1fr_2.1fr_45px] w-full bg-[#09090b]/40 shadow-2xl">
+            
+            {/* Left Spacer with diagonal stripes */}
+            <div 
+              className="hidden lg:block border-r border-t border-slate-850/80 border-t-dashed"
+              style={{ 
+                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
+              }} 
+            />
+
+            {/* Column 1: Revenue agents text */}
+            <div className="p-8 sm:p-10 flex flex-col justify-center text-left border-b lg:border-b-0 lg:border-r border-t border-slate-850/80 bg-[#08080a]/20">
+              <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                Revenue agents at your command.
+              </h3>
+              <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal">
+                It's your playbook. Agents work every account, capture every signal, and move every deal forward.
               </p>
             </div>
 
-            {/* 3-Column Visual Features Layout (Dark Mode Playbook version) */}
-            <div className="border border-slate-900 bg-[#09090b]/40 rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 w-full shadow-2xl">
+            {/* Column 2: Interactive workflow visualizer */}
+            <div className="p-8 sm:p-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-t border-slate-850/80 relative min-h-[420px] bg-[#08080a]/60 bg-[radial-gradient(#1e293b_1.5px,transparent_1.5px)] [background-size:20px_20px]">
               
-              {/* Column 1: Revenue agents text */}
-              <div className="lg:col-span-4 p-8 sm:p-10 flex flex-col justify-center text-left border-b lg:border-b-0 lg:border-r border-slate-900 bg-[#08080a]/20">
-                <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                  Revenue agents at your command.
-                </h3>
-                <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal">
-                  It's your playbook. Agents work every account, capture every signal, and move every deal forward.
-                </p>
+              {/* Node 1 */}
+              <div className="w-full max-w-[290px] relative z-10">
+                <div className="flex items-center justify-between w-full mb-2 px-1">
+                  <span className="text-[10px] text-zinc-500 font-semibold flex items-center gap-1.5 select-none">
+                    <Settings2 className="h-3 w-3 text-zinc-650" /> Trigger
+                  </span>
+                  <span className="text-[10px] bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 px-2 py-0.5 rounded-full font-medium flex items-center gap-1 select-none">
+                    <Check className="h-2.5 w-2.5" /> Triggered
+                  </span>
+                </div>
+                
+                <div className="border border-emerald-500/25 bg-[#09090b]/90 rounded-xl p-4 w-full shadow-lg relative group transition-all duration-300 hover:border-emerald-500/40">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="h-6 w-6 rounded-lg bg-[#0e0e11] border border-zinc-800 flex items-center justify-center text-zinc-400">
+                        <Database className="h-3.5 w-3.5" />
+                      </div>
+                      <span className="text-[12px] font-semibold text-white">When Deal updated</span>
+                    </div>
+                    <span className="text-[9px] bg-zinc-900 border border-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-mono">Deals</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-500 mt-2.5 font-normal leading-normal">
+                    Trigger when a Deal's status is updated
+                  </p>
+                </div>
               </div>
 
-              {/* Column 2: Interactive workflow visualizer */}
-              <div className="lg:col-span-5 p-8 sm:p-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-900 relative min-h-[420px] bg-[#08080a]/60 bg-[radial-gradient(#1e293b_1.5px,transparent_1.5px)] [background-size:20px_20px]">
-                
-                {/* Node 1 */}
-                <div className="w-full max-w-[290px] relative z-10">
-                  <div className="flex items-center justify-between w-full mb-2 px-1">
-                    <span className="text-[10px] text-zinc-500 font-semibold flex items-center gap-1.5 select-none">
-                      <Settings2 className="h-3 w-3 text-zinc-650" /> Trigger
-                    </span>
-                    <span className="text-[10px] bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 px-2 py-0.5 rounded-full font-medium flex items-center gap-1 select-none">
-                      <Check className="h-2.5 w-2.5" /> Triggered
-                    </span>
-                  </div>
-                  
-                  <div className="border border-emerald-500/25 bg-[#09090b]/90 rounded-xl p-4 w-full shadow-lg relative group transition-all duration-300 hover:border-emerald-500/40">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="h-6 w-6 rounded-lg bg-[#0e0e11] border border-zinc-800 flex items-center justify-center text-zinc-400">
-                          <Database className="h-3.5 w-3.5" />
-                        </div>
-                        <span className="text-[12px] font-semibold text-white">When Deal updated</span>
-                      </div>
-                      <span className="text-[9px] bg-zinc-900 border border-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-mono">Deals</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-500 mt-2.5 font-normal leading-normal">
-                      Trigger when a Deal's status is updated
-                    </p>
-                  </div>
-                </div>
-
-                {/* Connection Line */}
-                <div className="flex flex-col items-center justify-center my-3.5 h-12 w-full relative z-10">
-                  <div className="w-[1.5px] h-full bg-emerald-500/30" />
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-emerald-400 border-2 border-zinc-950 shadow-md shadow-emerald-500/20" />
-                </div>
-
-                {/* Node 2 */}
-                <div className="w-full max-w-[290px] relative z-10">
-                  <div className="flex items-center justify-between w-full mb-2 px-1">
-                    <span className="text-[10px] text-zinc-500 font-semibold flex items-center gap-1.5 opacity-0">
-                      <Settings2 className="h-3 w-3" /> Dummy
-                    </span>
-                    <span className="text-[10px] bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 px-2 py-0.5 rounded-full font-medium flex items-center gap-1 select-none">
-                      <Check className="h-2.5 w-2.5" /> Completed
-                    </span>
-                  </div>
-                  
-                  <div className="border border-emerald-500/25 bg-[#09090b]/90 rounded-xl p-4 w-full shadow-lg relative group transition-all duration-300 hover:border-emerald-500/40">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="h-6 w-6 rounded-lg bg-[#0e0e11] border border-zinc-800 flex items-center justify-center text-zinc-400">
-                          <Network className="h-3.5 w-3.5" />
-                        </div>
-                        <span className="text-[12px] font-semibold text-white">Switch</span>
-                      </div>
-                      <span className="text-[9px] bg-zinc-900 border border-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-mono">Condition</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-500 mt-2.5 font-normal leading-normal">
-                      Route to upsell or nurture
-                    </p>
-                  </div>
-                </div>
-
-                {/* Split branching lines at bottom */}
-                <div className="flex flex-col items-center justify-center mt-3.5 w-full relative z-10">
-                  <div className="w-[1.5px] h-6 bg-emerald-500/30" />
-                  <div className="flex justify-between w-[220px] border-t border-dashed border-emerald-500/25 pt-2 text-[9px] text-zinc-500 font-mono">
-                    <span className="flex items-center gap-1 select-none"><span className="h-1 w-1 rounded-full bg-emerald-500/50" /> Upsell</span>
-                    <span className="flex items-center gap-1 select-none"><span className="h-1 w-1 rounded-full bg-zinc-500/50" /> Nurture</span>
-                  </div>
-                </div>
-
+              {/* Connection Line */}
+              <div className="flex flex-col items-center justify-center my-3.5 h-12 w-full relative z-10">
+                <div className="w-[1.5px] h-full bg-emerald-500/30" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-emerald-400 border-2 border-zinc-950 shadow-md shadow-emerald-500/20" />
               </div>
 
-              {/* Column 3: Playbooks list */}
-              <div className="lg:col-span-3 p-8 sm:p-10 flex flex-col justify-center gap-3 bg-[#08080a]/30 relative overflow-hidden">
-                
-                {/* Pill 1: Re-engage cold leads */}
-                <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/20 bg-zinc-950/20 text-[11px] text-zinc-450 opacity-30 select-none">
-                  <Mail className="h-3.5 w-3.5 shrink-0" />
-                  <span>Re-engage cold leads</span>
+              {/* Node 2 */}
+              <div className="w-full max-w-[290px] relative z-10">
+                <div className="flex items-center justify-between w-full mb-2 px-1">
+                  <span className="text-[10px] text-zinc-500 font-semibold flex items-center gap-1.5 opacity-0">
+                    <Settings2 className="h-3 w-3" /> Dummy
+                  </span>
+                  <span className="text-[10px] bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 px-2 py-0.5 rounded-full font-medium flex items-center gap-1 select-none">
+                    <Check className="h-2.5 w-2.5" /> Completed
+                  </span>
                 </div>
                 
-                {/* Pill 2: MQL lead routing */}
-                <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/20 bg-zinc-950/20 text-[11px] text-zinc-450 opacity-30 select-none">
-                  <Zap className="h-3.5 w-3.5 shrink-0" />
-                  <span>MQL lead routing</span>
+                <div className="border border-emerald-500/25 bg-[#09090b]/90 rounded-xl p-4 w-full shadow-lg relative group transition-all duration-300 hover:border-emerald-500/40">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="h-6 w-6 rounded-lg bg-[#0e0e11] border border-zinc-800 flex items-center justify-center text-zinc-400">
+                        <Network className="h-3.5 w-3.5" />
+                      </div>
+                      <span className="text-[12px] font-semibold text-white">Switch</span>
+                    </div>
+                    <span className="text-[9px] bg-zinc-900 border border-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-mono">Condition</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-500 mt-2.5 font-normal leading-normal">
+                    Route to upsell or nurture
+                  </p>
                 </div>
-                
-                {/* Pill 3: Onboarding hand-off */}
-                <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/40 bg-zinc-950/40 text-[11px] text-zinc-350 opacity-60 select-none">
-                  <Building2 className="h-3.5 w-3.5 shrink-0" />
-                  <span>Onboarding hand-off</span>
-                </div>
-                
-                {/* Pill 4: New Deal email campaign (ACTIVE HIGHLIGHT) */}
-                <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-emerald-500/35 bg-emerald-500/5 text-[11.5px] text-white font-semibold shadow-[0_0_15px_rgba(16,185,129,0.08)] select-none">
-                  <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                  <Mail className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                  <span>New Deal email campaign</span>
-                </div>
-                
-                {/* Pill 5: Lead form submissions */}
-                <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/50 bg-zinc-950/40 text-[11px] text-zinc-350 opacity-70 select-none">
-                  <FileText className="h-3.5 w-3.5 shrink-0" />
-                  <span>Lead form submissions</span>
-                </div>
-                
-                {/* Pill 6: Monitor customer health */}
-                <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/20 bg-zinc-950/20 text-[11px] text-zinc-450 opacity-40 select-none">
-                  <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
-                  <span>Monitor customer health</span>
-                </div>
-                
-                {/* Pill 7: Identify expansion opportunity */}
-                <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/20 bg-zinc-950/20 text-[11px] text-zinc-450 opacity-30 select-none">
-                  <TrendingUp className="h-3.5 w-3.5 shrink-0" />
-                  <span>Identify expansion opportunity</span>
-                </div>
+              </div>
 
+              {/* Split branching lines at bottom */}
+              <div className="flex flex-col items-center justify-center mt-3.5 w-full relative z-10">
+                <div className="w-[1.5px] h-6 bg-emerald-500/30" />
+                <div className="flex justify-between w-[220px] border-t border-dashed border-emerald-500/25 pt-2 text-[9px] text-zinc-500 font-mono">
+                  <span className="flex items-center gap-1 select-none"><span className="h-1 w-1 rounded-full bg-emerald-500/50" /> Upsell</span>
+                  <span className="flex items-center gap-1 select-none"><span className="h-1 w-1 rounded-full bg-zinc-500/50" /> Nurture</span>
+                </div>
               </div>
 
             </div>
+
+            {/* Column 3: Playbooks list */}
+            <div className="p-8 sm:p-10 flex flex-col justify-center gap-3 bg-[#08080a]/30 relative overflow-hidden border-b lg:border-b-0 lg:border-r border-t border-slate-850/80 animate-in fade-in duration-350">
+              
+              {/* Pill 1: Re-engage cold leads */}
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/20 bg-zinc-950/20 text-[11px] text-zinc-455 opacity-30 select-none">
+                <Mail className="h-3.5 w-3.5 shrink-0" />
+                <span>Re-engage cold leads</span>
+              </div>
+              
+              {/* Pill 2: MQL lead routing */}
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/20 bg-zinc-950/20 text-[11px] text-zinc-455 opacity-30 select-none">
+                <Zap className="h-3.5 w-3.5 shrink-0" />
+                <span>MQL lead routing</span>
+              </div>
+              
+              {/* Pill 3: Onboarding hand-off */}
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/40 bg-zinc-950/40 text-[11px] text-zinc-350 opacity-60 select-none">
+                <Building2 className="h-3.5 w-3.5 shrink-0" />
+                <span>Onboarding hand-off</span>
+              </div>
+              
+              {/* Pill 4: New Deal email campaign (ACTIVE HIGHLIGHT) */}
+              <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-emerald-500/35 bg-emerald-500/5 text-[11.5px] text-white font-semibold shadow-[0_0_15px_rgba(16,185,129,0.08)] select-none">
+                <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <Mail className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                <span>New Deal email campaign</span>
+              </div>
+              
+              {/* Pill 5: Lead form submissions */}
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/50 bg-zinc-950/40 text-[11px] text-zinc-350 opacity-70 select-none">
+                <FileText className="h-3.5 w-3.5 shrink-0" />
+                <span>Lead form submissions</span>
+              </div>
+              
+              {/* Pill 6: Monitor customer health */}
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/20 bg-zinc-950/20 text-[11px] text-zinc-455 opacity-40 select-none">
+                <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
+                <span>Monitor customer health</span>
+              </div>
+              
+              {/* Pill 7: Identify expansion opportunity */}
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-zinc-850/20 bg-zinc-950/20 text-[11px] text-zinc-455 opacity-30 select-none">
+                <TrendingUp className="h-3.5 w-3.5 shrink-0" />
+                <span>Identify expansion opportunity</span>
+              </div>
+
+            </div>
+
+            {/* Right Spacer with diagonal stripes */}
+            <div 
+              className="hidden lg:block border-t border-slate-850/80 border-t-dashed"
+              style={{ 
+                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
+              }} 
+            />
+
           </div>
         </div>
       </section>
 
       {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
       <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
 
           {/* Section Header Band */}
-          <div className="border-b border-slate-850/40 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
               <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
@@ -937,10 +950,10 @@ export default function Home() {
 
       {/* SECTION 4: DAILY BRIEF */}
       <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
 
           {/* Section Header Band */}
-          <div className="border-b border-slate-850/40 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
               <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
@@ -1053,7 +1066,7 @@ export default function Home() {
 
       {/* TRUST SIGNALS FOOTER BLOCK */}
       <section className="w-full bg-[#070708]">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/40 relative pt-20 pb-12 px-8 sm:px-12 lg:px-16 flex flex-col gap-14">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/80 relative pt-20 pb-12 px-8 sm:px-12 lg:px-16 flex flex-col gap-14">
 
           {/* Main Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start w-full">
@@ -1134,7 +1147,7 @@ export default function Home() {
           </div>
 
           {/* Divider */}
-          <div className="w-full h-px bg-slate-850/40" />
+          <div className="w-full h-px bg-slate-850/80" />
 
           {/* Bottom Bar: Copyright & Socials */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-[13px] text-zinc-500 w-full">
