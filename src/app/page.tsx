@@ -148,7 +148,7 @@ export default function Home() {
         {/* Aurora Glowing Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
           {/* Subtle Grid Pattern Motif */}
-          <div 
+          <div
             className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:48px_48px]"
             style={{
               WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)',
@@ -212,46 +212,58 @@ export default function Home() {
             {/* Ask Coretify tab */}
             <button
               onClick={() => setActiveSectionTab("agent")}
-              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "agent"
-                  ? "text-white bg-white/5 font-semibold"
-                  : "hover:text-slate-200"
+              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "agent"
+                ? "text-white bg-white/[0.04] font-semibold"
+                : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
             >
-              Ask Coretify
+              <span className="relative z-10">Ask Coretify</span>
+              {activeSectionTab === "agent" && (
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+              )}
             </button>
 
             {/* Data model tab */}
             <button
               onClick={() => setActiveSectionTab("data")}
-              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "data"
-                  ? "text-white bg-white/5 font-semibold"
-                  : "hover:text-slate-200"
+              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "data"
+                ? "text-white bg-white/[0.04] font-semibold"
+                : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
             >
-              Data model
+              <span className="relative z-10">Data model</span>
+              {activeSectionTab === "data" && (
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+              )}
             </button>
 
             {/* Workflows tab */}
             <button
               onClick={() => setActiveSectionTab("tools")}
-              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "tools"
-                  ? "text-white bg-white/5 font-semibold"
-                  : "hover:text-slate-200"
+              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "tools"
+                ? "text-white bg-white/[0.04] font-semibold"
+                : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
             >
-              Workflows
+              <span className="relative z-10">Workflows</span>
+              {activeSectionTab === "tools" && (
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+              )}
             </button>
 
             {/* Reporting tab with dashed border on the right */}
             <button
               onClick={() => setActiveSectionTab("governance")}
-              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "governance"
-                  ? "text-white bg-white/5 font-semibold"
-                  : "hover:text-slate-200"
+              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "governance"
+                ? "text-white bg-white/[0.04] font-semibold"
+                : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
               style={{ borderRightStyle: "dashed" }}
             >
-              Reporting
+              <span className="relative z-10">Reporting</span>
+              {activeSectionTab === "governance" && (
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+              )}
             </button>
 
             {/* Right spacer column */}
@@ -660,16 +672,16 @@ export default function Home() {
           {/* BENTO GRID CONTAINER WITH SIDE SPACERS */}
           <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full border-t border-slate-850/80">
             {/* Left Spacer with diagonal stripes */}
-            <div 
+            <div
               className="hidden lg:block border-r border-slate-850/80"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
+              style={{
+                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+              }}
             />
 
             {/* Bento Grid Content */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 bg-[#09090b]/40 shadow-2xl">
-              
+
               {/* Card 1: Company Memory Builder (Ingestion Layer) - spans 2 cols on lg */}
               <div className="lg:col-span-2 border-b lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="grid grid-cols-1 md:grid-cols-12 h-full w-full">
@@ -842,7 +854,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Card 4: Daily Brief Digest (Proactive Alerts) - spans 1 col on lg */}
               <div className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="p-8 sm:p-10 pb-4 text-left">
@@ -946,11 +958,11 @@ export default function Home() {
             </div>
 
             {/* Right Spacer with diagonal stripes */}
-            <div 
+            <div
               className="hidden lg:block border-l border-slate-850/80"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
+              style={{
+                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+              }}
             />
           </div>
         </div>
@@ -998,8 +1010,8 @@ export default function Home() {
                       key={idx}
                       onClick={() => clickPreset(idx)}
                       className={`w-full text-left p-4.5 rounded-xl border transition-all flex items-center justify-between group cursor-pointer ${activePreset === idx
-                          ? "bg-[#0c0c0e]/90 border-slate-800 text-white"
-                          : "bg-transparent border-slate-900/60 text-slate-400 hover:text-slate-200 hover:border-slate-850"
+                        ? "bg-[#0c0c0e]/90 border-slate-800 text-white"
+                        : "bg-transparent border-slate-900/60 text-slate-400 hover:text-slate-200 hover:border-slate-850"
                         }`}
                     >
                       <span className="text-xs font-semibold">{preset.q}</span>

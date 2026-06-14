@@ -11,12 +11,12 @@ interface GLSLHillsProps {
   speed?: number;
 }
 
-export const GLSLHills = ({ 
-  width = '100%', 
-  height = '100%', 
-  cameraZ = 125, 
-  planeSize = 256, 
-  speed = 0.1 
+export const GLSLHills = ({
+  width = '100%',
+  height = '100%',
+  cameraZ = 125,
+  planeSize = 256,
+  speed = 0.1
 }: GLSLHillsProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -140,12 +140,10 @@ export const GLSLHills = ({
                 vec3 noisePosition = updatePosition + vec3(0.0, 0.0, time * -30.0);
                 float noise1 = cnoise(noisePosition * 0.08);
                 float noise2 = cnoise(noisePosition * 0.06);
-                float noise3 = cnoise(noisePosition * 0.4);
                 vec3 lastPosition = updatePosition + vec3(0.0,
-                  noise1 * sin1 * 8.0
+                  noise1 * sin1 * 10.0
                   + noise2 * sin1 * 8.0
-                  + noise3 * (abs(sin1) * 2.0 + 0.5)
-                  + pow(sin1, 2.0) * 40.0, 0.0);
+                  + pow(sin1, 2.0) * 35.0 + 10.0, 0.0);
 
                 vPosition = lastPosition;
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(lastPosition, 1.0);
@@ -157,28 +155,30 @@ export const GLSLHills = ({
               varying vec3 vPosition;
 
               void main(void) {
-                float opacity = (128.0 - length(vPosition)) / 256.0 * 0.85;
+                float opacity = (110.0 - length(vPosition)) / 256.0 * 0.7;
                 vec3 color = vec3(0.6);
                 gl_FragColor = vec4(color, opacity);
               }
             `,
-            transparent: true
+            transparent: true,
+            wireframe: true
           })
         );
       }
 
-      render(time: number) {
-        this.uniforms.time.value += time * this.time;
+      render(elapsedTime: number) {
+        this.uniforms.time.value = elapsedTime * this.time;
       }
     }
 
     const container = containerRef.current;
     const canvas = canvasRef.current;
-    
+
     // Three.js setup
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 2));
     const scene = new THREE.Scene();
-    
+
     const initialRect = container.getBoundingClientRect();
     const camera = new THREE.PerspectiveCamera(45, initialRect.width / initialRect.height, 1, 10000);
     const clock = new THREE.Clock();
@@ -195,7 +195,7 @@ export const GLSLHills = ({
     };
 
     const render = () => {
-      plane.render(clock.getDelta());
+      plane.render(clock.getElapsedTime());
       renderer.render(scene, camera);
     };
 
@@ -207,8 +207,8 @@ export const GLSLHills = ({
     const init = () => {
       renderer.setSize(initialRect.width, initialRect.height);
       renderer.setClearColor(0x000000, 0);
-      camera.position.set(0, 8, cameraZ);
-      camera.lookAt(new THREE.Vector3(0, 16, 0));
+      camera.position.set(0, 16, cameraZ);
+      camera.lookAt(new THREE.Vector3(0, 28, 0));
       scene.add(plane.mesh);
       window.addEventListener('resize', resize);
       resize();
@@ -231,7 +231,7 @@ export const GLSLHills = ({
   }, [cameraZ, planeSize, speed]);
 
   return (
-    <div ref={containerRef} style={{ position: 'absolute', top: 0, left: 0, width, height, pointerEvents: 'none', zIndex: 0 }}> 
+    <div ref={containerRef} style={{ position: 'absolute', top: 0, left: 0, width, height, pointerEvents: 'none', zIndex: 0 }}>
       <canvas
         ref={canvasRef}
         style={{
