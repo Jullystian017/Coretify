@@ -49,6 +49,14 @@
   --color-slate-900: rgba(255, 255, 255, 0.08);
   --color-slate-800: rgba(255, 255, 255, 0.35);
   --color-slate-850: rgba(255, 255, 255, 0.20);
+  --color-slate-300: #9aa2b1;
+  --color-slate-350: #8890a0;
+  --color-slate-400: #707786;
+  --color-slate-450: #626978;
+  --color-slate-500: #545a68;
+  --color-slate-550: #464c58;
+  --color-slate-600: #3b404b;
+  --color-slate-650: #30353f;
 }
 
 :root {
