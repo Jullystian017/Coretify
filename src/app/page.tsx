@@ -180,25 +180,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
-      <section className="relative border-b border-slate-900 w-full bg-[#070708]/10 py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
+      {/* TAB NAVIGATION ROW */}
+      <div className="w-full border-b border-slate-900 bg-[#08080a]/50">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900/40 grid grid-cols-12 text-[13px] font-semibold text-slate-400">
+          {/* Left spacer column with dashed border on the right */}
+          <div className="col-span-2 border-r border-dashed border-slate-900/60" />
+          
+          {/* Ask Coretify tab */}
+          <button
+            onClick={() => setActiveSectionTab("agent")}
+            className={`col-span-2 border-r border-slate-900/40 py-4 text-center cursor-pointer transition-all ${
+              activeSectionTab === "agent"
+                ? "text-white bg-white/5 font-semibold"
+                : "hover:text-slate-200"
+            }`}
+          >
+            Ask Coretify
+          </button>
+          
+          {/* Data model tab */}
+          <button
+            onClick={() => setActiveSectionTab("data")}
+            className={`col-span-2 border-r border-slate-900/40 py-4 text-center cursor-pointer transition-all ${
+              activeSectionTab === "data"
+                ? "text-white bg-white/5 font-semibold"
+                : "hover:text-slate-200"
+            }`}
+          >
+            Data model
+          </button>
 
-          {/* Centered Tab navigation header */}
-          <div className="flex justify-center mb-8 border-b border-slate-900/60 max-w-2xl mx-auto">
-            <button className="px-6 py-3 border-b-2 border-white text-xs font-semibold text-white transition-colors cursor-pointer">
-              Ask Coretify
-            </button>
-            <button className="px-6 py-3 border-b-2 border-transparent text-xs font-semibold text-slate-550 hover:text-slate-350 transition-colors cursor-pointer">
-              Data model
-            </button>
-            <button className="px-6 py-3 border-b-2 border-transparent text-xs font-semibold text-slate-550 hover:text-slate-350 transition-colors cursor-pointer">
-              Workflows
-            </button>
-            <button className="px-6 py-3 border-b-2 border-transparent text-xs font-semibold text-slate-550 hover:text-slate-350 transition-colors cursor-pointer">
-              Reporting
-            </button>
-          </div>
+          {/* Workflows tab */}
+          <button
+            onClick={() => setActiveSectionTab("tools")}
+            className={`col-span-2 border-r border-slate-900/40 py-4 text-center cursor-pointer transition-all ${
+              activeSectionTab === "tools"
+                ? "text-white bg-white/5 font-semibold"
+                : "hover:text-slate-200"
+            }`}
+          >
+            Workflows
+          </button>
+
+          {/* Reporting tab */}
+          <button
+            onClick={() => setActiveSectionTab("governance")}
+            className={`col-span-2 border-r border-slate-900/40 py-4 text-center cursor-pointer transition-all ${
+              activeSectionTab === "governance"
+                ? "text-white bg-white/5 font-semibold"
+                : "hover:text-slate-200"
+            }`}
+          >
+            Reporting
+          </button>
+
+          {/* Right spacer column */}
+          <div className="col-span-2" />
+        </div>
+      </div>
+
+      {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
+      <section className="relative border-b border-slate-900 w-full bg-[#070708]/10 pt-8 pb-16 sm:pb-20 lg:pb-24">
+        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
 
           {/* Product Window Shell (Dark Mode Basepoint/Attio Clone) */}
           <div className="relative border border-slate-900 bg-[#09090b] rounded-2xl overflow-hidden shadow-2xl">
