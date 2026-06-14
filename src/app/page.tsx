@@ -182,9 +182,9 @@ export default function Home() {
 
       {/* TAB NAVIGATION ROW */}
       <div className="w-full bg-[#08080a]/50">
-        <div className="mx-auto max-w-[1360px] grid grid-cols-12 text-[13px] font-semibold text-slate-400">
+        <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
           {/* Left spacer column with dashed border on the right */}
-          <div className="col-span-2 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
+          <div className="col-span-1 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
           
           {/* Ask Coretify tab */}
           <button
@@ -236,17 +236,14 @@ export default function Home() {
           </button>
 
           {/* Right spacer column */}
-          <div className="col-span-2" />
+          <div className="col-span-1" />
         </div>
 
         {/* Extension row to project vertical lines down to the dashboard */}
-        <div className="mx-auto max-w-[1360px] grid grid-cols-12 h-8">
-          <div className="col-span-2 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
-          <div className="col-span-2 border-r border-slate-850/40" />
-          <div className="col-span-2 border-r border-slate-850/40" />
-          <div className="col-span-2 border-r border-slate-850/40" />
-          <div className="col-span-2 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
-          <div className="col-span-2" />
+        <div className="mx-auto max-w-[1360px] grid grid-cols-10 h-8">
+          <div className="col-span-1 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
+          <div className="col-span-8 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
+          <div className="col-span-1" />
         </div>
       </div>
 
