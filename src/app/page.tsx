@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { CoretifyButton } from "@/components/ui/coretify-button";
 import { GLSLHills } from "@/components/ui/glsl-hills";
+import { ScrollRevealAbout } from "@/components/ui/scroll-reveal-about";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
@@ -81,16 +82,16 @@ export default function Home() {
     setActivePreset(idx);
     setDemoAnswer(null);
     setTypedText("");
-    
+
     const targetQ = presets[idx].q;
     let currentIdx = 0;
-    
+
     const interval = setInterval(() => {
       setTypedText((prev) => prev + targetQ.charAt(currentIdx));
       currentIdx++;
       if (currentIdx >= targetQ.length) {
         clearInterval(interval);
-        
+
         setTimeout(() => {
           setDemoAnswer(presets[idx].a);
           setDemoCitations(presets[idx].c);
@@ -101,7 +102,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#070708] text-slate-100 selection:bg-purple-500/30 selection:text-purple-200 relative overflow-hidden font-sans antialiased">
-      
+
       {/* Top light glow vignette */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1360px] rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/25 via-transparent to-transparent blur-3xl pointer-events-none" />
 
@@ -151,7 +152,7 @@ export default function Home() {
 
       {/* COMBINED HERO & DASHBOARD AREA (Spans full height of canvas) */}
       <section className="relative border-b border-slate-900 w-full bg-[#070708]/25 overflow-hidden">
-        
+
         {/* Aurora Glowing Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
           <div className="absolute -top-[10%] -left-[15%] h-[550px] w-[750px] rounded-full bg-indigo-500/20 blur-[130px] mix-blend-screen" />
@@ -167,7 +168,7 @@ export default function Home() {
         <div className="relative z-10 w-full border-b border-slate-900/40">
           <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-              
+
               {/* Left Column: Headline */}
               <div className="lg:col-span-8 pr-0 lg:pr-12 text-left space-y-6">
                 <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] leading-[1.08] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
@@ -200,27 +201,25 @@ export default function Home() {
           <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
             {/* Left spacer column with dashed border on the right */}
             <div className="col-span-1 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
-            
+
             {/* Ask Coretify tab */}
             <button
               onClick={() => setActiveSectionTab("agent")}
-              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
-                activeSectionTab === "agent"
+              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "agent"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
-              }`}
+                }`}
             >
               Ask Coretify
             </button>
-            
+
             {/* Data model tab */}
             <button
               onClick={() => setActiveSectionTab("data")}
-              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
-                activeSectionTab === "data"
+              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "data"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
-              }`}
+                }`}
             >
               Data model
             </button>
@@ -228,11 +227,10 @@ export default function Home() {
             {/* Workflows tab */}
             <button
               onClick={() => setActiveSectionTab("tools")}
-              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
-                activeSectionTab === "tools"
+              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "tools"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
-              }`}
+                }`}
             >
               Workflows
             </button>
@@ -240,11 +238,10 @@ export default function Home() {
             {/* Reporting tab with dashed border on the right */}
             <button
               onClick={() => setActiveSectionTab("governance")}
-              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
-                activeSectionTab === "governance"
+              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "governance"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
-              }`}
+                }`}
               style={{ borderRightStyle: "dashed" }}
             >
               Reporting
@@ -268,10 +265,10 @@ export default function Home() {
 
             {/* Product Window Shell (Dark Mode Basepoint/Attio Clone) */}
             <div className="relative border border-slate-900 bg-[#09090b] rounded-2xl overflow-hidden shadow-2xl">
-              
+
               {/* Header bar */}
               <div className="h-12 border-b border-slate-900 bg-[#09090b] px-5 flex items-center justify-between">
-                
+
                 {/* macOS Dots & Workspace Switcher */}
                 <div className="flex items-center gap-4.5">
                   <div className="flex items-center gap-1.5">
@@ -279,7 +276,7 @@ export default function Home() {
                     <span className="h-2.5 w-2.5 rounded-full bg-[#eab308]/20 border border-[#eab308]/35" />
                     <span className="h-2.5 w-2.5 rounded-full bg-[#22c55e]/20 border border-[#22c55e]/35" />
                   </div>
-                  
+
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-350 cursor-pointer hover:text-white transition-colors">
                     <div className="flex h-5 w-5 items-center justify-center rounded bg-slate-900 border border-slate-800 text-[10px] font-black text-slate-400">
                       B
@@ -304,11 +301,11 @@ export default function Home() {
 
               {/* Inner Dashboard Layout */}
               <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]">
-                
+
                 {/* Left Sidebar (Workspace Navigation) */}
                 <div className="lg:col-span-3 border-r border-slate-900 bg-[#09090b]/80 p-4.5 space-y-6 flex flex-col justify-between text-left">
                   <div className="space-y-5">
-                    
+
                     {/* Search box (Quick Actions) */}
                     <div className="relative flex items-center bg-[#070708] border border-slate-900 rounded-lg p-2 text-xs text-slate-500 hover:border-slate-850 transition-all cursor-pointer">
                       <Search className="h-3.5 w-3.5 mr-2 text-slate-550" />
@@ -390,10 +387,10 @@ export default function Home() {
 
                 {/* Main Content Area */}
                 <div className="lg:col-span-9 p-8 flex flex-col justify-between bg-[#09090b]/20 relative text-left">
-                  
+
                   {/* Visual content container */}
                   <div className="max-w-xl space-y-6">
-                    
+
                     {/* Greeting header */}
                     <div>
                       <h3 className="text-[13px] text-slate-500 font-semibold uppercase tracking-wider">Home</h3>
@@ -447,7 +444,7 @@ export default function Home() {
 
                       {/* Meetings lists */}
                       <div className="space-y-2 text-xs">
-                        
+
                         {/* Meeting 1 */}
                         <div
                           onClick={() => setExpandedMeeting(expandedMeeting === "stripe" ? "" : "stripe")}
@@ -476,9 +473,8 @@ export default function Home() {
                         <div className="border border-slate-900 rounded-xl overflow-hidden">
                           <div
                             onClick={() => setExpandedMeeting(expandedMeeting === "greenleaf" ? "" : "greenleaf")}
-                            className={`p-3.5 flex items-center justify-between cursor-pointer transition-colors ${
-                              expandedMeeting === "greenleaf" ? "bg-slate-900/40 border-b border-slate-900" : "bg-transparent hover:bg-slate-900/30"
-                            }`}
+                            className={`p-3.5 flex items-center justify-between cursor-pointer transition-colors ${expandedMeeting === "greenleaf" ? "bg-slate-900/40 border-b border-slate-900" : "bg-transparent hover:bg-slate-900/30"
+                              }`}
                           >
                             <div className="flex items-center gap-3">
                               <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
@@ -613,10 +609,12 @@ export default function Home() {
         </div>
       </section>
 
+      <ScrollRevealAbout />
+
       {/* SECTION: Tab Switcher (Introducing Default clone) */}
       <section className="w-full bg-[#070708]/40">
         <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative p-8 sm:p-12 lg:p-16" style={{ borderLeftStyle: "dashed", borderRightStyle: "dashed" }}>
-          
+
           {/* Top-most intersection markers */}
           <span className="absolute -top-2.5 -left-1 text-[11px] text-slate-800 font-mono select-none">+</span >
           <span className="absolute -top-2.5 -right-1.5 text-[11px] text-slate-800 font-mono select-none">+</span >
@@ -637,18 +635,17 @@ export default function Home() {
 
           {/* Grid Layout (With Vertical Divider) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-            
+
             {/* Left Column: 4 Tabs */}
             <div className="lg:col-span-4 space-y-4 pr-0 lg:pr-8">
-              
+
               {/* Tab 1: Data */}
               <button
                 onClick={() => setActiveSectionTab("data")}
-                className={`w-full text-left p-6 rounded-2xl border transition-all ${
-                  activeSectionTab === "data"
+                className={`w-full text-left p-6 rounded-2xl border transition-all ${activeSectionTab === "data"
                     ? "bg-[#0c0c0e]/85 border-slate-900 text-white"
                     : "bg-transparent border-transparent text-slate-500 hover:text-slate-200"
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-2.5 font-semibold text-xs mb-2">
                   <svg className={`h-4 w-4 ${activeSectionTab === "data" ? "text-emerald-450" : "text-slate-600"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -668,11 +665,10 @@ export default function Home() {
               {/* Tab 2: Tools */}
               <button
                 onClick={() => setActiveSectionTab("tools")}
-                className={`w-full text-left p-6 rounded-2xl border transition-all ${
-                  activeSectionTab === "tools"
+                className={`w-full text-left p-6 rounded-2xl border transition-all ${activeSectionTab === "tools"
                     ? "bg-[#0c0c0e]/85 border-slate-900 text-white"
                     : "bg-transparent border-transparent text-slate-500 hover:text-slate-200"
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-2.5 font-semibold text-xs mb-2">
                   <Zap className={`h-4 w-4 ${activeSectionTab === "tools" ? "text-purple-400 fill-purple-400/10" : "text-slate-650"}`} />
@@ -689,11 +685,10 @@ export default function Home() {
               {/* Tab 3: Agent */}
               <button
                 onClick={() => setActiveSectionTab("agent")}
-                className={`w-full text-left p-6 rounded-2xl border transition-all ${
-                  activeSectionTab === "agent"
+                className={`w-full text-left p-6 rounded-2xl border transition-all ${activeSectionTab === "agent"
                     ? "bg-[#0c0c0e]/85 border-slate-900 text-white"
                     : "bg-transparent border-transparent text-slate-500 hover:text-slate-200"
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-2.5 font-semibold text-xs mb-2">
                   <Bot className={`h-4 w-4 ${activeSectionTab === "agent" ? "text-blue-400" : "text-slate-650"}`} />
@@ -710,11 +705,10 @@ export default function Home() {
               {/* Tab 4: Governance */}
               <button
                 onClick={() => setActiveSectionTab("governance")}
-                className={`w-full text-left p-6 rounded-2xl border transition-all ${
-                  activeSectionTab === "governance"
+                className={`w-full text-left p-6 rounded-2xl border transition-all ${activeSectionTab === "governance"
                     ? "bg-[#0c0c0e]/85 border-slate-900 text-white"
                     : "bg-transparent border-transparent text-slate-500 hover:text-slate-200"
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-2.5 font-semibold text-xs mb-2">
                   <Lock className={`h-4 w-4 ${activeSectionTab === "governance" ? "text-amber-500" : "text-slate-650"}`} />
@@ -736,7 +730,7 @@ export default function Home() {
 
             {/* Right Column: Dynamic Preview Card */}
             <div className="lg:col-span-7 bg-[#0c0c0e] border border-slate-900 rounded-3xl p-8 shadow-xl relative min-h-[480px] flex flex-col justify-between overflow-hidden">
-              
+
               {/* Card Header Info */}
               <div className="space-y-4 mb-6 text-left">
                 {activeSectionTab === "data" && (
@@ -998,13 +992,13 @@ export default function Home() {
       {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
       <section className="w-full bg-[#070708]/40">
         <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative p-8 sm:p-12 lg:p-16" style={{ borderLeftStyle: "dashed", borderRightStyle: "dashed" }}>
-          
+
           {/* Section Intersection Markers */}
           <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
           <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-            
+
             {/* Left Column: Title & Presets */}
             <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
               <div className="space-y-3">
@@ -1025,16 +1019,14 @@ export default function Home() {
                   <button
                     key={idx}
                     onClick={() => clickPreset(idx)}
-                    className={`w-full text-left p-4.5 rounded-xl border transition-all flex items-center justify-between group cursor-pointer ${
-                      activePreset === idx
+                    className={`w-full text-left p-4.5 rounded-xl border transition-all flex items-center justify-between group cursor-pointer ${activePreset === idx
                         ? "bg-[#0c0c0e]/90 border-slate-800 text-white"
                         : "bg-transparent border-slate-900/60 text-slate-400 hover:text-slate-200 hover:border-slate-850"
-                    }`}
+                      }`}
                   >
                     <span className="text-xs font-semibold">{preset.q}</span>
-                    <ArrowRight className={`h-4 w-4 shrink-0 transition-transform ${
-                      activePreset === idx ? "translate-x-0 text-white" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-slate-450"
-                    }`} />
+                    <ArrowRight className={`h-4 w-4 shrink-0 transition-transform ${activePreset === idx ? "translate-x-0 text-white" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-slate-450"
+                      }`} />
                   </button>
                 ))}
               </div>
@@ -1046,7 +1038,7 @@ export default function Home() {
 
             {/* Right Column: Chat UI Window */}
             <div className="lg:col-span-6 bg-[#0c0c0e] border border-slate-900 rounded-3xl p-6 shadow-xl relative min-h-[440px] flex flex-col justify-between overflow-hidden">
-              
+
               {/* Chat Header */}
               <div className="flex justify-between items-center border-b border-slate-900 pb-3.5 mb-4">
                 <span className="text-xs font-bold text-white flex items-center gap-2">
@@ -1060,7 +1052,7 @@ export default function Home() {
 
               {/* Chat Conversation Area */}
               <div className="flex-1 space-y-4 mb-4 text-xs">
-                
+
                 {/* Initial bot message */}
                 <div className="flex gap-3 items-start justify-start">
                   <div className="h-7 w-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
@@ -1142,13 +1134,13 @@ export default function Home() {
       {/* SECTION 4: DAILY BRIEF */}
       <section className="w-full bg-[#070708]/40">
         <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative p-8 sm:p-12 lg:p-16" style={{ borderLeftStyle: "dashed", borderRightStyle: "dashed" }}>
-          
+
           {/* Section Intersection Markers */}
           <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
           <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-            
+
             {/* Left Column: Title & Intro */}
             <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
               <div className="space-y-3">
@@ -1170,7 +1162,7 @@ export default function Home() {
 
             {/* Right Column: Cards List */}
             <div className="lg:col-span-6 space-y-4 w-full">
-              
+
               {/* Card 1: 2 clients need follow-up */}
               <Card className="bg-[#0c0c0e]/80 border-slate-900 p-5 shadow-lg relative group transition-all duration-300 hover:border-slate-850 hover:bg-[#0c0c0e]">
                 <div className="flex items-start gap-4">
@@ -1246,7 +1238,7 @@ export default function Home() {
       {/* TRUST SIGNALS FOOTER BLOCK */}
       <section className="w-full bg-[#070708]/10">
         <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/40 relative p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-xs text-slate-500" style={{ borderLeftStyle: "dashed", borderRightStyle: "dashed" }}>
-          
+
           <span className="absolute top-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
           <span className="absolute top-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
 
