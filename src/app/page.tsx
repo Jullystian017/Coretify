@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { CoretifyButton } from "@/components/ui/coretify-button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
@@ -135,12 +136,14 @@ export default function Home() {
             <button className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors">
               Login
             </button>
-            <Button
+            <CoretifyButton
               onClick={handleStartOnboarding}
-              className="bg-[#18181b] hover:bg-[#27272a] text-white border border-[#2e2e33] text-[13px] font-medium px-5 py-4.5 rounded-xl shadow-md transition-all active:scale-[0.98]"
+              variant="dark"
+              size="default"
+              className="px-5 py-4.5 font-medium"
             >
               Request a Demo
-            </Button>
+            </CoretifyButton>
           </div>
         </div>
       </header>
@@ -153,23 +156,24 @@ export default function Home() {
             {/* Left Column: Headline */}
             <div className="lg:col-span-8 pr-0 lg:pr-12 text-left space-y-6">
               <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] text-white leading-[1.08]">
-                The product development<br className="hidden sm:inline" /> system for teams and agents
+                The business operating system<br className="hidden sm:inline" /> for teams and AI agents
               </h1>
             </div>
 
             {/* Right Column: Description & Primary CTA */}
             <div className="lg:col-span-4 pl-0 lg:pl-6 text-left space-y-6 lg:pt-2">
               <p className="text-base sm:text-[16px] text-slate-400 leading-relaxed font-normal">
-                Sync your workspace tools in one click. Coretify builds your company brain so your team can query operational context instantly.
+                Sync your workspace tools in one click. Coretify builds<br className="hidden sm:inline" /> your company brain to query context instantly.
               </p>
               <div>
-                <Button
+                <CoretifyButton
                   onClick={handleStartOnboarding}
+                  variant="white"
                   size="lg"
-                  className="bg-white hover:bg-slate-100 text-black font-semibold text-[13px] px-7 py-5.5 rounded-full shadow-lg transition-all hover:scale-[1.01] active:scale-[0.98]"
+                  className="px-7 py-5.5 text-[13px] font-semibold shadow-lg"
                 >
                   Try Coretify
-                </Button>
+                </CoretifyButton>
               </div>
             </div>
           </div>
@@ -245,7 +249,7 @@ export default function Home() {
 
       {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
       <section className="relative border-b border-slate-900 w-full bg-[#070708]/10 pt-0 pb-16 sm:pb-20 lg:pb-24">
-        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
+        <div className="mx-auto max-w-[1360px] px-8">
 
           {/* Product Window Shell (Dark Mode Basepoint/Attio Clone) */}
           <div className="relative border border-slate-900 bg-[#09090b] rounded-2xl overflow-hidden shadow-2xl">
@@ -525,8 +529,8 @@ export default function Home() {
 
       {/* BRAND LOGOS SECTION (No side grid lines, full width) */}
       <section className="relative border-b border-slate-900 w-full bg-[#070708]/20 py-10">
-        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
-          <div className="flex flex-wrap items-center justify-between gap-6 opacity-30 grayscale hover:opacity-50 transition-opacity duration-350 max-w-5xl mx-auto">
+        <div className="mx-auto max-w-[1360px] px-8">
+          <div className="flex flex-wrap items-center justify-between gap-6 opacity-30 grayscale hover:opacity-50 transition-opacity duration-350 w-full">
             {/* Granola */}
             <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
               <span className="text-[17px] font-extrabold tracking-tight">granola</span>
@@ -758,12 +762,14 @@ export default function Home() {
                 )}
 
                 <div>
-                  <Button
+                  <CoretifyButton
                     onClick={handleStartOnboarding}
-                    className="bg-[#18181b] hover:bg-[#27272a] text-white border border-[#2e2e33] text-xs font-semibold px-4.5 py-2.5 rounded-xl mt-1"
+                    variant="dark"
+                    size="sm"
+                    className="px-4.5 mt-1"
                   >
                     Learn More
-                  </Button>
+                  </CoretifyButton>
                 </div>
               </div>
 
