@@ -180,59 +180,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BRAND LOGOS SECTION (No side grid lines, full width) */}
-      <section className="relative border-b border-slate-900 w-full bg-[#070708]/20 py-10">
-        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
-          <div className="flex flex-wrap items-center justify-between gap-6 opacity-30 grayscale hover:opacity-50 transition-opacity duration-350 max-w-5xl mx-auto">
-            {/* Granola */}
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <span className="text-[17px] font-extrabold tracking-tight">granola</span>
-            </div>
-
-            {/* Flow */}
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <div className="flex flex-col gap-[2.5px] w-3.5">
-                <div className="h-[2px] w-full bg-current rounded-full" />
-                <div className="h-[2px] w-3/4 bg-current rounded-full" />
-                <div className="h-[2px] w-1/2 bg-current rounded-full" />
-              </div>
-              <span>Flow</span>
-            </div>
-
-            {/* Listen */}
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <svg className="h-4 w-4 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="3.5" fill="currentColor" />
-              </svg>
-              <span>Listen</span>
-            </div>
-
-            {/* Obvious */}
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-              </svg>
-              <span>Obvious</span>
-            </div>
-
-            {/* Modal */}
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <svg className="h-4 w-4 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
-                <path d="M4 4h16v16H4zM9 9h6v6H9z" />
-              </svg>
-              <span>Modal</span>
-            </div>
-
-            {/* USV */}
-            <div className="flex items-center gap-1 text-[11px] font-bold text-white uppercase tracking-wider">
-              <span className="bg-white text-black px-1.5 py-0.5 rounded font-black mr-0.5">USV</span>
-              <span>Union Square Ventures</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
       <section className="relative border-b border-slate-900 w-full bg-[#070708]/10 py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
@@ -360,7 +307,7 @@ export default function Home() {
                       <div className="pl-3.5 space-y-1.5 text-[11px] text-slate-500">
                         <div className="hover:text-slate-350 cursor-pointer">PQL Pipeline Deals</div>
                         <div className="hover:text-slate-350 cursor-pointer">PQL Workspace Outreach</div>
-                        <div className="hover:text-slate-350 cursor-pointer">PQL Triage</div>
+                        <div className="hover:text-slate-355 cursor-pointer">PQL Triage</div>
                       </div>
                     </div>
                   </div>
@@ -369,7 +316,7 @@ export default function Home() {
                     <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider block">Reports</span>
                     <div className="text-[11px] text-slate-500 font-semibold space-y-2 pl-1">
                       <div className="hover:text-slate-350 cursor-pointer">Revenue</div>
-                      <div className="hover:text-slate-350 cursor-pointer">Attribution</div>
+                      <div className="hover:text-slate-355 cursor-pointer">Attribution</div>
                     </div>
                   </div>
                 </div>
@@ -529,16 +476,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* MAIN VERTICAL GRID WRAPPER */}
-      <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative min-h-screen bg-[#070708]/40">
-        
-        {/* Top-most intersection markers */}
-        <span className="absolute -top-2.5 -left-1 text-[11px] text-slate-800 font-mono select-none">+</span >
-        <span className="absolute -top-2.5 -right-1.5 text-[11px] text-slate-800 font-mono select-none">+</span >
+      {/* BRAND LOGOS SECTION (No side grid lines, full width) */}
+      <section className="relative border-b border-slate-900 w-full bg-[#070708]/20 py-10">
+        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
+          <div className="flex flex-wrap items-center justify-between gap-6 opacity-30 grayscale hover:opacity-50 transition-opacity duration-350 max-w-5xl mx-auto">
+            {/* Granola */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
+              <span className="text-[17px] font-extrabold tracking-tight">granola</span>
+            </div>
 
-        {/* SECTION: Tab Switcher (Introducing Default clone) */}
-        <section className="relative border-b border-slate-900 p-8 sm:p-12 lg:p-16">
+            {/* Flow */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
+              <div className="flex flex-col gap-[2.5px] w-3.5">
+                <div className="h-[2px] w-full bg-current rounded-full" />
+                <div className="h-[2px] w-3/4 bg-current rounded-full" />
+                <div className="h-[2px] w-1/2 bg-current rounded-full" />
+              </div>
+              <span>Flow</span>
+            </div>
+
+            {/* Listen */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
+              <svg className="h-4 w-4 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="3.5" fill="currentColor" />
+              </svg>
+              <span>Listen</span>
+            </div>
+
+            {/* Obvious */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
+              <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+              </svg>
+              <span>Obvious</span>
+            </div>
+
+            {/* Modal */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
+              <svg className="h-4 w-4 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path d="M4 4h16v16H4zM9 9h6v6H9z" />
+              </svg>
+              <span>Modal</span>
+            </div>
+
+            {/* USV */}
+            <div className="flex items-center gap-1 text-[11px] font-bold text-white uppercase tracking-wider">
+              <span className="bg-white text-black px-1.5 py-0.5 rounded font-black mr-0.5">USV</span>
+              <span>Union Square Ventures</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION: Tab Switcher (Introducing Default clone) */}
+      <section className="w-full border-b border-slate-900 bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative p-8 sm:p-12 lg:p-16">
           
+          {/* Top-most intersection markers */}
+          <span className="absolute -top-2.5 -left-1 text-[11px] text-slate-800 font-mono select-none">+</span >
+          <span className="absolute -top-2.5 -right-1.5 text-[11px] text-slate-800 font-mono select-none">+</span >
+
+          {/* Section Intersection Markers */}
           <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
           <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
 
@@ -907,11 +906,12 @@ export default function Home() {
             </div>
 
           </div>
+        </div>
+      </section>
 
-        </section>
-
-        {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
-        <section className="relative border-b border-slate-900 p-8 sm:p-12 lg:p-16">
+      {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
+      <section className="w-full border-b border-slate-900 bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative p-8 sm:p-12 lg:p-16">
           
           {/* Section Intersection Markers */}
           <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
@@ -1050,10 +1050,12 @@ export default function Home() {
             </div>
 
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* SECTION 4: DAILY BRIEF */}
-        <section className="relative border-b border-slate-900 p-8 sm:p-12 lg:p-16">
+      {/* SECTION 4: DAILY BRIEF */}
+      <section className="w-full border-b border-slate-900 bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative p-8 sm:p-12 lg:p-16">
           
           {/* Section Intersection Markers */}
           <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
@@ -1152,10 +1154,12 @@ export default function Home() {
             </div>
 
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* TRUST SIGNALS FOOTER BLOCK */}
-        <section className="relative p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-xs text-slate-500 bg-[#070708]/10">
+      {/* TRUST SIGNALS FOOTER BLOCK */}
+      <section className="w-full bg-[#070708]/10">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-xs text-slate-500">
           
           <span className="absolute top-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
           <span className="absolute top-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
@@ -1168,9 +1172,8 @@ export default function Home() {
             <a href="/privacy" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
             <a href="mailto:support@coretify.ai" className="hover:text-slate-300 transition-colors">Hubungi Kami</a>
           </div>
-        </section>
-
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
