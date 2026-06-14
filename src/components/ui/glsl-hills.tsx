@@ -33,14 +33,17 @@ export const GLSLHills = ({
       constructor() {
         this.uniforms = {
           time: { value: 0 },
+          halfPlaneSize: { value: planeSize / 2 },
+          visibilityRadius: { value: planeSize * 0.65 }
         };
         this.mesh = this.createMesh();
         this.time = speed;
       }
 
       createMesh() {
+        // Reduced segments to 70 for maximum performance (extremely lightweight) and cleaner minimalist lines
         return new THREE.Mesh(
-          new THREE.PlaneGeometry(planeSize, planeSize, planeSize, planeSize),
+          new THREE.PlaneGeometry(planeSize, planeSize, 70, 70),
           new THREE.RawShaderMaterial({
             uniforms: this.uniforms,
             vertexShader: `
@@ -49,6 +52,7 @@ export const GLSLHills = ({
               uniform mat4 projectionMatrix;
               uniform mat4 modelViewMatrix;
               uniform float time;
+              uniform float halfPlaneSize;
               varying vec3 vPosition;
 
               mat4 rotateMatrixX(float radian) {
@@ -136,14 +140,15 @@ export const GLSLHills = ({
 
               void main(void) {
                 vec3 updatePosition = (rotateMatrixX(radians(90.0)) * vec4(position, 1.0)).xyz;
-                float sin1 = sin(radians(updatePosition.x / 128.0 * 90.0));
+                float sin1 = sin(radians(updatePosition.x / halfPlaneSize * 90.0));
                 vec3 noisePosition = updatePosition + vec3(0.0, 0.0, time * -30.0);
-                float noise1 = cnoise(noisePosition * 0.08);
-                float noise2 = cnoise(noisePosition * 0.06);
+                
+                // Single low-frequency noise layer for a clean, minimalist undulating grid
+                float noise = cnoise(noisePosition * 0.025);
+                
                 vec3 lastPosition = updatePosition + vec3(0.0,
-                  noise1 * sin1 * 10.0
-                  + noise2 * sin1 * 8.0
-                  + pow(sin1, 2.0) * 35.0 + 10.0, 0.0);
+                  noise * sin1 * 12.0
+                  + pow(sin1, 2.0) * 22.0 + 5.0, 0.0);
 
                 vPosition = lastPosition;
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(lastPosition, 1.0);
@@ -153,9 +158,10 @@ export const GLSLHills = ({
               precision highp float;
               #define GLSLIFY 1
               varying vec3 vPosition;
+              uniform float visibilityRadius;
 
               void main(void) {
-                float opacity = (110.0 - length(vPosition)) / 256.0 * 0.7;
+                float opacity = (visibilityRadius - length(vPosition)) / visibilityRadius * 0.7;
                 vec3 color = vec3(0.6);
                 gl_FragColor = vec4(color, opacity);
               }
@@ -199,8 +205,22 @@ export const GLSLHills = ({
       renderer.render(scene, camera);
     };
 
+    // Use IntersectionObserver to pause rendering when the component is off-screen
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(container);
+
     const renderLoop = () => {
-      render();
+      if (isVisible) {
+        render();
+      }
       animationFrameId = requestAnimationFrame(renderLoop);
     };
 
@@ -219,6 +239,7 @@ export const GLSLHills = ({
 
     return () => {
       window.removeEventListener('resize', resize);
+      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
       renderer.dispose();
       plane.mesh.geometry.dispose();
