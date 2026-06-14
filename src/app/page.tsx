@@ -181,15 +181,15 @@ export default function Home() {
       </section>
 
       {/* TAB NAVIGATION ROW */}
-      <div className="w-full border-b border-slate-900 bg-[#08080a]/50">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900/40 grid grid-cols-12 text-[13px] font-semibold text-slate-400">
+      <div className="w-full bg-[#08080a]/50">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-800 grid grid-cols-12 text-[13px] font-semibold text-slate-400">
           {/* Left spacer column with dashed border on the right */}
-          <div className="col-span-2 border-r border-dashed border-slate-900/60" />
+          <div className="col-span-2 border-r border-dashed border-slate-800" />
           
           {/* Ask Coretify tab */}
           <button
             onClick={() => setActiveSectionTab("agent")}
-            className={`col-span-2 border-r border-slate-900/40 py-4 text-center cursor-pointer transition-all ${
+            className={`col-span-2 border-r border-b border-slate-800 py-4 text-center cursor-pointer transition-all ${
               activeSectionTab === "agent"
                 ? "text-white bg-white/5 font-semibold"
                 : "hover:text-slate-200"
@@ -201,7 +201,7 @@ export default function Home() {
           {/* Data model tab */}
           <button
             onClick={() => setActiveSectionTab("data")}
-            className={`col-span-2 border-r border-slate-900/40 py-4 text-center cursor-pointer transition-all ${
+            className={`col-span-2 border-r border-b border-slate-800 py-4 text-center cursor-pointer transition-all ${
               activeSectionTab === "data"
                 ? "text-white bg-white/5 font-semibold"
                 : "hover:text-slate-200"
@@ -213,7 +213,7 @@ export default function Home() {
           {/* Workflows tab */}
           <button
             onClick={() => setActiveSectionTab("tools")}
-            className={`col-span-2 border-r border-slate-900/40 py-4 text-center cursor-pointer transition-all ${
+            className={`col-span-2 border-r border-b border-slate-800 py-4 text-center cursor-pointer transition-all ${
               activeSectionTab === "tools"
                 ? "text-white bg-white/5 font-semibold"
                 : "hover:text-slate-200"
@@ -225,7 +225,7 @@ export default function Home() {
           {/* Reporting tab */}
           <button
             onClick={() => setActiveSectionTab("governance")}
-            className={`col-span-2 border-r border-dashed border-slate-900/60 py-4 text-center cursor-pointer transition-all ${
+            className={`col-span-2 border-r border-dashed border-b border-slate-800 py-4 text-center cursor-pointer transition-all ${
               activeSectionTab === "governance"
                 ? "text-white bg-white/5 font-semibold"
                 : "hover:text-slate-200"
@@ -573,8 +573,8 @@ export default function Home() {
       </section>
 
       {/* SECTION: Tab Switcher (Introducing Default clone) */}
-      <section className="w-full border-b border-slate-900 bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative p-8 sm:p-12 lg:p-16">
+      <section className="w-full bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-800 relative p-8 sm:p-12 lg:p-16">
           
           {/* Top-most intersection markers */}
           <span className="absolute -top-2.5 -left-1 text-[11px] text-slate-800 font-mono select-none">+</span >
@@ -953,8 +953,8 @@ export default function Home() {
       </section>
 
       {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
-      <section className="w-full border-b border-slate-900 bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative p-8 sm:p-12 lg:p-16">
+      <section className="w-full bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-800 relative p-8 sm:p-12 lg:p-16">
           
           {/* Section Intersection Markers */}
           <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
@@ -1097,8 +1097,8 @@ export default function Home() {
       </section>
 
       {/* SECTION 4: DAILY BRIEF */}
-      <section className="w-full border-b border-slate-900 bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative p-8 sm:p-12 lg:p-16">
+      <section className="w-full bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-800 relative p-8 sm:p-12 lg:p-16">
           
           {/* Section Intersection Markers */}
           <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
@@ -1202,7 +1202,7 @@ export default function Home() {
 
       {/* TRUST SIGNALS FOOTER BLOCK */}
       <section className="w-full bg-[#070708]/10">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-xs text-slate-500">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-800 relative p-8 sm:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-xs text-slate-500">
           
           <span className="absolute top-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
           <span className="absolute top-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
