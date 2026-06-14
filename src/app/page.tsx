@@ -79,65 +79,57 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#070708] text-slate-100 selection:bg-purple-500/30 selection:text-purple-200 relative overflow-hidden font-sans antialiased">
       
-      {/* Background blueprint grid paper pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:48px_48px] opacity-70 pointer-events-none" />
-      
       {/* Top light glow vignette */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1440px] rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/25 via-transparent to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1360px] rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/25 via-transparent to-transparent blur-3xl pointer-events-none" />
+
+      {/* NAVBAR */}
+      <header className="border-b border-slate-900 bg-[#070708]/85 backdrop-blur-md sticky top-0 z-50 w-full">
+        <div className="mx-auto max-w-[1360px] px-8 flex h-20 items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => router.push("/")}>
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-350">
+              <Bot className="h-4.5 w-4.5" />
+            </div>
+            <span className="text-[17px] font-bold tracking-tight text-white">
+              Coretify
+            </span>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="hidden md:flex items-center gap-8 text-[13px] font-medium text-slate-400">
+            <button className="flex items-center gap-1 transition-colors hover:text-white">
+              Platform
+              <ChevronDown className="h-3.5 w-3.5 opacity-60" />
+            </button>
+            <button className="transition-colors hover:text-white" onClick={handleStartOnboarding}>
+              Agent
+            </button>
+            <button className="transition-colors hover:text-white">
+              Resources
+            </button>
+          </nav>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-6">
+            <button className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors">
+              Login
+            </button>
+            <Button
+              onClick={handleStartOnboarding}
+              className="bg-[#18181b] hover:bg-[#27272a] text-white border border-[#2e2e33] text-[13px] font-medium px-5 py-4.5 rounded-xl shadow-md transition-all active:scale-[0.98]"
+            >
+              Request a Demo
+            </Button>
+          </div>
+        </div>
+      </header>
 
       {/* MAIN VERTICAL GRID WRAPPER */}
-      <div className="mx-auto max-w-[1440px] border-l border-r border-slate-900 relative min-h-screen bg-[#070708]/40">
+      <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative min-h-screen bg-[#070708]/40">
         
         {/* Top-most intersection markers */}
         <span className="absolute -top-2.5 -left-1 text-[11px] text-slate-800 font-mono select-none">+</span >
         <span className="absolute -top-2.5 -right-1.5 text-[11px] text-slate-800 font-mono select-none">+</span >
-
-        {/* NAVBAR */}
-        <header className="border-b border-slate-900 bg-[#070708]/85 backdrop-blur-md sticky top-0 z-50 relative">
-          
-          {/* Header Intersection Markers */}
-          <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
-          <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
-
-          <div className="flex h-20 items-center justify-between px-8">
-            {/* Logo */}
-            <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => router.push("/")}>
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-350">
-                <Bot className="h-4.5 w-4.5" />
-              </div>
-              <span className="text-[17px] font-bold tracking-tight text-white">
-                Coretify
-              </span>
-            </div>
-
-            {/* Navigation Links */}
-            <nav className="hidden md:flex items-center gap-8 text-[13px] font-medium text-slate-400">
-              <button className="flex items-center gap-1 transition-colors hover:text-white">
-                Platform
-                <ChevronDown className="h-3.5 w-3.5 opacity-60" />
-              </button>
-              <button className="transition-colors hover:text-white" onClick={handleStartOnboarding}>
-                Agent
-              </button>
-              <button className="transition-colors hover:text-white">
-                Resources
-              </button>
-            </nav>
-
-            {/* Right actions */}
-            <div className="flex items-center gap-6">
-              <button className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors">
-                Login
-              </button>
-              <Button
-                onClick={handleStartOnboarding}
-                className="bg-[#18181b] hover:bg-[#27272a] text-white border border-[#2e2e33] text-[13px] font-medium px-5 py-4.5 rounded-xl shadow-md transition-all active:scale-[0.98]"
-              >
-                Request a Demo
-              </Button>
-            </div>
-          </div>
-        </header>
 
         {/* HERO SECTION GRID (With Vertical Divider) */}
         <section className="relative border-b border-slate-900 p-8 sm:p-12 lg:p-16">
@@ -155,10 +147,8 @@ export default function Home() {
               </h1>
             </div>
 
-            {/* Vertical Line Divider between hero columns (visible only on desktop) */}
-            <div className="hidden lg:block lg:col-span-1 h-full min-h-[140px] border-r border-slate-900 self-stretch relative">
-              <span className="absolute top-0 right-[-5px] text-[10px] text-slate-850 font-mono select-none">+</span >
-              <span className="absolute bottom-0 right-[-5px] text-[10px] text-slate-850 font-mono select-none">+</span >
+            {/* Spacing between hero columns (visible only on desktop) */}
+            <div className="hidden lg:block lg:col-span-1 h-full min-h-[140px] self-stretch relative">
             </div>
 
             {/* Right Column: Description & Primary CTA */}
@@ -576,10 +566,8 @@ export default function Home() {
 
             </div>
 
-            {/* Vertical Line Divider between Tab columns (desktop only) */}
-            <div className="hidden lg:block lg:col-span-1 border-r border-slate-900 self-stretch relative">
-              <span className="absolute top-0 right-[-5px] text-[10px] text-slate-850 font-mono select-none">+</span >
-              <span className="absolute bottom-0 right-[-5px] text-[10px] text-slate-850 font-mono select-none">+</span >
+            {/* Spacing between Tab columns (desktop only) */}
+            <div className="hidden lg:block lg:col-span-1 self-stretch relative">
             </div>
 
             {/* Right Column: Dynamic Preview Card */}
