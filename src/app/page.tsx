@@ -660,7 +660,7 @@ export default function Home() {
             </div>
 
             {/* Center Content Column: Visualizer */}
-            <div className="py-20 lg:py-24 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-t border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(#1e293b_1.5px,transparent_1.5px)] [background-size:20px_20px]">
+            <div className="py-20 lg:py-24 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-t border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
               {/* Central Graph/Flow Visualizer */}
               <div className="flex flex-col items-center justify-center w-full max-w-[420px] relative z-10 gap-6">
                 
@@ -760,7 +760,7 @@ export default function Home() {
             </div>
 
             {/* Center Content Column: Chat Interface Mockup */}
-            <div className="py-20 lg:py-24 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(#1e293b_1.5px,transparent_1.5px)] [background-size:20px_20px]">
+            <div className="py-20 lg:py-24 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
               <div className="w-full max-w-[360px] bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl text-left space-y-3.5 relative z-10">
                 {/* Chat Mock Header */}
                 <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
@@ -853,7 +853,7 @@ export default function Home() {
             </div>
 
             {/* Center Content Column: Daily Brief Visual Mockup */}
-            <div className="py-24 lg:py-32 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[600px] bg-[#08080a]/60 bg-[radial-gradient(#1e293b_1.5px,transparent_1.5px)] [background-size:20px_20px]">
+            <div className="py-24 lg:py-32 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[600px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
               <div className="w-full max-w-[340px] bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl text-left space-y-3 relative z-10">
                 {/* Header Band */}
                 <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
@@ -949,7 +949,7 @@ export default function Home() {
             </div>
 
             {/* Center Content Column: Graph Mockup */}
-            <div className="py-20 lg:py-24 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(#1e293b_1.5px,transparent_1.5px)] [background-size:20px_20px]">
+            <div className="py-20 lg:py-24 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
               <div className="w-full max-w-[420px] h-[280px] border border-zinc-800 rounded-2xl bg-[#0c0c0e]/95 relative overflow-hidden z-10 flex items-center justify-center">
                 {/* SVG Graph diagram */}
                 <svg className="w-full h-full" viewBox="0 0 400 280">
@@ -1046,7 +1046,7 @@ export default function Home() {
             </div>
 
             {/* Center Content Column: Playbook selection & stats mockup */}
-            <div className="py-20 lg:py-24 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(#1e293b_1.5px,transparent_1.5px)] [background-size:20px_20px]">
+            <div className="py-20 lg:py-24 px-8 sm:px-10 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
               <div className="w-full max-w-[370px] space-y-3.5 relative z-10 text-left">
                 {/* Playbook selector */}
                 <div className="flex gap-1.5 p-1 rounded-xl bg-slate-950/60 border border-zinc-800 text-[10px] font-semibold text-zinc-400">
