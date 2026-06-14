@@ -169,10 +169,10 @@ export default function Home() {
         </div>
 
         {/* GLSL 3D Shader Hills Background spanning the entire combined height */}
-        <GLSLHills width="100%" height="100%" cameraZ={125} planeSize={256} speed={0.35} />
+        <GLSLHills width="100%" height="100%" cameraZ={125} planeSize={256} speed={0.15} />
 
         {/* Hero Copywriting Row */}
-        <div className="relative z-10 w-full border-b border-slate-900/40">
+        <div className="relative z-10 w-full border-b border-slate-850/80">
           <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
 
@@ -205,14 +205,14 @@ export default function Home() {
 
         {/* TAB NAVIGATION ROW */}
         <div className="relative z-10 w-full bg-[#08080a]/35">
-          <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400 border-b border-slate-850/80">
+          <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
             {/* Left spacer column with dashed border on the right */}
             <div className="col-span-1 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
 
             {/* Ask Coretify tab */}
             <button
               onClick={() => setActiveSectionTab("agent")}
-              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "agent"
+              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "agent"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -226,7 +226,7 @@ export default function Home() {
             {/* Data model tab */}
             <button
               onClick={() => setActiveSectionTab("data")}
-              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "data"
+              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "data"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -240,7 +240,7 @@ export default function Home() {
             {/* Workflows tab */}
             <button
               onClick={() => setActiveSectionTab("tools")}
-              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "tools"
+              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "tools"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -254,7 +254,7 @@ export default function Home() {
             {/* Reporting tab with dashed border on the right */}
             <button
               onClick={() => setActiveSectionTab("governance")}
-              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "governance"
+              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "governance"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
