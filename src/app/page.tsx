@@ -147,17 +147,14 @@ export default function Home() {
 
       {/* HERO SECTION (No vertical grid borders, spans full width) */}
       <section className="relative border-b border-slate-900 w-full bg-[#070708]/20">
-        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
             
             {/* Left Column: Headline */}
             <div className="lg:col-span-8 pr-0 lg:pr-12 text-left space-y-6">
               <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] text-white leading-[1.08]">
-                The operating system<br className="hidden sm:inline" /> that understands your company
+                The product development<br className="hidden sm:inline" /> system for teams and agents
               </h1>
-              <p className="text-base sm:text-[17px] text-slate-400 leading-relaxed font-normal">
-                connects your knowledge, and helps you make better decisions.
-              </p>
             </div>
 
             {/* Right Column: Description & Primary CTA */}
