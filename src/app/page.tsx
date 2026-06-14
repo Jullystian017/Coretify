@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { CoretifyButton } from "@/components/ui/coretify-button";
-import { GLSLHills } from "../components/ui/glsl-hills";
+import Aurora from "../components/ui/aurora";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
@@ -167,10 +167,24 @@ export default function Home() {
           <div className="absolute -top-[10%] -right-[15%] h-[550px] w-[750px] rounded-full bg-purple-500/25 blur-[130px] mix-blend-screen" />
           <div className="absolute bottom-[10%] left-[30%] h-[500px] w-[750px] rounded-full bg-blue-500/15 blur-[120px] mix-blend-screen" />
         </div>
+        {/* Aurora WebGL Background spanning the entire combined height with a smooth radial mask */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-0 opacity-40"
+          style={{
+            WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%)',
+            maskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%)'
+          }}
+        >
+          <Aurora
+            colorStops={["#ffffff", "#09090b", "#94a3b8"]}
+            blend={0.6}
+            amplitude={1.1}
+            speed={0.35}
+          />
+        </div>
 
-        {/* GLSL 3D Shader Hills Background spanning the entire combined height */}
-        <GLSLHills width="100%" height="100%" cameraZ={125} planeSize={256} speed={0.15} />
-
+        {/* Smooth background transition fade to prevent harsh bottom line seam */}
+        <div className="absolute bottom-0 left-0 right-0 h-72 bg-gradient-to-t from-[#070708] via-[#070708]/85 to-transparent pointer-events-none z-0" />
         {/* Hero Copywriting Row */}
         <div className="relative z-10 w-full border-b border-slate-850/80">
           <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24">
@@ -204,7 +218,7 @@ export default function Home() {
         </div>
 
         {/* TAB NAVIGATION ROW */}
-        <div className="relative z-10 w-full bg-[#08080a]/35">
+        <div className="relative z-10 w-full">
           <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
             {/* Left spacer column with dashed border on the right */}
             <div className="col-span-1 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
@@ -280,6 +294,21 @@ export default function Home() {
 
         {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
         <div className="relative z-10 w-full pt-0 pb-0 -mb-16 lg:-mb-24">
+          {/* Aurora WebGL Background at the bottom of the dashboard */}
+          <div 
+            className="absolute inset-0 pointer-events-none -z-10 opacity-25"
+            style={{
+              WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 70%, #000 10%, transparent 100%)',
+              maskImage: 'radial-gradient(ellipse 80% 50% at 50% 70%, #000 10%, transparent 100%)'
+            }}
+          >
+            <Aurora
+              colorStops={["#ffffff", "#09090b", "#94a3b8"]}
+              blend={0.6}
+              amplitude={1.0}
+              speed={0.3}
+            />
+          </div>
           <div className="mx-auto max-w-[1360px] px-8">
 
             {/* Product Window Shell (Dark Mode Basepoint/Attio Clone) */}
