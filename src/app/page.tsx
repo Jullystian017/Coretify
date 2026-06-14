@@ -630,88 +630,8 @@ export default function Home() {
               Picks up leads at 2am. Catches renewals before they slip. Hands you the answer before you ask.
             </p>
           </div>
-          {/* Feature Row 1: Company Memory Builder */}
-          <div className="grid grid-cols-1 lg:grid-cols-[50px_3.5fr_6.5fr_50px] w-full bg-[#09090b]/40 shadow-2xl">
-            {/* Left Spacer with diagonal stripes */}
-            <div 
-              className="hidden lg:block border-r border-t border-slate-850/80 border-t-dashed"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
-            />
-
-            {/* Left Content Column: Feature Description */}
-            <div className="py-20 lg:py-24 px-8 sm:px-12 flex flex-col justify-center text-left border-b lg:border-b-0 lg:border-r border-t border-slate-850/80 bg-[#08080a]/20">
-              <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">01 . INGESTION LAYER</span>
-              <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                Company Memory Builder
-              </h3>
-              <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal">
-                Auto-ingest emails, drive files, calendar schedules, and WhatsApp chat exports. Coretify acts as a read-only listener to centralize all company context.
-              </p>
-            </div>
-
-            {/* Right Content Column: Visualizer */}
-            <div className="py-20 lg:py-24 px-8 sm:px-12 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-t border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
-              {/* Central Graph/Flow Visualizer */}
-              <div className="flex flex-col items-center justify-center w-full max-w-[420px] relative z-10 gap-6">
-                
-                {/* Connected Sources (Top Grid) */}
-                <div className="grid grid-cols-4 gap-3 w-full">
-                  <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-zinc-800 bg-[#09090b]/80 shadow-md">
-                    <Mail className="h-5 w-5 text-indigo-400 mb-1" />
-                    <span className="text-[10px] text-zinc-400 font-mono">Gmail</span>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-zinc-800 bg-[#09090b]/80 shadow-md">
-                    <Folder className="h-5 w-5 text-amber-400 mb-1" />
-                    <span className="text-[10px] text-zinc-400 font-mono">Drive</span>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-zinc-800 bg-[#09090b]/80 shadow-md">
-                    <Calendar className="h-5 w-5 text-rose-400 mb-1" />
-                    <span className="text-[10px] text-zinc-400 font-mono">Calendar</span>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-zinc-800 bg-[#09090b]/80 shadow-md">
-                    <Phone className="h-5 w-5 text-emerald-400 mb-1" />
-                    <span className="text-[10px] text-zinc-400 font-mono">WA Lite</span>
-                  </div>
-                </div>
-
-                {/* Particle flow lines */}
-                <div className="h-12 w-full flex items-center justify-center relative">
-                  <div className="w-[1.5px] h-full bg-indigo-500/20" />
-                  <div className="absolute top-1/2 left-1/4 w-[1.5px] h-6 bg-indigo-500/20 transform rotate-45" />
-                  <div className="absolute top-1/2 right-1/4 w-[1.5px] h-6 bg-indigo-500/20 transform -rotate-45" />
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-indigo-400 animate-ping" />
-                </div>
-
-                {/* Central Memory Core */}
-                <div className="border border-indigo-500/30 bg-indigo-950/20 rounded-2xl p-5 w-full shadow-lg relative group transition-all duration-300 hover:border-indigo-500/50 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                      <Bot className="h-5 w-5" />
-                    </div>
-                    <div className="text-left">
-                      <h4 className="text-[13px] font-semibold text-white">Central Company Memory</h4>
-                      <p className="text-[10px] text-zinc-500 mt-0.5">Continuous semantic embedding sync</p>
-                    </div>
-                  </div>
-                  <span className="text-[9px] bg-indigo-950/40 border border-indigo-500/30 text-indigo-400 px-2.5 py-0.5 rounded-full font-semibold font-mono animate-pulse">Active</span>
-                </div>
-
-              </div>
-            </div>
-
-            {/* Right Spacer with diagonal stripes */}
-            <div 
-              className="hidden lg:block border-t border-slate-850/80 border-t-dashed"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
-            />
-          </div>
-
-          {/* Feature Row 2: Ask Business Chat */}
-          <div className="grid grid-cols-1 lg:grid-cols-[50px_3.5fr_6.5fr_50px] w-full bg-[#09090b]/40 shadow-2xl border-t border-slate-850/80">
+          {/* BENTO GRID CONTAINER WITH SIDE SPACERS */}
+          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full border-t border-slate-850/80">
             {/* Left Spacer with diagonal stripes */}
             <div 
               className="hidden lg:block border-r border-slate-850/80"
@@ -720,280 +640,287 @@ export default function Home() {
               }} 
             />
 
-            {/* Left Content Column: Feature Description */}
-            <div className="py-20 lg:py-24 px-8 sm:px-12 flex flex-col justify-center text-left border-b lg:border-b-0 lg:border-r border-slate-850/80 bg-[#08080a]/20">
-              <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">02 . INTERACTIVE QUERY</span>
-              <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                Ask your business anything
-              </h3>
-              <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal">
-                Query Coretify Memory in plain English or Indonesian. Get instant answers regarding project statuses, meetings, and decisions, all with source reference citations.
-              </p>
-            </div>
-
-            {/* Right Content Column: Chat Interface Mockup */}
-            <div className="py-20 lg:py-24 px-8 sm:px-12 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
-              <div className="w-full max-w-[360px] bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl text-left space-y-3.5 relative z-10">
-                {/* Chat Mock Header */}
-                <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
-                  <span className="text-[10px] font-bold text-white flex items-center gap-1.5 select-none">
-                    <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" />
-                    Ask Business Console
-                  </span>
-                  <Badge variant="outline" className="text-[8px] border-zinc-800 text-zinc-500 bg-slate-950/40 px-2 py-0">RAG Engine</Badge>
-                </div>
-
-                {/* User Bubble */}
-                <div className="flex justify-end">
-                  <div className="bg-zinc-800 text-white text-[11px] px-3 py-2 rounded-2xl rounded-tr-none max-w-[85%] font-medium">
-                    Kenapa Project Mobile App telat?
+            {/* Bento Grid Content */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 bg-[#09090b]/40 shadow-2xl">
+              
+              {/* Card 1: Company Memory Builder (Ingestion Layer) - spans 2 cols on lg */}
+              <div className="lg:col-span-2 border-b lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
+                <div className="grid grid-cols-1 md:grid-cols-12 h-full w-full">
+                  {/* Left Column: Description */}
+                  <div className="md:col-span-5 p-8 sm:p-10 flex flex-col justify-center text-left">
+                    <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">01 . INGESTION LAYER</span>
+                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                      Company Memory Builder
+                    </h3>
+                    <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal">
+                      Auto-ingest emails, drive files, calendar schedules, and WhatsApp chat exports. Coretify acts as a read-only listener to centralize all company context.
+                    </p>
                   </div>
-                </div>
+                  {/* Right Column: Visualizer */}
+                  <div className="md:col-span-7 p-8 sm:p-10 border-t md:border-t-0 md:border-l border-slate-850/80 bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] flex items-center justify-center min-h-[320px] md:min-h-0">
+                    <div className="flex flex-col items-center justify-center w-full max-w-[420px] relative z-10 gap-6">
+                      {/* Connected Sources (Top Grid) */}
+                      <div className="grid grid-cols-4 gap-3 w-full">
+                        <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-zinc-800 bg-[#09090b]/80 shadow-md">
+                          <Mail className="h-5 w-5 text-indigo-400 mb-1" />
+                          <span className="text-[10px] text-zinc-400 font-mono">Gmail</span>
+                        </div>
+                        <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-zinc-800 bg-[#09090b]/80 shadow-md">
+                          <Folder className="h-5 w-5 text-amber-400 mb-1" />
+                          <span className="text-[10px] text-zinc-400 font-mono">Drive</span>
+                        </div>
+                        <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-zinc-800 bg-[#09090b]/80 shadow-md">
+                          <Calendar className="h-5 w-5 text-rose-400 mb-1" />
+                          <span className="text-[10px] text-zinc-400 font-mono">Calendar</span>
+                        </div>
+                        <div className="flex flex-col items-center justify-center p-3 rounded-xl border border-zinc-800 bg-[#09090b]/80 shadow-md">
+                          <Phone className="h-5 w-5 text-emerald-400 mb-1" />
+                          <span className="text-[10px] text-zinc-400 font-mono">WA Lite</span>
+                        </div>
+                      </div>
 
-                {/* Bot Response Bubble */}
-                <div className="flex gap-2.5 items-start">
-                  <div className="h-6 w-6 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0 mt-0.5">
-                    <Bot className="h-3.5 w-3.5" />
-                  </div>
-                  <div className="space-y-2 max-w-[85%] font-normal">
-                    <div className="bg-[#09090b]/80 border border-zinc-850 text-zinc-300 text-[10.5px] px-3.5 py-2.5 rounded-2xl rounded-tl-none leading-relaxed">
-                      Project Mobile App tertunda 5 hari karena ditemukan 12 email revisi alur API autentikasi dari client di Gmail <span className="text-indigo-400 font-bold">[1]</span> serta log chat WhatsApp terkait scope creep <span className="text-indigo-400 font-bold">[2]</span>.
+                      {/* Particle flow lines */}
+                      <div className="h-12 w-full flex items-center justify-center relative">
+                        <div className="w-[1.5px] h-full bg-indigo-500/20" />
+                        <div className="absolute top-1/2 left-1/4 w-[1.5px] h-6 bg-indigo-500/20 transform rotate-45" />
+                        <div className="absolute top-1/2 right-1/4 w-[1.5px] h-6 bg-indigo-500/20 transform -rotate-45" />
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-indigo-400 animate-ping" />
+                      </div>
+
+                      {/* Central Memory Core */}
+                      <div className="border border-indigo-500/30 bg-indigo-950/20 rounded-2xl p-5 w-full shadow-lg relative group transition-all duration-300 hover:border-indigo-500/50 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="h-8 w-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                            <Bot className="h-5 w-5" />
+                          </div>
+                          <div className="text-left">
+                            <h4 className="text-[13px] font-semibold text-white">Central Company Memory</h4>
+                            <p className="text-[10px] text-zinc-500 mt-0.5">Continuous semantic embedding sync</p>
+                          </div>
+                        </div>
+                        <span className="text-[9px] bg-indigo-950/40 border border-indigo-500/30 text-indigo-400 px-2.5 py-0.5 rounded-full font-semibold font-mono animate-pulse">Active</span>
+                      </div>
                     </div>
-                    {/* Citations */}
-                    <div className="flex gap-1.5">
-                      <span className="text-[8px] text-zinc-500 self-center">Citations:</span>
-                      <span className="text-[8px] bg-zinc-950 border border-zinc-850 text-zinc-400 px-1.5 py-0.5 rounded flex items-center gap-0.5 font-mono cursor-pointer hover:text-white transition-colors">
-                        Gmail <ExternalLink className="h-2 w-2" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: Ask Business Chat Console (Interactive Query) - spans 1 col on lg */}
+              <div className="lg:col-span-1 border-b border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
+                <div className="p-8 sm:p-10 pb-4 text-left">
+                  <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">02 . INTERACTIVE QUERY</span>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                    Ask your business anything
+                  </h3>
+                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal">
+                    Query Coretify Memory in plain English or Indonesian. Get instant answers regarding project statuses, meetings, and decisions.
+                  </p>
+                </div>
+                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
+                  <div className="w-full max-w-[340px] bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl text-left space-y-3.5 relative z-10">
+                    {/* Chat Mock Header */}
+                    <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
+                      <span className="text-[10px] font-bold text-white flex items-center gap-1.5 select-none">
+                        <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                        Ask Business Console
                       </span>
-                      <span className="text-[8px] bg-zinc-950 border border-zinc-850 text-zinc-400 px-1.5 py-0.5 rounded flex items-center gap-0.5 font-mono cursor-pointer hover:text-white transition-colors">
-                        WhatsApp <ExternalLink className="h-2 w-2" />
+                      <Badge variant="outline" className="text-[8px] border-zinc-800 text-zinc-500 bg-slate-950/40 px-2 py-0">RAG Engine</Badge>
+                    </div>
+
+                    {/* User Bubble */}
+                    <div className="flex justify-end">
+                      <div className="bg-zinc-800 text-white text-[11px] px-3 py-2 rounded-2xl rounded-tr-none max-w-[85%] font-medium">
+                        Kenapa Project Mobile App telat?
+                      </div>
+                    </div>
+
+                    {/* Bot Response Bubble */}
+                    <div className="flex gap-2.5 items-start">
+                      <div className="h-6 w-6 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0 mt-0.5">
+                        <Bot className="h-3.5 w-3.5" />
+                      </div>
+                      <div className="space-y-2 max-w-[85%] font-normal">
+                        <div className="bg-[#09090b]/80 border border-zinc-850 text-zinc-300 text-[10.5px] px-3.5 py-2.5 rounded-2xl rounded-tl-none leading-relaxed">
+                          Project Mobile App tertunda 5 hari karena ditemukan 12 email revisi alur API autentikasi dari client di Gmail <span className="text-indigo-400 font-bold">[1]</span> serta log chat WhatsApp terkait scope creep <span className="text-indigo-400 font-bold">[2]</span>.
+                        </div>
+                        {/* Citations */}
+                        <div className="flex gap-1.5">
+                          <span className="text-[8px] text-zinc-500 self-center">Citations:</span>
+                          <span className="text-[8px] bg-zinc-950 border border-zinc-850 text-zinc-400 px-1.5 py-0.5 rounded flex items-center gap-0.5 font-mono cursor-pointer hover:text-white transition-colors">
+                            Gmail <ExternalLink className="h-2 w-2" />
+                          </span>
+                          <span className="text-[8px] bg-zinc-950 border border-zinc-850 text-zinc-400 px-1.5 py-0.5 rounded flex items-center gap-0.5 font-mono cursor-pointer hover:text-white transition-colors">
+                            WhatsApp <ExternalLink className="h-2 w-2" />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3: Company Memory Graph (Knowledge Mapping) - spans 1 col on lg */}
+              <div className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
+                <div className="p-8 sm:p-10 pb-4 text-left">
+                  <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">03 . KNOWLEDGE MAPPING</span>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                    Company Memory Graph
+                  </h3>
+                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal">
+                    Visualize connections between Clients, Meetings, Decisions, Projects, and Tasks extracted by AI from your daily communications.
+                  </p>
+                </div>
+                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
+                  <div className="w-full max-w-[340px] h-[240px] border border-zinc-800 rounded-2xl bg-[#0c0c0e]/95 relative overflow-hidden z-10 flex items-center justify-center">
+                    {/* SVG Graph diagram */}
+                    <svg className="w-full h-full" viewBox="0 0 400 280">
+                      {/* Connection lines */}
+                      <line x1="80" y1="140" x2="200" y2="70" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1.5" strokeDasharray="3" />
+                      <line x1="80" y1="140" x2="200" y2="210" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1.5" />
+                      <line x1="200" y1="70" x2="320" y2="70" stroke="rgba(99, 102, 241, 0.5)" strokeWidth="2" />
+                      <line x1="200" y1="210" x2="320" y2="210" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1.5" strokeDasharray="3" />
+                      <line x1="320" y1="70" x2="320" y2="210" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1.5" />
+
+                      {/* Node 1: Client */}
+                      <circle cx="80" cy="140" r="24" fill="#09090b" stroke="#6366f1" strokeWidth="2" />
+                      <text x="80" y="143" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Client</text>
+                      <text x="80" y="178" fill="#8890a0" fontSize="8" textAnchor="middle">Vista Retail</text>
+
+                      {/* Node 2: Meeting */}
+                      <circle cx="200" cy="70" r="22" fill="#09090b" stroke="#f43f5e" strokeWidth="1.5" />
+                      <text x="200" y="73" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Meeting</text>
+                      <text x="200" y="105" fill="#8890a0" fontSize="8" textAnchor="middle">Sprint Kickoff</text>
+
+                      {/* Node 3: Project */}
+                      <circle cx="200" cy="210" r="22" fill="#09090b" stroke="#eab308" strokeWidth="1.5" />
+                      <text x="200" y="213" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Project</text>
+                      <text x="200" y="245" fill="#8890a0" fontSize="8" textAnchor="middle">Nexa App</text>
+
+                      {/* Node 4: Decision */}
+                      <circle cx="320" cy="70" r="22" fill="#09090b" stroke="#10b981" strokeWidth="1.5" />
+                      <text x="320" y="73" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Decision</text>
+                      <text x="320" y="105" fill="#8890a0" fontSize="8" textAnchor="middle">API Auth Spec</text>
+
+                      {/* Node 5: Task */}
+                      <circle cx="320" cy="210" r="22" fill="#09090b" stroke="#3b82f6" strokeWidth="1.5" />
+                      <text x="320" y="213" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Task</text>
+                      <text x="320" y="245" fill="#8890a0" fontSize="8" textAnchor="middle">Fix Login API</text>
+                    </svg>
+
+                    {/* Glassmorphic Inspect Card */}
+                    <div className="absolute bottom-2 right-2 bg-[#09090b]/80 backdrop-blur border border-zinc-800 p-1.5 rounded-lg text-left max-w-[110px] shadow-lg">
+                      <span className="text-[7px] font-bold text-zinc-550 block uppercase tracking-wider">Active Node</span>
+                      <span className="text-[8.5px] font-bold text-white block mt-0.5">Vista Retail</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 4: Daily Brief Digest (Proactive Alerts) - spans 1 col on lg */}
+              <div className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
+                <div className="p-8 sm:p-10 pb-4 text-left">
+                  <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">04 . PROACTIVE ALERTS</span>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                    Daily Brief Digest
+                  </h3>
+                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal">
+                    Receive a daily intelligence email every morning. Spot delayed projects, client follow-up windows, and critical cash flow changes.
+                  </p>
+                </div>
+                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
+                  <div className="w-full max-w-[300px] bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl text-left space-y-3 relative z-10">
+                    {/* Header Band */}
+                    <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
+                      <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
+                        <Mail className="h-3.5 w-3.5 text-indigo-400" />
+                        Morning Brief: 7:00 AM
                       </span>
+                      <span className="text-[8px] text-zinc-500 font-mono">Today</span>
+                    </div>
+
+                    {/* Email Brief Body */}
+                    <div className="space-y-2.5">
+                      {/* Item 1 */}
+                      <div className="p-2 rounded-lg bg-amber-500/5 border border-amber-500/15 flex items-start gap-2">
+                        <AlertCircle className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
+                        <div>
+                          <h5 className="text-[9px] font-bold text-white">2 clients need follow-up</h5>
+                          <p className="text-[8px] text-zinc-400 mt-0.5">Vista Retail: 0 touchpoints in 14 days.</p>
+                        </div>
+                      </div>
+
+                      {/* Item 2 */}
+                      <div className="p-2 rounded-lg bg-rose-500/5 border border-rose-500/15 flex items-start gap-2">
+                        <AlertCircle className="h-3.5 w-3.5 text-rose-500 shrink-0 mt-0.5" />
+                        <div>
+                          <h5 className="text-[9px] font-bold text-white">1 project at risk</h5>
+                          <p className="text-[8px] text-zinc-400 mt-0.5">Nexa App: delayed by 5 days from schedule.</p>
+                        </div>
+                      </div>
+
+                      {/* Item 3 */}
+                      <div className="p-2 rounded-lg bg-indigo-500/5 border border-indigo-500/15 flex items-start gap-2">
+                        <TrendingUp className="h-3.5 w-3.5 text-indigo-400 shrink-0 mt-0.5" />
+                        <div>
+                          <h5 className="text-[9px] font-bold text-white">Revenue down 12%</h5>
+                          <p className="text-[8px] text-zinc-400 mt-0.5">Delayed milestone invoice found.</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Right Spacer with diagonal stripes */}
-            <div 
-              className="hidden lg:block border-t border-slate-850/80"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
-            />
-          </div>
-
-          {/* Feature Row 3: Daily Proactive Brief */}
-          <div className="grid grid-cols-1 lg:grid-cols-[50px_3.5fr_6.5fr_50px] w-full bg-[#09090b]/40 shadow-2xl border-t border-slate-850/80">
-            {/* Left Spacer with diagonal stripes */}
-            <div 
-              className="hidden lg:block border-r border-slate-850/80"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
-            />
-
-            {/* Left Content Column: Feature Description */}
-            <div className="py-24 lg:py-32 px-8 sm:px-12 flex flex-col justify-center text-left border-b lg:border-b-0 lg:border-r border-slate-850/80 bg-[#08080a]/20">
-              <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">03 . PROACTIVE ALERTS</span>
-              <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                Daily Brief Digest
-              </h3>
-              <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal">
-                Receive a daily intelligence email every morning. Spot delayed projects, client follow-up windows, and critical cash flow changes before starting your day.
-              </p>
-            </div>
-
-            {/* Right Content Column: Daily Brief Visual Mockup */}
-            <div className="py-24 lg:py-32 px-8 sm:px-12 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[600px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
-              <div className="w-full max-w-[340px] bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl text-left space-y-3 relative z-10">
-                {/* Header Band */}
-                <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
-                  <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
-                    <Mail className="h-3.5 w-3.5 text-indigo-400" />
-                    Morning Brief: 7:00 AM
-                  </span>
-                  <span className="text-[8px] text-zinc-500 font-mono">Today</span>
+              {/* Card 5: Vertical Playbooks (Industry Tailored) - spans 1 col on lg */}
+              <div className="lg:col-span-1 flex flex-col justify-between h-full bg-[#08080a]/20">
+                <div className="p-8 sm:p-10 pb-4 text-left">
+                  <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">05 . INDUSTRY TAILORED</span>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                    Vertical Playbooks
+                  </h3>
+                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal">
+                    Insights customized for your exact business model. Whether you are a Software House, Creative Agency, or Startup.
+                  </p>
                 </div>
-
-                {/* Email Brief Body */}
-                <div className="space-y-2.5">
-                  <h4 className="text-[11.5px] font-semibold text-white">Good morning, Alex. Here is your daily digest:</h4>
-                  
-                  {/* Item 1 */}
-                  <div className="p-2.5 rounded-lg bg-amber-500/5 border border-amber-500/15 flex items-start gap-2.5">
-                    <AlertCircle className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
-                    <div>
-                      <h5 className="text-[10px] font-bold text-white">2 clients need follow-up</h5>
-                      <p className="text-[9px] text-zinc-400 mt-0.5">Vista Retail: 0 touchpoints in 14 days.</p>
+                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
+                  <div className="w-full max-w-[340px] space-y-3 relative z-10 text-left">
+                    {/* Playbook selector */}
+                    <div className="flex gap-1.5 p-1 rounded-xl bg-slate-950/60 border border-zinc-800 text-[10px] font-semibold text-zinc-400">
+                      <span className="flex-1 text-center py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-white font-bold cursor-pointer">Software House</span>
+                      <span className="flex-1 text-center py-1 rounded-lg hover:text-white transition-colors cursor-pointer">Agency</span>
+                      <span className="flex-1 text-center py-1 rounded-lg hover:text-white transition-colors cursor-pointer">Startup</span>
                     </div>
-                  </div>
 
-                  {/* Item 2 */}
-                  <div className="p-2.5 rounded-lg bg-rose-500/5 border border-rose-500/15 flex items-start gap-2.5">
-                    <AlertCircle className="h-3.5 w-3.5 text-rose-500 shrink-0 mt-0.5" />
-                    <div>
-                      <h5 className="text-[10px] font-bold text-white">1 project at risk</h5>
-                      <p className="text-[9px] text-zinc-400 mt-0.5">Nexa Web App: delayed by 5 days from schedule.</p>
-                    </div>
-                  </div>
+                    {/* Software House Playbook specific stats */}
+                    <div className="bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl space-y-2.5">
+                      <div className="flex items-center gap-2 text-zinc-400 text-[10px]">
+                        <Building2 className="h-3.5 w-3.5 text-indigo-400" />
+                        <span className="font-bold text-white">Software House Insights</span>
+                      </div>
 
-                  {/* Item 3 */}
-                  <div className="p-2.5 rounded-lg bg-indigo-500/5 border border-indigo-500/15 flex items-start gap-2.5">
-                    <TrendingUp className="h-3.5 w-3.5 text-indigo-400 shrink-0 mt-0.5" />
-                    <div>
-                      <h5 className="text-[10px] font-bold text-white">Revenue down 12%</h5>
-                      <p className="text-[9px] text-zinc-400 mt-0.5">Delayed milestone invoice found.</p>
+                      <div className="space-y-2">
+                        {/* Insight 1 */}
+                        <div className="p-2 bg-[#09090b]/80 border border-zinc-850 rounded-xl">
+                          <span className="text-[8px] font-bold text-zinc-550 uppercase tracking-wide block">Project Scope creep</span>
+                          <p className="text-[9px] text-zinc-350 font-semibold mt-0.5">63% of project delays are caused by client-requested API revisions post-kickoff.</p>
+                        </div>
+
+                        {/* Insight 2 */}
+                        <div className="p-2 bg-[#09090b]/80 border border-zinc-850 rounded-xl">
+                          <span className="text-[8px] font-bold text-zinc-550 uppercase tracking-wide block">Developer Overload</span>
+                          <p className="text-[9px] text-zinc-355 font-semibold mt-0.5">Lead Architect is tagged in 80% of active Github/Doc items.</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+
             </div>
 
             {/* Right Spacer with diagonal stripes */}
             <div 
-              className="hidden lg:block border-t border-slate-850/80"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
-            />
-          </div>
-
-          {/* Feature Row 4: Memory Graph View */}
-          <div className="grid grid-cols-1 lg:grid-cols-[50px_3.5fr_6.5fr_50px] w-full bg-[#09090b]/40 shadow-2xl border-t border-slate-850/80">
-            {/* Left Spacer with diagonal stripes */}
-            <div 
-              className="hidden lg:block border-r border-slate-850/80"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
-            />
-
-            {/* Left Content Column: Feature Description */}
-            <div className="py-20 lg:py-24 px-8 sm:px-12 flex flex-col justify-center text-left border-b lg:border-b-0 lg:border-r border-slate-850/80 bg-[#08080a]/20">
-              <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">04 . KNOWLEDGE MAPPING</span>
-              <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                Company Memory Graph
-              </h3>
-              <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal">
-                Visualize connections between Clients, Meetings, Decisions, Projects, and Tasks extracted by AI from your daily communications. Spot operational bottlenecks.
-              </p>
-            </div>
-
-            {/* Right Content Column: Graph Mockup */}
-            <div className="py-20 lg:py-24 px-8 sm:px-12 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
-              <div className="w-full max-w-[420px] h-[280px] border border-zinc-800 rounded-2xl bg-[#0c0c0e]/95 relative overflow-hidden z-10 flex items-center justify-center">
-                {/* SVG Graph diagram */}
-                <svg className="w-full h-full" viewBox="0 0 400 280">
-                  {/* Connection lines */}
-                  <line x1="80" y1="140" x2="200" y2="70" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1.5" strokeDasharray="3" />
-                  <line x1="80" y1="140" x2="200" y2="210" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1.5" />
-                  <line x1="200" y1="70" x2="320" y2="70" stroke="rgba(99, 102, 241, 0.5)" strokeWidth="2" />
-                  <line x1="200" y1="210" x2="320" y2="210" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1.5" strokeDasharray="3" />
-                  <line x1="320" y1="70" x2="320" y2="210" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1.5" />
-
-                  {/* Node 1: Client */}
-                  <circle cx="80" cy="140" r="24" fill="#09090b" stroke="#6366f1" strokeWidth="2" />
-                  <text x="80" y="143" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Client</text>
-                  <text x="80" y="178" fill="#8890a0" fontSize="8" textAnchor="middle">Vista Retail</text>
-
-                  {/* Node 2: Meeting */}
-                  <circle cx="200" cy="70" r="22" fill="#09090b" stroke="#f43f5e" strokeWidth="1.5" />
-                  <text x="200" y="73" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Meeting</text>
-                  <text x="200" y="105" fill="#8890a0" fontSize="8" textAnchor="middle">Sprint Kickoff</text>
-
-                  {/* Node 3: Project */}
-                  <circle cx="200" cy="210" r="22" fill="#09090b" stroke="#eab308" strokeWidth="1.5" />
-                  <text x="200" y="213" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Project</text>
-                  <text x="200" y="245" fill="#8890a0" fontSize="8" textAnchor="middle">Nexa App</text>
-
-                  {/* Node 4: Decision */}
-                  <circle cx="320" cy="70" r="22" fill="#09090b" stroke="#10b981" strokeWidth="1.5" />
-                  <text x="320" y="73" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Decision</text>
-                  <text x="320" y="105" fill="#8890a0" fontSize="8" textAnchor="middle">API Auth Spec</text>
-
-                  {/* Node 5: Task */}
-                  <circle cx="320" cy="210" r="22" fill="#09090b" stroke="#3b82f6" strokeWidth="1.5" />
-                  <text x="320" y="213" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Task</text>
-                  <text x="320" y="245" fill="#8890a0" fontSize="8" textAnchor="middle">Fix Login API</text>
-                </svg>
-
-                {/* Glassmorphic Inspect Card */}
-                <div className="absolute bottom-3 right-3 bg-[#09090b]/80 backdrop-blur border border-zinc-800 p-2 rounded-lg text-left max-w-[130px] shadow-lg">
-                  <span className="text-[7.5px] font-bold text-zinc-550 block uppercase tracking-wider">Active Node</span>
-                  <span className="text-[9px] font-bold text-white block mt-0.5">Vista Retail</span>
-                  <span className="text-[8px] text-zinc-400 block mt-0.5">12 emails, 2 meetings related</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Spacer with diagonal stripes */}
-            <div 
-              className="hidden lg:block border-t border-slate-850/80"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
-            />
-          </div>
-
-          {/* Feature Row 5: Vertical-Aware Playbooks */}
-          <div className="grid grid-cols-1 lg:grid-cols-[50px_3.5fr_6.5fr_50px] w-full bg-[#09090b]/40 shadow-2xl border-t border-slate-850/80">
-            {/* Left Spacer with diagonal stripes */}
-            <div 
-              className="hidden lg:block border-r border-slate-850/80"
-              style={{ 
-                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
-              }} 
-            />
-
-            {/* Left Content Column: Feature Description */}
-            <div className="py-20 lg:py-24 px-8 sm:px-12 flex flex-col justify-center text-left border-b lg:border-b-0 lg:border-r border-slate-850/80 bg-[#08080a]/20">
-              <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mb-2 block font-bold">05 . INDUSTRY TAILORED</span>
-              <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                Vertical Playbooks
-              </h3>
-              <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal">
-                Insights customized for your exact business model. Whether you are a Software House, Creative Agency, or Startup, Coretify runs targeted analysis routines.
-              </p>
-            </div>
-
-            {/* Right Content Column: Playbook selection & stats mockup */}
-            <div className="py-20 lg:py-24 px-8 sm:px-12 flex flex-col items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-850/80 relative min-h-[520px] bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px]">
-              <div className="w-full max-w-[370px] space-y-3.5 relative z-10 text-left">
-                {/* Playbook selector */}
-                <div className="flex gap-1.5 p-1 rounded-xl bg-slate-950/60 border border-zinc-800 text-[10px] font-semibold text-zinc-400">
-                  <span className="flex-1 text-center py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-white font-bold cursor-pointer">Software House</span>
-                  <span className="flex-1 text-center py-1.5 rounded-lg hover:text-white transition-colors cursor-pointer">Agency</span>
-                  <span className="flex-1 text-center py-1.5 rounded-lg hover:text-white transition-colors cursor-pointer">Startup</span>
-                </div>
-
-                {/* Software House Playbook specific stats */}
-                <div className="bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl space-y-3">
-                  <div className="flex items-center gap-2 text-zinc-400 text-[10.5px]">
-                    <Building2 className="h-4 w-4 text-indigo-400" />
-                    <span className="font-bold text-white">Software House Insights</span>
-                  </div>
-
-                  <div className="space-y-2.5">
-                    {/* Insight 1 */}
-                    <div className="p-2 bg-[#09090b]/80 border border-zinc-850 rounded-xl">
-                      <span className="text-[8.5px] font-bold text-zinc-550 uppercase tracking-wide block">Project Scope creep</span>
-                      <p className="text-[10px] text-zinc-300 font-semibold mt-1">63% of project delays are caused by client-requested API revisions post-kickoff.</p>
-                    </div>
-
-                    {/* Insight 2 */}
-                    <div className="p-2 bg-[#09090b]/80 border border-zinc-850 rounded-xl">
-                      <span className="text-[8.5px] font-bold text-zinc-550 uppercase tracking-wide block">Developer Overload</span>
-                      <p className="text-[10px] text-zinc-300 font-semibold mt-1">Lead Architect is tagged in 80% of active Github/Doc items.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Spacer with diagonal stripes */}
-            <div 
-              className="hidden lg:block border-t border-slate-850/80 border-t-dashed"
+              className="hidden lg:block border-l border-slate-850/80"
               style={{ 
                 backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)' 
               }} 
