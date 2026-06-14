@@ -147,6 +147,21 @@ export default function Home() {
 
         {/* Aurora Glowing Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
+          {/* Subtle Grid Pattern Motif */}
+          <div 
+            className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:48px_48px]"
+            style={{
+              WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)',
+              maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)'
+            }}
+          />
+
+          {/* Spotlight Glows from Top-Center */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-indigo-500/40 via-indigo-500/10 to-transparent blur-[110px] rounded-full mix-blend-screen" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-gradient-to-b from-purple-500/30 via-purple-500/5 to-transparent blur-[90px] rounded-full mix-blend-screen" />
+          <div className="absolute top-0 left-[48%] -translate-x-1/2 w-[350px] h-[200px] bg-gradient-to-b from-emerald-500/20 to-transparent blur-[70px] rounded-full mix-blend-screen" />
+
+          {/* Side & Bottom Glowing Blobs */}
           <div className="absolute -top-[10%] -left-[15%] h-[550px] w-[750px] rounded-full bg-indigo-500/20 blur-[130px] mix-blend-screen" />
           <div className="absolute top-[20%] left-[20%] h-[500px] w-[700px] rounded-full bg-emerald-500/15 blur-[110px] mix-blend-screen" />
           <div className="absolute -top-[10%] -right-[15%] h-[550px] w-[750px] rounded-full bg-purple-500/25 blur-[130px] mix-blend-screen" />
