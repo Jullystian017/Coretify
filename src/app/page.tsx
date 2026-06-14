@@ -151,20 +151,19 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
             
             {/* Left Column: Headline */}
-            <div className="lg:col-span-7 pr-0 lg:pr-12 text-left space-y-6">
+            <div className="lg:col-span-8 pr-0 lg:pr-12 text-left space-y-6">
               <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] text-white leading-[1.08]">
-                Deploy agents that work across your company memory
+                The operating system<br className="hidden sm:inline" /> that understands your company
               </h1>
-            </div>
-
-            {/* Spacing between hero columns (visible only on desktop) */}
-            <div className="hidden lg:block lg:col-span-1 h-full min-h-[140px] self-stretch relative">
+              <p className="text-base sm:text-[17px] text-slate-400 leading-relaxed font-normal">
+                connects your knowledge, and helps you make better decisions.
+              </p>
             </div>
 
             {/* Right Column: Description & Primary CTA */}
             <div className="lg:col-span-4 pl-0 lg:pl-6 text-left space-y-6 lg:pt-2">
               <p className="text-base sm:text-[16px] text-slate-400 leading-relaxed font-normal">
-                Build, deploy, and improve your existing memory agents for every business workflow and data connector.
+                Sync your workspace tools in one click. Coretify builds your company brain so your team can query operational context instantly.
               </p>
               <div>
                 <Button
@@ -172,7 +171,7 @@ export default function Home() {
                   size="lg"
                   className="bg-white hover:bg-slate-100 text-black font-semibold text-[13px] px-7 py-5.5 rounded-full shadow-lg transition-all hover:scale-[1.01] active:scale-[0.98]"
                 >
-                  Request a Demo
+                  Try Coretify
                 </Button>
               </div>
             </div>
