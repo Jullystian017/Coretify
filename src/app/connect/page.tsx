@@ -133,31 +133,31 @@ export default function ConnectPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-950 text-slate-100 selection:bg-purple-500/30">
-      {/* Background elements */}
-      <div className="absolute top-0 right-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-purple-600/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-blue-600/5 blur-[150px] pointer-events-none" />
+    <div className="flex flex-col min-h-screen bg-[#070708] text-slate-100 selection:bg-purple-500/30">
+      
+      {/* Top Background radial gradient */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-7xl rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/40 via-transparent to-transparent blur-3xl pointer-events-none" />
 
       {/* Header */}
-      <header className="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-bold text-lg bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+      <header className="border-b border-slate-900 bg-[#070708]/80 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-5xl mx-auto px-8 h-20 flex items-center justify-between">
+          <span className="font-bold text-[15px] tracking-tight text-white">
             Coretify Connect
           </span>
-          <div className="flex items-center gap-1 text-slate-400 text-xs bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full">
-            <ShieldCheck className="h-4 w-4 text-emerald-400" />
+          <div className="flex items-center gap-1.5 text-slate-400 text-[11px] bg-[#0c0c0e] border border-slate-900 px-3.5 py-1.5 rounded-xl">
+            <ShieldCheck className="h-4 w-4 text-emerald-500" />
             <span>Read-Only Integration Garansi 100%</span>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-6 py-12">
+      <main className="flex-1 max-w-4xl w-full mx-auto px-8 py-12">
         <div className="mb-10 text-center md:text-left">
-          <h1 className="text-3xl font-extrabold tracking-tight text-white mb-2">
+          <h1 className="text-3xl font-bold tracking-tight text-white mb-2">
             Hubungkan Memori Bisnis {companyName}
           </h1>
-          <p className="text-slate-400 text-sm max-w-xl">
+          <p className="text-slate-400 text-xs max-w-xl">
             Coretify bekerja dengan membaca data historis untuk memetakan entitas klien, projek, dan keputusan penting. Hubungkan minimal satu sumber untuk melanjutkan.
           </p>
         </div>
@@ -166,49 +166,49 @@ export default function ConnectPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           
           {/* Card 1: Google Workspace */}
-          <Card className={`bg-slate-900/40 border-slate-900 backdrop-blur-md overflow-hidden relative flex flex-col justify-between ${googleConnected ? "ring-2 ring-purple-500/30" : ""}`}>
+          <Card className={`bg-[#0c0c0e] border-slate-900 overflow-hidden relative flex flex-col justify-between ${googleConnected ? "ring-1 ring-slate-800" : ""}`}>
             {googleConnected && (
-              <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1 shadow-md">
-                <Check className="h-3 w-3" /> Connected
+              <div className="absolute top-0 right-0 bg-[#18181b] border-l border-b border-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1">
+                <Check className="h-3 w-3 text-emerald-400" /> Connected
               </div>
             )}
             <CardHeader className="pb-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 border border-slate-800 text-white mb-3 shadow-inner">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-white mb-3">
                 <Globe className="h-5 w-5 text-blue-400" />
               </div>
-              <CardTitle className="text-white flex items-center gap-2">
+              <CardTitle className="text-sm font-bold text-white flex items-center gap-2">
                 Google Workspace
-                <Badge variant="outline" className="text-[10px] text-purple-400 bg-purple-500/5 border-purple-500/10">Recommended</Badge>
+                <Badge variant="outline" className="text-[9px] text-slate-400 border-slate-900 bg-slate-950">Recommended</Badge>
               </CardTitle>
-              <CardDescription className="text-slate-400 text-xs">
+              <CardDescription className="text-slate-450 text-[11px]">
                 Sinkronisasi Gmail, Google Calendar, dan Drive/Sheets secara terpadu.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 flex-1">
-              <div className="space-y-2 text-xs">
-                <div className="flex items-start gap-2 text-slate-300">
-                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="space-y-2.5 text-[11px]">
+                <div className="flex items-start gap-2 text-slate-350">
+                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                   <span>Membaca email historis untuk memetakan korespondensi klien.</span>
                 </div>
-                <div className="flex items-start gap-2 text-slate-300">
-                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <div className="flex items-start gap-2 text-slate-350">
+                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                   <span>Memetakan timeline meeting & keputusan dari kalender.</span>
                 </div>
-                <div className="flex items-start gap-2 text-slate-300">
-                  <AlertTriangle className="h-3.5 w-3.5 text-amber-400 shrink-0 mt-0.5" />
-                  <span className="text-slate-400">Tidak ada hak akses menulis (read-only). Tidak bisa mengirim email/mengedit file.</span>
+                <div className="flex items-start gap-2 text-slate-400">
+                  <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
+                  <span className="text-slate-450">Tidak ada hak akses menulis (read-only). Tidak bisa mengirim email/mengedit file.</span>
                 </div>
               </div>
 
               {/* Collapsible Folder Select */}
               {googleConnected && (
-                <div className="border border-slate-800 rounded-xl bg-slate-950/40 p-3.5 mt-3 animate-in slide-in-from-top-2 duration-300">
+                <div className="border border-slate-900 rounded-xl bg-[#08080a] p-3.5 mt-3 animate-in slide-in-from-top-2 duration-300">
                   <button
                     onClick={() => setShowDriveFolders(!showDriveFolders)}
                     className="w-full flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors"
                   >
                     <span className="flex items-center gap-2">
-                      <FolderLock className="h-4 w-4 text-purple-400" />
+                      <FolderLock className="h-4 w-4 text-slate-400" />
                       Atur Folder Drive Ter-exclude
                     </span>
                     {showDriveFolders ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
@@ -242,10 +242,10 @@ export default function ConnectPage() {
                 </div>
               )}
             </CardContent>
-            <CardFooter className="pt-2 border-t border-slate-900/60 bg-slate-950/20 px-6 py-4">
+            <CardFooter className="pt-2 border-t border-slate-900 bg-[#08080a]/40 px-6 py-4">
               <Button
                 onClick={() => setShowOAuthModal(true)}
-                className={`w-full font-semibold rounded-xl text-xs ${googleConnected ? "bg-slate-800 text-slate-300 hover:bg-slate-700" : "bg-purple-600 hover:bg-purple-500 text-white shadow shadow-purple-600/10"}`}
+                className={`w-full font-semibold rounded-xl text-xs py-4.5 ${googleConnected ? "bg-[#18181b] hover:bg-[#27272a] text-slate-300 border border-[#2e2e33]" : "bg-white hover:bg-slate-100 text-black"}`}
               >
                 {googleConnected ? "Hubungkan Ulang Google" : "Connect Google Workspace"}
               </Button>
@@ -253,38 +253,38 @@ export default function ConnectPage() {
           </Card>
 
           {/* Card 2: WhatsApp Lite */}
-          <Card className={`bg-slate-900/40 border-slate-900 backdrop-blur-md flex flex-col justify-between overflow-hidden relative ${whatsappConnected ? "ring-2 ring-purple-500/30" : ""}`}>
+          <Card className={`bg-[#0c0c0e] border-slate-900 flex flex-col justify-between overflow-hidden relative ${whatsappConnected ? "ring-1 ring-slate-800" : ""}`}>
             {whatsappConnected && (
-              <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1 shadow-md">
-                <Check className="h-3 w-3" /> Connected
+              <div className="absolute top-0 right-0 bg-[#18181b] border-l border-b border-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1">
+                <Check className="h-3 w-3 text-emerald-400" /> Connected
               </div>
             )}
             <CardHeader className="pb-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 border border-slate-800 text-white mb-3 shadow-inner">
-                <MessageSquare className="h-5 w-5 text-emerald-400" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-white mb-3">
+                <MessageSquare className="h-5 w-5 text-emerald-500" />
               </div>
-              <CardTitle className="text-white flex items-center gap-2">
+              <CardTitle className="text-sm font-bold text-white flex items-center gap-2">
                 WhatsApp Lite
-                <Badge variant="outline" className="text-[10px] text-slate-400 border-slate-800">No API Needed</Badge>
+                <Badge variant="outline" className="text-[9px] text-slate-400 border-slate-900 bg-slate-950">No API Needed</Badge>
               </CardTitle>
-              <CardDescription className="text-slate-400 text-xs">
+              <CardDescription className="text-slate-450 text-[11px]">
                 Unggah hasil ekspor obrolan `.txt` untuk ekstraksi keputusan & task.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 flex-1">
-              <div className="space-y-2 text-xs">
-                <div className="flex items-start gap-2 text-slate-300">
-                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="space-y-2 text-[11px]">
+                <div className="flex items-start gap-2 text-slate-350">
+                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                   <span>Ekstraksi komitmen tindakan dan kesepakatan klien secara instan.</span>
                 </div>
-                <div className="flex items-start gap-2 text-slate-300">
-                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <div className="flex items-start gap-2 text-slate-350">
+                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                   <span>Keamanan penuh: Data hanya dibaca sekali untuk di-indeks.</span>
                 </div>
               </div>
 
               {/* Drag and Drop Uploader */}
-              <div className="relative border-2 border-dashed border-slate-800 rounded-xl p-4 bg-slate-950/20 hover:border-slate-700 transition-all text-center flex flex-col items-center justify-center min-h-[120px]">
+              <div className="relative border-2 border-dashed border-slate-900 rounded-xl p-4 bg-[#08080a] hover:border-slate-800 transition-all text-center flex flex-col items-center justify-center min-h-[120px]">
                 <input
                   type="file"
                   accept=".txt"
@@ -294,25 +294,25 @@ export default function ConnectPage() {
                 />
                 {isParsingWA ? (
                   <div className="space-y-2">
-                    <div className="h-5 w-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto" />
-                    <p className="text-[11px] text-slate-400 font-medium">Menganalisis chat WhatsApp...</p>
+                    <div className="h-5 w-5 border-2 border-slate-500 border-t-transparent rounded-full animate-spin mx-auto" />
+                    <p className="text-[10px] text-slate-400 font-medium">Menganalisis chat WhatsApp...</p>
                   </div>
                 ) : waFile ? (
                   <div className="space-y-1">
-                    <Check className="h-7 w-7 text-emerald-400 mx-auto" />
+                    <Check className="h-7 w-7 text-emerald-500 mx-auto" />
                     <p className="text-[11px] text-white font-semibold">{waFile}</p>
-                    <p className="text-[9px] text-emerald-400">Berhasil diekstrak (45 chat lines, 3 task ditemukan)</p>
+                    <p className="text-[9px] text-emerald-500">Berhasil diekstrak (45 chat lines, 3 task ditemukan)</p>
                   </div>
                 ) : (
                   <>
-                    <UploadCloud className="h-6 w-6 text-slate-500 mb-2" />
+                    <UploadCloud className="h-6 w-6 text-slate-600 mb-2" />
                     <p className="text-xs text-slate-300 font-semibold">Tarik & Lepas File .txt</p>
-                    <p className="text-[10px] text-slate-500 mt-1">Gunakan fitur 'Export Chat' dari WA HP Anda</p>
+                    <p className="text-[10px] text-slate-550 mt-1">Gunakan fitur 'Export Chat' dari WA HP Anda</p>
                   </>
                 )}
               </div>
             </CardContent>
-            <CardFooter className="pt-2 border-t border-slate-900/60 bg-slate-950/20 px-6 py-4">
+            <CardFooter className="pt-2 border-t border-slate-900 bg-[#08080a]/40 px-6 py-4">
               <div className="text-[10px] text-slate-500 text-center w-full">
                 Sangat aman & cocok untuk mendeteksi diskusi klien yang sering terlewat.
               </div>
@@ -320,38 +320,38 @@ export default function ConnectPage() {
           </Card>
 
           {/* Card 3: CSV/Excel Upload */}
-          <Card className={`bg-slate-900/40 border-slate-900 backdrop-blur-md flex flex-col justify-between overflow-hidden relative md:col-span-2 ${csvConnected ? "ring-2 ring-purple-500/30" : ""}`}>
+          <Card className={`bg-[#0c0c0e] border-slate-900 flex flex-col justify-between overflow-hidden relative md:col-span-2 ${csvConnected ? "ring-1 ring-slate-800" : ""}`}>
             {csvConnected && (
-              <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1 shadow-md">
-                <Check className="h-3 w-3" /> Connected
+              <div className="absolute top-0 right-0 bg-[#18181b] border-l border-b border-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1">
+                <Check className="h-3 w-3 text-emerald-400" /> Connected
               </div>
             )}
             <CardHeader className="pb-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 border border-slate-800 text-white mb-3 shadow-inner">
-                <FileSpreadsheet className="h-5 w-5 text-amber-400" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-white mb-3">
+                <FileSpreadsheet className="h-5 w-5 text-amber-500" />
               </div>
-              <CardTitle className="text-white flex items-center gap-2">
+              <CardTitle className="text-sm font-bold text-white flex items-center gap-2">
                 Unggah CSV/Excel (Data Keuangan/Log)
-                <Badge variant="outline" className="text-[10px] text-slate-400 border-slate-800">Generic Data</Badge>
+                <Badge variant="outline" className="text-[9px] text-slate-400 border-slate-900 bg-slate-950">Generic Data</Badge>
               </CardTitle>
-              <CardDescription className="text-slate-400 text-xs">
+              <CardDescription className="text-slate-450 text-[11px]">
                 Membantu memetakan tagihan invoice, cashflow, atau log transaksi sebagai context pendukung Company Memory.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-              <div className="space-y-2 text-xs">
-                <div className="flex items-start gap-2 text-slate-300">
-                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="space-y-2 text-[11px]">
+                <div className="flex items-start gap-2 text-slate-350">
+                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                   <span>Membaca log data piutang/revenue untuk korelasi profitabilitas klien.</span>
                 </div>
-                <div className="flex items-start gap-2 text-slate-300">
-                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <div className="flex items-start gap-2 text-slate-350">
+                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                   <span>Kompatibel dengan ekspor spreadsheet Accurate, Jurnal, atau manual log.</span>
                 </div>
               </div>
 
               {/* Drag and Drop Uploader */}
-              <div className="relative border-2 border-dashed border-slate-800 rounded-xl p-4 bg-slate-950/20 hover:border-slate-700 transition-all text-center flex flex-col items-center justify-center min-h-[110px]">
+              <div className="relative border-2 border-dashed border-slate-900 rounded-xl p-4 bg-[#08080a] hover:border-slate-800 transition-all text-center flex flex-col items-center justify-center min-h-[110px]">
                 <input
                   type="file"
                   accept=".csv,.xlsx"
@@ -361,20 +361,20 @@ export default function ConnectPage() {
                 />
                 {isParsingCSV ? (
                   <div className="space-y-2">
-                    <div className="h-5 w-5 border-2 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto" />
-                    <p className="text-[11px] text-slate-400 font-medium">Menganalisis tabel file...</p>
+                    <div className="h-5 w-5 border-2 border-slate-500 border-t-transparent rounded-full animate-spin mx-auto" />
+                    <p className="text-[10px] text-slate-400 font-medium">Menganalisis tabel file...</p>
                   </div>
                 ) : csvFile ? (
                   <div className="space-y-1">
-                    <Check className="h-7 w-7 text-emerald-400 mx-auto" />
+                    <Check className="h-7 w-7 text-emerald-500 mx-auto" />
                     <p className="text-[11px] text-white font-semibold">{csvFile}</p>
-                    <p className="text-[9px] text-emerald-400">Berhasil dipetakan (14 invoice log transaksi terdeteksi)</p>
+                    <p className="text-[9px] text-emerald-550">Berhasil dipetakan (14 invoice log transaksi terdeteksi)</p>
                   </div>
                 ) : (
                   <>
-                    <UploadCloud className="h-6 w-6 text-slate-500 mb-2" />
+                    <UploadCloud className="h-6 w-6 text-slate-600 mb-2" />
                     <p className="text-xs text-slate-300 font-semibold">Tarik & Lepas File .csv / .xlsx</p>
-                    <p className="text-[10px] text-slate-500 mt-1">Format laporan penjualan/invoice bebas</p>
+                    <p className="text-[10px] text-slate-550 mt-1">Format laporan penjualan/invoice bebas</p>
                   </>
                 )}
               </div>
@@ -391,7 +391,7 @@ export default function ConnectPage() {
           <Button
             onClick={handleBuildMemory}
             disabled={!canProceed}
-            className={`px-8 py-6 rounded-xl font-bold transition-all ${canProceed ? "bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white shadow-lg shadow-purple-600/20 scale-[1.02]" : "bg-slate-900 border border-slate-800 text-slate-500 cursor-not-allowed"}`}
+            className={`px-8 py-6 rounded-full font-bold transition-all ${canProceed ? "bg-white hover:bg-slate-100 text-black shadow-md scale-[1.01]" : "bg-[#0c0c0e] border border-slate-900 text-slate-550 cursor-not-allowed"}`}
           >
             Bangun Company Memory
             <ArrowRight className="h-4.5 w-4.5 ml-2" />
@@ -402,7 +402,7 @@ export default function ConnectPage() {
       {/* Google Workspace OAuth Simulation Modal */}
       {showOAuthModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <Card className="w-full max-w-lg bg-slate-900 border-slate-800 shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
+          <Card className="w-full max-w-lg bg-[#0c0c0e] border-slate-900 shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="p-6">
               {/* Google Brand Header */}
               <div className="flex items-center gap-2 mb-6">
@@ -424,19 +424,19 @@ export default function ConnectPage() {
                     d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.37 0 3.27 2.73 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"
                   />
                 </svg>
-                <span className="font-semibold text-slate-300 text-sm">Sign in with Google</span>
+                <span className="font-semibold text-slate-350 text-xs font-mono">Sign in with Google</span>
               </div>
 
-              <h2 className="text-xl font-bold text-white mb-2">Coretify meminta izin akses data</h2>
+              <h2 className="text-lg font-bold text-white mb-2">Coretify meminta izin akses data</h2>
               <p className="text-slate-400 text-xs leading-relaxed mb-6">
                 Coretify Labs memerlukan otorisasi read-only pada data-data Workspace berikut untuk diekstrak menjadi satu Company Memory terpusat.
               </p>
 
               {/* Scopes checklist */}
-              <div className="space-y-3.5 mb-6">
+              <div className="space-y-3 mb-6 text-xs">
                 <div
                   onClick={() => handleScopeToggle("gmail")}
-                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.gmail ? "bg-slate-950/40 border-purple-500/20" : "bg-transparent border-slate-800 opacity-60"}`}
+                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.gmail ? "bg-slate-950/40 border-slate-800" : "bg-transparent border-slate-900 opacity-60"}`}
                 >
                   <input
                     type="checkbox"
@@ -445,14 +445,14 @@ export default function ConnectPage() {
                     className="mt-0.5 rounded border-slate-800 text-purple-600 focus:ring-0 cursor-pointer"
                   />
                   <div>
-                    <h4 className="text-xs font-semibold text-slate-200">Read-only akses Gmail</h4>
+                    <h4 className="text-xs font-bold text-slate-200">Read-only akses Gmail</h4>
                     <p className="text-[10px] text-slate-500 mt-0.5">Memindai isi email untuk mendeteksi diskusi projek dan klien. Coretify TIDAK BISA mengirim email.</p>
                   </div>
                 </div>
 
                 <div
                   onClick={() => handleScopeToggle("calendar")}
-                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.calendar ? "bg-slate-950/40 border-purple-500/20" : "bg-transparent border-slate-800 opacity-60"}`}
+                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.calendar ? "bg-slate-950/40 border-slate-800" : "bg-transparent border-slate-900 opacity-60"}`}
                 >
                   <input
                     type="checkbox"
@@ -461,14 +461,14 @@ export default function ConnectPage() {
                     className="mt-0.5 rounded border-slate-800 text-purple-600 focus:ring-0 cursor-pointer"
                   />
                   <div>
-                    <h4 className="text-xs font-semibold text-slate-200">Read-only akses Google Calendar</h4>
+                    <h4 className="text-xs font-bold text-slate-200">Read-only akses Google Calendar</h4>
                     <p className="text-[10px] text-slate-500 mt-0.5">Memindai riwayat meeting untuk mendeteksi timelines projek dan janji temu.</p>
                   </div>
                 </div>
 
                 <div
                   onClick={() => handleScopeToggle("drive")}
-                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.drive ? "bg-slate-950/40 border-purple-500/20" : "bg-transparent border-slate-800 opacity-60"}`}
+                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.drive ? "bg-slate-950/40 border-slate-800" : "bg-transparent border-slate-900 opacity-60"}`}
                 >
                   <input
                     type="checkbox"
@@ -477,14 +477,14 @@ export default function ConnectPage() {
                     className="mt-0.5 rounded border-slate-800 text-purple-600 focus:ring-0 cursor-pointer"
                   />
                   <div>
-                    <h4 className="text-xs font-semibold text-slate-200">Read-only akses Google Drive</h4>
+                    <h4 className="text-xs font-bold text-slate-200">Read-only akses Google Drive</h4>
                     <p className="text-[10px] text-slate-500 mt-0.5">Membaca dokumen dan file pendukung. Folder bernada HR & Finance akan ter-exclude secara otomatis.</p>
                   </div>
                 </div>
 
                 <div
                   onClick={() => handleScopeToggle("sheets")}
-                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.sheets ? "bg-slate-950/40 border-purple-500/20" : "bg-transparent border-slate-800 opacity-60"}`}
+                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.sheets ? "bg-slate-950/40 border-slate-800" : "bg-transparent border-slate-900 opacity-60"}`}
                 >
                   <input
                     type="checkbox"
@@ -493,16 +493,16 @@ export default function ConnectPage() {
                     className="mt-0.5 rounded border-slate-800 text-purple-600 focus:ring-0 cursor-pointer"
                   />
                   <div>
-                    <h4 className="text-xs font-semibold text-slate-200">Read-only akses Google Sheets</h4>
+                    <h4 className="text-xs font-bold text-slate-200">Read-only akses Google Sheets</h4>
                     <p className="text-[10px] text-slate-500 mt-0.5">Membaca data spreadsheet kustom yang berisi invoice operasional atau backlog kerja.</p>
                   </div>
                 </div>
               </div>
 
               {/* Safety warning */}
-              <div className="flex gap-2.5 p-3 rounded-xl bg-slate-950 border border-slate-800 mb-6">
-                <Lock className="h-4.5 w-4.5 text-emerald-400 shrink-0 mt-0.5" />
-                <p className="text-[10px] text-slate-400 leading-normal">
+              <div className="flex gap-2.5 p-3 rounded-xl bg-[#08080a] border border-slate-900 mb-6">
+                <Lock className="h-4.5 w-4.5 text-emerald-500 shrink-0 mt-0.5" />
+                <p className="text-[10px] text-slate-450 leading-normal">
                   Coretify mematuhi Kebijakan Data Pengguna Layanan API Google, termasuk ketentuan Penggunaan Terbatas. Token Anda dienkripsi AES-256 tingkat perbankan.
                 </p>
               </div>
@@ -512,13 +512,13 @@ export default function ConnectPage() {
                 <Button
                   variant="ghost"
                   onClick={() => setShowOAuthModal(false)}
-                  className="text-xs text-slate-400 hover:text-white"
+                  className="text-xs text-slate-500 hover:text-white"
                 >
                   Batal
                 </Button>
                 <Button
                   onClick={handleOAuthApprove}
-                  className="bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs px-6 py-4 rounded-xl shadow-lg shadow-purple-600/15"
+                  className="bg-white hover:bg-slate-100 text-black font-semibold text-xs px-5 py-3 rounded-full"
                 >
                   Setujui & Lanjutkan
                 </Button>

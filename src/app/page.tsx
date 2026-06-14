@@ -1,374 +1,402 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import {
-  Sparkles,
+  ChevronDown,
+  Play,
+  Plus,
   ArrowRight,
-  Bot,
-  MessageSquare,
   ShieldCheck,
   Check,
-  Zap,
   Lock,
   ExternalLink,
-  ChevronRight,
-  TrendingUp,
+  Bot,
+  Building2,
+  Calendar,
   Mail,
-  Network
+  Network,
+  TrendingUp,
+  MoreHorizontal
 } from "lucide-react";
 
 export default function Home() {
   const router = useRouter();
-  const [typedText, setTypedText] = useState("");
-  const [activePreset, setActivePreset] = useState<number | null>(null);
-  const [demoAnswer, setDemoAnswer] = useState<string | null>(null);
-  const [demoCitations, setDemoCitations] = useState<any[]>([]);
-
-  const presets = [
-    {
-      q: "Apa project yang berisiko terlambat?",
-      a: "Berdasarkan analisis Gmail & Calendar, Project Nexa Web App terindikasi terlambat 5 hari dari timeline awal. Ditemukan 12 email revisi dari klien pasca-development berjalan.",
-      c: [{ name: "Email Budi (Subject:Nex Revision Request)", type: "Email" }]
-    },
-    {
-      q: "Client mana yang belum di-follow-up?",
-      a: "Vista Retail terdeteksi belum menerima email respons sejak 14 hari yang lalu. Biasanya tim Anda berkorespondensi setiap 3 hari sekali.",
-      c: [{ name: "Gmail Index / Vista Retail Inbox", type: "Email" }]
-    },
-    {
-      q: "Kenapa Project Mobile App telat?",
-      a: "Terjadi pergeseran timeline pengerjaan mockup wireframe karena 4 kali revisi layout utama yang diminta client via WhatsApp Group Chat.",
-      c: [{ name: "WhatsApp Lite / Group Chat Export", type: "Chat" }]
-    }
-  ];
 
   const handleStartOnboarding = () => {
     router.push("/onboarding");
   };
 
-  // Typing effect animation when clicking preset questions
-  const clickPreset = (idx: number) => {
-    setActivePreset(idx);
-    setDemoAnswer(null);
-    setTypedText("");
-    
-    const targetQ = presets[idx].q;
-    let currentIdx = 0;
-    
-    const interval = setInterval(() => {
-      setTypedText((prev) => prev + targetQ.charAt(currentIdx));
-      currentIdx++;
-      if (currentIdx >= targetQ.length) {
-        clearInterval(interval);
-        
-        // Show answer after brief delay
-        setTimeout(() => {
-          setDemoAnswer(presets[idx].a);
-          setDemoCitations(presets[idx].c);
-        }, 600);
-      }
-    }, 45);
-  };
-
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-purple-500/30 selection:text-purple-200 relative overflow-hidden font-sans">
-      {/* Background glow meshes */}
-      <div className="absolute top-[-10%] left-[10%] -z-10 h-[500px] w-[500px] rounded-full bg-purple-600/10 blur-[130px]" />
-      <div className="absolute top-[30%] right-[10%] -z-10 h-[600px] w-[600px] rounded-full bg-blue-600/5 blur-[160px]" />
-      <div className="absolute bottom-[-10%] left-[20%] -z-10 h-[500px] w-[500px] rounded-full bg-pink-500/5 blur-[120px]" />
+    <div className="min-h-screen bg-[#070708] text-slate-100 selection:bg-purple-500/30 selection:text-purple-200 relative overflow-hidden font-sans antialiased">
+      {/* Background radial gradient mesh for premium visual effect */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[600px] w-full max-w-7xl rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/40 via-transparent to-transparent blur-3xl pointer-events-none" />
 
-      {/* Navigation Header */}
-      <header className="sticky top-0 z-50 border-b border-slate-900 bg-slate-950/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl h-16 items-center justify-between px-6">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-lg">
+      {/* NAVBAR */}
+      <header className="sticky top-0 z-50 bg-[#070708]/80 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl h-20 items-center justify-between px-8">
+          
+          {/* Logo */}
+          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => router.push("/")}>
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-300 shadow-inner">
               <Bot className="h-4.5 w-4.5" />
             </div>
-            <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
+            <span className="text-[17px] font-bold tracking-tight text-white">
               Coretify
             </span>
-            <Badge variant="secondary" className="bg-purple-500/10 text-purple-400 border border-purple-500/20 text-[9px] py-0 px-2 font-mono">
-              Indonesian playbooks
-            </Badge>
           </div>
 
-          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-400">
-            <a href="#demo" className="transition-colors hover:text-white">Live Demo</a>
-            <a href="#features" className="transition-colors hover:text-white">Playbooks</a>
-            <a href="#security" className="transition-colors hover:text-white">Keamanan</a>
-            <a href="/privacy" className="transition-colors hover:text-white">Privacy Policy</a>
+          {/* Navigation Links */}
+          <nav className="hidden md:flex items-center gap-8 text-[13px] font-medium text-slate-400">
+            <button className="flex items-center gap-1 transition-colors hover:text-white">
+              Platform
+              <ChevronDown className="h-3.5 w-3.5 opacity-60" />
+            </button>
+            <button className="transition-colors hover:text-white" onClick={handleStartOnboarding}>
+              Agent
+            </button>
+            <button className="transition-colors hover:text-white">
+              Resources
+            </button>
           </nav>
 
-          <div className="flex items-center gap-3">
+          {/* Right actions */}
+          <div className="flex items-center gap-6">
+            <button className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors">
+              Login
+            </button>
             <Button
               onClick={handleStartOnboarding}
-              className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold px-4.5 py-4 rounded-xl shadow-lg shadow-purple-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="bg-[#18181b] hover:bg-[#27272a] text-white border border-[#2e2e33] text-[13px] font-medium px-5 py-4.5 rounded-xl shadow-md transition-all active:scale-[0.98]"
             >
-              Start Free Trial
-              <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
+              Request a Demo
             </Button>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <main className="mx-auto max-w-5xl px-6 pt-16 pb-24 sm:pt-24 text-center">
-        <div className="max-w-3xl mx-auto space-y-6 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-[10px] font-semibold text-purple-300">
-            <Sparkles className="h-3.5 w-3.5 text-purple-400" />
-            <span>AI Company Memory untuk Software House, Agency, & Startup</span>
+      {/* HERO SECTION */}
+      <main className="mx-auto max-w-7xl px-8 pt-12 pb-24">
+        
+        {/* Two-Column Hero Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-x-12 items-start mb-16">
+          
+          {/* Left Column: Headline */}
+          <div className="lg:col-span-7 max-w-2xl text-left">
+            <h1 className="text-4xl sm:text-[56px] font-semibold tracking-[-0.03em] text-white leading-[1.08] lg:pr-6">
+              Deploy agents that work across your company memory
+            </h1>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
-            Tanyakan Apa Saja Pada{" "}
-            <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
-              Memori Bisnismu
-            </span>
-          </h1>
-
-          <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl mx-auto">
-            Coretify menghubungkan Gmail, Drive, Calendar, dan WhatsApp menjadi satu Company Memory terpusat yang siap menjawab kendala operasional, risiko keterlambatan project, dan performa tim Anda.
-          </p>
-
-          <div className="flex justify-center gap-4 pt-2">
-            <Button
-              onClick={handleStartOnboarding}
-              size="lg"
-              className="bg-purple-600 hover:bg-purple-500 text-white font-semibold shadow-xl shadow-purple-500/25 transition-all rounded-xl"
-            >
-              Mulai Bangun Memory
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-            <a href="#demo">
+          {/* Right Column: Description & Primary CTA */}
+          <div className="lg:col-span-5 text-left lg:pt-3 space-y-6">
+            <p className="text-base sm:text-[17px] text-slate-400 leading-relaxed font-normal">
+              Build, deploy, and improve your existing memory agents for every business workflow and data connector.
+            </p>
+            <div>
               <Button
+                onClick={handleStartOnboarding}
                 size="lg"
-                variant="outline"
-                className="border-slate-800 bg-slate-900/50 text-slate-200 hover:bg-slate-900 hover:text-white rounded-xl transition-all"
+                className="bg-white hover:bg-slate-100 text-black font-semibold text-[14px] px-7 py-5 rounded-full shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                Coba Demo Bar Pencarian
+                Request a Demo
               </Button>
-            </a>
+            </div>
           </div>
         </div>
 
-        {/* SECTION: LIVE SEARCH BAR DEMO */}
-        <section id="demo" className="max-w-2xl mx-auto mb-28 scroll-mt-24">
-          <div className="text-center mb-6">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Interactive Preview</h3>
-            <p className="text-slate-400 text-xs mt-1">Pilih pertanyaan di bawah untuk mensimulasikan pencarian memori</p>
-          </div>
+        {/* LOGOS ROW (Greyscale, low opacity) */}
+        <div className="border-t border-slate-900/60 pt-8 pb-16">
+          <div className="flex flex-wrap items-center justify-between gap-6 opacity-35 grayscale hover:opacity-60 transition-opacity duration-300">
+            {/* Airbyte */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold tracking-tight text-white">
+              <svg className="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 0L2 6v12l10 6 10-6V6L12 0zm0 3.2L19 7.3v9.4l-7 4.1-7-4.1V7.3l7-4.1z" />
+              </svg>
+              <span>Airbyte</span>
+            </div>
 
-          <Card className="bg-slate-900/40 border-slate-900 p-5 backdrop-blur-xl shadow-2xl relative overflow-hidden text-left">
-            <div className="absolute top-0 right-0 h-[100px] w-[100px] bg-purple-600/5 blur-3xl rounded-full" />
+            {/* Tailscale */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold tracking-tight text-white">
+              <div className="grid grid-cols-3 gap-[2.5px] w-4 h-4">
+                {[...Array(9)].map((_, i) => (
+                  <div key={i} className="w-[3px] h-[3px] rounded-full bg-current" />
+                ))}
+              </div>
+              <span>tailscale</span>
+            </div>
+
+            {/* Listen */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold tracking-tight text-white">
+              <svg className="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+                <circle cx="12" cy="12" r="4" />
+              </svg>
+              <span>Listen</span>
+            </div>
+
+            {/* Profound */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold tracking-tight text-white">
+              <svg className="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2L2 12h20L12 2zm0 4.5L17.5 12H6.5L12 6.5zM2 14h20v2H2v-2zm0 4h20v2H2v-2z" />
+              </svg>
+              <span>Profound</span>
+            </div>
+
+            {/* Flow */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold tracking-tight text-white">
+              <div className="flex flex-col gap-[3px] w-4">
+                <div className="h-[2px] w-full bg-current rounded-full" />
+                <div className="h-[2px] w-3/4 bg-current rounded-full" />
+                <div className="h-[2px] w-1/2 bg-current rounded-full" />
+              </div>
+              <span>Flow</span>
+            </div>
+
+            {/* Fal */}
+            <div className="flex items-center gap-1.5 text-sm font-bold tracking-tight text-white">
+              <span className="font-mono text-base font-extrabold uppercase">fal</span>
+            </div>
+
+            {/* Perplexity */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold tracking-tight text-white">
+              <svg className="h-4.5 w-4.5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+              <span>perplexity</span>
+            </div>
+
+            {/* WorkOS */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold tracking-tight text-white">
+              <svg className="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.41 0 8-3.59 8-8s-3.59-8-8-8-8 3.59-8 8 3.59 8 8 8z" />
+              </svg>
+              <span>WorkOS</span>
+            </div>
+          </div>
+        </div>
+
+        {/* INTERACTIVE MOCK PRODUCT WINDOW */}
+        <div className="relative border border-slate-900 bg-[#0c0c0e] rounded-2xl overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)]">
+          
+          {/* Mock Window Header */}
+          <div className="h-14 border-b border-slate-900 bg-[#08080a] px-6 flex items-center justify-between">
             
-            {/* Search Input Simulation */}
-            <div className="flex items-center gap-2.5 bg-slate-950 border border-slate-850 p-3 rounded-xl mb-4">
-              <Bot className="h-4.5 w-4.5 text-purple-400 shrink-0" />
-              <div className="text-xs text-white flex-1 font-mono min-h-[1.2rem]">
-                {typedText || <span className="text-slate-600">Klik pertanyaan di bawah...</span>}
-                <span className="w-1.5 h-3 bg-purple-400 inline-block animate-pulse ml-0.5" />
+            {/* macOS Window Controls */}
+            <div className="flex items-center gap-5">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-[#ef4444]/25 border border-[#ef4444]/35" />
+                <span className="h-3 w-3 rounded-full bg-[#eab308]/25 border border-[#eab308]/35" />
+                <span className="h-3 w-3 rounded-full bg-[#22c55e]/25 border border-[#22c55e]/35" />
+              </div>
+              
+              {/* Tab navigation */}
+              <div className="flex items-center gap-1.5 bg-[#121215] border border-slate-850 px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-300">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                <span>Inbound Form Routing</span>
+                <span className="text-slate-600 ml-1.5 font-bold cursor-pointer">×</span>
+              </div>
+              <button className="text-slate-600 hover:text-slate-400 text-sm font-semibold">+</button>
+            </div>
+
+            {/* Profile pictures & action buttons */}
+            <div className="flex items-center gap-4">
+              {/* Profile group */}
+              <div className="flex -space-x-1.5 overflow-hidden">
+                <div className="h-6 w-6 rounded-full bg-slate-800 border-2 border-[#08080a] flex items-center justify-center text-[9px] font-bold text-purple-400">EM</div>
+                <div className="h-6 w-6 rounded-full bg-purple-900/30 border-2 border-[#08080a] flex items-center justify-center text-[9px] font-bold text-pink-400">BS</div>
+              </div>
+
+              {/* Action Buttons */}
+              <button className="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-850 bg-[#0f0f12]">
+                Share
+              </button>
+              <button className="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-850 bg-[#0f0f12] flex items-center gap-1">
+                <Play className="h-3 w-3 fill-current text-slate-500" />
+                Test
+              </button>
+              <button className="text-xs text-white bg-slate-900 border border-slate-850 px-3.5 py-1.5 rounded-lg font-semibold">
+                Publish
+              </button>
+            </div>
+          </div>
+
+          {/* Mock Window Main Panel Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
+            
+            {/* Left Side: Chat Panel (4 cols) */}
+            <div className="lg:col-span-4 border-r border-slate-900 p-6 flex flex-col justify-between bg-[#08080a]/60">
+              <div className="space-y-6">
+                {/* Chat bubble 1 */}
+                <div className="flex justify-end">
+                  <div className="bg-[#18181b] border border-slate-800 text-xs text-slate-200 px-4 py-2.5 rounded-2xl rounded-tr-none max-w-[90%]">
+                    Show me all Inbound sourced pipeline
+                  </div>
+                </div>
+
+                {/* Chat bubble 2 */}
+                <div className="space-y-2.5">
+                  <div className="text-[11px] text-slate-500 font-semibold tracking-wider uppercase">Searched through records...</div>
+                  <div className="text-xs text-slate-400 leading-relaxed">
+                    OK. Here's a list of opportunities that came from inbound demos.
+                  </div>
+                </div>
+
+                {/* Simulated Table */}
+                <div className="border border-slate-900 rounded-xl overflow-hidden text-xs">
+                  <div className="grid grid-cols-3 bg-[#0f0f12] border-b border-slate-900 px-3 py-2 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                    <div>Name</div>
+                    <div>Company</div>
+                    <div className="text-right">Amount</div>
+                  </div>
+                  <div className="divide-y divide-slate-900 bg-slate-950/20">
+                    <div className="grid grid-cols-3 px-3 py-2.5 text-slate-350">
+                      <div className="font-medium text-slate-200">Emma</div>
+                      <div>Airtable</div>
+                      <div className="text-right font-mono text-slate-400">$125,000</div>
+                    </div>
+                    <div className="grid grid-cols-3 px-3 py-2.5 text-slate-350">
+                      <div className="font-medium text-slate-200">Budi</div>
+                      <div>Nexa Corp</div>
+                      <div className="text-right font-mono text-slate-400">$84,000</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Prompt bar */}
+              <div className="border border-slate-900 bg-[#0f0f12] p-2.5 rounded-xl text-xs text-slate-600 flex items-center justify-between">
+                <span>Ask your memory agents...</span>
+                <ArrowRight className="h-4 w-4 text-slate-600" />
               </div>
             </div>
 
-            {/* Presets List */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {presets.map((preset, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => clickPreset(idx)}
-                  className={`text-[10px] font-semibold px-3 py-1.5 rounded-lg border transition-all ${
-                    activePreset === idx
-                      ? "bg-purple-600 border-purple-500 text-white"
-                      : "bg-slate-950 border-slate-850 text-slate-400 hover:border-slate-700 hover:text-slate-200"
-                  }`}
-                >
-                  {preset.q}
-                </button>
-              ))}
+            {/* Center Canvas Area: Workflow Graph (5 cols) */}
+            <div className="lg:col-span-5 p-6 flex flex-col justify-center items-center relative bg-[#0c0c0e]">
+              <div className="absolute inset-0 bg-[radial-gradient(#18181b_1px,transparent_1px)] bg-[size:16px_16px] opacity-40" />
+              
+              <div className="w-full max-w-sm space-y-6 z-10">
+                {/* Title badge selection */}
+                <div className="flex justify-between items-center bg-[#08080a] border border-slate-900 px-3.5 py-2 rounded-xl text-xs">
+                  <span className="flex items-center gap-2 text-slate-200 font-medium">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                    Live Inbound Form Routing
+                  </span>
+                  <ChevronDown className="h-4 w-4 text-slate-600" />
+                </div>
+
+                {/* Workflow Trigger Card */}
+                <Card className="bg-[#121215]/80 border-slate-850 p-4.5 shadow-xl relative group">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <div className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Trigger
+                      </div>
+                      <h4 className="text-xs font-bold text-white mt-1">New Form Submission</h4>
+                    </div>
+                    <MoreHorizontal className="h-4 w-4 text-slate-600" />
+                  </div>
+                  <p className="text-[10px] text-slate-400 leading-normal">
+                    Triggers this workflow whenever a visitor submits a form on your website.
+                  </p>
+                  <div className="mt-3.5">
+                    <Badge variant="secondary" className="bg-emerald-500/5 text-emerald-400 border border-emerald-500/10 text-[9px] py-0 px-2 font-mono">
+                      Inbound Demo Form
+                    </Badge>
+                  </div>
+                  
+                  {/* Cursor representation */}
+                  <div className="absolute -bottom-2 -right-2 bg-white text-black p-1 rounded-full shadow-lg shadow-black/45 border border-slate-300 pointer-events-none transform translate-y-2">
+                    <svg className="h-3 w-3 fill-current" viewBox="0 0 24 24">
+                      <path d="M4 2v20l6.5-6.5h8.5z" />
+                    </svg>
+                  </div>
+                </Card>
+
+                {/* Connecting arrow / line */}
+                <div className="flex flex-col items-center">
+                  <div className="w-0.5 h-8 bg-slate-900" />
+                  <div className="w-2 h-2 rounded-full bg-[#10b981]" />
+                </div>
+
+                {/* Workflow Action Card */}
+                <Card className="bg-[#121215]/80 border-slate-850 p-4.5 shadow-xl">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <div className="text-[10px] text-purple-400 font-bold uppercase tracking-wider">Action</div>
+                      <h4 className="text-xs font-bold text-white mt-1">Add to Sequence</h4>
+                    </div>
+                    <MoreHorizontal className="h-4 w-4 text-slate-600" />
+                  </div>
+                  <p className="text-[10px] text-slate-400 leading-normal">
+                    Enrolls the contact into the specified outreach campaign sequence.
+                  </p>
+                  <div className="mt-3.5">
+                    <Badge variant="secondary" className="bg-purple-500/5 text-purple-400 border border-purple-500/10 text-[9px] py-0 px-2 font-mono">
+                      Amplemarket Seq
+                    </Badge>
+                  </div>
+                </Card>
+              </div>
             </div>
 
-            {/* Answer Display */}
-            {demoAnswer && (
-              <div className="border-t border-slate-850 pt-4 space-y-3 animate-in fade-in slide-in-from-top-2 duration-450">
-                <div className="p-3.5 rounded-xl bg-slate-950/80 border border-purple-500/10 text-xs text-slate-300 leading-relaxed">
-                  {demoAnswer}
+            {/* Right Side: Inspector Panel (3 cols) */}
+            <div className="lg:col-span-3 border-l border-slate-900 p-6 space-y-6 bg-[#08080a]/60">
+              <div className="flex justify-between items-center border-b border-slate-900 pb-3">
+                <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                  <Check className="h-4 w-4 text-purple-400" />
+                  Add to Sequence
+                </span>
+                <span className="text-slate-600 text-xs font-semibold cursor-pointer">×</span>
+              </div>
+
+              {/* Form group 1 */}
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Name</label>
+                <div className="bg-[#0f0f12] border border-slate-900 px-3 py-2 rounded-xl text-xs text-slate-300 font-mono">
+                  Add to Sequence
                 </div>
+              </div>
+
+              {/* Info alert box */}
+              <div className="p-3 bg-[#121215] border border-slate-850 rounded-xl">
+                <p className="text-[10px] text-slate-400 leading-normal">
+                  Checks for a matching tag to delete or update the item within the sequence manager automatically.
+                </p>
+              </div>
+
+              {/* Form group 2 */}
+              <div className="space-y-4 pt-2">
+                <h5 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Inputs</h5>
                 
-                {/* Citations Preview */}
-                <div className="flex items-center gap-2 text-[10px] text-slate-500">
-                  <span>Referensi terverifikasi:</span>
-                  {demoCitations.map((cit, i) => (
-                    <span key={i} className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400 inline-flex items-center gap-1">
-                      {cit.name} <ExternalLink className="h-2 w-2" />
+                <div className="space-y-1">
+                  <label className="text-[9px] font-semibold text-slate-400 block">Provider</label>
+                  <div className="bg-[#0f0f12] border border-slate-900 px-3 py-2 rounded-xl text-xs text-slate-300 flex items-center justify-between">
+                    <span className="flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-blue-500" /> Amplemarket
                     </span>
-                  ))}
+                    <ChevronDown className="h-3.5 w-3.5 text-slate-600" />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[9px] font-semibold text-slate-400 block">Sequence</label>
+                  <div className="bg-[#0f0f12] border border-slate-900 px-3 py-2 rounded-xl text-xs text-slate-600">
+                    Select...
+                  </div>
                 </div>
               </div>
-            )}
-          </Card>
-        </section>
-
-        {/* PLAYBOOK VERTICAL HIGHLIGHTS */}
-        <section id="features" className="mb-28 scroll-mt-24 space-y-12">
-          <div className="max-w-xl mx-auto space-y-2 text-center">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Insight Spesifik Sesuai Bidang Usahamu</h2>
-            <p className="text-slate-400 text-xs">
-              Satu engine memori dengan 3 playbook vertical kustom. Kami tahu persis apa yang Anda cari.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-            <Card className="bg-slate-900/30 border-slate-900 p-6 flex flex-col justify-between backdrop-blur-md">
-              <div className="space-y-3">
-                <div className="h-8 w-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                  <TrendingUp className="h-4.5 w-4.5" />
-                </div>
-                <h4 className="text-sm font-bold text-white">Playbook Software House</h4>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
-                  Fokus mendeteksi project delay, resiko scope creep, kelebihan beban developer, dan hilangnya knowledge terdokumentasi akibat pergantian tim.
-                </p>
-              </div>
-              <span className="text-[10px] text-purple-400 font-bold mt-4 flex items-center gap-0.5">Selengkapnya <ChevronRight className="h-3 w-3" /></span>
-            </Card>
-
-            <Card className="bg-slate-900/30 border-slate-900 p-6 flex flex-col justify-between backdrop-blur-md">
-              <div className="space-y-3">
-                <div className="h-8 w-8 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400">
-                  <Mail className="h-4.5 w-4.5" />
-                </div>
-                <h4 className="text-sm font-bold text-white">Playbook Creative Agency</h4>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
-                  Memantau korelasi kapasitas tim vs profit margin klien bulanan. Mendeteksi churn risk berdasarkan frekuensi obrolan email klien yang merosot.
-                </p>
-              </div>
-              <span className="text-[10px] text-pink-400 font-bold mt-4 flex items-center gap-0.5">Selengkapnya <ChevronRight className="h-3 w-3" /></span>
-            </Card>
-
-            <Card className="bg-slate-900/30 border-slate-900 p-6 flex flex-col justify-between backdrop-blur-md">
-              <div className="space-y-3">
-                <div className="h-8 w-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-                  <Network className="h-4.5 w-4.5" />
-                </div>
-                <h4 className="text-sm font-bold text-white">Playbook Startup</h4>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
-                  Menilai efisiensi rapat tim internal, menyelaraskan target OKR dengan aktivitas aktual dokumen, serta melacak runway keuangan via spreadsheet logs.
-                </p>
-              </div>
-              <span className="text-[10px] text-blue-400 font-bold mt-4 flex items-center gap-0.5">Selengkapnya <ChevronRight className="h-3 w-3" /></span>
-            </Card>
-          </div>
-        </section>
-
-        {/* SECURITY & TRUST PILLARS */}
-        <section id="security" className="max-w-3xl mx-auto mb-28 p-8 rounded-2xl bg-slate-900/20 border border-slate-900/80 backdrop-blur-md text-left space-y-8">
-          <div className="space-y-2">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <ShieldCheck className="h-5.5 w-5.5 text-emerald-400" />
-              Keamanan Data & Privasi adalah Prioritas Utama
-            </h3>
-            <p className="text-slate-400 text-xs leading-relaxed">
-              Coretify didesain dengan arsitektur privasi super ketat agar data perusahaan Anda aman 100% dan bebas dari penyalahgunaan.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2 font-semibold text-slate-200">
-                <Check className="h-4 w-4 text-emerald-400" /> Guaranteed Read-Only
-              </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed pl-6">
-                Tidak ada connector yang meminta hak akses menulis. Coretify tidak bisa mengirim email, mengubah file Drive, atau memodifikasi data Anda.
-              </p>
             </div>
 
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2 font-semibold text-slate-200">
-                <Check className="h-4 w-4 text-emerald-400" /> Folder-Level Control
-              </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed pl-6">
-                Pilih folder Drive mana saja yang boleh dipindai. Folder keuangan, gaji (Payroll), dan HR akan dikecualikan secara otomatis secara default.
-              </p>
-            </div>
-
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2 font-semibold text-slate-200">
-                <Check className="h-4 w-4 text-emerald-400" /> Row-Level Security
-              </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed pl-6">
-                Membatasi ekstraksi RAG berdasarkan role user (Owner, Manager, Member). Member tidak akan pernah bisa mengakses data terbatas finansial.
-              </p>
-            </div>
-
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2 font-semibold text-slate-200">
-                <Check className="h-4 w-4 text-emerald-400" /> Instant Wipe Guarantee
-              </div>
-              <p className="text-slate-400 text-[11px] leading-relaxed pl-6">
-                Kapan saja Anda mencabut akses, Anda bisa memicu hapus total. Seluruh data index memori di database Supabase kami akan langsung dibersihkan.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* PRICING TABLE CARD */}
-        <section className="mb-24 space-y-8">
-          <div className="max-w-md mx-auto text-center space-y-2">
-            <h2 className="text-2xl font-bold text-white">Skema Harga & Batas Penggunaan</h2>
-            <p className="text-slate-400 text-xs">Coba gratis 50 pertanyaan memori awal tanpa kartu kredit.</p>
           </div>
 
-          <div className="max-w-md mx-auto">
-            <Card className="bg-slate-900/40 border-purple-500/20 backdrop-blur-md p-6 text-left relative overflow-hidden shadow-2xl">
-              <div className="absolute top-0 right-0 bg-purple-600 text-white text-[9px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
-                MVP Tier
-              </div>
-              <div className="space-y-1.5 mb-6">
-                <span className="text-xs font-bold text-purple-400">Free Starter Plan</span>
-                <div className="flex items-baseline gap-1.5">
-                  <span className="text-3xl font-extrabold text-white">Rp 0</span>
-                  <span className="text-xs text-slate-500">/ selamanya</span>
-                </div>
-              </div>
+        </div>
 
-              <div className="space-y-3.5 mb-8 text-xs">
-                <div className="flex items-center gap-2.5 text-slate-300">
-                  <Check className="h-4 w-4 text-emerald-400" />
-                  <span>Konektor Gmail & Calendar</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-slate-300">
-                  <Check className="h-4 w-4 text-emerald-400" />
-                  <span>50 Pertanyaan AI RAG per bulan</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-slate-300">
-                  <Check className="h-4 w-4 text-emerald-400" />
-                  <span>Kapasitas 500 berkas/dokumen memori</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-slate-500 line-through">
-                  <Lock className="h-3.5 w-3.5" />
-                  <span>Konektor WhatsApp Lite (Starter pack)</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-slate-500 line-through">
-                  <Lock className="h-3.5 w-3.5" />
-                  <span>Konektor Excel/CSV upload finansial</span>
-                </div>
-              </div>
-
-              <Button
-                onClick={handleStartOnboarding}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold py-3.5 rounded-xl shadow-lg transition-all"
-              >
-                Mulai Uji Coba Gratis
-              </Button>
-            </Card>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="border-t border-slate-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        {/* TRUST SIGNALS FOOTER BLOCK */}
+        <section className="mt-28 border-t border-slate-900/60 pt-16 flex flex-col md:flex-row items-center justify-between gap-8 text-xs text-slate-500">
           <div className="flex items-center gap-2">
             <Bot className="h-4 w-4 text-slate-400" />
             <span>&copy; {new Date().getFullYear()} Coretify Inc by Stravio Labs. All rights reserved.</span>
@@ -377,7 +405,8 @@ export default function Home() {
             <a href="/privacy" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
             <a href="mailto:support@coretify.ai" className="hover:text-slate-300 transition-colors">Hubungi Kami</a>
           </div>
-        </footer>
+        </section>
+
       </main>
     </div>
   );
