@@ -155,8 +155,8 @@ export default function Home() {
             
             {/* Left Column: Headline */}
             <div className="lg:col-span-8 pr-0 lg:pr-12 text-left space-y-6">
-              <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] text-white leading-[1.08]">
-                The business operating system<br className="hidden sm:inline" /> for teams and AI agents
+              <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] leading-[1.08] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+                The AI operating system <br className="hidden sm:inline" />for your growing companies.
               </h1>
             </div>
 
@@ -382,7 +382,7 @@ export default function Home() {
                   {/* Greeting header */}
                   <div>
                     <h3 className="text-[13px] text-slate-500 font-semibold uppercase tracking-wider">Home</h3>
-                    <h1 className="text-2xl sm:text-[28px] font-bold text-white tracking-tight mt-1.5">
+                    <h1 className="text-2xl sm:text-[28px] font-semibold text-white tracking-tight mt-1.5">
                       Good morning, Alex
                     </h1>
                   </div>
@@ -715,7 +715,7 @@ export default function Home() {
                       </svg>
                       <span>Data</span>
                     </div>
-                    <h3 className="text-xl font-bold text-white">One source of truth for every agent</h3>
+                    <h3 className="text-xl font-semibold text-white">One source of truth for every agent</h3>
                     <p className="text-slate-400 text-xs leading-relaxed max-w-xl">
                       Coretify unifies data from CRM, website, forms, enrichment vendors, ad platforms, and conversation tools into a single identity-resolved model in real time.
                     </p>
@@ -728,7 +728,7 @@ export default function Home() {
                       <Zap className="h-4.5 w-4.5 text-purple-400 fill-purple-400/10" />
                       <span>Tools</span>
                     </div>
-                    <h3 className="text-xl font-bold text-white">Equip your team with the right playbooks</h3>
+                    <h3 className="text-xl font-semibold text-white">Equip your team with the right playbooks</h3>
                     <p className="text-slate-400 text-xs leading-relaxed max-w-xl">
                       Coretify unifies tools and playbooks into a single dashboard. Manage team workload allocations, check active client feedback loops, and query RAG memory instantly.
                     </p>
@@ -741,7 +741,7 @@ export default function Home() {
                       <Bot className="h-4.5 w-4.5 text-blue-400" />
                       <span>Agent</span>
                     </div>
-                    <h3 className="text-xl font-bold text-white">Conversational memory at your service</h3>
+                    <h3 className="text-xl font-semibold text-white">Conversational memory at your service</h3>
                     <p className="text-slate-400 text-xs leading-relaxed max-w-xl">
                       Query your company memory in plain Bahasa Indonesia. Get structured operational answers citing exact source emails, calendar events, and chat logs.
                     </p>
@@ -754,7 +754,7 @@ export default function Home() {
                       <Lock className="h-4.5 w-4.5 text-amber-500" />
                       <span>Governance</span>
                     </div>
-                    <h3 className="text-xl font-bold text-white">Enterprise-grade Row-Level Security</h3>
+                    <h3 className="text-xl font-semibold text-white">Enterprise-grade Row-Level Security</h3>
                     <p className="text-slate-400 text-xs leading-relaxed max-w-xl">
                       Enforce role-based access control (Owner, Manager, Member) at the database level. Sensitive financial records are automatically restricted from general queries.
                     </p>
@@ -1146,7 +1146,7 @@ export default function Home() {
                   </div>
                   <div className="flex-1 space-y-1.5 text-left">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-bold text-white group-hover:text-amber-400 transition-colors">
+                      <h4 className="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">
                         2 clients need follow-up
                       </h4>
                       <Badge variant="secondary" className="bg-amber-500/5 text-amber-500 border border-amber-500/10 text-[9px] py-0 px-2 font-mono">
@@ -1168,7 +1168,7 @@ export default function Home() {
                   </div>
                   <div className="flex-1 space-y-1.5 text-left">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-bold text-white group-hover:text-rose-450 transition-colors">
+                      <h4 className="text-sm font-semibold text-white group-hover:text-rose-450 transition-colors">
                         1 project at risk
                       </h4>
                       <Badge variant="secondary" className="bg-rose-500/5 text-rose-500 border border-rose-500/10 text-[9px] py-0 px-2 font-mono">
@@ -1190,7 +1190,7 @@ export default function Home() {
                   </div>
                   <div className="flex-1 space-y-1.5 text-left">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-bold text-white group-hover:text-rose-450 transition-colors">
+                      <h4 className="text-sm font-semibold text-white group-hover:text-rose-450 transition-colors">
                         Revenue down 12%
                       </h4>
                       <Badge variant="secondary" className="bg-rose-500/5 text-rose-450 border border-rose-500/10 text-[9px] py-0 px-2 font-mono">
