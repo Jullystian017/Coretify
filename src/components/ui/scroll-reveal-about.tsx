@@ -50,6 +50,15 @@ export function ScrollRevealAbout() {
     }));
   });
 
+  // Calculate scroll reveal progress for the last line ("This is Coretify.") to power the spotlight.
+  const lastLineStartIdx = linesWithGlobalIndices[3][0].globalIdx;
+  const lastLineStart = lastLineStartIdx / totalWords;
+  const lastLineEnd = 1.0;
+  let lastLineProgress = 0;
+  if (progress > lastLineStart) {
+    lastLineProgress = Math.min(1, (progress - lastLineStart) / (lastLineEnd - lastLineStart));
+  }
+
   return (
     <div ref={containerRef} className="relative h-[250vh] w-full">
       {/* Sticky container positioned exactly below the 80px tall sticky navbar */}
@@ -61,15 +70,16 @@ export function ScrollRevealAbout() {
           <div className="absolute top-[20%] left-[10%] -translate-y-1/2 -translate-x-1/2 h-[500px] w-[700px] rounded-full bg-purple-500/10 blur-[130px] mix-blend-screen opacity-70" />
           <div className="absolute bottom-[20%] right-[10%] translate-y-1/2 translate-x-1/2 h-[500px] w-[700px] rounded-full bg-blue-500/10 blur-[130px] mix-blend-screen opacity-70" />
           
-          {/* Grid motif */}
+          {/* Highly Visible Grid/Dot motif */}
           <div 
-            className="absolute inset-0 opacity-25"
+            className="absolute inset-0 opacity-60"
             style={{
               backgroundImage: `
+                radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px),
                 linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
               `,
-              backgroundSize: "64px 64px",
+              backgroundSize: "32px 32px, 128px 128px, 128px 128px",
               backgroundPosition: "center center",
             }}
           />
@@ -78,13 +88,25 @@ export function ScrollRevealAbout() {
         </div>
 
         {/* Text Content */}
-        <div className="relative z-10 max-w-4xl px-6 md:px-12 w-full text-center">
-          <div className="flex flex-col gap-6 md:gap-8 font-sans">
+        <div className="relative z-10 max-w-5xl px-6 md:px-12 w-full text-center">
+          
+          {/* Dynamic Spotlight Glow exactly behind "This is Coretify." */}
+          <div 
+            className="absolute -translate-x-1/2 left-1/2 w-[350px] sm:w-[450px] h-[150px] rounded-full bg-purple-600/15 blur-[50px] pointer-events-none transition-all duration-300 ease-out"
+            style={{
+              opacity: lastLineProgress * 0.9,
+              transform: `translateX(-50%) scale(${0.85 + lastLineProgress * 0.15})`,
+              bottom: "10px",
+              zIndex: -1,
+            }}
+          />
+
+          <div className="flex flex-col gap-3 md:gap-4 font-sans">
             {linesWithGlobalIndices.map((words, lineIdx) => {
               return (
                 <div 
                   key={lineIdx} 
-                  className="flex flex-wrap justify-center text-3xl sm:text-4xl md:text-[52px] font-semibold leading-[1.15] tracking-tight text-center"
+                  className="flex flex-wrap justify-center text-2xl sm:text-3xl md:text-[42px] lg:text-[46px] font-semibold leading-[1.1] tracking-tight text-center"
                 >
                   {words.map(({ word, globalIdx }, wordIdx) => {
                     // Seq word highlights
@@ -97,13 +119,11 @@ export function ScrollRevealAbout() {
                       if (wordProgress > 1) wordProgress = 1;
                     }
 
-                    const isLastLine = lineIdx === 3;
-                    const revealedClass = isLastLine
-                      ? "bg-gradient-to-r from-purple-400 via-fuchsia-400 to-indigo-400 bg-clip-text text-transparent font-bold drop-shadow-[0_0_15px_rgba(168,85,247,0.15)]"
-                      : "bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent";
+                    // All text now uses the same white-zinc gradient reveal
+                    const revealedClass = "bg-gradient-to-b from-white to-zinc-300 bg-clip-text text-transparent";
 
                     return (
-                      <span key={wordIdx} className="relative inline-block mx-[0.16em] my-[0.05em] select-none">
+                      <span key={wordIdx} className="relative inline-block mx-[0.14em] my-[0.03em] select-none">
                         {/* Base dim text */}
                         <span className="text-white/15 transition-colors duration-300">
                           {word}
