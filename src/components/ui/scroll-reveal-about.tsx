@@ -50,13 +50,15 @@ export function ScrollRevealAbout() {
     }));
   });
 
-  // Calculate scroll reveal progress for the last line ("This is Coretify.") to power the spotlight.
-  const lastLineStartIdx = linesWithGlobalIndices[3][0].globalIdx;
-  const lastLineStart = lastLineStartIdx / totalWords;
-  const lastLineEnd = 1.0;
-  let lastLineProgress = 0;
-  if (progress > lastLineStart) {
-    lastLineProgress = Math.min(1, (progress - lastLineStart) / (lastLineEnd - lastLineStart));
+  // Calculate backlight opacity based on progress:
+  // Fades in from progress 0 -> 0.2, stays active from 0.2 -> 0.8, and fades out from 0.8 -> 1.0.
+  let backlightOpacity = 0;
+  if (progress > 0 && progress < 0.2) {
+    backlightOpacity = progress / 0.2;
+  } else if (progress >= 0.2 && progress <= 0.8) {
+    backlightOpacity = 1;
+  } else if (progress > 0.8 && progress <= 1) {
+    backlightOpacity = (1 - progress) / 0.2;
   }
 
   return (
@@ -64,34 +66,45 @@ export function ScrollRevealAbout() {
       {/* Sticky container positioned exactly below the 80px tall sticky navbar */}
       <div className="sticky top-[80px] h-[calc(100vh-80px)] w-full flex flex-col items-center justify-center overflow-hidden bg-[#070708]">
         
-        {/* Aesthetic Background Grid & Glows */}
+        {/* Aesthetic Background Dots & Glows */}
         <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-          {/* Central Glowing Backlights (Illuminates the grid from behind) */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[550px] w-[850px] rounded-full bg-indigo-500/12 blur-[130px] mix-blend-screen" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[650px] rounded-full bg-purple-500/8 blur-[110px] mix-blend-screen" />
+          {/* Central Glowing Backlights (Illuminates the dots from behind, fades with scroll progress, no purple) */}
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[550px] w-[850px] rounded-full bg-indigo-500/15 blur-[130px] mix-blend-screen transition-opacity duration-300 pointer-events-none" 
+            style={{ opacity: backlightOpacity }}
+          />
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[650px] rounded-full bg-emerald-500/10 blur-[110px] mix-blend-screen transition-opacity duration-300 pointer-events-none"
+            style={{ opacity: backlightOpacity }}
+          />
           
-          {/* Outer Aurora Glows for depth */}
-          <div className="absolute top-[10%] left-[5%] h-[400px] w-[500px] rounded-full bg-indigo-600/5 blur-[120px] mix-blend-screen" />
-          <div className="absolute bottom-[10%] right-[5%] h-[400px] w-[500px] rounded-full bg-purple-600/5 blur-[120px] mix-blend-screen" />
+          {/* Outer Aurora Glows for depth (Fades with scroll progress) */}
+          <div 
+            className="absolute top-[10%] left-[5%] h-[400px] w-[500px] rounded-full bg-indigo-600/5 blur-[120px] mix-blend-screen transition-opacity duration-300 pointer-events-none"
+            style={{ opacity: backlightOpacity }}
+          />
+          <div 
+            className="absolute bottom-[10%] right-[5%] h-[400px] w-[500px] rounded-full bg-emerald-600/5 blur-[120px] mix-blend-screen transition-opacity duration-300 pointer-events-none"
+            style={{ opacity: backlightOpacity }}
+          />
           
-          {/* Highly Visible Grid/Dot motif */}
+          {/* Highly Visible Dot-only motif (No grid lines) */}
           <div 
             className="absolute inset-0 opacity-75"
             style={{
-              backgroundImage: `
-                radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px),
-                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
-              `,
-              backgroundSize: "32px 32px, 128px 128px, 128px 128px",
+              backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.15) 1.2px, transparent 1.2px)`,
+              backgroundSize: "32px 32px",
               backgroundPosition: "center center",
             }}
           />
           {/* Vignette fade to solid bg at edges */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,#070708_95%)]" />
           
-          {/* Central Radial Light Overlay (Make center lines/dots glow) */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.06)_0%,transparent_60%)]" />
+          {/* Central Radial Light Overlay (Make center dots glow, fades with scroll progress) */}
+          <div 
+            className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.08)_0%,transparent_60%)] transition-opacity duration-300 pointer-events-none"
+            style={{ opacity: backlightOpacity }}
+          />
         </div>
 
         {/* Text Content */}
