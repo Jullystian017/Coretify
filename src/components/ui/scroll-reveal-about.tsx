@@ -66,18 +66,22 @@ export function ScrollRevealAbout() {
         
         {/* Aesthetic Background Grid & Glows */}
         <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-          {/* Radial Aurora Glows */}
-          <div className="absolute top-[20%] left-[10%] -translate-y-1/2 -translate-x-1/2 h-[500px] w-[700px] rounded-full bg-purple-500/10 blur-[130px] mix-blend-screen opacity-70" />
-          <div className="absolute bottom-[20%] right-[10%] translate-y-1/2 translate-x-1/2 h-[500px] w-[700px] rounded-full bg-blue-500/10 blur-[130px] mix-blend-screen opacity-70" />
+          {/* Central Glowing Backlights (Illuminates the grid from behind) */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[550px] w-[850px] rounded-full bg-indigo-500/12 blur-[130px] mix-blend-screen" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[650px] rounded-full bg-purple-500/8 blur-[110px] mix-blend-screen" />
+          
+          {/* Outer Aurora Glows for depth */}
+          <div className="absolute top-[10%] left-[5%] h-[400px] w-[500px] rounded-full bg-indigo-600/5 blur-[120px] mix-blend-screen" />
+          <div className="absolute bottom-[10%] right-[5%] h-[400px] w-[500px] rounded-full bg-purple-600/5 blur-[120px] mix-blend-screen" />
           
           {/* Highly Visible Grid/Dot motif */}
           <div 
-            className="absolute inset-0 opacity-60"
+            className="absolute inset-0 opacity-75"
             style={{
               backgroundImage: `
-                radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px),
-                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+                radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px),
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
               `,
               backgroundSize: "32px 32px, 128px 128px, 128px 128px",
               backgroundPosition: "center center",
@@ -85,21 +89,13 @@ export function ScrollRevealAbout() {
           />
           {/* Vignette fade to solid bg at edges */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,#070708_95%)]" />
+          
+          {/* Central Radial Light Overlay (Make center lines/dots glow) */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.06)_0%,transparent_60%)]" />
         </div>
 
         {/* Text Content */}
         <div className="relative z-10 max-w-5xl px-6 md:px-12 w-full text-center">
-          
-          {/* Dynamic Spotlight Glow exactly behind "This is Coretify." */}
-          <div 
-            className="absolute -translate-x-1/2 left-1/2 w-[350px] sm:w-[450px] h-[150px] rounded-full bg-purple-600/15 blur-[50px] pointer-events-none transition-all duration-300 ease-out"
-            style={{
-              opacity: lastLineProgress * 0.9,
-              transform: `translateX(-50%) scale(${0.85 + lastLineProgress * 0.15})`,
-              bottom: "10px",
-              zIndex: -1,
-            }}
-          />
 
           <div className="flex flex-col gap-3 md:gap-4 font-sans">
             {linesWithGlobalIndices.map((words, lineIdx) => {
