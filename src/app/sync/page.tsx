@@ -241,7 +241,7 @@ export default function SyncPage() {
     <div className="flex flex-col min-h-screen bg-[#070708] text-slate-100 selection:bg-purple-500/30">
       
       {/* Top Background radial gradient */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-7xl rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/40 via-transparent to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1440px] rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/40 via-transparent to-transparent blur-3xl pointer-events-none" />
 
       <main className="flex-1 max-w-4xl w-full mx-auto px-8 py-16 flex flex-col items-center justify-center">
         <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-12 gap-8 items-start">

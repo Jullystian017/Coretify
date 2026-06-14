@@ -80,13 +80,13 @@ export default function Home() {
     <div className="min-h-screen bg-[#070708] text-slate-100 selection:bg-purple-500/30 selection:text-purple-200 relative overflow-hidden font-sans antialiased">
       
       {/* Background blueprint grid paper pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f0f11_1px,transparent_1px),linear-gradient(to_bottom,#0f0f11_1px,transparent_1px)] bg-[size:48px_48px] opacity-70 pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:48px_48px] opacity-70 pointer-events-none" />
       
       {/* Top light glow vignette */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-7xl rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/25 via-transparent to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1440px] rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/25 via-transparent to-transparent blur-3xl pointer-events-none" />
 
       {/* MAIN VERTICAL GRID WRAPPER */}
-      <div className="mx-auto max-w-7xl border-l border-r border-slate-900 relative min-h-screen bg-[#070708]/40">
+      <div className="mx-auto max-w-[1440px] border-l border-r border-slate-900 relative min-h-screen bg-[#070708]/40">
         
         {/* Top-most intersection markers */}
         <span className="absolute -top-2.5 -left-1 text-[11px] text-slate-800 font-mono select-none">+</span >

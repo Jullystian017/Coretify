@@ -240,7 +240,7 @@ export default function DashboardPage() {
   return (
     <div className="flex min-h-screen bg-[#070708] text-slate-100 font-sans relative overflow-hidden antialiased">
       {/* Background subtle top gradient */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-7xl rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/30 via-transparent to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1440px] rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/30 via-transparent to-transparent blur-3xl pointer-events-none" />
 
       {/* Floating simulator alert */}
       {toastMessage && (
@@ -753,7 +753,7 @@ export default function DashboardPage() {
                 
                 {/* SVG Graph Canvas */}
                 <Card className="flex-1 bg-[#0c0c0e] border-slate-900 p-4 relative min-h-[400px] flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:30px_30px] opacity-20" />
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:30px_30px] opacity-20" />
                   
                   {/* Interactive SVG Nodes */}
                   <svg className="w-full h-[360px] z-10 select-none">
