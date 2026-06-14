@@ -20,11 +20,17 @@ import {
   Mail,
   Network,
   TrendingUp,
-  MoreHorizontal
+  MoreHorizontal,
+  Zap
 } from "lucide-react";
 
 export default function Home() {
   const router = useRouter();
+  const [typedText, setTypedText] = useState("");
+  const [activePreset, setActivePreset] = useState<number | null>(null);
+  const [demoAnswer, setDemoAnswer] = useState<string | null>(null);
+  const [demoCitations, setDemoCitations] = useState<any[]>([]);
+  const [activeSectionTab, setActiveSectionTab] = useState<"data" | "tools" | "agent" | "governance">("data");
 
   const handleStartOnboarding = () => {
     router.push("/onboarding");
@@ -394,6 +400,373 @@ export default function Home() {
           </div>
 
         </div>
+
+        {/* SECTION: Tab Switcher (Introducing Default clone) */}
+        <section className="mt-36 border-t border-slate-900/60 pt-20">
+          
+          {/* Section Header */}
+          <div className="text-left mb-16 space-y-3">
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-widest font-mono">
+              Introducing Coretify
+            </span>
+            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12] max-w-2xl">
+              The infrastructure agents need to run on your company memory
+            </h2>
+          </div>
+
+          {/* Grid Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            
+            {/* Left Column: 4 Tabs */}
+            <div className="lg:col-span-4 space-y-4">
+              
+              {/* Tab 1: Data */}
+              <button
+                onClick={() => setActiveSectionTab("data")}
+                className={`w-full text-left p-6 rounded-2xl border transition-all ${
+                  activeSectionTab === "data"
+                    ? "bg-[#0c0c0e]/80 border-slate-900 text-white"
+                    : "bg-transparent border-transparent text-slate-500 hover:text-slate-200"
+                }`}
+              >
+                <div className="flex items-center gap-2.5 font-semibold text-xs mb-2">
+                  <svg className={`h-4 w-4 ${activeSectionTab === "data" ? "text-emerald-400" : "text-slate-500"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+                  </svg>
+                  <span>Data</span>
+                </div>
+                <p className="text-[11px] text-slate-450 leading-relaxed font-normal">
+                  Coretify unifies every data source into one context-resolved model.
+                </p>
+                {activeSectionTab === "data" && (
+                  <div className="w-10 h-[2px] bg-white mt-4" />
+                )}
+              </button>
+
+              {/* Tab 2: Tools */}
+              <button
+                onClick={() => setActiveSectionTab("tools")}
+                className={`w-full text-left p-6 rounded-2xl border transition-all ${
+                  activeSectionTab === "tools"
+                    ? "bg-[#0c0c0e]/80 border-slate-900 text-white"
+                    : "bg-transparent border-transparent text-slate-500 hover:text-slate-200"
+                }`}
+              >
+                <div className="flex items-center gap-2.5 font-semibold text-xs mb-2">
+                  <Zap className={`h-4 w-4 ${activeSectionTab === "tools" ? "text-purple-400 fill-purple-400/10" : "text-slate-500"}`} />
+                  <span>Tools</span>
+                </div>
+                <p className="text-[11px] text-slate-450 leading-relaxed font-normal">
+                  Coretify gives agents and operators shared tables, workflows, and routing.
+                </p>
+                {activeSectionTab === "tools" && (
+                  <div className="w-10 h-[2px] bg-white mt-4" />
+                )}
+              </button>
+
+              {/* Tab 3: Agent */}
+              <button
+                onClick={() => setActiveSectionTab("agent")}
+                className={`w-full text-left p-6 rounded-2xl border transition-all ${
+                  activeSectionTab === "agent"
+                    ? "bg-[#0c0c0e]/80 border-slate-900 text-white"
+                    : "bg-transparent border-transparent text-slate-500 hover:text-slate-200"
+                }`}
+              >
+                <div className="flex items-center gap-2.5 font-semibold text-xs mb-2">
+                  <Bot className={`h-4 w-4 ${activeSectionTab === "agent" ? "text-blue-400" : "text-slate-500"}`} />
+                  <span>Agent</span>
+                </div>
+                <p className="text-[11px] text-slate-450 leading-relaxed font-normal">
+                  Coretify's agents turn plain language into working systems.
+                </p>
+                {activeSectionTab === "agent" && (
+                  <div className="w-10 h-[2px] bg-white mt-4" />
+                )}
+              </button>
+
+              {/* Tab 4: Governance */}
+              <button
+                onClick={() => setActiveSectionTab("governance")}
+                className={`w-full text-left p-6 rounded-2xl border transition-all ${
+                  activeSectionTab === "governance"
+                    ? "bg-[#0c0c0e]/80 border-slate-900 text-white"
+                    : "bg-transparent border-transparent text-slate-500 hover:text-slate-200"
+                }`}
+              >
+                <div className="flex items-center gap-2.5 font-semibold text-xs mb-2">
+                  <Lock className={`h-4 w-4 ${activeSectionTab === "governance" ? "text-amber-500" : "text-slate-500"}`} />
+                  <span>Governance</span>
+                </div>
+                <p className="text-[11px] text-slate-450 leading-relaxed font-normal">
+                  Coretify's agents propose, you approve, anything rolls back.
+                </p>
+                {activeSectionTab === "governance" && (
+                  <div className="w-10 h-[2px] bg-white mt-4" />
+                )}
+              </button>
+
+            </div>
+
+            {/* Right Column: Dynamic Preview Card (8 cols) */}
+            <div className="lg:col-span-8 bg-[#0c0c0e] border border-slate-900 rounded-3xl p-8 shadow-xl relative min-h-[500px] flex flex-col justify-between overflow-hidden">
+              
+              {/* Card Header Info */}
+              <div className="space-y-4 mb-8 text-left">
+                {activeSectionTab === "data" && (
+                  <>
+                    <div className="flex items-center gap-2 text-xs font-semibold text-white">
+                      <svg className="h-4.5 w-4.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+                      </svg>
+                      <span>Data</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white">One source of truth for every agent</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed max-w-xl">
+                      Coretify unifies data from CRM, website, forms, enrichment vendors, ad platforms, and conversation tools into a single identity-resolved model in real time.
+                    </p>
+                  </>
+                )}
+
+                {activeSectionTab === "tools" && (
+                  <>
+                    <div className="flex items-center gap-2 text-xs font-semibold text-white">
+                      <Zap className="h-4.5 w-4.5 text-purple-400 fill-purple-400/10" />
+                      <span>Tools</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white">Equip your team with the right playbooks</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed max-w-xl">
+                      Coretify unifies tools and playbooks into a single dashboard. Manage team workload allocations, check active client feedback loops, and query RAG memory instantly.
+                    </p>
+                  </>
+                )}
+
+                {activeSectionTab === "agent" && (
+                  <>
+                    <div className="flex items-center gap-2 text-xs font-semibold text-white">
+                      <Bot className="h-4.5 w-4.5 text-blue-400" />
+                      <span>Agent</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white">Conversational memory at your service</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed max-w-xl">
+                      Query your company memory in plain Bahasa Indonesia. Get structured operational answers citing exact source emails, calendar events, and chat logs.
+                    </p>
+                  </>
+                )}
+
+                {activeSectionTab === "governance" && (
+                  <>
+                    <div className="flex items-center gap-2 text-xs font-semibold text-white">
+                      <Lock className="h-4.5 w-4.5 text-amber-500" />
+                      <span>Governance</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white">Enterprise-grade Row-Level Security</h3>
+                    <p className="text-slate-400 text-xs leading-relaxed max-w-xl">
+                      Enforce role-based access control (Owner, Manager, Member) at the database level. Sensitive financial records are automatically restricted from general queries.
+                    </p>
+                  </>
+                )}
+
+                <div>
+                  <Button
+                    onClick={handleStartOnboarding}
+                    className="bg-[#18181b] hover:bg-[#27272a] text-white border border-[#2e2e33] text-xs font-semibold px-4.5 py-2.5 rounded-xl mt-1"
+                  >
+                    Learn More
+                  </Button>
+                </div>
+              </div>
+
+              {/* Dynamic Mock Content below */}
+              {activeSectionTab === "data" && (
+                <div className="border border-slate-900 bg-[#08080a] rounded-2xl overflow-hidden shadow-inner w-full mt-4 text-left">
+                  {/* Mock Window Header */}
+                  <div className="h-12 border-b border-slate-900 bg-[#08080a] px-4.5 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      {/* Controls */}
+                      <div className="flex items-center gap-1.5">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]/20 border border-[#ef4444]/30" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#eab308]/20 border border-[#eab308]/30" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#22c55e]/20 border border-[#22c55e]/30" />
+                      </div>
+                      {/* Tabs */}
+                      <div className="flex items-center gap-1.5 bg-[#121215] border border-slate-850 px-3 py-1.5 rounded-lg text-[10px] text-slate-350">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                        <span>Core Data Model</span>
+                        <span className="text-slate-650 ml-1.5 font-bold">×</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-[10px] text-slate-500 pl-1">
+                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500/50" />
+                        <span>Companies last week</span>
+                      </div>
+                    </div>
+                    <span className="text-slate-600 text-sm font-semibold cursor-pointer pr-1">+</span>
+                  </div>
+
+                  {/* Mock Window body */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 text-xs min-h-[260px] bg-[#0c0c0e]/30">
+                    {/* Left Sidebar (3 cols) */}
+                    <div className="lg:col-span-3 border-r border-slate-900 p-4.5 space-y-4">
+                      <button className="w-full text-left py-1.5 px-2.5 border border-slate-900 rounded-lg bg-[#0f0f12] text-[10px] text-slate-400 font-semibold flex items-center gap-1">
+                        <Plus className="h-3 w-3" /> Create new view
+                      </button>
+                      <div className="space-y-1.5 text-[11px] text-slate-400 font-medium">
+                        <div className="flex items-center gap-2 py-1 px-2 hover:bg-slate-900/50 rounded"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500/40" /> Home</div>
+                        <div className="flex items-center gap-2 py-1 px-2 hover:bg-slate-900/50 rounded"><span className="h-1.5 w-1.5 rounded-full bg-blue-500/40" /> All Contacts</div>
+                        <div className="flex items-center gap-2 py-1 px-2 hover:bg-slate-900/50 rounded"><span className="h-1.5 w-1.5 rounded-full bg-blue-500/40" /> All Accounts</div>
+                        <div className="flex items-center gap-2 py-1 px-2 hover:bg-slate-900/50 rounded"><span className="h-1.5 w-1.5 rounded-full bg-yellow-500/40" /> All Opportunities</div>
+                        <div className="h-[1px] bg-slate-900 my-2" />
+                        <div className="flex items-center gap-2 py-1.5 px-2 bg-slate-900/50 rounded text-white"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Core Data Model</div>
+                      </div>
+                    </div>
+
+                    {/* Right Spreadsheet Table (9 cols) */}
+                    <div className="lg:col-span-9 overflow-x-auto">
+                      <div className="min-w-[500px]">
+                        {/* Headers */}
+                        <div className="grid grid-cols-12 bg-[#0f0f12] border-b border-slate-900 py-2 px-3 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                          <div className="col-span-1">#</div>
+                          <div className="col-span-4">Work Email</div>
+                          <div className="col-span-3">Company name</div>
+                          <div className="col-span-2">Headcount</div>
+                          <div className="col-span-2 text-right">Mobile</div>
+                        </div>
+                        {/* Rows */}
+                        <div className="divide-y divide-slate-900/50 font-mono text-[10.5px]">
+                          <div className="grid grid-cols-12 py-2.5 px-3 text-slate-350">
+                            <div className="col-span-1 text-slate-600">1</div>
+                            <div className="col-span-4 text-slate-200">michelle.rivera@example.com</div>
+                            <div className="col-span-3">Attio</div>
+                            <div className="col-span-2">$3,385,492</div>
+                            <div className="col-span-2 text-right text-slate-500">+1 (415)...</div>
+                          </div>
+                          <div className="grid grid-cols-12 py-2.5 px-3 text-slate-350">
+                            <div className="col-span-1 text-slate-600">2</div>
+                            <div className="col-span-4 text-slate-200">felicia.reid@example.com</div>
+                            <div className="col-span-3">Amplemarket</div>
+                            <div className="col-span-2">$5,375,784</div>
+                            <div className="col-span-2 text-right text-slate-500">+1 (212)...</div>
+                          </div>
+                          <div className="grid grid-cols-12 py-2.5 px-3 text-slate-350">
+                            <div className="col-span-1 text-slate-600">3</div>
+                            <div className="col-span-4 text-slate-200">james.smith@example.com</div>
+                            <div className="col-span-3">Apollo</div>
+                            <div className="col-span-2">$2,140,800</div>
+                            <div className="col-span-2 text-right text-slate-500">+1 (206)...</div>
+                          </div>
+                          <div className="grid grid-cols-12 py-2.5 px-3 text-slate-350">
+                            <div className="col-span-1 text-slate-600">4</div>
+                            <div className="col-span-4 text-slate-200">patricia.johnson@example.com</div>
+                            <div className="col-span-3">Calendly</div>
+                            <div className="col-span-2">$890,250</div>
+                            <div className="col-span-2 text-right text-slate-500">+1 (404)...</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeSectionTab === "tools" && (
+                <div className="border border-slate-900 bg-[#08080a] rounded-2xl p-6 space-y-4 w-full mt-4 text-left">
+                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Active Playbook Configurations</span>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Card className="bg-[#0c0c0e] border-slate-900 p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-white font-sans">Software House</span>
+                        <Check className="h-4 w-4 text-emerald-500" />
+                      </div>
+                      <p className="text-[10px] text-slate-400 leading-relaxed font-sans">
+                        Scope creep warnings and developer overload tracking active.
+                      </p>
+                    </Card>
+                    <Card className="bg-transparent border-slate-950 p-4 space-y-2 opacity-50">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-slate-400 font-sans">Creative Agency</span>
+                      </div>
+                      <p className="text-[10px] text-slate-500 leading-relaxed font-sans">
+                        Client capacity limits and churn monitoring alerts.
+                      </p>
+                    </Card>
+                    <Card className="bg-transparent border-slate-950 p-4 space-y-2 opacity-50">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-slate-400 font-sans">Startup Playbook</span>
+                      </div>
+                      <p className="text-[10px] text-slate-500 leading-relaxed font-sans">
+                        Goal activity tracking and cash runway logs.
+                      </p>
+                    </Card>
+                  </div>
+                </div>
+              )}
+
+              {activeSectionTab === "agent" && (
+                <div className="border border-slate-900 bg-[#08080a] rounded-2xl p-6 space-y-4 w-full mt-4 text-xs text-left">
+                  <div className="flex gap-3 justify-end">
+                    <div className="bg-[#18181b] border border-slate-850 text-slate-200 px-4 py-2.5 rounded-2xl rounded-tr-none">
+                      Kenapa Project Nexa Corp telat?
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <div className="h-7 w-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
+                      <Bot className="h-4 w-4" />
+                    </div>
+                    <div className="space-y-2 max-w-[80%]">
+                      <div className="bg-[#0c0c0e] border border-slate-900 text-slate-300 px-4 py-2.5 rounded-2xl rounded-tl-none leading-relaxed">
+                        Project Nexa Corp terlambat karena adanya 4 kali revisi desain autentikasi API oleh klien setelah pengerjaan dimulai.
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-[9px] text-slate-500 self-center font-sans">Referensi:</span>
+                        <span className="text-[9px] font-semibold px-2 py-0.5 rounded border bg-slate-900 border-slate-850 text-slate-400 inline-flex items-center gap-1 font-sans">
+                          Email Budi (12 June) <ExternalLink className="h-2.5 w-2.5" />
+                        </span>
+                        <span className="text-[9px] font-semibold px-2 py-0.5 rounded border bg-slate-900 border-slate-850 text-slate-400 inline-flex items-center gap-1 font-sans">
+                          WhatsApp Group Nexa <ExternalLink className="h-2.5 w-2.5" />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeSectionTab === "governance" && (
+                <div className="border border-slate-900 bg-[#08080a] rounded-2xl p-6 space-y-4 w-full mt-4 text-xs text-left">
+                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider block font-sans">Access Control & RLS Settings</span>
+                  <div className="border border-slate-900 rounded-xl overflow-hidden">
+                    <div className="grid grid-cols-3 bg-[#0f0f12] border-b border-slate-900 py-2 px-3 text-[10px] text-slate-500 font-bold uppercase tracking-wider font-sans">
+                      <div>Role</div>
+                      <div>Access Scope</div>
+                      <div>Permissions status</div>
+                    </div>
+                    <div className="divide-y divide-slate-900/50">
+                      <div className="grid grid-cols-3 py-2.5 px-3 text-slate-350 font-sans">
+                        <div className="font-bold text-white">Owner</div>
+                        <div>Full Read-Write</div>
+                        <div><Badge variant="outline" className="text-[9px] border-emerald-500/20 text-emerald-400 bg-emerald-500/5 py-0 px-2 font-mono">Unrestricted</Badge></div>
+                      </div>
+                      <div className="grid grid-cols-3 py-2.5 px-3 text-slate-350 font-sans">
+                        <div className="font-bold text-white">Manager</div>
+                        <div>Read-Only (General)</div>
+                        <div><Badge variant="outline" className="text-[9px] border-slate-800 text-slate-400 bg-slate-950 py-0 px-2 font-mono">Restricted Finance</Badge></div>
+                      </div>
+                      <div className="grid grid-cols-3 py-2.5 px-3 text-slate-350 font-sans">
+                        <div className="font-bold text-white">Member</div>
+                        <div>Read-Only (Operational)</div>
+                        <div><Badge variant="outline" className="text-[9px] border-slate-800 text-slate-400 bg-slate-950 py-0 px-2 font-mono">Restricted Finance</Badge></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+            </div>
+
+          </div>
+
+        </section>
 
         {/* TRUST SIGNALS FOOTER BLOCK */}
         <section className="mt-28 border-t border-slate-900/60 pt-16 flex flex-col md:flex-row items-center justify-between gap-8 text-xs text-slate-500">
