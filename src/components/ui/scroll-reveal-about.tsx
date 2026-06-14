@@ -13,9 +13,10 @@ export function ScrollRevealAbout() {
       const rect = containerRef.current.getBoundingClientRect();
       const viewHeight = window.innerHeight;
       
-      // Calculate how much we can scroll past the container.
-      const totalScrollable = rect.height - viewHeight;
-      const scrolled = -rect.top;
+      // Calculate how much we can scroll past the container, accounting for the 80px sticky navbar offset.
+      const stickyHeight = viewHeight - 80;
+      const totalScrollable = rect.height - stickyHeight;
+      const scrolled = 80 - rect.top;
       
       const currentProgress = Math.max(0, Math.min(1, scrolled / totalScrollable));
       setProgress(currentProgress);
@@ -51,8 +52,8 @@ export function ScrollRevealAbout() {
 
   return (
     <div ref={containerRef} className="relative h-[250vh] w-full">
-      {/* Sticky container */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#070708]">
+      {/* Sticky container positioned exactly below the 80px tall sticky navbar */}
+      <div className="sticky top-[80px] h-[calc(100vh-80px)] w-full flex flex-col items-center justify-center overflow-hidden bg-[#070708]">
         
         {/* Aesthetic Background Grid & Glows */}
         <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
