@@ -618,10 +618,19 @@ export default function Home() {
         <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative p-8 sm:p-12 lg:p-16">
 
           {/* Section Header */}
-          <div className="text-left mb-12 space-y-3">
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-widest font-mono">
-              Introducing Coretify
-            </span>
+          <div className="text-left mb-12 space-y-4">
+            <div className="flex items-center gap-2 select-none">
+              <div className="w-[3px] h-3.5 bg-orange-500 rounded-full" />
+              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                <span className="text-slate-700">[</span>
+                <span className="text-orange-500 font-bold">01</span>
+                <span className="text-slate-700">/</span>
+                <span className="text-slate-600">03</span>
+                <span className="text-slate-700">]</span>
+                <span className="text-slate-650 mx-0.5">·</span>
+                <span className="uppercase text-slate-400 font-bold">FEATURES</span>
+              </div>
+            </div>
             <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12] max-w-2xl">
               The infrastructure agents need to run on your company memory
             </h2>
@@ -995,10 +1004,19 @@ export default function Home() {
             
             {/* Left Column: Title & Presets */}
             <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
-              <div className="space-y-3">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest font-mono">
-                  Interact & Query
-                </span>
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 select-none">
+                  <div className="w-[3px] h-3.5 bg-orange-500 rounded-full" />
+                  <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                    <span className="text-slate-700">[</span>
+                    <span className="text-orange-500 font-bold">02</span>
+                    <span className="text-slate-700">/</span>
+                    <span className="text-slate-600">03</span>
+                    <span className="text-slate-700">]</span>
+                    <span className="text-slate-650 mx-0.5">·</span>
+                    <span className="uppercase text-slate-400 font-bold">PLAYGROUND</span>
+                  </div>
+                </div>
                 <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
                   Ask your business anything
                 </h2>
@@ -1135,10 +1153,19 @@ export default function Home() {
             
             {/* Left Column: Title & Intro */}
             <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
-              <div className="space-y-3">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest font-mono">
-                  Morning Digest
-                </span>
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 select-none">
+                  <div className="w-[3px] h-3.5 bg-orange-500 rounded-full" />
+                  <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                    <span className="text-slate-700">[</span>
+                    <span className="text-orange-500 font-bold">03</span>
+                    <span className="text-slate-700">/</span>
+                    <span className="text-slate-600">03</span>
+                    <span className="text-slate-700">]</span>
+                    <span className="text-slate-650 mx-0.5">·</span>
+                    <span className="uppercase text-slate-400 font-bold">PROACTIVE</span>
+                  </div>
+                </div>
                 <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
                   Daily Brief
                 </h2>
