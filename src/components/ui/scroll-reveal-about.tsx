@@ -51,14 +51,10 @@ export function ScrollRevealAbout() {
   });
 
   // Calculate backlight opacity based on progress:
-  // Fades in from progress 0 -> 0.2, stays active from 0.2 -> 0.8, and fades out from 0.8 -> 1.0.
+  // Fades in from progress 0 -> 0.25 and STAYS active (no fade out at the end).
   let backlightOpacity = 0;
-  if (progress > 0 && progress < 0.2) {
-    backlightOpacity = progress / 0.2;
-  } else if (progress >= 0.2 && progress <= 0.8) {
-    backlightOpacity = 1;
-  } else if (progress > 0.8 && progress <= 1) {
-    backlightOpacity = (1 - progress) / 0.2;
+  if (progress > 0) {
+    backlightOpacity = Math.min(1, progress / 0.25);
   }
 
   return (
@@ -66,43 +62,46 @@ export function ScrollRevealAbout() {
       {/* Sticky container positioned exactly below the 80px tall sticky navbar */}
       <div className="sticky top-[80px] h-[calc(100vh-80px)] w-full flex flex-col items-center justify-center overflow-hidden bg-[#070708]">
         
-        {/* Aesthetic Background Dots & Glows */}
+        {/* Aesthetic Background Grid & Glows */}
         <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-          {/* Central Glowing Backlights (Illuminates the dots from behind, fades with scroll progress, no purple) */}
+          {/* Central Glowing Backlights (Illuminates the grid from behind, stays active, white) */}
           <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[550px] w-[850px] rounded-full bg-indigo-500/15 blur-[130px] mix-blend-screen transition-opacity duration-300 pointer-events-none" 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[550px] w-[850px] rounded-full bg-white/8 blur-[130px] mix-blend-screen transition-opacity duration-300 pointer-events-none" 
             style={{ opacity: backlightOpacity }}
           />
           <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[650px] rounded-full bg-emerald-500/10 blur-[110px] mix-blend-screen transition-opacity duration-300 pointer-events-none"
-            style={{ opacity: backlightOpacity }}
-          />
-          
-          {/* Outer Aurora Glows for depth (Fades with scroll progress) */}
-          <div 
-            className="absolute top-[10%] left-[5%] h-[400px] w-[500px] rounded-full bg-indigo-600/5 blur-[120px] mix-blend-screen transition-opacity duration-300 pointer-events-none"
-            style={{ opacity: backlightOpacity }}
-          />
-          <div 
-            className="absolute bottom-[10%] right-[5%] h-[400px] w-[500px] rounded-full bg-emerald-600/5 blur-[120px] mix-blend-screen transition-opacity duration-300 pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[450px] w-[650px] rounded-full bg-zinc-200/6 blur-[110px] mix-blend-screen transition-opacity duration-300 pointer-events-none"
             style={{ opacity: backlightOpacity }}
           />
           
-          {/* Highly Visible Dot-only motif (No grid lines) */}
+          {/* Outer Backlights for depth (Neutral white, stays active) */}
+          <div 
+            className="absolute top-[10%] left-[5%] h-[400px] w-[500px] rounded-full bg-white/3 blur-[120px] mix-blend-screen transition-opacity duration-300 pointer-events-none"
+            style={{ opacity: backlightOpacity }}
+          />
+          <div 
+            className="absolute bottom-[10%] right-[5%] h-[400px] w-[500px] rounded-full bg-white/3 blur-[120px] mix-blend-screen transition-opacity duration-300 pointer-events-none"
+            style={{ opacity: backlightOpacity }}
+          />
+          
+          {/* Highly Visible Grid motif (Only linear grid lines, no dots) */}
           <div 
             className="absolute inset-0 opacity-75"
             style={{
-              backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.15) 1.2px, transparent 1.2px)`,
-              backgroundSize: "32px 32px",
+              backgroundImage: `
+                linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px)
+              `,
+              backgroundSize: "64px 64px",
               backgroundPosition: "center center",
             }}
           />
           {/* Vignette fade to solid bg at edges */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,#070708_95%)]" />
           
-          {/* Central Radial Light Overlay (Make center dots glow, fades with scroll progress) */}
+          {/* Central Radial Light Overlay (Make center grid lines glow, white/neutral, stays active) */}
           <div 
-            className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.08)_0%,transparent_60%)] transition-opacity duration-300 pointer-events-none"
+            className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06)_0%,transparent_60%)] transition-opacity duration-300 pointer-events-none"
             style={{ opacity: backlightOpacity }}
           />
         </div>
