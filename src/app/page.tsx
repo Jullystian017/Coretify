@@ -189,7 +189,7 @@ export default function Home() {
           {/* Ask Coretify tab */}
           <button
             onClick={() => setActiveSectionTab("agent")}
-            className={`col-span-2 border-r border-b border-slate-850/40 py-4 text-center cursor-pointer transition-all ${
+            className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
               activeSectionTab === "agent"
                 ? "text-white bg-white/5 font-semibold"
                 : "hover:text-slate-200"
@@ -201,7 +201,7 @@ export default function Home() {
           {/* Data model tab */}
           <button
             onClick={() => setActiveSectionTab("data")}
-            className={`col-span-2 border-r border-b border-slate-850/40 py-4 text-center cursor-pointer transition-all ${
+            className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
               activeSectionTab === "data"
                 ? "text-white bg-white/5 font-semibold"
                 : "hover:text-slate-200"
@@ -213,7 +213,7 @@ export default function Home() {
           {/* Workflows tab */}
           <button
             onClick={() => setActiveSectionTab("tools")}
-            className={`col-span-2 border-r border-b border-slate-850/40 py-4 text-center cursor-pointer transition-all ${
+            className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
               activeSectionTab === "tools"
                 ? "text-white bg-white/5 font-semibold"
                 : "hover:text-slate-200"
@@ -225,7 +225,7 @@ export default function Home() {
           {/* Reporting tab with dashed border on the right */}
           <button
             onClick={() => setActiveSectionTab("governance")}
-            className={`col-span-2 border-r border-b border-slate-850/40 py-4 text-center cursor-pointer transition-all ${
+            className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
               activeSectionTab === "governance"
                 ? "text-white bg-white/5 font-semibold"
                 : "hover:text-slate-200"
@@ -238,10 +238,20 @@ export default function Home() {
           {/* Right spacer column */}
           <div className="col-span-2" />
         </div>
+
+        {/* Extension row to project vertical lines down to the dashboard */}
+        <div className="mx-auto max-w-[1360px] grid grid-cols-12 h-8">
+          <div className="col-span-2 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
+          <div className="col-span-2 border-r border-slate-850/40" />
+          <div className="col-span-2 border-r border-slate-850/40" />
+          <div className="col-span-2 border-r border-slate-850/40" />
+          <div className="col-span-2 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
+          <div className="col-span-2" />
+        </div>
       </div>
 
       {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
-      <section className="relative border-b border-slate-900 w-full bg-[#070708]/10 pt-8 pb-16 sm:pb-20 lg:pb-24">
+      <section className="relative border-b border-slate-900 w-full bg-[#070708]/10 pt-0 pb-16 sm:pb-20 lg:pb-24">
         <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
 
           {/* Product Window Shell (Dark Mode Basepoint/Attio Clone) */}
