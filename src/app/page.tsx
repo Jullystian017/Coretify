@@ -1276,28 +1276,33 @@ export default function Home() {
       </section>
 
       {/* TRUST SIGNALS FOOTER BLOCK */}
-      <section className="w-full bg-[#070708]/10">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/40 relative pt-16 pb-12 px-8 sm:px-12 lg:px-16 flex flex-col gap-12">
+      <section className="w-full bg-[#070708]">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/40 relative pt-20 pb-12 px-8 sm:px-12 lg:px-16 flex flex-col gap-14">
           
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start w-full">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start w-full">
             
             {/* Left Column: Brand, Desc, Watch button */}
-            <div className="md:col-span-5 space-y-5 text-left">
-              <div className="flex items-center gap-2.5 select-none cursor-pointer" onClick={() => router.push("/")}>
-                <div className="flex h-7.5 w-7.5 items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-350">
-                  <Bot className="h-4.5 w-4.5" />
+            <div className="md:col-span-5 space-y-6 text-left">
+              <div className="flex items-center gap-3 select-none cursor-pointer" onClick={() => router.push("/")}>
+                {/* Modern minimalist logo inspired by the screenshot's squircle shape */}
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 shadow-md">
+                  <div className="h-5 w-5 rounded-lg border-2 border-zinc-700 bg-zinc-950 flex items-center justify-center">
+                    <div className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
+                  </div>
                 </div>
-                <span className="font-bold text-[17px] tracking-tight text-white">
+                <span className="text-[21px] font-semibold tracking-tight text-white">
                   Coretify
                 </span>
               </div>
-              <p className="text-[12px] text-zinc-400 leading-relaxed font-normal max-w-xs">
+              <p className="text-[13px] text-zinc-400 leading-relaxed font-normal max-w-sm">
                 Deploy agents that work across your company memory.
               </p>
-              <div>
-                <button className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-800 bg-slate-900/40 hover:bg-slate-900 hover:border-slate-700 text-[11px] font-medium text-slate-300 transition-all cursor-pointer select-none">
-                  <Play className="h-3 w-3 fill-current text-slate-400" />
+              <div className="pt-1">
+                <button className="inline-flex items-center gap-2.5 pl-1.5 pr-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900 hover:border-zinc-700 text-[12px] font-medium text-zinc-300 transition-all duration-200 cursor-pointer select-none">
+                  <span className="flex h-5.5 w-5.5 items-center justify-center rounded-full bg-zinc-100 text-black">
+                    <Play className="h-2 w-2 fill-current ml-0.5" />
+                  </span>
                   <span>Watch the launch</span>
                 </button>
               </div>
@@ -1307,9 +1312,9 @@ export default function Home() {
             <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-8 text-left">
               
               {/* Column 1: Platform */}
-              <div className="space-y-4">
-                <h5 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-mono">Platform</h5>
-                <ul className="space-y-3 text-[12px] text-zinc-400 font-normal">
+              <div className="space-y-4.5">
+                <h5 className="text-[13px] font-medium text-zinc-500">Platform</h5>
+                <ul className="space-y-3.5 text-[13px] text-zinc-400 font-normal">
                   <li><a href="#" className="hover:text-white transition-colors">Data</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Agent</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Tools</a></li>
@@ -1318,9 +1323,9 @@ export default function Home() {
               </div>
 
               {/* Column 2: Tools */}
-              <div className="space-y-4">
-                <h5 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-mono">Tools</h5>
-                <ul className="space-y-3 text-[12px] text-zinc-400 font-normal">
+              <div className="space-y-4.5">
+                <h5 className="text-[13px] font-medium text-zinc-500">Tools</h5>
+                <ul className="space-y-3.5 text-[13px] text-zinc-400 font-normal">
                   <li><a href="#" className="hover:text-white transition-colors">Tables</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Routing</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Scheduling</a></li>
@@ -1329,18 +1334,18 @@ export default function Home() {
               </div>
 
               {/* Column 3: Company */}
-              <div className="space-y-4">
-                <h5 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-mono">Company</h5>
-                <ul className="space-y-3 text-[12px] text-zinc-400 font-normal">
+              <div className="space-y-4.5">
+                <h5 className="text-[13px] font-medium text-zinc-500">Company</h5>
+                <ul className="space-y-3.5 text-[13px] text-zinc-400 font-normal">
                   <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Resources</a></li>
                 </ul>
               </div>
 
               {/* Column 4: Legal */}
-              <div className="space-y-4">
-                <h5 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-mono">Legal</h5>
-                <ul className="space-y-3 text-[12px] text-zinc-400 font-normal">
+              <div className="space-y-4.5">
+                <h5 className="text-[13px] font-medium text-zinc-500">Legal</h5>
+                <ul className="space-y-3.5 text-[13px] text-zinc-400 font-normal">
                   <li><a href="/privacy" className="hover:text-white transition-colors">Privacy</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Terms</a></li>
                   <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
@@ -1353,24 +1358,24 @@ export default function Home() {
           </div>
 
           {/* Divider */}
-          <div className="w-full h-px bg-slate-900" />
+          <div className="w-full h-px bg-slate-850/40" />
 
           {/* Bottom Bar: Copyright & Socials */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-[12px] text-slate-500 w-full">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-[13px] text-zinc-500 w-full">
             <span className="font-normal select-none">
               &copy; {new Date().getFullYear()} Coretify. All rights reserved.
             </span>
             
             {/* Social Icons */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-3">
               {/* LinkedIn */}
-              <a href="#" className="h-8 w-8 rounded-lg bg-slate-900/30 border border-slate-800/80 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-900/70 hover:border-slate-700 transition-all" aria-label="LinkedIn">
+              <a href="#" className="h-9.5 w-9.5 rounded-xl bg-zinc-900/30 border border-zinc-800/80 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-900/60 hover:border-zinc-700 transition-all duration-200" aria-label="LinkedIn">
                 <svg className="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24">
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
               </a>
               {/* X / Twitter */}
-              <a href="#" className="h-8 w-8 rounded-lg bg-slate-900/30 border border-slate-800/80 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-900/70 hover:border-slate-700 transition-all" aria-label="X (Twitter)">
+              <a href="#" className="h-9.5 w-9.5 rounded-xl bg-zinc-900/30 border border-zinc-800/80 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-900/60 hover:border-zinc-700 transition-all duration-200" aria-label="X (Twitter)">
                 <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
