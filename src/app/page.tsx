@@ -143,7 +143,7 @@ export default function Home() {
       </header>
 
       {/* COMBINED HERO & DASHBOARD AREA (Spans full height of canvas) */}
-      <section className="relative border-b border-slate-900 w-full bg-[#070708]/25 overflow-hidden">
+      <section className="relative border-b border-slate-850/80 w-full bg-[#070708]/25 overflow-hidden">
 
         {/* Aurora Glowing Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
@@ -190,14 +190,14 @@ export default function Home() {
 
         {/* TAB NAVIGATION ROW */}
         <div className="relative z-10 w-full bg-[#08080a]/35">
-          <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
+          <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400 border-b border-slate-850/80">
             {/* Left spacer column with dashed border on the right */}
             <div className="col-span-1 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
 
             {/* Ask Coretify tab */}
             <button
               onClick={() => setActiveSectionTab("agent")}
-              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "agent"
+              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "agent"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
                 }`}
@@ -208,7 +208,7 @@ export default function Home() {
             {/* Data model tab */}
             <button
               onClick={() => setActiveSectionTab("data")}
-              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "data"
+              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "data"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
                 }`}
@@ -219,7 +219,7 @@ export default function Home() {
             {/* Workflows tab */}
             <button
               onClick={() => setActiveSectionTab("tools")}
-              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "tools"
+              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "tools"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
                 }`}
@@ -230,7 +230,7 @@ export default function Home() {
             {/* Reporting tab with dashed border on the right */}
             <button
               onClick={() => setActiveSectionTab("governance")}
-              className={`col-span-2 border-r border-b border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "governance"
+              className={`col-span-2 border-r border-slate-850/80 py-6 text-center cursor-pointer transition-all ${activeSectionTab === "governance"
                   ? "text-white bg-white/5 font-semibold"
                   : "hover:text-slate-200"
                 }`}
@@ -252,7 +252,7 @@ export default function Home() {
         </div>
 
         {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
-        <div className="relative z-10 w-full pt-0 pb-16 sm:pb-20 lg:pb-24">
+        <div className="relative z-10 w-full pt-0 pb-0 -mb-16 lg:-mb-24">
           <div className="mx-auto max-w-[1360px] px-8">
 
             {/* Product Window Shell (Dark Mode Basepoint/Attio Clone) */}
@@ -526,6 +526,9 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Smooth Bottom Fade */}
+              <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#09090b] via-[#09090b]/95 to-transparent pointer-events-none z-20" />
+
             </div>
           </div>
         </div>
@@ -533,70 +536,79 @@ export default function Home() {
       </section>
 
       {/* BRAND LOGOS SECTION (Inside the vertical grid lines) */}
-      <section className="relative w-full bg-[#070708]/20 py-10">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/80 px-8">
-          <div className="flex flex-wrap items-center justify-between gap-x-12 gap-y-6 w-full text-white">
-            {/* Vercel */}
-            <div className="flex items-center gap-2 select-none">
-              <svg viewBox="0 0 76 65" className="h-3.5 w-auto fill-current">
-                <polygon points="38 0 76 65 0 65" />
-              </svg>
-              <span className="text-[17px] font-bold tracking-tight">Vercel</span>
-            </div>
+      <section className="relative z-20 w-full bg-[#070708] border-t border-b border-slate-850/80 shadow-[0_-20px_50px_rgba(0,0,0,0.95)]">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/80">
+          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full">
+            {/* Left Spacer */}
+            <div className="hidden lg:block" />
 
-            {/* Cursor */}
-            <div className="flex items-center gap-2 select-none">
-              <svg viewBox="0 0 24 24" className="h-[18px] w-auto fill-none stroke-current" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-                <path d="M12 12v10" />
-              </svg>
-              <span className="text-[14px] font-extrabold tracking-wider font-sans">CURSOR</span>
-            </div>
-
-            {/* Oscar */}
-            <div className="flex items-center select-none">
-              <span className="text-[20px] font-semibold tracking-tight font-sans lowercase">oscar</span>
-            </div>
-
-            {/* OpenAI */}
-            <div className="flex items-center gap-1.5 select-none">
-              <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
-                <path d="M21.3,10.6a5.5,5.5,0,0,0-2.6-4.6,5.5,5.5,0,0,0-5.1-.3,5.5,5.5,0,0,0-5-3.8,5.6,5.6,0,0,0-5.4,3,5.5,5.5,0,0,0-2.3,4.8,5.5,5.5,0,0,0,2.6,4.6,5.5,5.5,0,0,0,5.1.3,5.5,5.5,0,0,0,5,3.8,5.5,5.5,0,0,0,5.4-3A5.5,5.5,0,0,0,21.3,10.6ZM12.7,4.3a3.5,3.5,0,0,1,1.9.5,3.6,3.6,0,0,1,1.6,2.2c-.1,0-.2,0-.3-.1L11,4.3A3.6,3.6,0,0,1,12.7,4.3ZM5.9,6.7a3.5,3.5,0,0,1,.8-1.9,3.6,3.6,0,0,1,2.5-1.1c0,.1,0,.2,0,.3V8.8A3.6,3.6,0,0,1,5.9,6.7ZM4.5,12.8a3.5,3.5,0,0,1-1.1-1.7,3.6,3.6,0,0,1,.3-2.7c.1,0,.2.1.2.1l4.9,2.8A3.6,3.6,0,0,1,4.5,12.8Zm6.8,6.9a3.5,3.5,0,0,1-1.9-.5,3.6,3.6,0,0,1-1.6-2.2c.1,0,.2,0,.3.1L13,19.7A3.6,3.6,0,0,1,11.3,19.7ZM18.1,17.3a3.5,3.5,0,0,1-.8,1.9,3.6,3.6,0,0,1-2.5,1.1c0-.1,0-.2,0-.3V15.2A3.6,3.6,0,0,1,18.1,17.3Zm1.4-6.1a3.5,3.5,0,0,1,1.1,1.7,3.6,3.6,0,0,1-.3,2.7c-.1,0-.2-.1-.2-.1l-4.9-2.8A3.6,3.6,0,0,1,19.5,11.2Z" />
-              </svg>
-              <span className="text-[17px] font-semibold tracking-tight">OpenAI</span>
-            </div>
-
-            {/* Coinbase */}
-            <div className="flex items-center select-none">
-              <span className="text-[20px] font-semibold tracking-tight font-sans lowercase">coinbase</span>
-            </div>
-
-            {/* Cash App */}
-            <div className="flex items-center gap-2 select-none">
-              <div className="flex items-center justify-center h-[18px] w-[18px] bg-white text-black font-extrabold rounded-[4px] text-[11.5px] leading-none">
-                $
+            {/* Logos wrapper with padding */}
+            <div className="px-8 py-6 flex flex-wrap items-center justify-between gap-x-12 gap-y-6 w-full text-white">
+              {/* Vercel */}
+              <div className="flex items-center gap-2 select-none">
+                <svg viewBox="0 0 76 65" className="h-3.5 w-auto fill-current">
+                  <polygon points="38 0 76 65 0 65" />
+                </svg>
+                <span className="text-[17px] font-bold tracking-tight">Vercel</span>
               </div>
-              <span className="text-[17px] font-bold tracking-tight">Cash App</span>
+
+              {/* Cursor */}
+              <div className="flex items-center gap-2 select-none">
+                <svg viewBox="0 0 24 24" className="h-[18px] w-auto fill-none stroke-current" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5" />
+                  <path d="M2 12l10 5 10-5" />
+                  <path d="M12 12v10" />
+                </svg>
+                <span className="text-[14px] font-extrabold tracking-wider font-sans">CURSOR</span>
+              </div>
+
+              {/* Oscar */}
+              <div className="flex items-center select-none">
+                <span className="text-[20px] font-semibold tracking-tight font-sans lowercase">oscar</span>
+              </div>
+
+              {/* OpenAI */}
+              <div className="flex items-center gap-1.5 select-none">
+                <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
+                  <path d="M21.3,10.6a5.5,5.5,0,0,0-2.6-4.6,5.5,5.5,0,0,0-5.1-.3,5.5,5.5,0,0,0-5-3.8,5.6,5.6,0,0,0-5.4,3,5.5,5.5,0,0,0-2.3,4.8,5.5,5.5,0,0,0,2.6,4.6,5.5,5.5,0,0,0,5.1.3,5.5,5.5,0,0,0,5,3.8,5.5,5.5,0,0,0,5.4-3A5.5,5.5,0,0,0,21.3,10.6ZM12.7,4.3a3.5,3.5,0,0,1,1.9.5,3.6,3.6,0,0,1,1.6,2.2c-.1,0-.2,0-.3-.1L11,4.3A3.6,3.6,0,0,1,12.7,4.3ZM5.9,6.7a3.5,3.5,0,0,1,.8-1.9,3.6,3.6,0,0,1,2.5-1.1c0,.1,0,.2,0,.3V8.8A3.6,3.6,0,0,1,5.9,6.7ZM4.5,12.8a3.5,3.5,0,0,1-1.1-1.7,3.6,3.6,0,0,1,.3-2.7c.1,0,.2.1.2.1l4.9,2.8A3.6,3.6,0,0,1,4.5,12.8Zm6.8,6.9a3.5,3.5,0,0,1-1.9-.5,3.6,3.6,0,0,1-1.6-2.2c.1,0,.2,0,.3.1L13,19.7A3.6,3.6,0,0,1,11.3,19.7ZM18.1,17.3a3.5,3.5,0,0,1-.8,1.9,3.6,3.6,0,0,1-2.5,1.1c0-.1,0-.2,0-.3V15.2A3.6,3.6,0,0,1,18.1,17.3Zm1.4-6.1a3.5,3.5,0,0,1,1.1,1.7,3.6,3.6,0,0,1-.3,2.7c-.1,0-.2-.1-.2-.1l-4.9-2.8A3.6,3.6,0,0,1,19.5,11.2Z" />
+                </svg>
+                <span className="text-[17px] font-semibold tracking-tight">OpenAI</span>
+              </div>
+
+              {/* Coinbase */}
+              <div className="flex items-center select-none">
+                <span className="text-[20px] font-semibold tracking-tight font-sans lowercase">coinbase</span>
+              </div>
+
+              {/* Cash App */}
+              <div className="flex items-center gap-2 select-none">
+                <div className="flex items-center justify-center h-[18px] w-[18px] bg-white text-black font-extrabold rounded-[4px] text-[11.5px] leading-none">
+                  $
+                </div>
+                <span className="text-[17px] font-bold tracking-tight">Cash App</span>
+              </div>
+
+              {/* Boom */}
+              <div className="flex items-center select-none">
+                <svg viewBox="0 0 224 57" className="h-[21px] w-auto fill-current">
+                  <path d="M84.6 14.8c0-.3.2-.5.5-.5h14.7c6.2 0 9.5 2.9 9.5 7.6 0 3.1-2.1 5-4.3 5.7 2.6.8 4.9 3.1 4.9 6.8 0 4.9-3.3 8.1-9.9 8.1H85.1c-.3 0-.5-.2-.5-.5V14.8zm5.3 4.1v6.9h9.3c3.1 0 4.6-1.2 4.6-3.5 0-2.4-1.6-3.5-4.6-3.5h-9.3v.1zm0 11.4v7.8h9.5c3.5 0 5.1-1.4 5.1-3.9 0-2.6-1.7-3.9-5.1-3.9h-9.5zm26.6-1.8c0-8.5 6.4-14.6 14.8-14.6s14.8 6.1 14.8 14.6c0 8.4-6.4 14.6-14.8 14.6-8.5 0-14.8-6.1-14.8-14.6zm24.2 0c0-5.4-3.7-9.7-9.3-9.7-5.6 0-9.3 4.4-9.3 9.7 0 5.5 3.7 9.7 9.3 9.7 5.5.1 9.3-4.3 9.3-9.7zm12.2 0c0-8.5 6.4-14.6 14.8-14.6s14.8 6.1 14.8 14.6c0 8.4-6.4 14.6-14.8 14.6-8.5 0-14.8-6.1-14.8-14.6zm24.2 0c0-5.4-3.7-9.7-9.3-9.7-5.6 0-9.3 4.4-9.3 9.7 0 5.5 3.7 9.7 9.3 9.7 5.5.1 9.3-4.3 9.3-9.7zM207 35l8.4-20.3c.1-.2.2-.3.4-.3h6.9c.3 0 .5.2.5.5v27.3c0 .3-.2.5-.5.5h-4.3c-.3 0-.5-.2-.5-.5V19.5l-9.4 23c-.1.2-.2.3-.4.3h-3c-.2 0-.4-.1-.4-.3l-9.3-22.8v22.5c0 .3-.2.5-.5.5h-4.3c-.3 0-.5-.2-.5-.5V14.9c0-.3.2-.5.5-.5h7.2c.2 0 .4.1.4.3L207 35zM63.1 28.6c-.1-.8-.8-1.3-1.6-1.2l-16.2 2.2 16.7-7c.8-.3 1.2-1.3.9-2.1-.3-.8-1.3-1.2-2.1-.9l-13 5.5 12.6-9.7c.8-.6.9-1.7.3-2.5-.6-.8-1.7-.9-2.5-.3l-10.5 8.1 9.1-12c.6-.8.5-2-.4-2.7-.8-.6-2-.5-2.7.4l-7.5 9.9 5.6-13.2c.4-1 0-2.1-1-2.6-1-.4-2.1 0-2.6 1L37.3 27c-1 2.3-3.4 3.9-6.1 3.9-2.6 0-4.7-1.5-5.8-3.8L13.7.6c-.1-.3-.5-.5-.8-.3-.3.1-.5.5-.3.8L23 24.5 8.5 5.8c-.3-.3-.8-.4-1.1-.1-.3.3-.4.8-.1 1.1l14.5 18.7L4.6 12.4c-.4-.3-1-.2-1.3.2-.3.4-.2 1 .2 1.3l17.9 13.7-19-7.7c-.6-.2-1.2 0-1.5.6-.2.6 0 1.2.6 1.5l19.9 8.1-19.3-2.5c-.7-.1-1.3.4-1.4 1.1-.1.7.4 1.3 1.1 1.4l20.3 2.6-18.2 2.5c-.8.1-1.3.8-1.2 1.6.1.8.8 1.3 1.6 1.2l18.9-2.6L7.5 42c-.8.3-1.2 1.3-.9 2.1.3.8 1.3 1.2 2.1.9l16.7-7-12.6 9.8c-.8.6-.9 1.7-.3 2.5.6.8 1.7.9 2.5.3l13.1-10.1-8.7 11.4c-.6.8-.5 2 .4 2.7.8.6 2 .5 2.7-.4l8.1-10.7-4.5 10.6c-.4 1 0 2.1 1 2.6 1 .4 2.1 0 2.6-1l3.5-8.3 3.9 8.9c.1.3.5.5.8.3.3-.1.5-.5.3-.8l-4.4-10 1.3-3 8.8 11.4c.3.3.8.4 1.1.1.3-.3.4-.8.1-1.1l-9.4-12.1.7-1.8 14.1 10.8c.4.3 1 .2 1.3-.2.3-.4.2-1-.2-1.3L37.1 37.5l.3-.7L56 44.4c.6.2 1.2 0 1.5-.6.2-.6 0-1.2-.6-1.5l-17.8-7.2 20.7 2.7c.7.1 1.3-.4 1.4-1.1.1-.7-.4-1.3-1.1-1.4l-17.5-2.2 19.2-2.6c.8-.4 1.4-1.1 1.3-1.9z" />
+                </svg>
+              </div>
+
+              {/* Ramp */}
+              <div className="flex items-center select-none">
+                <svg viewBox="0 0 96 26" className="h-[19px] w-auto fill-current">
+                  <g fill="currentColor">
+                    <path d="m6.64257 8.79302c-2.28962 0-3.41358 2.04688-3.41358 4.77998v6.8492h-3.22899v-14.45351h3.17241v3.74982h.05509c.67735-2.30551 2.0276-4.16846 4.11029-4.16846 1.46488 0 2.08269.51881 2.08269.51881l-1.45744 2.97684c0-.0015-.46447-.25268-1.32047-.25268zm39.03513 1.98408v9.6437h-3.1456v-8.47c0-2.43114-.7518-3.71846-2.6722-3.71846-1.9889 0-2.9506 1.62821-2.9506 4.75156v7.4354h-3.1173v-8.4685c0-2.33695-.7429-3.71846-2.644-3.71846-2.1705 0-3.0057 1.92876-3.0057 4.75156v7.4354h-3.1724v-14.45061h3.1724v3.27287h.0283c.4943-2.26514 1.843-3.6631 4.1193-3.6631 2.2568 0 3.7277 1.2305 4.2859 3.41192.5315-2.09919 1.9457-3.41192 4.1192-3.41192 3.0325 0 4.9827 1.92873 4.9827 5.19864zm-29.9109-5.22705c-2.9193 0-4.8293 1.39048-5.7002 3.90083l2.6871.99132c.4898-1.51462 1.511-2.37732 3.0697-2.37732 1.7537 0 2.7838.78346 2.7838 1.98552 0 1.229-.8202 1.4862-2.6722 1.7897-2.0603.3364-6.95964.4471-6.95964 4.6395 0 2.4565 2.02464 4.3045 5.06604 4.3045 2.2866 0 3.8438-.9479 4.5643-2.7122h.0283v2.3489h3.1456v-8.8887c-.0014-3.88885-1.9308-5.98205-6.0128-5.98205zm2.9223 8.06775c0 3.0307-1.4783 4.9774-3.8408 4.9774-1.6703 0-2.6722-.9509-2.6722-2.322 0-1.2858 1.0301-2.1784 3.0056-2.5462 2.0217-.3768 3.04-.8418 3.5074-1.9572zm38.1777-8.03934c-2.4058 0-3.9957 1.34114-4.676 3.3566v-2.96637h-3.3407v20.01551h3.3124v-8.5283h.0283c.7369 2.1829 2.2717 3.3835 4.676 3.3835 3.8125 0 6.5413-3.1862 6.5413-7.688-.0015-4.47052-2.7288-7.57294-6.5413-7.57294zm-.8218 12.57864c-2.6409 0-4.1058-1.9437-4.1058-4.9624s1.639-4.96236 4.1058-4.96236c2.4653 0 4.1058 2.03786 4.1058 4.96236 0 2.926-1.639 4.9624-4.1058 4.9624z" />
+                    <path d="m96.2197 20.3553v.0901l-12.9282.0046v-.0947c1.8642-1.068 3.151-2.1559 4.3089-3.2927h5.3085zm-3.2033-17.07889-3.277-3.2605409h-.0952s.0553 6.0764609-5.4467 11.6028309c-5.3838 5.4088-11.7151 5.421-11.7151 5.421v.0948l3.3384 3.317s6.2391.0627 11.7504-5.421c5.4913-5.46526 5.4452-11.75409 5.4452-11.75409z" />
+                  </g>
+                </svg>
+              </div>
             </div>
 
-            {/* Boom */}
-            <div className="flex items-center select-none">
-              <svg viewBox="0 0 224 57" className="h-[21px] w-auto fill-current">
-                <path d="M84.6 14.8c0-.3.2-.5.5-.5h14.7c6.2 0 9.5 2.9 9.5 7.6 0 3.1-2.1 5-4.3 5.7 2.6.8 4.9 3.1 4.9 6.8 0 4.9-3.3 8.1-9.9 8.1H85.1c-.3 0-.5-.2-.5-.5V14.8zm5.3 4.1v6.9h9.3c3.1 0 4.6-1.2 4.6-3.5 0-2.4-1.6-3.5-4.6-3.5h-9.3v.1zm0 11.4v7.8h9.5c3.5 0 5.1-1.4 5.1-3.9 0-2.6-1.7-3.9-5.1-3.9h-9.5zm26.6-1.8c0-8.5 6.4-14.6 14.8-14.6s14.8 6.1 14.8 14.6c0 8.4-6.4 14.6-14.8 14.6-8.5 0-14.8-6.1-14.8-14.6zm24.2 0c0-5.4-3.7-9.7-9.3-9.7-5.6 0-9.3 4.4-9.3 9.7 0 5.5 3.7 9.7 9.3 9.7 5.5.1 9.3-4.3 9.3-9.7zm12.2 0c0-8.5 6.4-14.6 14.8-14.6s14.8 6.1 14.8 14.6c0 8.4-6.4 14.6-14.8 14.6-8.5 0-14.8-6.1-14.8-14.6zm24.2 0c0-5.4-3.7-9.7-9.3-9.7-5.6 0-9.3 4.4-9.3 9.7 0 5.5 3.7 9.7 9.3 9.7 5.5.1 9.3-4.3 9.3-9.7zM207 35l8.4-20.3c.1-.2.2-.3.4-.3h6.9c.3 0 .5.2.5.5v27.3c0 .3-.2.5-.5.5h-4.3c-.3 0-.5-.2-.5-.5V19.5l-9.4 23c-.1.2-.2.3-.4.3h-3c-.2 0-.4-.1-.4-.3l-9.3-22.8v22.5c0 .3-.2.5-.5.5h-4c-.3 0-.5-.2-.5-.5V14.9c0-.3.2-.5.5-.5h7.2c.2 0 .4.1.4.3L207 35zM63.1 28.6c-.1-.8-.8-1.3-1.6-1.2l-16.2 2.2 16.7-7c.8-.3 1.2-1.3.9-2.1-.3-.8-1.3-1.2-2.1-.9l-13 5.5 12.6-9.7c.8-.6.9-1.7.3-2.5-.6-.8-1.7-.9-2.5-.3l-10.5 8.1 9.1-12c.6-.8.5-2-.4-2.7-.8-.6-2-.5-2.7.4l-7.5 9.9 5.6-13.2c.4-1 0-2.1-1-2.6-1-.4-2.1 0-2.6 1L37.3 27c-1 2.3-3.4 3.9-6.1 3.9-2.6 0-4.7-1.5-5.8-3.8L13.7.6c-.1-.3-.5-.5-.8-.3-.3.1-.5.5-.3.8L23 24.5 8.5 5.8c-.3-.3-.8-.4-1.1-.1-.3.3-.4.8-.1 1.1l14.5 18.7L4.6 12.4c-.4-.3-1-.2-1.3.2-.3.4-.2 1 .2 1.3l17.9 13.7-19-7.7c-.6-.2-1.2 0-1.5.6-.2.6 0 1.2.6 1.5l19.9 8.1-19.3-2.5c-.7-.1-1.3.4-1.4 1.1-.1.7.4 1.3 1.1 1.4l20.3 2.6-18.2 2.5c-.8.1-1.3.8-1.2 1.6.1.8.8 1.3 1.6 1.2l18.9-2.6L7.5 42c-.8.3-1.2 1.3-.9 2.1.3.8 1.3 1.2 2.1.9l16.7-7-12.6 9.8c-.8.6-.9 1.7-.3 2.5.6.8 1.7.9 2.5.3l13.1-10.1-8.7 11.4c-.6.8-.5 2 .4 2.7.8.6 2 .5 2.7-.4l8.1-10.7-4.5 10.6c-.4 1 0 2.1 1 2.6 1 .4 2.1 0 2.6-1l3.5-8.3 3.9 8.9c.1.3.5.5.8.3.3-.1.5-.5.3-.8l-4.4-10 1.3-3 8.8 11.4c.3.3.8.4 1.1.1.3-.3.4-.8.1-1.1l-9.4-12.1.7-1.8 14.1 10.8c.4.3 1 .2 1.3-.2.3-.4.2-1-.2-1.3L37.1 37.5l.3-.7L56 44.4c.6.2 1.2 0 1.5-.6.2-.6 0-1.2-.6-1.5l-17.8-7.2 20.7 2.7c.7.1 1.3-.4 1.4-1.1.1-.7-.4-1.3-1.1-1.4l-17.5-2.2 19.2-2.6c.8-.4 1.4-1.1 1.3-1.9z" />
-              </svg>
-            </div>
-
-            {/* Ramp */}
-            <div className="flex items-center select-none">
-              <svg viewBox="0 0 96 26" className="h-[19px] w-auto fill-current">
-                <g fill="currentColor">
-                  <path d="m6.64257 8.79302c-2.28962 0-3.41358 2.04688-3.41358 4.77998v6.8492h-3.22899v-14.45351h3.17241v3.74982h.05509c.67735-2.30551 2.0276-4.16846 4.11029-4.16846 1.46488 0 2.08269.51881 2.08269.51881l-1.45744 2.97684c0-.0015-.46447-.25268-1.32047-.25268zm39.03513 1.98408v9.6437h-3.1456v-8.47c0-2.43114-.7518-3.71846-2.6722-3.71846-1.9889 0-2.9506 1.62821-2.9506 4.75156v7.4354h-3.1173v-8.4685c0-2.33695-.7429-3.71846-2.644-3.71846-2.1705 0-3.0057 1.92876-3.0057 4.75156v7.4354h-3.1724v-14.45061h3.1724v3.27287h.0283c.4943-2.26514 1.843-3.6631 4.1193-3.6631 2.2568 0 3.7277 1.2305 4.2859 3.41192.5315-2.09919 1.9457-3.41192 4.1192-3.41192 3.0325 0 4.9827 1.92873 4.9827 5.19864zm-29.9109-5.22705c-2.9193 0-4.8293 1.39048-5.7002 3.90083l2.6871.99132c.4898-1.51462 1.511-2.37732 3.0697-2.37732 1.7537 0 2.7838.78346 2.7838 1.98552 0 1.229-.8202 1.4862-2.6722 1.7897-2.0603.3364-6.95964.4471-6.95964 4.6395 0 2.4565 2.02464 4.3045 5.06604 4.3045 2.2866 0 3.8438-.9479 4.5643-2.7122h.0283v2.3489h3.1456v-8.8887c-.0014-3.88885-1.9308-5.98205-6.0128-5.98205zm2.9223 8.06775c0 3.0307-1.4783 4.9774-3.8408 4.9774-1.6703 0-2.6722-.9509-2.6722-2.322 0-1.2858 1.0301-2.1784 3.0056-2.5462 2.0217-.3768 3.04-.8418 3.5074-1.9572zm38.1777-8.03934c-2.4058 0-3.9957 1.34114-4.676 3.3566v-2.96637h-3.3407v20.01551h3.3124v-8.5283h.0283c.7369 2.1829 2.2717 3.3835 4.676 3.3835 3.8125 0 6.5413-3.1862 6.5413-7.688-.0015-4.47052-2.7288-7.57294-6.5413-7.57294zm-.8218 12.57864c-2.6409 0-4.1058-1.9437-4.1058-4.9624s1.639-4.96236 4.1058-4.96236c2.4653 0 4.1058 2.03786 4.1058 4.96236 0 2.926-1.639 4.9624-4.1058 4.9624z" />
-                  <path d="m96.2197 20.3553v.0901l-12.9282.0046v-.0947c1.8642-1.068 3.151-2.1559 4.3089-3.2927h5.3085zm-3.2033-17.07889-3.277-3.2605409h-.0952s.0553 6.0764609-5.4467 11.6028309c-5.3838 5.4088-11.7151 5.421-11.7151 5.421v.0948l3.3384 3.317s6.2391.0627 11.7504-5.421c5.4913-5.46526 5.4452-11.75409 5.4452-11.75409z" />
-                </g>
-              </svg>
-            </div>
+            {/* Right Spacer */}
+            <div className="hidden lg:block" />
           </div>
         </div>
       </section>
