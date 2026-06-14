@@ -145,20 +145,9 @@ export default function Home() {
         </div>
       </header>
 
-      {/* MAIN VERTICAL GRID WRAPPER */}
-      <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative min-h-screen bg-[#070708]/40">
-        
-        {/* Top-most intersection markers */}
-        <span className="absolute -top-2.5 -left-1 text-[11px] text-slate-800 font-mono select-none">+</span >
-        <span className="absolute -top-2.5 -right-1.5 text-[11px] text-slate-800 font-mono select-none">+</span >
-
-        {/* HERO SECTION GRID (With Vertical Divider) */}
-        <section className="relative border-b border-slate-900 p-8 sm:p-12 lg:p-16">
-          
-          {/* Section Intersection Markers */}
-          <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
-          <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
-
+      {/* HERO SECTION (No vertical grid borders, spans full width) */}
+      <section className="relative border-b border-slate-900 w-full bg-[#070708]/20">
+        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16 py-16 sm:py-20 lg:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
             
             {/* Left Column: Headline */}
@@ -188,13 +177,12 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="relative border-b border-slate-900 px-8 py-10 bg-[#070708]/20">
-          
-          <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
-          <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
-
+      {/* BRAND LOGOS SECTION (No side grid lines, full width) */}
+      <section className="relative border-b border-slate-900 w-full bg-[#070708]/20 py-10">
+        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
           <div className="flex flex-wrap items-center justify-between gap-6 opacity-30 grayscale hover:opacity-50 transition-opacity duration-350 max-w-5xl mx-auto">
             {/* Granola */}
             <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
@@ -242,13 +230,12 @@ export default function Home() {
               <span>Union Square Ventures</span>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* INTERACTIVE PRODUCT MOCKUP SECTION */}
-        <section className="relative border-b border-slate-900 p-8 sm:p-12 lg:p-16">
-          
-          <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
-          <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
+      {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
+      <section className="relative border-b border-slate-900 w-full bg-[#070708]/10 py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1360px] px-8 sm:px-12 lg:px-16">
 
           {/* Centered Tab navigation header */}
           <div className="flex justify-center mb-8 border-b border-slate-900/60 max-w-2xl mx-auto">
@@ -539,7 +526,15 @@ export default function Home() {
             </div>
 
           </div>
-        </section>
+        </div>
+      </section>
+
+      {/* MAIN VERTICAL GRID WRAPPER */}
+      <div className="mx-auto max-w-[1360px] border-l border-r border-slate-900 relative min-h-screen bg-[#070708]/40">
+        
+        {/* Top-most intersection markers */}
+        <span className="absolute -top-2.5 -left-1 text-[11px] text-slate-800 font-mono select-none">+</span >
+        <span className="absolute -top-2.5 -right-1.5 text-[11px] text-slate-800 font-mono select-none">+</span >
 
         {/* SECTION: Tab Switcher (Introducing Default clone) */}
         <section className="relative border-b border-slate-900 p-8 sm:p-12 lg:p-16">
