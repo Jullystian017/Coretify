@@ -615,15 +615,15 @@ export default function Home() {
 
       {/* SECTION: Tab Switcher (Introducing Default clone) */}
       <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative p-8 sm:p-12 lg:p-16">
-
-          {/* Section Header */}
-          <div className="text-left mb-12 space-y-4">
-            <div className="flex items-center gap-2 select-none">
-              <div className="w-[3px] h-3.5 bg-orange-500 rounded-full" />
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative">
+          
+          {/* Section Header Band */}
+          <div className="border-b border-slate-850/40 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+            <div className="flex items-center gap-2">
+              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
-                <span className="text-orange-500 font-bold">01</span>
+                <span className="text-white font-bold">01</span>
                 <span className="text-slate-700">/</span>
                 <span className="text-slate-600">03</span>
                 <span className="text-slate-700">]</span>
@@ -631,13 +631,19 @@ export default function Home() {
                 <span className="uppercase text-slate-400 font-bold">FEATURES</span>
               </div>
             </div>
-            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12] max-w-2xl">
-              The infrastructure agents need to run on your company memory
-            </h2>
           </div>
 
-          {/* Grid Layout (With Vertical Divider) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
+          {/* Section Content Area */}
+          <div className="p-8 sm:p-12 lg:p-16">
+            {/* Section Header */}
+            <div className="text-left mb-12">
+              <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12] max-w-2xl">
+                The infrastructure agents need to run on your company memory
+              </h2>
+            </div>
+
+            {/* Grid Layout (With Vertical Divider) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
             
             {/* Left Column: 4 Tabs */}
             <div className="lg:col-span-4 space-y-4 pr-0 lg:pr-8">
@@ -994,36 +1000,43 @@ export default function Home() {
 
           </div>
         </div>
+      </div>
       </section>
 
       {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
       <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative p-8 sm:p-12 lg:p-16">
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-            
-            {/* Left Column: Title & Presets */}
-            <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 select-none">
-                  <div className="w-[3px] h-3.5 bg-orange-500 rounded-full" />
-                  <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
-                    <span className="text-slate-700">[</span>
-                    <span className="text-orange-500 font-bold">02</span>
-                    <span className="text-slate-700">/</span>
-                    <span className="text-slate-600">03</span>
-                    <span className="text-slate-700">]</span>
-                    <span className="text-slate-650 mx-0.5">·</span>
-                    <span className="uppercase text-slate-400 font-bold">PLAYGROUND</span>
-                  </div>
-                </div>
-                <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
-                  Ask your business anything
-                </h2>
-                <p className="text-slate-400 text-xs leading-relaxed font-normal">
-                  Query your company memory in plain English. Coretify resolves identities, details, and context across tools to give you direct answers with exact source references.
-                </p>
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative">
+          
+          {/* Section Header Band */}
+          <div className="border-b border-slate-850/40 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+            <div className="flex items-center gap-2">
+              <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
+              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                <span className="text-slate-700">[</span>
+                <span className="text-white font-bold">02</span>
+                <span className="text-slate-700">/</span>
+                <span className="text-slate-600">03</span>
+                <span className="text-slate-700">]</span>
+                <span className="text-slate-650 mx-0.5">·</span>
+                <span className="uppercase text-slate-400 font-bold">PLAYGROUND</span>
               </div>
+            </div>
+          </div>
+
+          {/* Section Content Area */}
+          <div className="p-8 sm:p-12 lg:p-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
+              
+              {/* Left Column: Title & Presets */}
+              <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
+                <div className="space-y-3">
+                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
+                    Ask your business anything
+                  </h2>
+                  <p className="text-slate-400 text-xs leading-relaxed font-normal">
+                    Query your company memory in plain English. Coretify resolves identities, details, and context across tools to give you direct answers with exact source references.
+                  </p>
+                </div>
 
               {/* Clickable Preset Cards */}
               <div className="space-y-3 pt-2">
@@ -1143,37 +1156,44 @@ export default function Home() {
 
           </div>
         </div>
+      </div>
       </section>
 
       {/* SECTION 4: DAILY BRIEF */}
       <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative p-8 sm:p-12 lg:p-16">
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-            
-            {/* Left Column: Title & Intro */}
-            <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 select-none">
-                  <div className="w-[3px] h-3.5 bg-orange-500 rounded-full" />
-                  <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
-                    <span className="text-slate-700">[</span>
-                    <span className="text-orange-500 font-bold">03</span>
-                    <span className="text-slate-700">/</span>
-                    <span className="text-slate-600">03</span>
-                    <span className="text-slate-700">]</span>
-                    <span className="text-slate-650 mx-0.5">·</span>
-                    <span className="uppercase text-slate-400 font-bold">PROACTIVE</span>
-                  </div>
-                </div>
-                <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
-                  Daily Brief
-                </h2>
-                <p className="text-slate-400 text-xs leading-relaxed font-normal">
-                  Stay ahead of operational issues with Coretify's proactive morning briefs. We automatically scan communications, calendars, and accounting sheets to alert you about key action points before your day starts.
-                </p>
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/40 relative">
+          
+          {/* Section Header Band */}
+          <div className="border-b border-slate-850/40 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+            <div className="flex items-center gap-2">
+              <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
+              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                <span className="text-slate-700">[</span>
+                <span className="text-white font-bold">03</span>
+                <span className="text-slate-700">/</span>
+                <span className="text-slate-600">03</span>
+                <span className="text-slate-700">]</span>
+                <span className="text-slate-650 mx-0.5">·</span>
+                <span className="uppercase text-slate-400 font-bold">PROACTIVE</span>
               </div>
             </div>
+          </div>
+
+          {/* Section Content Area */}
+          <div className="p-8 sm:p-12 lg:p-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
+              
+              {/* Left Column: Title & Intro */}
+              <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
+                <div className="space-y-3">
+                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
+                    Daily Brief
+                  </h2>
+                  <p className="text-slate-400 text-xs leading-relaxed font-normal">
+                    Stay ahead of operational issues with Coretify's proactive morning briefs. We automatically scan communications, calendars, and accounting sheets to alert you about key action points before your day starts.
+                  </p>
+                </div>
+              </div>
 
             {/* Spacing Column */}
             <div className="hidden lg:block lg:col-span-1 self-stretch relative">
@@ -1252,6 +1272,7 @@ export default function Home() {
 
           </div>
         </div>
+      </div>
       </section>
 
       {/* TRUST SIGNALS FOOTER BLOCK */}
