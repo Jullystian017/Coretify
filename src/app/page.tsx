@@ -640,7 +640,7 @@ export default function Home() {
           </div>
 
           {/* 3-Column Visual Features Layout (Dark Mode Playbook version - Grid integrated with outer vertical borders and spacer stripes) */}
-          <div className="grid grid-cols-1 lg:grid-cols-[45px_3.1fr_5.1fr_2.1fr_45px] w-full bg-[#09090b]/40 shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-[50px_2.4fr_5.6fr_2.4fr_50px] w-full bg-[#09090b]/40 shadow-2xl">
             
             {/* Left Spacer with diagonal stripes */}
             <div 
