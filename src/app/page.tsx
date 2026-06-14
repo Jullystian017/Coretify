@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { CoretifyButton } from "@/components/ui/coretify-button";
+import { GLSLHills } from "@/components/ui/glsl-hills";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
@@ -149,8 +150,19 @@ export default function Home() {
       </header>
 
       {/* HERO SECTION (No vertical grid borders, spans full width) */}
-      <section className="relative border-b border-slate-900 w-full bg-[#070708]/20">
-        <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24">
+      <section className="relative border-b border-slate-900 w-full bg-[#070708]/20 overflow-hidden">
+        
+        {/* Aurora Glowing Background Elements */}
+        <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
+          <div className="absolute -top-[45%] -left-[15%] h-[450px] w-[650px] rounded-full bg-indigo-500/25 blur-[120px] mix-blend-screen" />
+          <div className="absolute -top-[35%] left-[20%] h-[400px] w-[600px] rounded-full bg-emerald-500/20 blur-[100px] mix-blend-screen" />
+          <div className="absolute -top-[45%] -right-[15%] h-[450px] w-[650px] rounded-full bg-purple-500/30 blur-[120px] mix-blend-screen" />
+        </div>
+
+        {/* GLSL 3D Shader Hills Background */}
+        <GLSLHills width="100%" height="100%" cameraZ={125} planeSize={256} speed={0.4} />
+
+        <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
             
             {/* Left Column: Headline */}
