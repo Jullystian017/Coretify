@@ -38,19 +38,29 @@ export default function Home() {
 
   const presets = [
     {
-      q: "Apa project yang berisiko terlambat?",
-      a: "Berdasarkan analisis Gmail & Calendar, Project Nexa Web App terindikasi terlambat 5 hari dari timeline awal. Ditemukan 12 email revisi dari klien pasca-development berjalan.",
-      c: [{ name: "Email Budi (Subject:Nex Revision Request)", type: "Email" }]
+      q: "Which clients are at risk?",
+      a: "Vista Retail is flagged as a high-churn risk. Gmail logs indicate zero correspondence or follow-ups for the past 14 days, whereas your team normally schedules touchpoints every 3 days. Aero Design is also marked as a medium risk due to invoice payment delays.",
+      c: [
+        { name: "Gmail Inbox / Vista Retail", type: "Email" },
+        { name: "Invoices & Accounts Receivable", type: "Spreadsheet" }
+      ]
     },
     {
-      q: "Client mana yang belum di-follow-up?",
-      a: "Vista Retail terdeteksi belum menerima email respons sejak 14 hari yang lalu. Biasanya tim Anda berkorespondensi setiap 3 hari sekali.",
-      c: [{ name: "Gmail Index / Vista Retail Inbox", type: "Email" }]
+      q: "What decisions were made last week?",
+      a: "Three key decisions were finalized last week:\n\n1. **Authentication API Flow**: Client approved the revised API schema for Nexa Corp via WhatsApp on June 12.\n2. **Runway Optimization**: Owner decided to reduce server scaling costs by 15% starting next billing cycle.\n3. **Vista Retainer Renewal**: Retainer terms agreed upon on June 10.",
+      c: [
+        { name: "WhatsApp Group Chat / Nexa Corp", type: "Chat" },
+        { name: "Internal Team Minutes", type: "Document" },
+        { name: "Email Budi / Retainer terms", type: "Email" }
+      ]
     },
     {
-      q: "Kenapa Project Mobile App telat?",
-      a: "Terjadi pergeseran timeline pengerjaan mockup wireframe karena 4 kali revisi layout utama yang diminta client via WhatsApp Group Chat.",
-      c: [{ name: "WhatsApp Lite / Group Chat Export", type: "Chat" }]
+      q: "Which projects are delayed?",
+      a: "Project **Nexa Web App** is currently delayed by 5 days from its initial kickoff timeline. The delay was triggered by 4 successive authentication flow revision requests requested by the client after development began.",
+      c: [
+        { name: "Email Budi (Subject: Nexa Revision Request)", type: "Email" },
+        { name: "Google Calendar kickoff details", type: "Calendar" }
+      ]
     }
   ];
 
@@ -827,6 +837,148 @@ export default function Home() {
 
           </div>
 
+        </section>
+
+        {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
+        <section className="relative border-b border-slate-900 p-8 sm:p-12 lg:p-16">
+          
+          {/* Section Intersection Markers */}
+          <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
+          <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
+            
+            {/* Left Column: Title & Presets */}
+            <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
+              <div className="space-y-3">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest font-mono">
+                  Interact & Query
+                </span>
+                <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
+                  Ask your business anything
+                </h2>
+                <p className="text-slate-400 text-xs leading-relaxed font-normal">
+                  Query your company memory in plain English. Coretify resolves identities, details, and context across tools to give you direct answers with exact source references.
+                </p>
+              </div>
+
+              {/* Clickable Preset Cards */}
+              <div className="space-y-3 pt-2">
+                {presets.map((preset, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => clickPreset(idx)}
+                    className={`w-full text-left p-4.5 rounded-xl border transition-all flex items-center justify-between group cursor-pointer ${
+                      activePreset === idx
+                        ? "bg-[#0c0c0e]/90 border-slate-800 text-white"
+                        : "bg-transparent border-slate-900/60 text-slate-400 hover:text-slate-200 hover:border-slate-850"
+                    }`}
+                  >
+                    <span className="text-xs font-semibold">{preset.q}</span>
+                    <ArrowRight className={`h-4 w-4 shrink-0 transition-transform ${
+                      activePreset === idx ? "translate-x-0 text-white" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-slate-450"
+                    }`} />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Spacing Column */}
+            <div className="hidden lg:block lg:col-span-1 self-stretch relative">
+            </div>
+
+            {/* Right Column: Chat UI Window */}
+            <div className="lg:col-span-6 bg-[#0c0c0e] border border-slate-900 rounded-3xl p-6 shadow-xl relative min-h-[440px] flex flex-col justify-between overflow-hidden">
+              
+              {/* Chat Header */}
+              <div className="flex justify-between items-center border-b border-slate-900 pb-3.5 mb-4">
+                <span className="text-xs font-bold text-white flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Coretify Memory AI
+                </span>
+                <Badge variant="outline" className="text-[9px] border-slate-850 text-slate-500 bg-slate-950 px-2 py-0.5 font-mono">
+                  RAG pgvector
+                </Badge>
+              </div>
+
+              {/* Chat Conversation Area */}
+              <div className="flex-1 space-y-4 mb-4 text-xs">
+                
+                {/* Initial bot message */}
+                <div className="flex gap-3 items-start justify-start">
+                  <div className="h-7 w-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
+                    <Bot className="h-4 w-4" />
+                  </div>
+                  <div className="bg-[#08080a]/60 border border-slate-900 text-slate-450 px-3.5 py-2.5 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed text-left">
+                    Hello! Ask me anything about your business memory. I can search through calendar schedules, email correspondence, chat exports, and document files.
+                  </div>
+                </div>
+
+                {/* User Typed Query */}
+                {typedText && (
+                  <div className="flex gap-3 items-start justify-end animate-in fade-in duration-200">
+                    <div className="bg-[#18181b] border border-slate-850 text-white px-3.5 py-2.5 rounded-2xl rounded-tr-none max-w-[85%] leading-relaxed text-left">
+                      {typedText}
+                    </div>
+                  </div>
+                )}
+
+                {/* Loading/Typing Indicator */}
+                {typedText && !demoAnswer && (
+                  <div className="flex gap-3 items-start justify-start animate-in fade-in duration-100">
+                    <div className="h-7 w-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
+                      <Bot className="h-4.5 w-4.5 animate-pulse" />
+                    </div>
+                    <div className="bg-[#08080a]/60 border border-slate-900 rounded-2xl rounded-tl-none px-3.5 py-2 flex items-center gap-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+                    </div>
+                  </div>
+                )}
+
+                {/* AI Answer & Citations */}
+                {demoAnswer && (
+                  <div className="flex gap-3 items-start justify-start animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div className="h-7 w-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
+                      <Bot className="h-4.5 w-4.5" />
+                    </div>
+                    <div className="space-y-2 max-w-[85%] text-left">
+                      <div className="bg-[#08080a] border border-slate-900 text-slate-300 px-3.5 py-2.5 rounded-2xl rounded-tl-none leading-relaxed whitespace-pre-line">
+                        {demoAnswer}
+                      </div>
+
+                      {/* Citations list */}
+                      {demoCitations && demoCitations.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 pt-0.5">
+                          <span className="text-[9px] text-slate-500 self-center">Sources:</span>
+                          {demoCitations.map((cite, cIdx) => (
+                            <span
+                              key={cIdx}
+                              className="text-[9px] font-semibold px-2 py-0.5 rounded border bg-slate-900 border-slate-850 text-slate-400 inline-flex items-center gap-1 font-sans cursor-pointer hover:text-white transition-colors"
+                            >
+                              {cite.name} <ExternalLink className="h-2.5 w-2.5" />
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+              </div>
+
+              {/* Chat Input Bar */}
+              <div className="border border-slate-900 bg-[#08080a] p-1.5 rounded-xl text-xs text-slate-650 flex items-center justify-between mt-4">
+                <span className="pl-2.5 select-none">Ask a question...</span>
+                <button className="bg-slate-900 border border-slate-800 text-slate-400 p-1.5 rounded-lg hover:text-white transition-colors">
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </div>
+
+            </div>
+
+          </div>
         </section>
 
         {/* TRUST SIGNALS FOOTER BLOCK */}
