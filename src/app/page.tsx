@@ -650,7 +650,7 @@ export default function Home() {
 
           {/* Section Title Block (spanning full width) */}
           <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4 bg-transparent">
-            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
+            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
               The intelligent system that never sleeps.
             </h2>
             <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-none leading-relaxed">
@@ -983,7 +983,7 @@ export default function Home() {
               {/* Left Column: Title & Presets */}
               <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
                 <div className="space-y-3">
-                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
+                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
                     Ask your business anything
                   </h2>
                   <p className="text-slate-400 text-xs leading-relaxed font-normal">
@@ -1137,7 +1137,7 @@ export default function Home() {
               {/* Left Column: Title & Intro */}
               <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
                 <div className="space-y-3">
-                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
+                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
                     Daily Brief
                   </h2>
                   <p className="text-slate-400 text-xs leading-relaxed font-normal">
