@@ -22,7 +22,16 @@ import {
   TrendingUp,
   MoreHorizontal,
   Zap,
-  AlertCircle
+  AlertCircle,
+  Bell,
+  CheckSquare,
+  FileText,
+  Phone,
+  BarChart2,
+  Settings2,
+  HelpCircle,
+  Search,
+  Folder
 } from "lucide-react";
 
 export default function Home() {
@@ -32,6 +41,7 @@ export default function Home() {
   const [demoAnswer, setDemoAnswer] = useState<string | null>(null);
   const [demoCitations, setDemoCitations] = useState<any[]>([]);
   const [activeSectionTab, setActiveSectionTab] = useState<"data" | "tools" | "agent" | "governance">("data");
+  const [expandedMeeting, setExpandedMeeting] = useState<string>("greenleaf");
 
   const handleStartOnboarding = () => {
     router.push("/onboarding");
@@ -180,46 +190,15 @@ export default function Home() {
           </div>
         </section>
 
-        {/* LOGOS ROW (Horizontal bar) */}
         <section className="relative border-b border-slate-900 px-8 py-10 bg-[#070708]/20">
           
           <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
           <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
 
-          <div className="flex flex-wrap items-center justify-between gap-6 opacity-30 grayscale hover:opacity-50 transition-opacity duration-350">
-            {/* Airbyte */}
+          <div className="flex flex-wrap items-center justify-between gap-6 opacity-30 grayscale hover:opacity-50 transition-opacity duration-350 max-w-5xl mx-auto">
+            {/* Granola */}
             <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                <path d="M12 0L2 6v12l10 6 10-6V6L12 0zm0 3.2L19 7.3v9.4l-7 4.1-7-4.1V7.3l7-4.1z" />
-              </svg>
-              <span>Airbyte</span>
-            </div>
-
-            {/* Tailscale */}
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <div className="grid grid-cols-3 gap-[2px] w-3.5 h-3.5">
-                {[...Array(9)].map((_, i) => (
-                  <div key={i} className="w-[2.5px] h-[2.5px] rounded-full bg-current" />
-                ))}
-              </div>
-              <span>tailscale</span>
-            </div>
-
-            {/* Listen */}
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <svg className="h-4 w-4 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="3.5" fill="currentColor" />
-              </svg>
-              <span>Listen</span>
-            </div>
-
-            {/* Profound */}
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                <path d="M12 2L2 12h20L12 2zm0 4.5L17.5 12H6.5L12 6.5zM2 14h20v2H2v-2zm0 4h20v2H2v-2z" />
-              </svg>
-              <span>Profound</span>
+              <span className="text-[17px] font-extrabold tracking-tight">granola</span>
             </div>
 
             {/* Flow */}
@@ -232,25 +211,35 @@ export default function Home() {
               <span>Flow</span>
             </div>
 
-            {/* Fal */}
-            <div className="flex items-center gap-1.5 text-xs font-black text-white uppercase tracking-wider">
-              <span>fal</span>
-            </div>
-
-            {/* Perplexity */}
+            {/* Listen */}
             <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
-              <svg className="h-4 w-4 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              <svg className="h-4 w-4 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="3.5" fill="currentColor" />
               </svg>
-              <span>perplexity</span>
+              <span>Listen</span>
             </div>
 
-            {/* WorkOS */}
+            {/* Obvious */}
             <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
               <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                <path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.41 0 8-3.59 8-8s-3.59-8-8-8-8 3.59-8 8 3.59 8 8 8z" />
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
               </svg>
-              <span>WorkOS</span>
+              <span>Obvious</span>
+            </div>
+
+            {/* Modal */}
+            <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
+              <svg className="h-4 w-4 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path d="M4 4h16v16H4zM9 9h6v6H9z" />
+              </svg>
+              <span>Modal</span>
+            </div>
+
+            {/* USV */}
+            <div className="flex items-center gap-1 text-[11px] font-bold text-white uppercase tracking-wider">
+              <span className="bg-white text-black px-1.5 py-0.5 rounded font-black mr-0.5">USV</span>
+              <span>Union Square Ventures</span>
             </div>
           </div>
         </section>
@@ -261,208 +250,294 @@ export default function Home() {
           <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
           <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
 
-          {/* Product Window Shell */}
-          <div className="relative border border-slate-900 bg-[#0c0c0e] rounded-2xl overflow-hidden shadow-2xl">
+          {/* Centered Tab navigation header */}
+          <div className="flex justify-center mb-8 border-b border-slate-900/60 max-w-2xl mx-auto">
+            <button className="px-6 py-3 border-b-2 border-white text-xs font-semibold text-white transition-colors cursor-pointer">
+              Ask Coretify
+            </button>
+            <button className="px-6 py-3 border-b-2 border-transparent text-xs font-semibold text-slate-550 hover:text-slate-350 transition-colors cursor-pointer">
+              Data model
+            </button>
+            <button className="px-6 py-3 border-b-2 border-transparent text-xs font-semibold text-slate-550 hover:text-slate-350 transition-colors cursor-pointer">
+              Workflows
+            </button>
+            <button className="px-6 py-3 border-b-2 border-transparent text-xs font-semibold text-slate-550 hover:text-slate-350 transition-colors cursor-pointer">
+              Reporting
+            </button>
+          </div>
+
+          {/* Product Window Shell (Dark Mode Basepoint/Attio Clone) */}
+          <div className="relative border border-slate-900 bg-[#09090b] rounded-2xl overflow-hidden shadow-2xl">
             
             {/* Header bar */}
-            <div className="h-14 border-b border-slate-900 bg-[#08080a] px-6 flex items-center justify-between">
+            <div className="h-12 border-b border-slate-900 bg-[#09090b] px-5 flex items-center justify-between">
               
-              {/* macOS Dots & Tabs */}
-              <div className="flex items-center gap-5">
-                <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-[#ef4444]/20 border border-[#ef4444]/35" />
-                  <span className="h-3 w-3 rounded-full bg-[#eab308]/20 border border-[#eab308]/35" />
-                  <span className="h-3 w-3 rounded-full bg-[#22c55e]/20 border border-[#22c55e]/35" />
+              {/* macOS Dots & Workspace Switcher */}
+              <div className="flex items-center gap-4.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]/20 border border-[#ef4444]/35" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#eab308]/20 border border-[#eab308]/35" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#22c55e]/20 border border-[#22c55e]/35" />
                 </div>
                 
-                <div className="flex items-center gap-1.5 bg-[#121215] border border-slate-850 px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-350">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                  <span>Inbound Form Routing</span>
-                  <span className="text-slate-650 ml-1.5 font-bold cursor-pointer">×</span>
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-350 cursor-pointer hover:text-white transition-colors">
+                  <div className="flex h-5 w-5 items-center justify-center rounded bg-slate-900 border border-slate-800 text-[10px] font-black text-slate-400">
+                    B
+                  </div>
+                  <span>Basepoint</span>
+                  <ChevronDown className="h-3.5 w-3.5 opacity-60" />
                 </div>
-                <button className="text-slate-600 hover:text-slate-400 text-sm font-semibold">+</button>
               </div>
 
-              {/* Profiles & Actions */}
-              <div className="flex items-center gap-4">
-                <div className="flex -space-x-1.5 overflow-hidden">
-                  <div className="h-6 w-6 rounded-full bg-slate-900 border-2 border-[#08080a] flex items-center justify-center text-[9px] font-bold text-slate-400">EM</div>
-                  <div className="h-6 w-6 rounded-full bg-slate-900 border-2 border-[#08080a] flex items-center justify-center text-[9px] font-bold text-slate-400">BS</div>
-                </div>
-
-                <button className="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-850 bg-[#0f0f12]">
-                  Share
+              {/* Configure & Help */}
+              <div className="flex items-center gap-4 text-xs text-slate-450">
+                <button className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
+                  <Settings2 className="h-3.5 w-3.5" />
+                  Configure
                 </button>
-                <button className="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-850 bg-[#0f0f12] flex items-center gap-1">
-                  <Play className="h-3 w-3 fill-current text-slate-500" />
-                  Test
-                </button>
-                <button className="text-xs text-white bg-slate-900 border border-slate-850 px-3.5 py-1.5 rounded-lg font-semibold">
-                  Publish
+                <button className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
+                  <HelpCircle className="h-3.5 w-3.5" />
+                  Help
                 </button>
               </div>
             </div>
 
-            {/* Inner Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
+            {/* Inner Dashboard Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]">
               
-              {/* Left Side: Chat Panel */}
-              <div className="lg:col-span-4 border-r border-slate-900 p-6 flex flex-col justify-between bg-[#08080a]/40">
-                <div className="space-y-6">
-                  <div className="flex justify-end">
-                    <div className="bg-[#18181b] border border-slate-850 text-xs text-slate-200 px-4 py-2.5 rounded-2xl rounded-tr-none max-w-[90%]">
-                      Show me all Inbound sourced pipeline
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="text-[10px] text-slate-650 font-bold tracking-wider uppercase">Searched through records...</div>
-                    <div className="text-xs text-slate-400 leading-relaxed">
-                      OK. Here's a list of opportunities that came from inbound demos.
-                    </div>
-                  </div>
-
-                  {/* Table */}
-                  <div className="border border-slate-900 rounded-xl overflow-hidden text-xs">
-                    <div className="grid grid-cols-3 bg-[#0f0f12] border-b border-slate-900 px-3 py-2 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                      <div>Name</div>
-                      <div>Company</div>
-                      <div className="text-right">Amount</div>
-                    </div>
-                    <div className="divide-y divide-slate-900 bg-slate-950/20">
-                      <div className="grid grid-cols-3 px-3 py-2.5 text-slate-350">
-                        <div className="font-medium text-slate-200">Emma</div>
-                        <div>Airtable</div>
-                        <div className="text-right font-mono text-slate-400">$125,000</div>
-                      </div>
-                      <div className="grid grid-cols-3 px-3 py-2.5 text-slate-350">
-                        <div className="font-medium text-slate-200">Budi</div>
-                        <div>Nexa Corp</div>
-                        <div className="text-right font-mono text-slate-400">$84,000</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border border-slate-900 bg-[#0f0f12] p-2.5 rounded-xl text-xs text-slate-650 flex items-center justify-between mt-4">
-                  <span>Ask your memory agents...</span>
-                  <ArrowRight className="h-4 w-4 text-slate-600" />
-                </div>
-              </div>
-
-              {/* Center Flow Canvas */}
-              <div className="lg:col-span-5 p-6 flex flex-col justify-center items-center relative bg-[#0c0c0e]/30">
-                <div className="absolute inset-0 bg-[radial-gradient(#18181b_1px,transparent_1px)] bg-[size:16px_16px] opacity-40" />
-                
-                <div className="w-full max-w-sm space-y-6 z-10">
-                  <div className="flex justify-between items-center bg-[#08080a] border border-slate-900 px-3.5 py-2 rounded-xl text-xs">
-                    <span className="flex items-center gap-2 text-slate-200 font-medium">
-                      <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                      Live Inbound Form Routing
-                    </span>
-                    <ChevronDown className="h-4 w-4 text-slate-600" />
-                  </div>
-
-                  {/* Trigger card */}
-                  <Card className="bg-[#121215]/80 border-slate-850 p-4.5 shadow-xl relative group">
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <div className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Trigger
-                        </div>
-                        <h4 className="text-xs font-bold text-white mt-1">New Form Submission</h4>
-                      </div>
-                      <MoreHorizontal className="h-4 w-4 text-slate-600" />
-                    </div>
-                    <p className="text-[10px] text-slate-400 leading-normal">
-                      Triggers this workflow whenever a visitor submits a form on your website.
-                  </p>
-                    <div className="mt-3.5">
-                      <Badge variant="secondary" className="bg-emerald-500/5 text-emerald-400 border border-emerald-500/10 text-[9px] py-0 px-2 font-mono">
-                        Inbound Demo Form
-                    </Badge>
-                    </div>
-                    
-                    {/* Cursor */}
-                    <div className="absolute -bottom-2 -right-2 bg-white text-black p-1 rounded-full shadow-lg shadow-black/45 border border-slate-300 pointer-events-none transform translate-y-2">
-                      <svg className="h-3 w-3 fill-current" viewBox="0 0 24 24">
-                        <path d="M4 2v20l6.5-6.5h8.5z" />
-                      </svg>
-                    </div>
-                  </Card>
-
-                  <div className="flex flex-col items-center">
-                    <div className="w-0.5 h-8 bg-slate-900" />
-                    <div className="w-2 h-2 rounded-full bg-[#10b981]" />
-                  </div>
-
-                  {/* Action card */}
-                  <Card className="bg-[#121215]/80 border-slate-850 p-4.5 shadow-xl">
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <div className="text-[10px] text-purple-400 font-bold uppercase tracking-wider">Action</div>
-                        <h4 className="text-xs font-bold text-white mt-1">Add to Sequence</h4>
-                      </div>
-                      <MoreHorizontal className="h-4 w-4 text-slate-600" />
-                    </div>
-                    <p className="text-[10px] text-slate-400 leading-normal">
-                      Enrolls the contact into the specified outreach campaign sequence.
-                  </p>
-                    <div className="mt-3.5">
-                      <Badge variant="secondary" className="bg-purple-500/5 text-purple-400 border border-purple-500/10 text-[9px] py-0 px-2 font-mono">
-                        Amplemarket Seq
-                    </Badge>
-                    </div>
-                  </Card>
-                </div>
-              </div>
-
-              {/* Right Side: Inspector Panel */}
-              <div className="lg:col-span-3 border-l border-slate-900 p-6 space-y-6 bg-[#08080a]/60">
-                <div className="flex justify-between items-center border-b border-slate-900 pb-3">
-                  <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                    <Check className="h-4 w-4 text-purple-400" />
-                    Add to Sequence
-                  </span>
-                  <span className="text-slate-650 text-xs font-bold cursor-pointer">×</span>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Name</label>
-                  <div className="bg-[#0f0f12] border border-slate-900 px-3 py-2 rounded-xl text-xs text-slate-350 font-mono">
-                    Add to Sequence
-                  </div>
-                </div>
-
-                <div className="p-3 bg-[#121215] border border-slate-850 rounded-xl">
-                  <p className="text-[10px] text-slate-450 leading-normal">
-                    Checks for a matching tag to delete or update the item within the sequence manager automatically.
-                  </p>
-                </div>
-
-                <div className="space-y-4 pt-2">
-                  <h5 className="text-[10px] font-bold text-slate-550 uppercase tracking-wider">Inputs</h5>
+              {/* Left Sidebar (Workspace Navigation) */}
+              <div className="lg:col-span-3 border-r border-slate-900 bg-[#09090b]/80 p-4.5 space-y-6 flex flex-col justify-between text-left">
+                <div className="space-y-5">
                   
+                  {/* Search box (Quick Actions) */}
+                  <div className="relative flex items-center bg-[#070708] border border-slate-900 rounded-lg p-2 text-xs text-slate-500 hover:border-slate-850 transition-all cursor-pointer">
+                    <Search className="h-3.5 w-3.5 mr-2 text-slate-550" />
+                    <span className="flex-1">Quick Actions</span>
+                    <span className="text-[9px] bg-slate-900 border border-slate-850 text-slate-450 px-1 rounded font-mono mr-1">⌘K</span>
+                    <span className="text-[10px] text-slate-550 font-mono">/</span>
+                  </div>
+
+                  {/* Nav list */}
+                  <nav className="space-y-1 text-slate-400 text-xs font-semibold">
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-900 border border-slate-850 text-white cursor-pointer text-left">
+                      <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                      <span>Home</span>
+                    </button>
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <Bell className="h-3.5 w-3.5 text-slate-550" />
+                      <span>Notifications</span>
+                    </button>
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <CheckSquare className="h-3.5 w-3.5 text-slate-550" />
+                      <span>Tasks</span>
+                    </button>
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <FileText className="h-3.5 w-3.5 text-slate-550" />
+                      <span>Notes</span>
+                    </button>
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <Mail className="h-3.5 w-3.5 text-slate-550" />
+                      <span>Emails</span>
+                    </button>
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <Phone className="h-3.5 w-3.5 text-slate-550" />
+                      <span>Calls</span>
+                    </button>
+                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <BarChart2 className="h-3.5 w-3.5 text-slate-550" />
+                      <span>Reports</span>
+                    </button>
+                    <button className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <div className="flex items-center gap-2.5">
+                        <Folder className="h-3.5 w-3.5 text-slate-550" />
+                        <span>Automations</span>
+                      </div>
+                      <ChevronDown className="h-3.5 w-3.5 opacity-60" />
+                    </button>
+                    <div className="pl-8 space-y-1 pt-0.5 text-[11px] font-medium text-slate-500">
+                      <div className="hover:text-slate-300 cursor-pointer py-1">Sequences</div>
+                      <div className="hover:text-slate-300 cursor-pointer py-1">Workflows</div>
+                    </div>
+                  </nav>
+                </div>
+
+                {/* Favorites & PQL workflows */}
+                <div className="space-y-4 pt-4 border-t border-slate-900/60">
                   <div className="space-y-1">
-                    <label className="text-[9px] font-semibold text-slate-450 block">Provider</label>
-                    <div className="bg-[#0f0f12] border border-slate-900 px-3 py-2 rounded-xl text-xs text-slate-300 flex items-center justify-between">
-                      <span className="flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-blue-500" /> Amplemarket
-                      </span>
-                      <ChevronDown className="h-3.5 w-3.5 text-slate-600" />
+                    <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider block">Favorites</span>
+                    <div className="text-xs text-slate-400 font-semibold space-y-1.5 pl-1">
+                      <div className="flex items-center gap-2 hover:text-white cursor-pointer py-1">
+                        <span className="h-1.5 w-1.5 rounded-full bg-slate-650" />
+                        <span>PQL workflows</span>
+                      </div>
+                      <div className="pl-3.5 space-y-1.5 text-[11px] text-slate-500">
+                        <div className="hover:text-slate-350 cursor-pointer">PQL Pipeline Deals</div>
+                        <div className="hover:text-slate-350 cursor-pointer">PQL Workspace Outreach</div>
+                        <div className="hover:text-slate-350 cursor-pointer">PQL Triage</div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="text-[9px] font-semibold text-slate-455 block">Sequence</label>
-                    <div className="bg-[#0f0f12] border border-slate-900 px-3 py-2 rounded-xl text-xs text-slate-650">
-                      Select...
+                  <div className="space-y-1 pt-2">
+                    <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider block">Reports</span>
+                    <div className="text-[11px] text-slate-500 font-semibold space-y-2 pl-1">
+                      <div className="hover:text-slate-350 cursor-pointer">Revenue</div>
+                      <div className="hover:text-slate-350 cursor-pointer">Attribution</div>
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Main Content Area */}
+              <div className="lg:col-span-9 p-8 flex flex-col justify-between bg-[#09090b]/20 relative text-left">
+                
+                {/* Visual content container */}
+                <div className="max-w-xl space-y-6">
+                  
+                  {/* Greeting header */}
+                  <div>
+                    <h3 className="text-[13px] text-slate-500 font-semibold uppercase tracking-wider">Home</h3>
+                    <h1 className="text-2xl sm:text-[28px] font-bold text-white tracking-tight mt-1.5">
+                      Good morning, Alex
+                    </h1>
+                  </div>
+
+                  {/* AI Search Card (glowing search input) */}
+                  <div className="bg-[#0c0c0e] border border-slate-900 rounded-xl p-4.5 shadow-lg relative group transition-all duration-300 hover:border-slate-800">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-1 space-y-1 text-slate-300 font-mono text-xs">
+                        <div className="min-h-[24px]">How do I win m</div>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button className="bg-slate-950 border border-slate-900 text-slate-450 hover:text-white px-2.5 py-1 rounded text-[10px] font-bold flex items-center gap-1">
+                          Auto
+                          <ChevronDown className="h-3 w-3" />
+                        </button>
+                        <button className="bg-blue-600 hover:bg-blue-500 text-white h-7.5 w-7.5 rounded-full flex items-center justify-center transition-colors">
+                          <ArrowRight className="h-4 w-4 -rotate-90" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Quick Pills */}
+                  <div className="flex gap-2">
+                    <button className="bg-slate-900 border border-slate-850 hover:border-slate-700 text-xs font-semibold text-slate-300 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer">
+                      <span className="h-2 w-2 rounded-full bg-blue-500" />
+                      Prep for next meeting
+                    </button>
+                    <button className="bg-slate-900 border border-slate-850 hover:border-slate-700 text-xs font-semibold text-slate-300 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer">
+                      <span className="h-2 w-2 rounded-full bg-rose-500" />
+                      Recap last call
+                    </button>
+                  </div>
+
+                  {/* Meetings Widget */}
+                  <div className="space-y-3 pt-4">
+                    <div className="flex items-center justify-between border-b border-slate-900 pb-2">
+                      <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Meetings</h4>
+                      <div className="flex items-center gap-2 text-[10px] text-slate-500 font-bold">
+                        <span>Today, Jun 14</span>
+                        <div className="flex gap-1">
+                          <button className="p-0.5 hover:text-white cursor-pointer">&lt;</button>
+                          <button className="p-0.5 hover:text-white cursor-pointer">&gt;</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Meetings lists */}
+                    <div className="space-y-2 text-xs">
+                      
+                      {/* Meeting 1 */}
+                      <div
+                        onClick={() => setExpandedMeeting(expandedMeeting === "stripe" ? "" : "stripe")}
+                        className="bg-transparent border border-slate-950/60 p-3.5 rounded-xl hover:bg-slate-900/30 flex items-center justify-between cursor-pointer transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="h-2 w-2 rounded-full bg-amber-500 shrink-0" />
+                          <span className="font-bold text-slate-200">Basepoint x Stripe</span>
+                        </div>
+                        <span className="text-slate-500 font-mono text-[11px]">10:00 - 11:00 AM</span>
+                      </div>
+
+                      {/* Meeting 2 */}
+                      <div
+                        onClick={() => setExpandedMeeting(expandedMeeting === "ashley" ? "" : "ashley")}
+                        className="bg-transparent border border-slate-950/60 p-3.5 rounded-xl hover:bg-slate-900/30 flex items-center justify-between cursor-pointer transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="h-2 w-2 rounded-full bg-slate-650 shrink-0" />
+                          <span className="font-bold text-slate-400">Ashley & Martin</span>
+                        </div>
+                        <span className="text-slate-500 font-mono text-[11px]">10:20 - 10:40 AM</span>
+                      </div>
+
+                      {/* Meeting 3 (Expanded active item) */}
+                      <div className="border border-slate-900 rounded-xl overflow-hidden">
+                        <div
+                          onClick={() => setExpandedMeeting(expandedMeeting === "greenleaf" ? "" : "greenleaf")}
+                          className={`p-3.5 flex items-center justify-between cursor-pointer transition-colors ${
+                            expandedMeeting === "greenleaf" ? "bg-slate-900/40 border-b border-slate-900" : "bg-transparent hover:bg-slate-900/30"
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+                            <span className="font-bold text-slate-200">Greenleaf // Basepoint</span>
+                          </div>
+                          <span className="text-slate-400 font-mono text-[11px] font-semibold">2:30 - 3:00 PM</span>
+                        </div>
+
+                        {expandedMeeting === "greenleaf" && (
+                          <div className="p-4 bg-slate-950/20 space-y-4 animate-in fade-in duration-200 text-[11px] text-slate-400">
+                            <div>
+                              <div className="text-slate-600 font-bold uppercase text-[9px] tracking-wider mb-1">Details</div>
+                              <p className="leading-relaxed">
+                                Demo call with Greenleaf team to help them get the most out of their PRO trial.
+                              </p>
+                              <a
+                                href="https://meet.google.com/psn-zfzb-yaw"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-blue-400 hover:underline inline-flex items-center gap-1 mt-1.5"
+                              >
+                                https://meet.google.com/psn-zfzb-yaw
+                              </a>
+                            </div>
+
+                            <div className="pt-2 border-t border-slate-900/60">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-slate-650 font-bold uppercase text-[9px] tracking-wider">Participants</span>
+                                <Badge variant="secondary" className="bg-slate-900 text-slate-400 text-[9px] py-0 px-1 font-mono border border-slate-850">8</Badge>
+                              </div>
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2">
+                                  <div className="h-6 w-6 rounded-full bg-slate-900 border border-slate-850 flex items-center justify-center text-[9px] font-black text-slate-350">DP</div>
+                                  <div>
+                                    <span className="font-semibold text-slate-200">Dylan Parker</span>
+                                    <span className="text-slate-550 ml-1.5 font-normal">CEO of Basepoint</span>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <div className="h-6 w-6 rounded-full bg-slate-900 border border-slate-850 flex items-center justify-center text-[9px] font-black text-slate-355">AZ</div>
+                                  <div>
+                                    <span className="font-semibold text-slate-200">Annie Zhang</span>
+                                    <span className="text-slate-550 ml-1.5 font-normal">Product Manager at Greenleaf</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
             </div>
+
           </div>
         </section>
 
