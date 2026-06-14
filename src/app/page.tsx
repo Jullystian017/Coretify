@@ -225,7 +225,7 @@ export default function Home() {
           {/* Reporting tab */}
           <button
             onClick={() => setActiveSectionTab("governance")}
-            className={`col-span-2 border-r border-slate-900/40 py-4 text-center cursor-pointer transition-all ${
+            className={`col-span-2 border-r border-dashed border-slate-900/60 py-4 text-center cursor-pointer transition-all ${
               activeSectionTab === "governance"
                 ? "text-white bg-white/5 font-semibold"
                 : "hover:text-slate-200"
