@@ -149,394 +149,399 @@ export default function Home() {
         </div>
       </header>
 
-      {/* HERO SECTION (No vertical grid borders, spans full width) */}
-      <section className="relative border-b border-slate-900 w-full bg-[#070708]/20 overflow-hidden">
+      {/* COMBINED HERO & DASHBOARD AREA (Spans full height of canvas) */}
+      <section className="relative border-b border-slate-900 w-full bg-[#070708]/25 overflow-hidden">
         
         {/* Aurora Glowing Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
-          <div className="absolute -top-[45%] -left-[15%] h-[450px] w-[650px] rounded-full bg-indigo-500/25 blur-[120px] mix-blend-screen" />
-          <div className="absolute -top-[35%] left-[20%] h-[400px] w-[600px] rounded-full bg-emerald-500/20 blur-[100px] mix-blend-screen" />
-          <div className="absolute -top-[45%] -right-[15%] h-[450px] w-[650px] rounded-full bg-purple-500/30 blur-[120px] mix-blend-screen" />
+          <div className="absolute -top-[10%] -left-[15%] h-[550px] w-[750px] rounded-full bg-indigo-500/20 blur-[130px] mix-blend-screen" />
+          <div className="absolute top-[20%] left-[20%] h-[500px] w-[700px] rounded-full bg-emerald-500/15 blur-[110px] mix-blend-screen" />
+          <div className="absolute -top-[10%] -right-[15%] h-[550px] w-[750px] rounded-full bg-purple-500/25 blur-[130px] mix-blend-screen" />
+          <div className="absolute bottom-[10%] left-[30%] h-[500px] w-[750px] rounded-full bg-blue-500/15 blur-[120px] mix-blend-screen" />
         </div>
 
-        {/* GLSL 3D Shader Hills Background */}
-        <GLSLHills width="100%" height="100%" cameraZ={125} planeSize={256} speed={0.4} />
+        {/* GLSL 3D Shader Hills Background spanning the entire combined height */}
+        <GLSLHills width="100%" height="100%" cameraZ={125} planeSize={256} speed={0.35} />
 
-        <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-            
-            {/* Left Column: Headline */}
-            <div className="lg:col-span-8 pr-0 lg:pr-12 text-left space-y-6">
-              <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] leading-[1.08] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
-                The AI operating system <br className="hidden sm:inline" />for your growing companies.
-              </h1>
-            </div>
+        {/* Hero Copywriting Row */}
+        <div className="relative z-10 w-full border-b border-slate-900/40">
+          <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
+              
+              {/* Left Column: Headline */}
+              <div className="lg:col-span-8 pr-0 lg:pr-12 text-left space-y-6">
+                <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] leading-[1.08] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+                  The AI operating system <br className="hidden sm:inline" />for your growing companies.
+                </h1>
+              </div>
 
-            {/* Right Column: Description & Primary CTA */}
-            <div className="lg:col-span-4 pl-0 lg:pl-6 text-left space-y-6 lg:pt-2">
-              <p className="text-base sm:text-[16px] text-slate-400 leading-relaxed font-normal">
-                Sync your workspace tools in one click. Coretify builds<br className="hidden sm:inline" /> your company brain to query context instantly.
-              </p>
-              <div>
-                <CoretifyButton
-                  onClick={handleStartOnboarding}
-                  variant="white"
-                  size="lg"
-                  className="px-7 py-5.5 text-[13px] font-semibold shadow-lg"
-                >
-                  Try Coretify
-                </CoretifyButton>
+              {/* Right Column: Description & Primary CTA */}
+              <div className="lg:col-span-4 pl-0 lg:pl-6 text-left space-y-6 lg:pt-2">
+                <p className="text-base sm:text-[16px] text-zinc-400 leading-relaxed font-normal">
+                  Sync your workspace tools in one click. Coretify builds<br className="hidden sm:inline" /> your company brain to query context instantly.
+                </p>
+                <div>
+                  <CoretifyButton
+                    onClick={handleStartOnboarding}
+                    variant="white"
+                    size="lg"
+                    className="px-7 py-5.5 text-[13px] font-semibold shadow-lg"
+                  >
+                    Try Coretify
+                  </CoretifyButton>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* TAB NAVIGATION ROW */}
-      <div className="w-full bg-[#08080a]/50">
-        <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
-          {/* Left spacer column with dashed border on the right */}
-          <div className="col-span-1 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
-          
-          {/* Ask Coretify tab */}
-          <button
-            onClick={() => setActiveSectionTab("agent")}
-            className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
-              activeSectionTab === "agent"
-                ? "text-white bg-white/5 font-semibold"
-                : "hover:text-slate-200"
-            }`}
-          >
-            Ask Coretify
-          </button>
-          
-          {/* Data model tab */}
-          <button
-            onClick={() => setActiveSectionTab("data")}
-            className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
-              activeSectionTab === "data"
-                ? "text-white bg-white/5 font-semibold"
-                : "hover:text-slate-200"
-            }`}
-          >
-            Data model
-          </button>
-
-          {/* Workflows tab */}
-          <button
-            onClick={() => setActiveSectionTab("tools")}
-            className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
-              activeSectionTab === "tools"
-                ? "text-white bg-white/5 font-semibold"
-                : "hover:text-slate-200"
-            }`}
-          >
-            Workflows
-          </button>
-
-          {/* Reporting tab with dashed border on the right */}
-          <button
-            onClick={() => setActiveSectionTab("governance")}
-            className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
-              activeSectionTab === "governance"
-                ? "text-white bg-white/5 font-semibold"
-                : "hover:text-slate-200"
-            }`}
-            style={{ borderRightStyle: "dashed" }}
-          >
-            Reporting
-          </button>
-
-          {/* Right spacer column */}
-          <div className="col-span-1" />
-        </div>
-
-        {/* Extension row to project vertical lines down to the dashboard */}
-        <div className="mx-auto max-w-[1360px] grid grid-cols-10 h-8">
-          <div className="col-span-1 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
-          <div className="col-span-8 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
-          <div className="col-span-1" />
-        </div>
-      </div>
-
-      {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
-      <section className="relative border-b border-slate-900 w-full bg-[#070708]/10 pt-0 pb-16 sm:pb-20 lg:pb-24">
-        <div className="mx-auto max-w-[1360px] px-8">
-
-          {/* Product Window Shell (Dark Mode Basepoint/Attio Clone) */}
-          <div className="relative border border-slate-900 bg-[#09090b] rounded-2xl overflow-hidden shadow-2xl">
+        {/* TAB NAVIGATION ROW */}
+        <div className="relative z-10 w-full bg-[#08080a]/35">
+          <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
+            {/* Left spacer column with dashed border on the right */}
+            <div className="col-span-1 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
             
-            {/* Header bar */}
-            <div className="h-12 border-b border-slate-900 bg-[#09090b] px-5 flex items-center justify-between">
+            {/* Ask Coretify tab */}
+            <button
+              onClick={() => setActiveSectionTab("agent")}
+              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
+                activeSectionTab === "agent"
+                  ? "text-white bg-white/5 font-semibold"
+                  : "hover:text-slate-200"
+              }`}
+            >
+              Ask Coretify
+            </button>
+            
+            {/* Data model tab */}
+            <button
+              onClick={() => setActiveSectionTab("data")}
+              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
+                activeSectionTab === "data"
+                  ? "text-white bg-white/5 font-semibold"
+                  : "hover:text-slate-200"
+              }`}
+            >
+              Data model
+            </button>
+
+            {/* Workflows tab */}
+            <button
+              onClick={() => setActiveSectionTab("tools")}
+              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
+                activeSectionTab === "tools"
+                  ? "text-white bg-white/5 font-semibold"
+                  : "hover:text-slate-200"
+              }`}
+            >
+              Workflows
+            </button>
+
+            {/* Reporting tab with dashed border on the right */}
+            <button
+              onClick={() => setActiveSectionTab("governance")}
+              className={`col-span-2 border-r border-b border-slate-850/40 py-6 text-center cursor-pointer transition-all ${
+                activeSectionTab === "governance"
+                  ? "text-white bg-white/5 font-semibold"
+                  : "hover:text-slate-200"
+              }`}
+              style={{ borderRightStyle: "dashed" }}
+            >
+              Reporting
+            </button>
+
+            {/* Right spacer column */}
+            <div className="col-span-1" />
+          </div>
+
+          {/* Extension row to project vertical lines down to the dashboard */}
+          <div className="mx-auto max-w-[1360px] grid grid-cols-10 h-8">
+            <div className="col-span-1 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-8 border-r border-slate-850/40" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-1" />
+          </div>
+        </div>
+
+        {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
+        <div className="relative z-10 w-full pt-0 pb-16 sm:pb-20 lg:pb-24">
+          <div className="mx-auto max-w-[1360px] px-8">
+
+            {/* Product Window Shell (Dark Mode Basepoint/Attio Clone) */}
+            <div className="relative border border-slate-900 bg-[#09090b] rounded-2xl overflow-hidden shadow-2xl">
               
-              {/* macOS Dots & Workspace Switcher */}
-              <div className="flex items-center gap-4.5">
-                <div className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]/20 border border-[#ef4444]/35" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#eab308]/20 border border-[#eab308]/35" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#22c55e]/20 border border-[#22c55e]/35" />
-                </div>
+              {/* Header bar */}
+              <div className="h-12 border-b border-slate-900 bg-[#09090b] px-5 flex items-center justify-between">
                 
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-350 cursor-pointer hover:text-white transition-colors">
-                  <div className="flex h-5 w-5 items-center justify-center rounded bg-slate-900 border border-slate-800 text-[10px] font-black text-slate-400">
-                    B
+                {/* macOS Dots & Workspace Switcher */}
+                <div className="flex items-center gap-4.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]/20 border border-[#ef4444]/35" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#eab308]/20 border border-[#eab308]/35" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#22c55e]/20 border border-[#22c55e]/35" />
                   </div>
-                  <span>Basepoint</span>
-                  <ChevronDown className="h-3.5 w-3.5 opacity-60" />
-                </div>
-              </div>
-
-              {/* Configure & Help */}
-              <div className="flex items-center gap-4 text-xs text-slate-450">
-                <button className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
-                  <Settings2 className="h-3.5 w-3.5" />
-                  Configure
-                </button>
-                <button className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
-                  <HelpCircle className="h-3.5 w-3.5" />
-                  Help
-                </button>
-              </div>
-            </div>
-
-            {/* Inner Dashboard Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]">
-              
-              {/* Left Sidebar (Workspace Navigation) */}
-              <div className="lg:col-span-3 border-r border-slate-900 bg-[#09090b]/80 p-4.5 space-y-6 flex flex-col justify-between text-left">
-                <div className="space-y-5">
                   
-                  {/* Search box (Quick Actions) */}
-                  <div className="relative flex items-center bg-[#070708] border border-slate-900 rounded-lg p-2 text-xs text-slate-500 hover:border-slate-850 transition-all cursor-pointer">
-                    <Search className="h-3.5 w-3.5 mr-2 text-slate-550" />
-                    <span className="flex-1">Quick Actions</span>
-                    <span className="text-[9px] bg-slate-900 border border-slate-850 text-slate-450 px-1 rounded font-mono mr-1">⌘K</span>
-                    <span className="text-[10px] text-slate-550 font-mono">/</span>
-                  </div>
-
-                  {/* Nav list */}
-                  <nav className="space-y-1 text-slate-400 text-xs font-semibold">
-                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-900 border border-slate-850 text-white cursor-pointer text-left">
-                      <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-                      <span>Home</span>
-                    </button>
-                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
-                      <Bell className="h-3.5 w-3.5 text-slate-550" />
-                      <span>Notifications</span>
-                    </button>
-                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
-                      <CheckSquare className="h-3.5 w-3.5 text-slate-550" />
-                      <span>Tasks</span>
-                    </button>
-                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
-                      <FileText className="h-3.5 w-3.5 text-slate-550" />
-                      <span>Notes</span>
-                    </button>
-                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
-                      <Mail className="h-3.5 w-3.5 text-slate-550" />
-                      <span>Emails</span>
-                    </button>
-                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
-                      <Phone className="h-3.5 w-3.5 text-slate-550" />
-                      <span>Calls</span>
-                    </button>
-                    <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
-                      <BarChart2 className="h-3.5 w-3.5 text-slate-550" />
-                      <span>Reports</span>
-                    </button>
-                    <button className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
-                      <div className="flex items-center gap-2.5">
-                        <Folder className="h-3.5 w-3.5 text-slate-550" />
-                        <span>Automations</span>
-                      </div>
-                      <ChevronDown className="h-3.5 w-3.5 opacity-60" />
-                    </button>
-                    <div className="pl-8 space-y-1 pt-0.5 text-[11px] font-medium text-slate-500">
-                      <div className="hover:text-slate-300 cursor-pointer py-1">Sequences</div>
-                      <div className="hover:text-slate-300 cursor-pointer py-1">Workflows</div>
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-350 cursor-pointer hover:text-white transition-colors">
+                    <div className="flex h-5 w-5 items-center justify-center rounded bg-slate-900 border border-slate-800 text-[10px] font-black text-slate-400">
+                      B
                     </div>
-                  </nav>
+                    <span>Basepoint</span>
+                    <ChevronDown className="h-3.5 w-3.5 opacity-60" />
+                  </div>
                 </div>
 
-                {/* Favorites & PQL workflows */}
-                <div className="space-y-4 pt-4 border-t border-slate-900/60">
-                  <div className="space-y-1">
-                    <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider block">Favorites</span>
-                    <div className="text-xs text-slate-400 font-semibold space-y-1.5 pl-1">
-                      <div className="flex items-center gap-2 hover:text-white cursor-pointer py-1">
-                        <span className="h-1.5 w-1.5 rounded-full bg-slate-650" />
-                        <span>PQL workflows</span>
-                      </div>
-                      <div className="pl-3.5 space-y-1.5 text-[11px] text-slate-500">
-                        <div className="hover:text-slate-350 cursor-pointer">PQL Pipeline Deals</div>
-                        <div className="hover:text-slate-350 cursor-pointer">PQL Workspace Outreach</div>
-                        <div className="hover:text-slate-355 cursor-pointer">PQL Triage</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1 pt-2">
-                    <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider block">Reports</span>
-                    <div className="text-[11px] text-slate-500 font-semibold space-y-2 pl-1">
-                      <div className="hover:text-slate-350 cursor-pointer">Revenue</div>
-                      <div className="hover:text-slate-355 cursor-pointer">Attribution</div>
-                    </div>
-                  </div>
+                {/* Configure & Help */}
+                <div className="flex items-center gap-4 text-xs text-slate-450">
+                  <button className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
+                    <Settings2 className="h-3.5 w-3.5" />
+                    Configure
+                  </button>
+                  <button className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
+                    <HelpCircle className="h-3.5 w-3.5" />
+                    Help
+                  </button>
                 </div>
               </div>
 
-              {/* Main Content Area */}
-              <div className="lg:col-span-9 p-8 flex flex-col justify-between bg-[#09090b]/20 relative text-left">
+              {/* Inner Dashboard Layout */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]">
                 
-                {/* Visual content container */}
-                <div className="max-w-xl space-y-6">
+                {/* Left Sidebar (Workspace Navigation) */}
+                <div className="lg:col-span-3 border-r border-slate-900 bg-[#09090b]/80 p-4.5 space-y-6 flex flex-col justify-between text-left">
+                  <div className="space-y-5">
+                    
+                    {/* Search box (Quick Actions) */}
+                    <div className="relative flex items-center bg-[#070708] border border-slate-900 rounded-lg p-2 text-xs text-slate-500 hover:border-slate-850 transition-all cursor-pointer">
+                      <Search className="h-3.5 w-3.5 mr-2 text-slate-550" />
+                      <span className="flex-1">Quick Actions</span>
+                      <span className="text-[9px] bg-slate-900 border border-slate-850 text-slate-450 px-1 rounded font-mono mr-1">⌘K</span>
+                      <span className="text-[10px] text-slate-550 font-mono">/</span>
+                    </div>
+
+                    {/* Nav list */}
+                    <nav className="space-y-1 text-slate-400 text-xs font-semibold">
+                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-900 border border-slate-850 text-white cursor-pointer text-left">
+                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                        <span>Home</span>
+                      </button>
+                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                        <Bell className="h-3.5 w-3.5 text-slate-550" />
+                        <span>Notifications</span>
+                      </button>
+                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                        <CheckSquare className="h-3.5 w-3.5 text-slate-550" />
+                        <span>Tasks</span>
+                      </button>
+                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                        <FileText className="h-3.5 w-3.5 text-slate-550" />
+                        <span>Notes</span>
+                      </button>
+                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                        <Mail className="h-3.5 w-3.5 text-slate-550" />
+                        <span>Emails</span>
+                      </button>
+                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                        <Phone className="h-3.5 w-3.5 text-slate-550" />
+                        <span>Calls</span>
+                      </button>
+                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                        <BarChart2 className="h-3.5 w-3.5 text-slate-550" />
+                        <span>Reports</span>
+                      </button>
+                      <button className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                        <div className="flex items-center gap-2.5">
+                          <Folder className="h-3.5 w-3.5 text-slate-550" />
+                          <span>Automations</span>
+                        </div>
+                        <ChevronDown className="h-3.5 w-3.5 opacity-60" />
+                      </button>
+                      <div className="pl-8 space-y-1 pt-0.5 text-[11px] font-medium text-slate-500">
+                        <div className="hover:text-slate-300 cursor-pointer py-1">Sequences</div>
+                        <div className="hover:text-slate-300 cursor-pointer py-1">Workflows</div>
+                      </div>
+                    </nav>
+                  </div>
+
+                  {/* Favorites & PQL workflows */}
+                  <div className="space-y-4 pt-4 border-t border-slate-900/60">
+                    <div className="space-y-1">
+                      <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider block">Favorites</span>
+                      <div className="text-xs text-slate-400 font-semibold space-y-1.5 pl-1">
+                        <div className="flex items-center gap-2 hover:text-white cursor-pointer py-1">
+                          <span className="h-1.5 w-1.5 rounded-full bg-slate-650" />
+                          <span>PQL workflows</span>
+                        </div>
+                        <div className="pl-3.5 space-y-1.5 text-[11px] text-slate-500">
+                          <div className="hover:text-slate-350 cursor-pointer">PQL Pipeline Deals</div>
+                          <div className="hover:text-slate-350 cursor-pointer">PQL Workspace Outreach</div>
+                          <div className="hover:text-slate-355 cursor-pointer">PQL Triage</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1 pt-2">
+                      <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider block">Reports</span>
+                      <div className="text-[11px] text-slate-500 font-semibold space-y-2 pl-1">
+                        <div className="hover:text-slate-350 cursor-pointer">Revenue</div>
+                        <div className="hover:text-slate-355 cursor-pointer">Attribution</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Main Content Area */}
+                <div className="lg:col-span-9 p-8 flex flex-col justify-between bg-[#09090b]/20 relative text-left">
                   
-                  {/* Greeting header */}
-                  <div>
-                    <h3 className="text-[13px] text-slate-500 font-semibold uppercase tracking-wider">Home</h3>
-                    <h1 className="text-2xl sm:text-[28px] font-semibold text-white tracking-tight mt-1.5">
-                      Good morning, Alex
-                    </h1>
-                  </div>
-
-                  {/* AI Search Card (glowing search input) */}
-                  <div className="bg-[#0c0c0e] border border-slate-900 rounded-xl p-4.5 shadow-lg relative group transition-all duration-300 hover:border-slate-800">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-1 space-y-1 text-slate-300 font-mono text-xs">
-                        <div className="min-h-[24px]">How do I win m</div>
-                      </div>
-                      <div className="flex items-center gap-2 shrink-0">
-                        <button className="bg-slate-950 border border-slate-900 text-slate-450 hover:text-white px-2.5 py-1 rounded text-[10px] font-bold flex items-center gap-1">
-                          Auto
-                          <ChevronDown className="h-3 w-3" />
-                        </button>
-                        <button className="bg-blue-600 hover:bg-blue-500 text-white h-7.5 w-7.5 rounded-full flex items-center justify-center transition-colors">
-                          <ArrowRight className="h-4 w-4 -rotate-90" />
-                        </button>
-                      </div>
+                  {/* Visual content container */}
+                  <div className="max-w-xl space-y-6">
+                    
+                    {/* Greeting header */}
+                    <div>
+                      <h3 className="text-[13px] text-slate-500 font-semibold uppercase tracking-wider">Home</h3>
+                      <h1 className="text-2xl sm:text-[28px] font-semibold text-white tracking-tight mt-1.5">
+                        Good morning, Alex
+                      </h1>
                     </div>
-                  </div>
 
-                  {/* Quick Pills */}
-                  <div className="flex gap-2">
-                    <button className="bg-slate-900 border border-slate-850 hover:border-slate-700 text-xs font-semibold text-slate-300 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer">
-                      <span className="h-2 w-2 rounded-full bg-blue-500" />
-                      Prep for next meeting
-                    </button>
-                    <button className="bg-slate-900 border border-slate-850 hover:border-slate-700 text-xs font-semibold text-slate-300 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer">
-                      <span className="h-2 w-2 rounded-full bg-rose-500" />
-                      Recap last call
-                    </button>
-                  </div>
-
-                  {/* Meetings Widget */}
-                  <div className="space-y-3 pt-4">
-                    <div className="flex items-center justify-between border-b border-slate-900 pb-2">
-                      <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Meetings</h4>
-                      <div className="flex items-center gap-2 text-[10px] text-slate-500 font-bold">
-                        <span>Today, Jun 14</span>
-                        <div className="flex gap-1">
-                          <button className="p-0.5 hover:text-white cursor-pointer">&lt;</button>
-                          <button className="p-0.5 hover:text-white cursor-pointer">&gt;</button>
+                    {/* AI Search Card (glowing search input) */}
+                    <div className="bg-[#0c0c0e] border border-slate-900 rounded-xl p-4.5 shadow-lg relative group transition-all duration-300 hover:border-slate-800">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-1 space-y-1 text-slate-300 font-mono text-xs">
+                          <div className="min-h-[24px]">How do I win m</div>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <button className="bg-slate-950 border border-slate-900 text-slate-450 hover:text-white px-2.5 py-1 rounded text-[10px] font-bold flex items-center gap-1">
+                            Auto
+                            <ChevronDown className="h-3 w-3" />
+                          </button>
+                          <button className="bg-blue-600 hover:bg-blue-500 text-white h-7.5 w-7.5 rounded-full flex items-center justify-center transition-colors">
+                            <ArrowRight className="h-4 w-4 -rotate-90" />
+                          </button>
                         </div>
                       </div>
                     </div>
 
-                    {/* Meetings lists */}
-                    <div className="space-y-2 text-xs">
-                      
-                      {/* Meeting 1 */}
-                      <div
-                        onClick={() => setExpandedMeeting(expandedMeeting === "stripe" ? "" : "stripe")}
-                        className="bg-transparent border border-slate-950/60 p-3.5 rounded-xl hover:bg-slate-900/30 flex items-center justify-between cursor-pointer transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="h-2 w-2 rounded-full bg-amber-500 shrink-0" />
-                          <span className="font-bold text-slate-200">Basepoint x Stripe</span>
+                    {/* Quick Pills */}
+                    <div className="flex gap-2">
+                      <button className="bg-slate-900 border border-slate-850 hover:border-slate-700 text-xs font-semibold text-slate-300 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer">
+                        <span className="h-2 w-2 rounded-full bg-blue-500" />
+                        Prep for next meeting
+                      </button>
+                      <button className="bg-slate-900 border border-slate-850 hover:border-slate-700 text-xs font-semibold text-slate-300 px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer">
+                        <span className="h-2 w-2 rounded-full bg-rose-500" />
+                        Recap last call
+                      </button>
+                    </div>
+
+                    {/* Meetings Widget */}
+                    <div className="space-y-3 pt-4">
+                      <div className="flex items-center justify-between border-b border-slate-900 pb-2">
+                        <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Meetings</h4>
+                        <div className="flex items-center gap-2 text-[10px] text-slate-500 font-bold">
+                          <span>Today, Jun 14</span>
+                          <div className="flex gap-1">
+                            <button className="p-0.5 hover:text-white cursor-pointer">&lt;</button>
+                            <button className="p-0.5 hover:text-white cursor-pointer">&gt;</button>
+                          </div>
                         </div>
-                        <span className="text-slate-500 font-mono text-[11px]">10:00 - 11:00 AM</span>
                       </div>
 
-                      {/* Meeting 2 */}
-                      <div
-                        onClick={() => setExpandedMeeting(expandedMeeting === "ashley" ? "" : "ashley")}
-                        className="bg-transparent border border-slate-950/60 p-3.5 rounded-xl hover:bg-slate-900/30 flex items-center justify-between cursor-pointer transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="h-2 w-2 rounded-full bg-slate-650 shrink-0" />
-                          <span className="font-bold text-slate-400">Ashley & Martin</span>
-                        </div>
-                        <span className="text-slate-500 font-mono text-[11px]">10:20 - 10:40 AM</span>
-                      </div>
-
-                      {/* Meeting 3 (Expanded active item) */}
-                      <div className="border border-slate-900 rounded-xl overflow-hidden">
+                      {/* Meetings lists */}
+                      <div className="space-y-2 text-xs">
+                        
+                        {/* Meeting 1 */}
                         <div
-                          onClick={() => setExpandedMeeting(expandedMeeting === "greenleaf" ? "" : "greenleaf")}
-                          className={`p-3.5 flex items-center justify-between cursor-pointer transition-colors ${
-                            expandedMeeting === "greenleaf" ? "bg-slate-900/40 border-b border-slate-900" : "bg-transparent hover:bg-slate-900/30"
-                          }`}
+                          onClick={() => setExpandedMeeting(expandedMeeting === "stripe" ? "" : "stripe")}
+                          className="bg-transparent border border-slate-950/60 p-3.5 rounded-xl hover:bg-slate-900/30 flex items-center justify-between cursor-pointer transition-colors"
                         >
                           <div className="flex items-center gap-3">
-                            <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
-                            <span className="font-bold text-slate-200">Greenleaf // Basepoint</span>
+                            <span className="h-2 w-2 rounded-full bg-amber-500 shrink-0" />
+                            <span className="font-bold text-slate-200">Basepoint x Stripe</span>
                           </div>
-                          <span className="text-slate-400 font-mono text-[11px] font-semibold">2:30 - 3:00 PM</span>
+                          <span className="text-slate-500 font-mono text-[11px]">10:00 - 11:00 AM</span>
                         </div>
 
-                        {expandedMeeting === "greenleaf" && (
-                          <div className="p-4 bg-slate-950/20 space-y-4 animate-in fade-in duration-200 text-[11px] text-slate-400">
-                            <div>
-                              <div className="text-slate-600 font-bold uppercase text-[9px] tracking-wider mb-1">Details</div>
-                              <p className="leading-relaxed">
-                                Demo call with Greenleaf team to help them get the most out of their PRO trial.
-                              </p>
-                              <a
-                                href="https://meet.google.com/psn-zfzb-yaw"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="text-blue-400 hover:underline inline-flex items-center gap-1 mt-1.5"
-                              >
-                                https://meet.google.com/psn-zfzb-yaw
-                              </a>
-                            </div>
-
-                            <div className="pt-2 border-t border-slate-900/60">
-                              <div className="flex items-center gap-2 mb-2">
-                                <span className="text-slate-650 font-bold uppercase text-[9px] tracking-wider">Participants</span>
-                                <Badge variant="secondary" className="bg-slate-900 text-slate-400 text-[9px] py-0 px-1 font-mono border border-slate-850">8</Badge>
-                              </div>
-                              <div className="space-y-2">
-                                <div className="flex items-center gap-2">
-                                  <div className="h-6 w-6 rounded-full bg-slate-900 border border-slate-850 flex items-center justify-center text-[9px] font-black text-slate-350">DP</div>
-                                  <div>
-                                    <span className="font-semibold text-slate-200">Dylan Parker</span>
-                                    <span className="text-slate-550 ml-1.5 font-normal">CEO of Basepoint</span>
-                                  </div>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <div className="h-6 w-6 rounded-full bg-slate-900 border border-slate-850 flex items-center justify-center text-[9px] font-black text-slate-355">AZ</div>
-                                  <div>
-                                    <span className="font-semibold text-slate-200">Annie Zhang</span>
-                                    <span className="text-slate-550 ml-1.5 font-normal">Product Manager at Greenleaf</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                        {/* Meeting 2 */}
+                        <div
+                          onClick={() => setExpandedMeeting(expandedMeeting === "ashley" ? "" : "ashley")}
+                          className="bg-transparent border border-slate-950/60 p-3.5 rounded-xl hover:bg-slate-900/30 flex items-center justify-between cursor-pointer transition-colors"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="h-2 w-2 rounded-full bg-slate-650 shrink-0" />
+                            <span className="font-bold text-slate-400">Ashley & Martin</span>
                           </div>
-                        )}
-                      </div>
+                          <span className="text-slate-500 font-mono text-[11px]">10:20 - 10:40 AM</span>
+                        </div>
 
+                        {/* Meeting 3 (Expanded active item) */}
+                        <div className="border border-slate-900 rounded-xl overflow-hidden">
+                          <div
+                            onClick={() => setExpandedMeeting(expandedMeeting === "greenleaf" ? "" : "greenleaf")}
+                            className={`p-3.5 flex items-center justify-between cursor-pointer transition-colors ${
+                              expandedMeeting === "greenleaf" ? "bg-slate-900/40 border-b border-slate-900" : "bg-transparent hover:bg-slate-900/30"
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+                              <span className="font-bold text-slate-200">Greenleaf // Basepoint</span>
+                            </div>
+                            <span className="text-slate-400 font-mono text-[11px] font-semibold">2:30 - 3:00 PM</span>
+                          </div>
+
+                          {expandedMeeting === "greenleaf" && (
+                            <div className="p-4 bg-slate-950/20 space-y-4 animate-in fade-in duration-200 text-[11px] text-slate-400">
+                              <div>
+                                <div className="text-slate-650 font-bold uppercase text-[9px] tracking-wider mb-1">Details</div>
+                                <p className="leading-relaxed">
+                                  Demo call with Greenleaf team to help them get the most out of their PRO trial.
+                                </p>
+                                <a
+                                  href="https://meet.google.com/psn-zfzb-yaw"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="text-blue-400 hover:underline inline-flex items-center gap-1 mt-1.5"
+                                >
+                                  https://meet.google.com/psn-zfzb-yaw
+                                </a>
+                              </div>
+
+                              <div className="pt-2 border-t border-slate-900/60">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <span className="text-slate-655 font-bold uppercase text-[9px] tracking-wider">Participants</span>
+                                  <Badge variant="secondary" className="bg-slate-900 text-slate-400 text-[9px] py-0 px-1 font-mono border border-slate-850">8</Badge>
+                                </div>
+                                <div className="space-y-2">
+                                  <div className="flex items-center gap-2">
+                                    <div className="h-6 w-6 rounded-full bg-slate-900 border border-slate-850 flex items-center justify-center text-[9px] font-black text-slate-355">DP</div>
+                                    <div>
+                                      <span className="font-semibold text-slate-200">Dylan Parker</span>
+                                      <span className="text-slate-550 ml-1.5 font-normal">CEO of Basepoint</span>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <div className="h-6 w-6 rounded-full bg-slate-900 border border-slate-850 flex items-center justify-center text-[9px] font-black text-slate-355">AZ</div>
+                                    <div>
+                                      <span className="font-semibold text-slate-200">Annie Zhang</span>
+                                      <span className="text-slate-550 ml-1.5 font-normal">Product Manager at Greenleaf</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                      </div>
                     </div>
+
                   </div>
 
                 </div>
-
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
+
       </section>
 
       {/* BRAND LOGOS SECTION (No side grid lines, full width) */}
