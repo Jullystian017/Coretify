@@ -58,7 +58,7 @@ export function ScrollRevealAbout() {
   }
 
   return (
-    <div ref={containerRef} className="relative h-[250vh] w-full">
+    <div ref={containerRef} className="relative h-[250vh] w-full z-10 -mt-[380px]">
       {/* Sticky container positioned exactly below the 80px tall sticky navbar */}
       <div className="sticky top-[80px] h-[calc(100vh-80px)] w-full flex flex-col items-center justify-center overflow-hidden bg-[#070708]">
         
@@ -86,7 +86,7 @@ export function ScrollRevealAbout() {
           
           {/* Highly Visible Grid motif (Only linear grid lines, no dots) */}
           <div 
-            className="absolute inset-0 opacity-75"
+            className="absolute inset-0"
             style={{
               backgroundImage: `
                 linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
@@ -94,6 +94,8 @@ export function ScrollRevealAbout() {
               `,
               backgroundSize: "64px 64px",
               backgroundPosition: "center center",
+              opacity: Math.min(0.75, progress * 4.0),
+              transition: "opacity 0.2s ease-out",
             }}
           />
           {/* Vignette fade to solid bg at edges */}
@@ -133,14 +135,17 @@ export function ScrollRevealAbout() {
                     return (
                       <span key={wordIdx} className="relative inline-block mx-[0.14em] my-[0.03em] select-none">
                         {/* Base dim text */}
-                        <span className="text-white/15 transition-colors duration-300">
+                        <span 
+                          className="text-white transition-opacity duration-300"
+                          style={{ opacity: Math.min(0.15, progress * 0.8) }}
+                        >
                           {word}
                         </span>
                         {/* Overlaid bright/gradient text revealed by scrolling */}
                         <span 
                           className={`absolute inset-0 pointer-events-none text-center ${revealedClass}`}
                           style={{ 
-                            opacity: wordProgress,
+                            opacity: wordProgress * Math.min(1, progress * 10.0),
                             transform: `scale(${0.98 + wordProgress * 0.02})`,
                             transition: "transform 0.15s ease-out, opacity 0.07s linear"
                           }}
