@@ -21,7 +21,8 @@ import {
   Network,
   TrendingUp,
   MoreHorizontal,
-  Zap
+  Zap,
+  AlertCircle
 } from "lucide-react";
 
 export default function Home() {
@@ -975,6 +976,108 @@ export default function Home() {
                   <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        {/* SECTION 4: DAILY BRIEF */}
+        <section className="relative border-b border-slate-900 p-8 sm:p-12 lg:p-16">
+          
+          {/* Section Intersection Markers */}
+          <span className="absolute bottom-[-7.5px] -left-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
+          <span className="absolute bottom-[-7.5px] -right-[4.5px] text-[11px] text-slate-800 font-mono select-none">+</span >
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
+            
+            {/* Left Column: Title & Intro */}
+            <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
+              <div className="space-y-3">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest font-mono">
+                  Morning Digest
+                </span>
+                <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] text-white leading-[1.12]">
+                  Daily Brief
+                </h2>
+                <p className="text-slate-400 text-xs leading-relaxed font-normal">
+                  Stay ahead of operational issues with Coretify's proactive morning briefs. We automatically scan communications, calendars, and accounting sheets to alert you about key action points before your day starts.
+                </p>
+              </div>
+            </div>
+
+            {/* Spacing Column */}
+            <div className="hidden lg:block lg:col-span-1 self-stretch relative">
+            </div>
+
+            {/* Right Column: Cards List */}
+            <div className="lg:col-span-6 space-y-4 w-full">
+              
+              {/* Card 1: 2 clients need follow-up */}
+              <Card className="bg-[#0c0c0e]/80 border-slate-900 p-5 shadow-lg relative group transition-all duration-300 hover:border-slate-850 hover:bg-[#0c0c0e]">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-xl bg-amber-500/5 border border-amber-500/10 flex items-center justify-center text-amber-500 shrink-0">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1 space-y-1.5 text-left">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-bold text-white group-hover:text-amber-400 transition-colors">
+                        2 clients need follow-up
+                      </h4>
+                      <Badge variant="secondary" className="bg-amber-500/5 text-amber-500 border border-amber-500/10 text-[9px] py-0 px-2 font-mono">
+                        High Priority
+                      </Badge>
+                    </div>
+                    <p className="text-slate-400 text-xs leading-relaxed font-normal">
+                      Vista Retail has had 0 email responses in 14 days (Playbook target is every 3 days). Aero Design retainer amendment proposal is awaiting your reply.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Card 2: 1 project at risk */}
+              <Card className="bg-[#0c0c0e]/80 border-slate-900 p-5 shadow-lg relative group transition-all duration-300 hover:border-slate-850 hover:bg-[#0c0c0e]">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-xl bg-rose-500/5 border border-rose-500/10 flex items-center justify-center text-rose-500 shrink-0">
+                    <AlertCircle className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1 space-y-1.5 text-left">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-bold text-white group-hover:text-rose-450 transition-colors">
+                        1 project at risk
+                      </h4>
+                      <Badge variant="secondary" className="bg-rose-500/5 text-rose-500 border border-rose-500/10 text-[9px] py-0 px-2 font-mono">
+                        Timeline Delay
+                      </Badge>
+                    </div>
+                    <p className="text-slate-400 text-xs leading-relaxed font-normal">
+                      Nexa Web App is projected to be delayed by 5 days from the kickoff schedule. Ditemukan 12 email revisi alur API autentikasi dari client di Gmail.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Card 3: Revenue down 12% */}
+              <Card className="bg-[#0c0c0e]/80 border-slate-900 p-5 shadow-lg relative group transition-all duration-300 hover:border-slate-850 hover:bg-[#0c0c0e]">
+                <div className="flex items-start gap-4">
+                  <div className="h-10 w-10 rounded-xl bg-rose-500/5 border border-rose-500/10 flex items-center justify-center text-rose-500 shrink-0">
+                    <TrendingUp className="h-5 w-5 rotate-180" />
+                  </div>
+                  <div className="flex-1 space-y-1.5 text-left">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-bold text-white group-hover:text-rose-450 transition-colors">
+                        Revenue down 12%
+                      </h4>
+                      <Badge variant="secondary" className="bg-rose-500/5 text-rose-450 border border-rose-500/10 text-[9px] py-0 px-2 font-mono">
+                        Financial Impact
+                      </Badge>
+                    </div>
+                    <p className="text-slate-400 text-xs leading-relaxed font-normal">
+                      Monthly revenue dropped due to the delayed Nexa milestone invoice. Current operational burn rate is Rp45.2M/month, with runway estimated at 6.5 months.
+                    </p>
+                  </div>
+                </div>
+              </Card>
 
             </div>
 
