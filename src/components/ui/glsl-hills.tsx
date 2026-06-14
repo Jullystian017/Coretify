@@ -157,7 +157,7 @@ export const GLSLHills = ({
               varying vec3 vPosition;
 
               void main(void) {
-                float opacity = (96.0 - length(vPosition)) / 256.0 * 0.6;
+                float opacity = (128.0 - length(vPosition)) / 256.0 * 0.85;
                 vec3 color = vec3(0.6);
                 gl_FragColor = vec4(color, opacity);
               }
@@ -207,8 +207,8 @@ export const GLSLHills = ({
     const init = () => {
       renderer.setSize(initialRect.width, initialRect.height);
       renderer.setClearColor(0x000000, 0);
-      camera.position.set(0, 16, cameraZ);
-      camera.lookAt(new THREE.Vector3(0, 28, 0));
+      camera.position.set(0, 8, cameraZ);
+      camera.lookAt(new THREE.Vector3(0, 16, 0));
       scene.add(plane.mesh);
       window.addEventListener('resize', resize);
       resize();
