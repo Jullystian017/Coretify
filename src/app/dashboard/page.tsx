@@ -255,9 +255,7 @@ export default function DashboardPage() {
         <div className="space-y-6">
           {/* Logo */}
           <div className="flex items-center gap-2.5 px-2">
-            <div className="flex h-7.5 w-7.5 items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-350">
-              <Bot className="h-4.5 w-4.5" />
-            </div>
+            <img src="/coretify.png" alt="Coretify Logo" className="h-7.5 w-auto object-contain" />
             <div>
               <span className="font-bold text-sm tracking-tight text-white block">
                 Coretify

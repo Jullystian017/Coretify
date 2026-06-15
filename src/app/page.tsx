@@ -103,9 +103,7 @@ export default function Home() {
         <div className="mx-auto max-w-[1360px] px-8 flex h-20 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => router.push("/")}>
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-350">
-              <Bot className="h-4.5 w-4.5" />
-            </div>
+            <img src="/coretify.png" alt="Coretify Logo" className="h-9 w-auto object-contain" />
             <span className="text-[17px] font-bold tracking-tight text-white">
               Coretify
             </span>
@@ -1258,12 +1256,7 @@ export default function Home() {
             {/* Left Column: Brand, Desc, Watch button */}
             <div className="md:col-span-5 space-y-6 text-left">
               <div className="flex items-center gap-3 select-none cursor-pointer" onClick={() => router.push("/")}>
-                {/* Modern minimalist logo inspired by the screenshot's squircle shape */}
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 shadow-md">
-                  <div className="h-5 w-5 rounded-lg border-2 border-zinc-700 bg-zinc-950 flex items-center justify-center">
-                    <div className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
-                  </div>
-                </div>
+                <img src="/coretify.png" alt="Coretify Logo" className="h-9 w-auto object-contain" />
                 <span className="text-[21px] font-semibold tracking-tight text-white">
                   Coretify
                 </span>

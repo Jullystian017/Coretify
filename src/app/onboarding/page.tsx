@@ -196,9 +196,7 @@ export default function OnboardingPage() {
       <header className="border-b border-slate-900 bg-[#070708]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-7.5 w-7.5 items-center justify-center rounded-lg bg-slate-900 border border-slate-800 text-slate-350">
-              <Bot className="h-4.5 w-4.5" />
-            </div>
+            <img src="/coretify.png" alt="Coretify Logo" className="h-7.5 w-auto object-contain" />
             <span className="font-bold text-[15px] tracking-tight text-white">
               Coretify Setup
             </span>
