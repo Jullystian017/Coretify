@@ -192,12 +192,11 @@ export default function OnboardingPage() {
       {/* Top Background radial gradient */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1360px] rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/40 via-transparent to-transparent blur-3xl pointer-events-none" />
 
-      {/* Top Header */}
       <header className="border-b border-slate-900 bg-[#070708]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-0">
             <img src="/coretify.png" alt="Coretify Logo" className="h-7.5 w-auto object-contain" />
-            <span className="font-bold text-[15px] tracking-tight text-white">
+            <span className="font-bold text-[19px] tracking-tight text-white">
               Coretify Setup
             </span>
           </div>

@@ -25,9 +25,9 @@ export default function PrivacyPage() {
 
       <header className="border-b border-slate-900 bg-[#070708]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => router.push("/")}>
+          <div className="flex items-center gap-0 cursor-pointer" onClick={() => router.push("/")}>
             <img src="/coretify.png" alt="Coretify Logo" className="h-7.5 w-auto object-contain" />
-            <span className="font-bold text-[15px] tracking-tight text-white">
+            <span className="font-bold text-[17px] tracking-tight text-white">
               Coretify Privacy & Trust
             </span>
           </div>

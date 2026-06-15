@@ -254,10 +254,10 @@ export default function DashboardPage() {
       <aside className="w-64 border-r border-slate-900 bg-[#08080a] flex flex-col justify-between p-5 shrink-0 z-30">
         <div className="space-y-6">
           {/* Logo */}
-          <div className="flex items-center gap-2.5 px-2">
+          <div className="flex items-center gap-0 px-2">
             <img src="/coretify.png" alt="Coretify Logo" className="h-7.5 w-auto object-contain" />
             <div>
-              <span className="font-bold text-sm tracking-tight text-white block">
+              <span className="font-bold text-[18px] tracking-tight text-white block">
                 Coretify
               </span>
               <span className="text-[9px] text-slate-600 font-mono block">v1.0 (MVP)</span>

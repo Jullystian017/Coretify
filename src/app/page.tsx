@@ -102,9 +102,9 @@ export default function Home() {
       <header className="border-b border-slate-900 bg-[#070708]/85 backdrop-blur-md sticky top-0 z-50 w-full">
         <div className="mx-auto max-w-[1360px] px-8 flex h-20 items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => router.push("/")}>
+          <div className="flex items-center gap-0 cursor-pointer" onClick={() => router.push("/")}>
             <img src="/coretify.png" alt="Coretify Logo" className="h-9 w-auto object-contain" />
-            <span className="text-[17px] font-bold tracking-tight text-white">
+            <span className="text-[21px] font-bold tracking-tight text-white">
               Coretify
             </span>
           </div>
@@ -1255,9 +1255,9 @@ export default function Home() {
 
             {/* Left Column: Brand, Desc, Watch button */}
             <div className="md:col-span-5 space-y-6 text-left">
-              <div className="flex items-center gap-3 select-none cursor-pointer" onClick={() => router.push("/")}>
+              <div className="flex items-center gap-0 select-none cursor-pointer" onClick={() => router.push("/")}>
                 <img src="/coretify.png" alt="Coretify Logo" className="h-9 w-auto object-contain" />
-                <span className="text-[21px] font-semibold tracking-tight text-white">
+                <span className="text-[24px] font-semibold tracking-tight text-white">
                   Coretify
                 </span>
               </div>
