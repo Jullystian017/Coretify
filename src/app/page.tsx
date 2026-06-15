@@ -38,6 +38,7 @@ export default function Home() {
   const router = useRouter();
   const [activeSectionTab, setActiveSectionTab] = useState<"data" | "tools" | "agent" | "governance">("data");
   const [expandedMeeting, setExpandedMeeting] = useState<string>("greenleaf");
+  const [activePlaybookTab, setActivePlaybookTab] = useState<"software_house" | "agency" | "startup">("software_house");
 
   const handleStartOnboarding = () => {
     router.push("/onboarding");
@@ -961,7 +962,6 @@ export default function Home() {
                     The infrastructure agents need to run on your company memory
                   </h2>
                 </div>
-
                 {/* Vertical Category List */}
                 <div className="space-y-6 pt-4 border-l border-slate-900 pl-4">
                   {/* Category 1: Data */}
@@ -973,7 +973,7 @@ export default function Home() {
                       <span className="text-xs font-semibold text-white">Data</span>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
-                      Coretify unifies every data source into one identity-resolved model.
+                      Coretify unifies Gmail, Drive, Calendar, WhatsApp, and spreadsheets into one secure knowledge graph.
                     </p>
                   </div>
 
@@ -986,7 +986,7 @@ export default function Home() {
                       <span className="text-xs font-semibold text-zinc-450">Tools</span>
                     </div>
                     <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
-                      Coretify gives agents and operators shared playbooks, workflows, and routing.
+                      Coretify gives agents shared playbooks and read-only connectors to your daily workspace tools.
                     </p>
                   </div>
 
@@ -996,10 +996,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400">
                         <Cpu className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-zinc-450">Agent</span>
+                      <span className="text-xs font-semibold text-zinc-455">Agent</span>
                     </div>
                     <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
-                      Coretify's agents turn plain language into working corporate memory.
+                      Coretify's agents turn natural language queries into instant answers with transparent source citations.
                     </p>
                   </div>
 
@@ -1009,10 +1009,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
                         <ShieldCheck className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-zinc-450">Governance</span>
+                      <span className="text-xs font-semibold text-zinc-455">Governance</span>
                     </div>
                     <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
-                      Coretify's agents propose, you approve, and security RLS controls roll back.
+                      3-role permission architecture (Owner, Manager, Member) with strict database-level RLS.
                     </p>
                   </div>
                 </div>
@@ -1035,10 +1035,10 @@ export default function Home() {
                     </div>
                     
                     <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                      One source of truth for every agent
+                      One company memory for every RAG query
                     </h3>
                     <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
-                      Coretify unifies data from CRM, WhatsApp, documents, and calendar events into a single identity-resolved model. Experience workspace synchronization in real time.
+                      Coretify automatically ingests and maps operational context across Google Workspace, spreadsheets, and WhatsApp chat exports in real time.
                     </p>
 
                     <div>
@@ -1119,10 +1119,10 @@ export default function Home() {
                     </div>
                     
                     <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                      Every tool you need to run your playbooks
+                      Every connector your team needs
                     </h3>
                     <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
-                      Tables, workspace ingestion, playbooks, and task routing - accessible to autonomous agents and the operators who manage them.
+                      Enable your workspace connectors securely. Coretify operates on read-only permissions by default—never sending emails, modifying files, or writing data.
                     </p>
 
                     <div>
@@ -1163,12 +1163,166 @@ export default function Home() {
                             <Cpu className="h-4 w-4" />
                           </div>
                           <div className="text-left">
-                            <span className="text-[10px] text-zinc-550 font-bold block">ACTION LOGIC</span>
+                            <span className="text-[10px] text-zinc-555 font-bold block">ACTION LOGIC</span>
                             <span className="text-xs font-semibold text-white">RLS Control & Semantic Mapping</span>
                           </div>
                         </div>
                       </div>
 
+                    </div>
+                  </div>
+                </div>
+
+                {/* Showcase Card 3: Agent */}
+                <div className="rounded-2xl border border-slate-900 bg-[#09090b]/30 p-8 space-y-6 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                  
+                  <div className="space-y-4">
+                    {/* Badge */}
+                    <div className="flex items-center gap-2">
+                      <span className="h-6 w-6 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400">
+                        <Cpu className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-zinc-400">Agent</span>
+                    </div>
+                    
+                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                      Turn plain language into business answers
+                    </h3>
+                    <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
+                      Query Coretify Memory in Indonesian or English. Coretify handles client details, project timelines, and email threads to return clear summaries with exact source citations.
+                    </p>
+
+                    <div>
+                      <button className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-850 text-[11px] font-semibold text-zinc-350 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer select-none">
+                        Learn More
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Chat RAG Mockup */}
+                  <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] p-5 space-y-4 text-left">
+                    <div className="flex justify-between items-center border-b border-slate-900 pb-2">
+                      <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" /> Ask Coretify
+                      </span>
+                      <span className="text-[9px] font-semibold text-slate-500 font-mono bg-slate-900 px-2 py-0.5 rounded border border-slate-850">
+                        RAG CITATION
+                      </span>
+                    </div>
+
+                    <div className="space-y-3.5">
+                      {/* User input */}
+                      <div className="flex justify-end">
+                        <div className="bg-[#18181b] border border-slate-850 text-white px-3 py-2 rounded-xl rounded-tr-none text-[10.5px]">
+                          Kenapa project Nexa Corp terlambat?
+                        </div>
+                      </div>
+
+                      {/* Bot response */}
+                      <div className="flex gap-2.5 items-start">
+                        <div className="h-6 w-6 rounded bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
+                          <Bot className="h-3.5 w-3.5" />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="bg-[#08080a] border border-slate-900 text-zinc-300 px-3 py-2 rounded-xl rounded-tl-none leading-relaxed text-[10.5px]">
+                            Project **Nexa Web App** terlambat 5 hari karena adanya 4 revisi berturut-turut pada API autentikasi yang diajukan oleh client setelah fase development dimulai.
+                          </div>
+                          {/* Citations */}
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="text-[9px] text-slate-500">Sumber:</span>
+                            <span className="text-[9px] px-1.5 py-0.5 rounded border bg-slate-950 border-slate-900 text-zinc-400 inline-flex items-center gap-1">
+                              WhatsApp / Nexa Revision <ExternalLink className="h-2 w-2" />
+                            </span>
+                            <span className="text-[9px] px-1.5 py-0.5 rounded border bg-slate-950 border-slate-900 text-zinc-400 inline-flex items-center gap-1">
+                              Gmail / Client API request <ExternalLink className="h-2 w-2" />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Showcase Card 4: Governance */}
+                <div className="rounded-2xl border border-slate-900 bg-[#09090b]/30 p-8 space-y-6 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                  
+                  <div className="space-y-4">
+                    {/* Badge */}
+                    <div className="flex items-center gap-2">
+                      <span className="h-6 w-6 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                        <ShieldCheck className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-blue-400">Governance</span>
+                    </div>
+                    
+                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                      Role-Based Access Control by default
+                    </h3>
+                    <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
+                      Keep sensitive salary, payroll, and executive data safe. Row-Level Security (RLS) filters retrieval at the database level, ensuring non-owners never receive restricted chunks.
+                    </p>
+
+                    <div>
+                      <button className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-850 text-[11px] font-semibold text-zinc-350 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer select-none">
+                        Learn More
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* RLS Permissions Guard Mockup */}
+                  <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] text-zinc-300">
+                    <div className="flex items-center justify-between bg-slate-900/40 px-4 py-2.5 border-b border-slate-900">
+                      <div className="flex items-center gap-1.5">
+                        <span className="h-2.5 w-2.5 rounded-full bg-rose-500/40" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-amber-500/40" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/40" />
+                        <span className="ml-2 font-mono text-[10px] text-slate-500 flex items-center gap-1.5">
+                          <ShieldCheck className="h-3 w-3" /> Security Policies
+                        </span>
+                      </div>
+                      <span className="text-[9px] font-semibold px-2 py-0.5 rounded border border-slate-800 bg-[#09090b]/80 text-blue-400 flex items-center gap-1">
+                        Active Guard
+                      </span>
+                    </div>
+
+                    <div className="p-4 space-y-3">
+                      {/* Policy 1: Owner */}
+                      <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-900 bg-[#0c0c0e]/40">
+                        <div className="flex items-center gap-2">
+                          <div className="h-5 w-5 rounded bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-[9px] font-bold">OWN</div>
+                          <div className="text-left">
+                            <span className="text-xs font-semibold text-white block">Owner Access Role</span>
+                            <span className="text-[9px] text-slate-500">Unfiltered search including financial & payroll data</span>
+                          </div>
+                        </div>
+                        <span className="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-mono">Full Access</span>
+                      </div>
+
+                      {/* Policy 2: Manager */}
+                      <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-900 bg-[#0c0c0e]/40">
+                        <div className="flex items-center gap-2">
+                          <div className="h-5 w-5 rounded bg-amber-500/10 text-amber-400 flex items-center justify-center text-[9px] font-bold">MGR</div>
+                          <div className="text-left">
+                            <span className="text-xs font-semibold text-white block">Manager Access Role</span>
+                            <span className="text-[9px] text-slate-500">Operational projects, workload timelines, meeting logs</span>
+                          </div>
+                        </div>
+                        <span className="text-[9px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded font-mono">Restricted</span>
+                      </div>
+
+                      {/* Policy 3: Member */}
+                      <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-900 bg-[#0c0c0e]/40">
+                        <div className="flex items-center gap-2">
+                          <div className="h-5 w-5 rounded bg-blue-500/10 text-blue-400 flex items-center justify-center text-[9px] font-bold">MBR</div>
+                          <div className="text-left">
+                            <span className="text-xs font-semibold text-white block">Member Access Role</span>
+                            <span className="text-[9px] text-slate-500">Own assigned tasks, project overview, team meetings</span>
+                          </div>
+                        </div>
+                        <span className="text-[9px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono">Restricted</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1180,13 +1334,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 3: DAILY BRIEF */}
+      {/* SECTION 3: INTEGRATIONS GRID */}
       <section className="w-full bg-[#070708]/40">
         <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+          
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
+              <div className="w-[3px] h-3.5 bg-amber-500 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">03</span>
@@ -1194,99 +1349,137 @@ export default function Home() {
                 <span className="text-slate-600">03</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
-                <span className="uppercase text-slate-400 font-bold">PROACTIVE</span>
+                <span className="uppercase text-slate-400 font-bold">CONNECT</span>
               </div>
             </div>
           </div>
 
           {/* Section Content Area */}
           <div className="p-8 sm:p-12 lg:p-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-
-              {/* Left Column: Title & Intro */}
-              <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
-                <div className="space-y-3">
-                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
-                    Daily Brief
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+              
+              {/* Left Column: Copywriting & CTA */}
+              <div className="lg:col-span-5 space-y-8 text-left">
+                <div className="space-y-4">
+                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none font-sans">
+                    Connect with your favorite tools.
                   </h2>
-                  <p className="text-slate-400 text-xs leading-relaxed font-normal">
-                    Stay ahead of operational issues with Coretify's proactive morning briefs. We automatically scan communications, calendars, and accounting sheets to alert you about key action points before your day starts.
+                  <p className="text-zinc-400 text-[13px] leading-relaxed font-normal">
+                    Coretify reads your operational data securely in one click. Zero write permissions, zero deletion rights—pure read-only intelligence that unifies Gmail, Drive, Calendar, WhatsApp, and spreadsheets into one central brain.
                   </p>
+                </div>
+
+                <div>
+                  <CoretifyButton
+                    onClick={handleStartOnboarding}
+                    variant="white"
+                    size="lg"
+                    className="px-7 py-5.5 text-[13px] font-semibold shadow-lg"
+                  >
+                    Start Connecting
+                  </CoretifyButton>
                 </div>
               </div>
 
               {/* Spacing Column */}
-              <div className="hidden lg:block lg:col-span-1 self-stretch relative">
-              </div>
+              <div className="hidden lg:block lg:col-span-1" />
 
-              {/* Right Column: Cards List */}
-              <div className="lg:col-span-6 space-y-4 w-full">
+              {/* Right Column: SaaS Integrations Grid */}
+              <div className="lg:col-span-6 w-full">
+                
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 select-none relative">
+                  
+                  {/* Subtle radial glow under grid */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/5 via-indigo-500/5 to-emerald-500/5 blur-3xl rounded-full -z-10 pointer-events-none" />
 
-                {/* Card 1: 2 clients need follow-up */}
-                <Card className="bg-[#0c0c0e]/80 border-slate-900 p-5 shadow-lg relative group transition-all duration-300 hover:border-slate-850 hover:bg-[#0c0c0e]">
-                  <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-xl bg-amber-500/5 border border-amber-500/10 flex items-center justify-center text-amber-500 shrink-0">
-                      <Mail className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1 space-y-1.5 text-left">
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-white group-hover:text-amber-400 transition-colors">
-                          2 clients need follow-up
-                        </h4>
-                        <Badge variant="secondary" className="bg-amber-500/5 text-amber-500 border border-amber-500/10 text-[9px] py-0 px-2 font-mono">
-                          High Priority
-                        </Badge>
-                      </div>
-                      <p className="text-slate-400 text-xs leading-relaxed font-normal">
-                        Vista Retail has had 0 email responses in 14 days (Playbook target is every 3 days). Aero Design retainer amendment proposal is awaiting your reply.
-                      </p>
-                    </div>
+                  {/* Row 1 */}
+                  {/* Cell 1: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 2: WhatsApp Lite */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
+                    <Phone className="h-7 w-7 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">WA Lite</span>
                   </div>
-                </Card>
 
-                {/* Card 2: 1 project at risk */}
-                <Card className="bg-[#0c0c0e]/80 border-slate-900 p-5 shadow-lg relative group transition-all duration-300 hover:border-slate-850 hover:bg-[#0c0c0e]">
-                  <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-xl bg-rose-500/5 border border-rose-500/10 flex items-center justify-center text-rose-500 shrink-0">
-                      <AlertCircle className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1 space-y-1.5 text-left">
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-white group-hover:text-rose-450 transition-colors">
-                          1 project at risk
-                        </h4>
-                        <Badge variant="secondary" className="bg-rose-500/5 text-rose-500 border border-rose-500/10 text-[9px] py-0 px-2 font-mono">
-                          Timeline Delay
-                        </Badge>
-                      </div>
-                      <p className="text-slate-400 text-xs leading-relaxed font-normal">
-                        Nexa Web App is projected to be delayed by 5 days from the kickoff schedule. Ditemukan 12 email revisi alur API autentikasi dari client di Gmail.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
+                  {/* Cell 3: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
 
-                {/* Card 3: Revenue down 12% */}
-                <Card className="bg-[#0c0c0e]/80 border-slate-900 p-5 shadow-lg relative group transition-all duration-300 hover:border-slate-850 hover:bg-[#0c0c0e]">
-                  <div className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-xl bg-rose-500/5 border border-rose-500/10 flex items-center justify-center text-rose-500 shrink-0">
-                      <TrendingUp className="h-5 w-5 rotate-180" />
-                    </div>
-                    <div className="flex-1 space-y-1.5 text-left">
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-white group-hover:text-rose-450 transition-colors">
-                          Revenue down 12%
-                        </h4>
-                        <Badge variant="secondary" className="bg-rose-500/5 text-rose-450 border border-rose-500/10 text-[9px] py-0 px-2 font-mono">
-                          Financial Impact
-                        </Badge>
-                      </div>
-                      <p className="text-slate-400 text-xs leading-relaxed font-normal">
-                        Monthly revenue dropped due to the delayed Nexa milestone invoice. Current operational burn rate is Rp45.2M/month, with runway estimated at 6.5 months.
-                      </p>
-                    </div>
+                  {/* Cell 4: Google Calendar */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-blue-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(59,130,246,0.08)] group cursor-pointer">
+                    <Calendar className="h-7 w-7 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Calendar</span>
                   </div>
-                </Card>
+
+                  {/* Cell 5: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 6: Notion */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-zinc-700 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(255,255,255,0.04)] group cursor-pointer">
+                    <span className="text-xl font-black text-white font-mono group-hover:scale-110 transition-transform duration-300 select-none">N</span>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Notion</span>
+                  </div>
+
+                  {/* Row 2 */}
+                  {/* Cell 7: Gmail */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-rose-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(239,68,68,0.08)] group cursor-pointer">
+                    <Mail className="h-7 w-7 text-rose-400 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Gmail</span>
+                  </div>
+
+                  {/* Cell 8: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 9: Google Drive */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-amber-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] group cursor-pointer">
+                    <Folder className="h-7 w-7 text-amber-400 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Drive</span>
+                  </div>
+
+                  {/* Cell 10: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 11: Zapier */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-orange-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(249,115,22,0.08)] group cursor-pointer">
+                    <Zap className="h-7 w-7 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Zapier</span>
+                  </div>
+
+                  {/* Cell 12: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Row 3 */}
+                  {/* Cell 13: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 14: CSV/Excel */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-teal-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(20,184,166,0.08)] group cursor-pointer">
+                    <FileText className="h-7 w-7 text-teal-400 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">CSV/Excel</span>
+                  </div>
+
+                  {/* Cell 15: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 16: Slack */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-purple-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(168,85,247,0.08)] group cursor-pointer">
+                    <div className="flex flex-wrap h-7 w-7 justify-center items-center group-hover:scale-110 transition-transform duration-300">
+                      <span className="h-3 w-3 bg-purple-400 rounded-sm m-0.5" />
+                      <span className="h-3 w-3 bg-rose-400 rounded-sm m-0.5" />
+                    </div>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Slack</span>
+                  </div>
+
+                  {/* Cell 17: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 18: Accurate/Jurnal */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
+                    <BarChart2 className="h-7 w-7 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Accounting</span>
+                  </div>
+
+                </div>
 
               </div>
 
