@@ -1985,10 +1985,19 @@ export default function Home() {
           </div>
 
           {/* CTA Banner Card Container */}
-          <div className="p-8 sm:p-12 lg:p-20 flex flex-col items-center justify-center text-center relative overflow-hidden bg-gradient-to-b from-slate-950/20 to-transparent">
-            {/* Glowing background */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-72 w-full max-w-2xl bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-48 w-full max-w-xl bg-purple-500/5 rounded-full blur-[80px] pointer-events-none" />
+          <div className="p-8 sm:p-12 lg:p-24 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#08080a] border-b border-slate-900">
+            {/* Grid Pattern Motif */}
+            <div 
+              className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
+              style={{
+                WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 85%)',
+                maskImage: 'radial-gradient(circle at center, black 30%, transparent 85%)'
+              }}
+            />
+            {/* Spotlight Glows */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[600px] bg-indigo-500/10 rounded-full blur-[110px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[250px] w-[400px] bg-purple-500/10 rounded-full blur-[90px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[180px] w-[300px] bg-emerald-500/5 rounded-full blur-[70px] pointer-events-none" />
 
             <div className="max-w-2xl space-y-6 z-10">
               <h2 className="text-3xl sm:text-[44px] font-semibold tracking-[-0.03em] leading-[1.1] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
