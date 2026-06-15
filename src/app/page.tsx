@@ -39,6 +39,7 @@ export default function Home() {
   const [activeSectionTab, setActiveSectionTab] = useState<"data" | "tools" | "agent" | "governance">("data");
   const [expandedMeeting, setExpandedMeeting] = useState<string>("greenleaf");
   const [activePlaybookTab, setActivePlaybookTab] = useState<"software_house" | "agency" | "startup">("software_house");
+  const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(null);
 
   const handleStartOnboarding = () => {
     router.push("/onboarding");
@@ -612,7 +613,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">01</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">03</span>
+                <span className="text-slate-600">05</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">FEATURES</span>
@@ -940,7 +941,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">02</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">03</span>
+                <span className="text-slate-600">05</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">INFRASTRUCTURE</span>
@@ -1346,7 +1347,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">03</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">03</span>
+                <span className="text-slate-600">05</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">CONNECT</span>
@@ -1398,8 +1399,10 @@ export default function Home() {
 
                   {/* Cell 2: WhatsApp Lite */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
-                    <Phone className="h-7 w-7 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">WA Lite</span>
+                    <svg viewBox="0 0 24 24" className="h-8.5 w-8.5 fill-current text-[#25D366] group-hover:scale-110 transition-transform duration-300">
+                      <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12c0 2.14.68 4.18 1.97 5.9L2.03 22l4.22-1.1c1.63.9 3.5 1.4 5.75 1.4 5.5 0 10-4.5 10-10S17.5 2 12.004 2zm5.73 14.28c-.24.68-1.2 1.25-1.65 1.3-.46.06-.9.1-2.9-.7-2.55-1.03-4.2-3.6-4.32-3.77-.13-.17-1.07-1.4-1.07-2.7 0-1.28.67-1.92.9-2.2.25-.26.54-.33.72-.33.18 0 .36 0 .5.02.16 0 .37-.06.57.43.2.5.7 1.7.75 1.8.06.12.1.27.02.43-.08.16-.12.26-.25.4-.12.14-.26.3-.37.42-.12.12-.25.26-.1.5.14.24.62 1.03 1.32 1.66.9.8 1.66 1.05 1.9 1.17.24.12.38.1.52-.06.14-.16.6-1.03.77-1.37.16-.34.33-.28.56-.2.23.08 1.48.7 1.73.82.25.12.4.18.46.3.06.1.06.67-.18 1.34z"/>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">WA Lite</span>
                   </div>
 
                   {/* Cell 3: Empty */}
@@ -1407,7 +1410,11 @@ export default function Home() {
 
                   {/* Cell 4: Google Calendar */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-blue-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(59,130,246,0.08)] group cursor-pointer">
-                    <Calendar className="h-7 w-7 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M26 4H8C5.8 4 4 5.8 4 8v32c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V22L26 4z" fill="#4285F4"/>
+                      <path d="M44 22H26V4l18 18z" fill="#1565C0"/>
+                      <text x="22" y="34" fill="#FFF" fontSize="21" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">31</text>
+                    </svg>
                     <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Calendar</span>
                   </div>
 
@@ -1416,15 +1423,23 @@ export default function Home() {
 
                   {/* Cell 6: Notion */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-zinc-700 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(255,255,255,0.04)] group cursor-pointer">
-                    <span className="text-xl font-black text-white font-mono group-hover:scale-110 transition-transform duration-300 select-none">N</span>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Notion</span>
+                    <svg viewBox="0 0 24 24" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300">
+                      <rect x="2" y="2" width="20" height="20" rx="4" fill="#FFF" stroke="#000" strokeWidth="1.5"/>
+                      <path d="M6 6h2.5l7.5 9.5V6h2.5v12h-2.5L8.5 8.5V18H6V6z" fill="#000"/>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Notion</span>
                   </div>
 
                   {/* Row 2 */}
                   {/* Cell 7: Gmail */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-rose-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(239,68,68,0.08)] group cursor-pointer">
-                    <Mail className="h-7 w-7 text-rose-400 group-hover:scale-110 transition-transform duration-300" />
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Gmail</span>
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M4 12v24c0 2.2 1.8 4 4 4h6V18L4 12z" fill="#4285F4"/>
+                      <path d="M44 12v24c0 2.2-1.8 4-4 4h-6V18l10-6z" fill="#34A853"/>
+                      <path d="M14 18h20V8L24 16 14 8v10z" fill="#EA4335"/>
+                      <path d="M4 12l20 15 20-15v-4L24 22 4 8v4z" fill="#FBBC05"/>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Gmail</span>
                   </div>
 
                   {/* Cell 8: Empty */}
@@ -1432,7 +1447,11 @@ export default function Home() {
 
                   {/* Cell 9: Google Drive */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-amber-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] group cursor-pointer">
-                    <Folder className="h-7 w-7 text-amber-400 group-hover:scale-110 transition-transform duration-300" />
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M16 6h16l15 26H31L16 6z" fill="#FFCC00"/>
+                      <path d="M32 32H2L10 18h30l-8 14z" fill="#00AA47"/>
+                      <path d="M16 6L1 32l8 14 23-40H16z" fill="#4285F4"/>
+                    </svg>
                     <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Drive</span>
                   </div>
 
@@ -1441,8 +1460,15 @@ export default function Home() {
 
                   {/* Cell 11: Zapier */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-orange-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(249,115,22,0.08)] group cursor-pointer">
-                    <Zap className="h-7 w-7 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Zapier</span>
+                    <svg viewBox="0 0 48 48" className="h-8.5 w-8.5 group-hover:scale-110 transition-transform duration-300">
+                      <circle cx="24" cy="24" r="22" fill="#FF4F00"/>
+                      <g stroke="#FFF" strokeWidth="5.5" strokeLinecap="round">
+                        <line x1="24" y1="12" x2="24" y2="36" />
+                        <line x1="13.6" y1="18" x2="34.4" y2="30" />
+                        <line x1="13.6" y1="30" x2="34.4" y2="18" />
+                      </g>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Zapier</span>
                   </div>
 
                   {/* Cell 12: Empty */}
@@ -1454,8 +1480,12 @@ export default function Home() {
 
                   {/* Cell 14: CSV/Excel */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-teal-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(20,184,166,0.08)] group cursor-pointer">
-                    <FileText className="h-7 w-7 text-teal-400 group-hover:scale-110 transition-transform duration-300" />
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">CSV/Excel</span>
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <rect x="4" y="4" width="40" height="40" rx="6" fill="#107C41" />
+                      <path d="M26 14h10v20H26z" fill="#FFF" opacity="0.15" />
+                      <path d="M12 14l8 10-8 10h5l5.5-7 5.5 7h5L25 24l8-10h-5l-5.5 7-5.5-7h-5z" fill="#FFF" />
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Excel/CSV</span>
                   </div>
 
                   {/* Cell 15: Empty */}
@@ -1463,10 +1493,12 @@ export default function Home() {
 
                   {/* Cell 16: Slack */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-purple-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(168,85,247,0.08)] group cursor-pointer">
-                    <div className="flex flex-wrap h-7 w-7 justify-center items-center group-hover:scale-110 transition-transform duration-300">
-                      <span className="h-3 w-3 bg-purple-400 rounded-sm m-0.5" />
-                      <span className="h-3 w-3 bg-rose-400 rounded-sm m-0.5" />
-                    </div>
+                    <svg viewBox="0 0 100 100" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M20 50a10 10 0 1 1 10-10v10H20zm10 10a10 10 0 1 1 0-20h20v20H30z" fill="#36C5F0"/>
+                      <path d="M50 20a10 10 0 1 1 10 10H50V20zm10 10a10 10 0 1 1-20 0V10h20v20z" fill="#2EB67D"/>
+                      <path d="M80 50a10 10 0 1 1-10 10V50h10zm-10-10a10 10 0 1 1 0 20H50V40h20z" fill="#ECB22E"/>
+                      <path d="M50 80a10 10 0 1 1-10-10h10v10zm-10-10a10 10 0 1 1 20 0v10H40v-20z" fill="#E01E5A"/>
+                    </svg>
                     <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Slack</span>
                   </div>
 
@@ -1475,12 +1507,362 @@ export default function Home() {
 
                   {/* Cell 18: Accurate/Jurnal */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
-                    <BarChart2 className="h-7 w-7 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Accounting</span>
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M30 6L14 22v14h8V26l12-12-4-8z" fill="#007AFF" />
+                      <path d="M22 36a8 8 0 0 1-8-8v-6l-6 6v8a8 8 0 0 0 8 8h12l-6-8z" fill="#0051A8" />
+                      <path d="M34 14l-4-8-8 8h8a4 4 0 0 1 4 4v4l6-6v-2z" fill="#3395FF" />
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Jurnal.id</span>
                   </div>
 
                 </div>
 
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: PRICING */}
+      <section className="w-full bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+          
+          {/* Section Header Band */}
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+            <div className="flex items-center gap-2">
+              <div className="w-[3px] h-3.5 bg-indigo-500 rounded-full" />
+              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                <span className="text-slate-700">[</span>
+                <span className="text-white font-bold">04</span>
+                <span className="text-slate-700">/</span>
+                <span className="text-slate-600">05</span>
+                <span className="text-slate-700">]</span>
+                <span className="text-slate-650 mx-0.5">·</span>
+                <span className="uppercase text-slate-400 font-bold">PRICING</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Title block */}
+          <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4">
+            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+              Simple, transparent pricing.
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-2xl leading-relaxed">
+              Start for free, then scale up as your company memory grows. All paid plans include custom playbook insights.
+            </p>
+          </div>
+
+          {/* Pricing Grid */}
+          <div className="border-t border-slate-850/80 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-[#09090b]/10">
+            
+            {/* Free Tier */}
+            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r lg:border-b-0">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-base font-semibold text-slate-200">Free</h3>
+                  <p className="text-xs text-zinc-500 mt-1">Sempurna untuk uji coba personal.</p>
+                </div>
+                <div className="flex items-baseline">
+                  <span className="text-3xl font-bold text-white tracking-tight">Rp 0</span>
+                  <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                </div>
+                <div className="w-full h-px bg-slate-850/50" />
+                <ul className="space-y-3.5 text-xs text-zinc-400">
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Maksimal 2 konektor data (Gmail & Calendar)</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>50 pertanyaan AI / bulan</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Batas 500 dokumen memori</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Akses 1 pengguna saja</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-8">
+                <CoretifyButton
+                  onClick={handleStartOnboarding}
+                  variant="dark"
+                  className="w-full py-5 text-xs font-semibold"
+                >
+                  Get Started
+                </CoretifyButton>
+              </div>
+            </div>
+
+            {/* Starter Tier */}
+            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 lg:border-r lg:border-b-0">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-base font-semibold text-slate-200">Starter</h3>
+                  <p className="text-xs text-zinc-500 mt-1">Untuk tim kecil yang mulai berkolaborasi.</p>
+                </div>
+                <div className="flex items-baseline">
+                  <span className="text-3xl font-bold text-white tracking-tight">Rp 199k</span>
+                  <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                </div>
+                <div className="w-full h-px bg-slate-850/50" />
+                <ul className="space-y-3.5 text-xs text-zinc-400">
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Hingga 5 konektor data aktif</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>500 pertanyaan AI / bulan</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Batas 10.000 dokumen memori</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Hingga 3 anggota tim</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Insights playbook standar</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-8">
+                <CoretifyButton
+                  onClick={handleStartOnboarding}
+                  variant="dark"
+                  className="w-full py-5 text-xs font-semibold"
+                >
+                  Upgrade to Starter
+                </CoretifyButton>
+              </div>
+            </div>
+
+            {/* Growth Tier [Popular] */}
+            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r md:border-b-0 lg:border-b-0 lg:border-r relative bg-gradient-to-b from-purple-950/10 via-[#0c0c0e]/30 to-transparent">
+              
+              {/* Popular Badge & Glow effect */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-36 w-full max-w-[240px] bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
+              
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base font-semibold text-slate-200">Growth</h3>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-purple-500/15 text-purple-400 border border-purple-500/20">
+                    POPULAR
+                  </span>
+                </div>
+                <div className="flex items-baseline">
+                  <span className="text-3xl font-bold text-white tracking-tight">Rp 499k</span>
+                  <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                </div>
+                <div className="w-full h-px bg-purple-500/20" />
+                <ul className="space-y-3.5 text-xs text-zinc-300">
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="font-medium text-slate-200">Konektor data tanpa batas</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>5.000 pertanyaan AI / bulan</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="font-medium text-slate-200">Dokumen memori tanpa batas</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Hingga 10 anggota tim</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Prioritas playbook & insight kustom</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-8">
+                <CoretifyButton
+                  onClick={handleStartOnboarding}
+                  variant="white"
+                  className="w-full py-5 text-xs font-semibold shadow-lg hover:shadow-purple-500/10"
+                >
+                  Try Growth Free
+                </CoretifyButton>
+              </div>
+            </div>
+
+            {/* Business Tier */}
+            <div className="p-8 flex flex-col justify-between">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-base font-semibold text-slate-200">Business</h3>
+                  <p className="text-xs text-zinc-500 mt-1">Untuk perusahaan besar dengan tata kelola khusus.</p>
+                </div>
+                <div className="flex items-baseline">
+                  <span className="text-3xl font-bold text-white tracking-tight">Rp 1.99M</span>
+                  <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                </div>
+                <div className="w-full h-px bg-slate-850/50" />
+                <ul className="space-y-3.5 text-xs text-zinc-400">
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Konektor standard + custom API</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="font-medium text-slate-200">Pertanyaan AI tanpa batas</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Anggota tim tanpa batas</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Kustomisasi kepatuhan & log audit</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Dukungan khusus & SLA 99.9%</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-8">
+                <CoretifyButton
+                  onClick={handleStartOnboarding}
+                  variant="dark"
+                  className="w-full py-5 text-xs font-semibold"
+                >
+                  Contact Sales
+                </CoretifyButton>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: FAQ */}
+      <section className="w-full bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+          
+          {/* Section Header Band */}
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+            <div className="flex items-center gap-2">
+              <div className="w-[3px] h-3.5 bg-emerald-500 rounded-full" />
+              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                <span className="text-slate-700">[</span>
+                <span className="text-white font-bold">05</span>
+                <span className="text-slate-700">/</span>
+                <span className="text-slate-600">05</span>
+                <span className="text-slate-700">]</span>
+                <span className="text-slate-650 mx-0.5">·</span>
+                <span className="uppercase text-slate-400 font-bold">FAQ</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Section Content Area */}
+          <div className="p-8 sm:p-12 lg:p-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+              
+              {/* Left Column: Headline */}
+              <div className="lg:col-span-4 lg:sticky lg:top-28 text-left space-y-4">
+                <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+                  Frequently asked questions.
+                </h2>
+                <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed">
+                  Semua hal yang perlu Anda ketahui tentang keamanan, performa, dan integrasi di Coretify.
+                </p>
+              </div>
+
+              {/* Right Column: Interactive Accordion */}
+              <div className="lg:col-span-8 space-y-4 text-left">
+                {[
+                  {
+                    question: "Apakah Coretify aman dan 100% read-only?",
+                    answer: "Ya, keamanan data adalah prioritas utama kami. Coretify dirancang dengan prinsip 100% read-only untuk semua integrasi tools (seperti Gmail, Slack, dan Jurnal.id). Kami tidak pernah memodifikasi, menghapus, atau menulis data ke dalam workspace asal Anda."
+                  },
+                  {
+                    question: "Bagaimana Coretify melindungi data sensitif seperti gaji atau keuangan?",
+                    answer: "Kami menggunakan Database-Level Row Level Security (RLS) dan Role-Based Access Control (RBAC) yang ketat. Data gaji, transaksi keuangan, atau dokumen legal terlindung di balik enkripsi tingkat tinggi dan hanya dapat diakses oleh personil yang memiliki otorisasi eksklusif."
+                  },
+                  {
+                    question: "Bagaimana cara kerja WhatsApp Lite tanpa WhatsApp Business API?",
+                    answer: "WhatsApp Lite memungkinkan Anda mengunggah riwayat chat penting secara manual via ekspor file .txt standar. Coretify langsung memproses, mengekstrak entitas penting, dan mengindeks konteks percakapan tersebut ke dalam memori perusahaan Anda tanpa perlu setup API yang rumit."
+                  },
+                  {
+                    question: "Apakah saya bisa menghapus memori data perusahaan secara permanen?",
+                    answer: "Tentu. Kami mendukung kebijakan kedaulatan data penuh. Anda dapat melakukan Instant Wipe kapan saja melalui dashboard admin. Semua data terindeks, representasi vektor, dan cache AI yang berkaitan dengan organisasi Anda akan dihapus secara permanen dari server kami dalam hitungan detik."
+                  },
+                  {
+                    question: "Berapa lama waktu untuk sinkronisasi awal memori?",
+                    answer: "Sinkronisasi awal biasanya selesai dalam waktu 5 hingga 15 menit, tergantung pada volume data pada email, kalender, dan dokumen yang Anda hubungkan. AI Coretify akan langsung dapat menjawab pertanyaan tentang operasional Anda setelah sinkronisasi pertama selesai."
+                  }
+                ].map((faq, index) => {
+                  const isOpen = activeFaqIndex === index;
+                  return (
+                    <div key={index} className="border border-slate-900 bg-[#09090b]/40 rounded-xl overflow-hidden transition-all duration-300">
+                      <button
+                        onClick={() => setActiveFaqIndex(isOpen ? null : index)}
+                        className="w-full py-4.5 px-5 flex items-center justify-between text-left cursor-pointer transition-colors hover:bg-slate-900/10 focus:outline-none"
+                      >
+                        <span className="text-sm font-semibold text-slate-200 pr-4">{faq.question}</span>
+                        <ChevronDown className={`h-4 w-4 text-slate-500 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-white" : ""}`} />
+                      </button>
+                      <div 
+                        className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                          isOpen ? "max-h-60 opacity-100 border-t border-slate-900/60 p-5 bg-[#09090b]/20" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <p className="text-[13px] text-zinc-400 leading-relaxed font-normal">{faq.answer}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
             </div>
