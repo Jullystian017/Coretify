@@ -26,7 +26,10 @@ import {
   Settings2,
   HelpCircle,
   Search,
-  Folder
+  Folder,
+  Cpu,
+  RefreshCw,
+  ShieldCheck
 } from "lucide-react";
 
 export default function Home() {
@@ -660,7 +663,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">01</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">03</span>
+                <span className="text-slate-600">04</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">FEATURES</span>
@@ -976,6 +979,271 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SECTION: CORE ENGINE (Central Memory Hub) */}
+      <section className="w-full bg-[#070708]">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+          
+          {/* Section Header Band */}
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+            <div className="flex items-center gap-2">
+              <div className="w-[3px] h-3.5 bg-purple-500 rounded-full" />
+              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                <span className="text-slate-700">[</span>
+                <span className="text-white font-bold">02</span>
+                <span className="text-slate-700">/</span>
+                <span className="text-slate-600">04</span>
+                <span className="text-slate-700">]</span>
+                <span className="text-slate-650 mx-0.5">·</span>
+                <span className="uppercase text-slate-400 font-bold">CORE ENGINE</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Section Content Area */}
+          <div className="p-8 sm:p-12 lg:p-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              
+              {/* Left Column: Explanations */}
+              <div className="lg:col-span-5 space-y-8 text-left">
+                <div className="space-y-3">
+                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+                    The Central Memory Hub
+                  </h2>
+                  <p className="text-zinc-400 text-[13px] leading-relaxed font-normal">
+                    Coretify integrates your fragmented company tools into a single, unified knowledge graph. Our engine constantly ingests, contextualizes, and secures data stream connections.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  {/* Pillar 1 */}
+                  <div className="flex gap-4 p-4 rounded-xl border border-slate-900 bg-zinc-900/5 hover:border-slate-800/80 transition-all duration-300">
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                      <Cpu className="h-5 w-5" />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-[14px] font-semibold text-white">Semantic Graph Linking</h3>
+                      <p className="text-[12px] text-zinc-400 leading-relaxed">
+                        Data from Drive, WhatsApp, and Gmail aren't just stored; they are linked semantically to map operational relationships automatically.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Pillar 2 */}
+                  <div className="flex gap-4 p-4 rounded-xl border border-slate-900 bg-zinc-900/5 hover:border-slate-800/80 transition-all duration-300">
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                      <RefreshCw className="h-5 w-5" />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-[14px] font-semibold text-white">Continuous Real-time Ingestion</h3>
+                      <p className="text-[12px] text-zinc-400 leading-relaxed">
+                        Automatic background sync schedules ensure that your AI is working with up-to-the-minute operational context.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Pillar 3 */}
+                  <div className="flex gap-4 p-4 rounded-xl border border-slate-900 bg-zinc-900/5 hover:border-slate-800/80 transition-all duration-300">
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                      <ShieldCheck className="h-5 w-5" />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-[14px] font-semibold text-white">Row-Level Security Guard</h3>
+                      <p className="text-[12px] text-zinc-400 leading-relaxed">
+                        Strict permission levels filter RAG queries so that non-sensitive roles never see confidential financial or HR logs.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Visual Interactive Diagram */}
+              <div className="lg:col-span-7 flex justify-center items-center relative py-6">
+                
+                {/* Neon Background Glows */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-72 w-72 rounded-full bg-purple-500/5 blur-[80px]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-48 w-48 rounded-full bg-emerald-500/5 blur-[60px]" />
+
+                {/* Main Hub Container */}
+                <div className="w-full max-w-[540px] aspect-[4/3] rounded-2xl border border-slate-850/50 bg-[#09090b]/40 backdrop-blur-sm relative overflow-hidden p-6 flex items-center justify-center select-none">
+                  
+                  {/* Dot Grid Background */}
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+
+                  {/* HTML Inline Style for flow animations */}
+                  <style dangerouslySetInnerHTML={{ __html: `
+                    @keyframes flow {
+                      from {
+                        stroke-dashoffset: 80;
+                      }
+                      to {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                    .animate-flow {
+                      stroke-dasharray: 10, 30;
+                      animation: flow 4s linear infinite;
+                    }
+                    .animate-flow-delayed {
+                      stroke-dasharray: 10, 30;
+                      animation: flow 4s linear infinite;
+                      animation-delay: 2s;
+                    }
+                    .animate-flow-out {
+                      stroke-dasharray: 15, 35;
+                      animation: flow 3s linear infinite reverse;
+                    }
+                    .animate-flow-out-delayed {
+                      stroke-dasharray: 10, 40;
+                      animation: flow 3s linear infinite reverse;
+                      animation-delay: 1.5s;
+                    }
+                  `}} />
+
+                  {/* SVG Canvas for Connecting Streams */}
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.8" />
+                        <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#10b981" stopOpacity="0.8" />
+                      </linearGradient>
+                    </defs>
+
+                    {/* Flow Lines: Left Sources -> Central Core */}
+                    {/* Google Drive Line */}
+                    <path d="M 15,15 C 32,15 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
+                    {/* WhatsApp Line */}
+                    <path d="M 15,32.5 C 32,32.5 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
+                    {/* Gmail Line */}
+                    <path d="M 15,50 C 32,50 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
+                    {/* Calendar Line */}
+                    <path d="M 15,67.5 C 32,67.5 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
+                    {/* Slack Line */}
+                    <path d="M 15,85 C 32,85 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
+
+                    {/* Flow Lines: Central Core -> Right Outputs */}
+                    {/* Chat AI Line */}
+                    <path d="M 50,50 C 68,50 68,22.5 85,22.5" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
+                    {/* Daily Brief Line */}
+                    <path d="M 50,50 C 68,50 68,50 85,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
+                    {/* Playbook Line */}
+                    <path d="M 50,50 C 68,50 68,77.5 85,77.5" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
+
+                    {/* Animated Glow Trails */}
+                    {/* Left to Core */}
+                    <path d="M 15,15 C 32,15 32,50 50,50" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow" />
+                    <path d="M 15,50 C 32,50 32,50 50,50" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow-delayed" />
+                    <path d="M 15,85 C 32,85 32,50 50,50" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow" />
+                    
+                    {/* Core to Right */}
+                    <path d="M 50,50 C 68,50 68,22.5 85,22.5" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow-out" />
+                    <path d="M 50,50 C 68,50 68,77.5 85,77.5" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow-out-delayed" />
+                  </svg>
+
+                  {/* Left Column: Data Sources */}
+                  {/* Source 1: Google Drive */}
+                  <div className="absolute top-[15%] left-[8%] -translate-y-1/2 group z-10">
+                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-purple-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.15)] transition-all duration-300 cursor-pointer">
+                      <Folder className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-purple-400 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
+                      Google Drive
+                    </div>
+                  </div>
+
+                  {/* Source 2: WhatsApp */}
+                  <div className="absolute top-[32.5%] left-[8%] -translate-y-1/2 group z-10">
+                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-emerald-500/50 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 cursor-pointer">
+                      <Phone className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-emerald-400 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
+                      WhatsApp Chats
+                    </div>
+                  </div>
+
+                  {/* Source 3: Gmail */}
+                  <div className="absolute top-[50%] left-[8%] -translate-y-1/2 group z-10">
+                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300 cursor-pointer">
+                      <Mail className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-blue-400 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
+                      Gmail Inboxes
+                    </div>
+                  </div>
+
+                  {/* Source 4: Calendar */}
+                  <div className="absolute top-[67.5%] left-[8%] -translate-y-1/2 group z-10">
+                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-amber-500/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] transition-all duration-300 cursor-pointer">
+                      <Calendar className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-amber-400 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
+                      Calendar Events
+                    </div>
+                  </div>
+
+                  {/* Source 5: Slack */}
+                  <div className="absolute top-[85%] left-[8%] -translate-y-1/2 group z-10">
+                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-pink-500/50 hover:shadow-[0_0_15px_rgba(236,72,153,0.15)] transition-all duration-300 cursor-pointer">
+                      <Bot className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-pink-400 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
+                      Slack Workspace
+                    </div>
+                  </div>
+
+                  {/* Central Node: Coretify Brain Core */}
+                  <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center h-20 w-20 sm:h-24 sm:w-24 rounded-full border border-purple-500/40 bg-slate-950 shadow-[0_0_30px_rgba(139,92,246,0.25)] z-10 hover:scale-105 transition-transform duration-500 cursor-pointer group">
+                    {/* Ring animation */}
+                    <div className="absolute inset-[-4px] rounded-full border border-dashed border-emerald-500/30 animate-[spin_20s_linear_infinite]" />
+                    <div className="absolute inset-[-8px] rounded-full border border-dotted border-blue-500/20 animate-[spin_30s_linear_infinite_reverse]" />
+                    
+                    <img src="/coretify.png" alt="Coretify Brain Core" className="h-8 w-auto sm:h-10 sm:w-auto object-contain select-none z-10" />
+
+                    {/* Ping ripple */}
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-purple-500/10 opacity-75 animate-ping" />
+                  </div>
+
+                  {/* Right Column: AI Outputs */}
+                  {/* Output 1: Chat AI */}
+                  <div className="absolute top-[22.5%] right-[8%] -translate-y-1/2 group z-10">
+                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-purple-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.15)] transition-all duration-300 cursor-pointer">
+                      <Bot className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-purple-400 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
+                      Ask Chat AI
+                    </div>
+                  </div>
+
+                  {/* Output 2: Daily Brief */}
+                  <div className="absolute top-[50%] right-[8%] -translate-y-1/2 group z-10">
+                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-emerald-500/50 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 cursor-pointer">
+                      <Mail className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-emerald-400 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
+                      Daily Brief Digests
+                    </div>
+                  </div>
+
+                  {/* Output 3: Workflows */}
+                  <div className="absolute top-[77.5%] right-[8%] -translate-y-1/2 group z-10">
+                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300 cursor-pointer">
+                      <TrendingUp className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-blue-400 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
+                      Playbook Insights
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
       <section className="w-full bg-[#070708]/40">
         <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
@@ -986,9 +1254,9 @@ export default function Home() {
               <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
-                <span className="text-white font-bold">02</span>
+                <span className="text-white font-bold">03</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">03</span>
+                <span className="text-slate-600">04</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">PLAYGROUND</span>
@@ -1140,9 +1408,9 @@ export default function Home() {
               <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
-                <span className="text-white font-bold">03</span>
+                <span className="text-white font-bold">04</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">03</span>
+                <span className="text-slate-600">04</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">PROACTIVE</span>
