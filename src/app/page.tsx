@@ -29,70 +29,18 @@ import {
   Folder,
   Cpu,
   RefreshCw,
-  ShieldCheck
+  ShieldCheck,
+  Database,
+  Zap
 } from "lucide-react";
 
 export default function Home() {
   const router = useRouter();
-  const [typedText, setTypedText] = useState("");
-  const [activePreset, setActivePreset] = useState<number | null>(null);
-  const [demoAnswer, setDemoAnswer] = useState<string | null>(null);
-  const [demoCitations, setDemoCitations] = useState<any[]>([]);
   const [activeSectionTab, setActiveSectionTab] = useState<"data" | "tools" | "agent" | "governance">("data");
   const [expandedMeeting, setExpandedMeeting] = useState<string>("greenleaf");
 
   const handleStartOnboarding = () => {
     router.push("/onboarding");
-  };
-
-  const presets = [
-    {
-      q: "Which clients are at risk?",
-      a: "Vista Retail is flagged as a high-churn risk. Gmail logs indicate zero correspondence or follow-ups for the past 14 days, whereas your team normally schedules touchpoints every 3 days. Aero Design is also marked as a medium risk due to invoice payment delays.",
-      c: [
-        { name: "Gmail Inbox / Vista Retail", type: "Email" },
-        { name: "Invoices & Accounts Receivable", type: "Spreadsheet" }
-      ]
-    },
-    {
-      q: "What decisions were made last week?",
-      a: "Three key decisions were finalized last week:\n\n1. **Authentication API Flow**: Client approved the revised API schema for Nexa Corp via WhatsApp on June 12.\n2. **Runway Optimization**: Owner decided to reduce server scaling costs by 15% starting next billing cycle.\n3. **Vista Retainer Renewal**: Retainer terms agreed upon on June 10.",
-      c: [
-        { name: "WhatsApp Group Chat / Nexa Corp", type: "Chat" },
-        { name: "Internal Team Minutes", type: "Document" },
-        { name: "Email Budi / Retainer terms", type: "Email" }
-      ]
-    },
-    {
-      q: "Which projects are delayed?",
-      a: "Project **Nexa Web App** is currently delayed by 5 days from its initial kickoff timeline. The delay was triggered by 4 successive authentication flow revision requests requested by the client after development began.",
-      c: [
-        { name: "Email Budi (Subject: Nexa Revision Request)", type: "Email" },
-        { name: "Google Calendar kickoff details", type: "Calendar" }
-      ]
-    }
-  ];
-
-  const clickPreset = (idx: number) => {
-    setActivePreset(idx);
-    setDemoAnswer(null);
-    setTypedText("");
-
-    const targetQ = presets[idx].q;
-    let currentIdx = 0;
-
-    const interval = setInterval(() => {
-      setTypedText((prev) => prev + targetQ.charAt(currentIdx));
-      currentIdx++;
-      if (currentIdx >= targetQ.length) {
-        clearInterval(interval);
-
-        setTimeout(() => {
-          setDemoAnswer(presets[idx].a);
-          setDemoCitations(presets[idx].c);
-        }, 600);
-      }
-    }, 45);
   };
 
   return (
@@ -663,7 +611,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">01</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">04</span>
+                <span className="text-slate-600">03</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">FEATURES</span>
@@ -979,7 +927,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION: CORE ENGINE (Central Memory Hub) */}
+      {/* SECTION: PLATFORM INFRASTRUCTURE */}
       <section className="w-full bg-[#070708]">
         <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
           
@@ -991,263 +939,250 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">02</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">04</span>
+                <span className="text-slate-600">03</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
-                <span className="uppercase text-slate-400 font-bold">CORE ENGINE</span>
+                <span className="uppercase text-slate-400 font-bold">INFRASTRUCTURE</span>
               </div>
             </div>
           </div>
 
           {/* Section Content Area */}
           <div className="p-8 sm:p-12 lg:p-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
               
-              {/* Left Column: Explanations */}
-              <div className="lg:col-span-5 space-y-8 text-left">
+              {/* Left Column: Sticky Sidebar */}
+              <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-8 text-left">
                 <div className="space-y-3">
-                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
-                    The Central Memory Hub
+                  <div className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold">
+                    Introducing Coretify
+                  </div>
+                  <h2 className="text-3xl sm:text-[38px] font-semibold tracking-[-0.03em] leading-[1.12] text-white">
+                    The infrastructure agents need to run on your company memory
                   </h2>
-                  <p className="text-zinc-400 text-[13px] leading-relaxed font-normal">
-                    Coretify integrates your fragmented company tools into a single, unified knowledge graph. Our engine constantly ingests, contextualizes, and secures data stream connections.
-                  </p>
                 </div>
 
-                <div className="space-y-4">
-                  {/* Pillar 1 */}
-                  <div className="flex gap-4 p-4 rounded-xl border border-slate-900 bg-zinc-900/5 hover:border-slate-800/80 transition-all duration-300">
-                    <div className="h-10 w-10 shrink-0 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                      <Cpu className="h-5 w-5" />
+                {/* Vertical Category List */}
+                <div className="space-y-6 pt-4 border-l border-slate-900 pl-4">
+                  {/* Category 1: Data */}
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                        <Database className="h-2.5 w-2.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-white">Data</span>
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="text-[14px] font-semibold text-white">Semantic Graph Linking</h3>
-                      <p className="text-[12px] text-zinc-400 leading-relaxed">
-                        Data from Drive, WhatsApp, and Gmail aren't just stored; they are linked semantically to map operational relationships automatically.
-                      </p>
-                    </div>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
+                      Coretify unifies every data source into one identity-resolved model.
+                    </p>
                   </div>
 
-                  {/* Pillar 2 */}
-                  <div className="flex gap-4 p-4 rounded-xl border border-slate-900 bg-zinc-900/5 hover:border-slate-800/80 transition-all duration-300">
-                    <div className="h-10 w-10 shrink-0 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                      <RefreshCw className="h-5 w-5" />
+                  {/* Category 2: Tools */}
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                        <Zap className="h-2.5 w-2.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-zinc-450">Tools</span>
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="text-[14px] font-semibold text-white">Continuous Real-time Ingestion</h3>
-                      <p className="text-[12px] text-zinc-400 leading-relaxed">
-                        Automatic background sync schedules ensure that your AI is working with up-to-the-minute operational context.
-                      </p>
-                    </div>
+                    <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
+                      Coretify gives agents and operators shared playbooks, workflows, and routing.
+                    </p>
                   </div>
 
-                  {/* Pillar 3 */}
-                  <div className="flex gap-4 p-4 rounded-xl border border-slate-900 bg-zinc-900/5 hover:border-slate-800/80 transition-all duration-300">
-                    <div className="h-10 w-10 shrink-0 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-                      <ShieldCheck className="h-5 w-5" />
+                  {/* Category 3: Agent */}
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400">
+                        <Cpu className="h-2.5 w-2.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-zinc-450">Agent</span>
                     </div>
-                    <div className="space-y-1">
-                      <h3 className="text-[14px] font-semibold text-white">Row-Level Security Guard</h3>
-                      <p className="text-[12px] text-zinc-400 leading-relaxed">
-                        Strict permission levels filter RAG queries so that non-sensitive roles never see confidential financial or HR logs.
-                      </p>
+                    <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
+                      Coretify's agents turn plain language into working corporate memory.
+                    </p>
+                  </div>
+
+                  {/* Category 4: Governance */}
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                        <ShieldCheck className="h-2.5 w-2.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-zinc-450">Governance</span>
                     </div>
+                    <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
+                      Coretify's agents propose, you approve, and security RLS controls roll back.
+                    </p>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: Visual Interactive Diagram */}
-              <div className="lg:col-span-7 flex justify-center items-center relative py-6">
+              {/* Right Column: Stacked Showcase Cards */}
+              <div className="lg:col-span-8 space-y-16 text-left">
                 
-                {/* Neon Background Glows */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-72 w-72 rounded-full bg-purple-500/5 blur-[80px]" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-48 w-48 rounded-full bg-emerald-500/5 blur-[60px]" />
-
-                {/* Main Hub Container */}
-                <div className="w-full max-w-[540px] aspect-[4/3] rounded-2xl border border-slate-850/50 bg-[#09090b]/40 backdrop-blur-sm relative overflow-hidden p-6 flex items-center justify-center select-none">
+                {/* Showcase Card 1: Data */}
+                <div className="rounded-2xl border border-slate-900 bg-[#09090b]/30 p-8 space-y-6 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
                   
-                  {/* Dot Grid Background */}
-                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-
-                  {/* HTML Inline Style for flow animations */}
-                  <style dangerouslySetInnerHTML={{ __html: `
-                    @keyframes flow {
-                      from {
-                        stroke-dashoffset: 80;
-                      }
-                      to {
-                        stroke-dashoffset: 0;
-                      }
-                    }
-                    .animate-flow {
-                      stroke-dasharray: 10, 30;
-                      animation: flow 4s linear infinite;
-                    }
-                    .animate-flow-delayed {
-                      stroke-dasharray: 10, 30;
-                      animation: flow 4s linear infinite;
-                      animation-delay: 2s;
-                    }
-                    .animate-flow-out {
-                      stroke-dasharray: 15, 35;
-                      animation: flow 3s linear infinite reverse;
-                    }
-                    .animate-flow-out-delayed {
-                      stroke-dasharray: 10, 40;
-                      animation: flow 3s linear infinite reverse;
-                      animation-delay: 1.5s;
-                    }
-                  `}} />
-
-                  {/* SVG Canvas for Connecting Streams */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.8" />
-                        <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#10b981" stopOpacity="0.8" />
-                      </linearGradient>
-                    </defs>
-
-                    {/* Flow Lines: Left Sources -> Central Core */}
-                    {/* Google Drive Line */}
-                    <path d="M 15,15 C 32,15 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
-                    {/* WhatsApp Line */}
-                    <path d="M 15,32.5 C 32,32.5 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
-                    {/* Gmail Line */}
-                    <path d="M 15,50 C 32,50 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
-                    {/* Calendar Line */}
-                    <path d="M 15,67.5 C 32,67.5 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
-                    {/* Slack Line */}
-                    <path d="M 15,85 C 32,85 32,50 50,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
-
-                    {/* Flow Lines: Central Core -> Right Outputs */}
-                    {/* Chat AI Line */}
-                    <path d="M 50,50 C 68,50 68,22.5 85,22.5" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
-                    {/* Daily Brief Line */}
-                    <path d="M 50,50 C 68,50 68,50 85,50" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
-                    {/* Playbook Line */}
-                    <path d="M 50,50 C 68,50 68,77.5 85,77.5" fill="none" stroke="#1e293b" strokeWidth="0.75" strokeDasharray="1 2" />
-
-                    {/* Animated Glow Trails */}
-                    {/* Left to Core */}
-                    <path d="M 15,15 C 32,15 32,50 50,50" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow" />
-                    <path d="M 15,50 C 32,50 32,50 50,50" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow-delayed" />
-                    <path d="M 15,85 C 32,85 32,50 50,50" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow" />
+                  <div className="space-y-4">
+                    {/* Badge */}
+                    <div className="flex items-center gap-2">
+                      <span className="h-6 w-6 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                        <Database className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-emerald-400">Data</span>
+                    </div>
                     
-                    {/* Core to Right */}
-                    <path d="M 50,50 C 68,50 68,22.5 85,22.5" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow-out" />
-                    <path d="M 50,50 C 68,50 68,77.5 85,77.5" fill="none" stroke="url(#glowGrad)" strokeWidth="0.75" strokeDashoffset="0" className="animate-flow-out-delayed" />
-                  </svg>
+                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                      One source of truth for every agent
+                    </h3>
+                    <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
+                      Coretify unifies data from CRM, WhatsApp, documents, and calendar events into a single identity-resolved model. Experience workspace synchronization in real time.
+                    </p>
 
-                  {/* Left Column: Data Sources */}
-                  {/* Source 1: Google Drive */}
-                  <div className="absolute top-[15%] left-[8%] -translate-y-1/2 group z-10">
-                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-purple-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.15)] transition-all duration-300 cursor-pointer">
-                      <Folder className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-purple-400 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
-                      Google Drive
+                    <div>
+                      <button className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-850 text-[11px] font-semibold text-zinc-350 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer select-none">
+                        Learn More
+                      </button>
                     </div>
                   </div>
 
-                  {/* Source 2: WhatsApp */}
-                  <div className="absolute top-[32.5%] left-[8%] -translate-y-1/2 group z-10">
-                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-emerald-500/50 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 cursor-pointer">
-                      <Phone className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-emerald-400 group-hover:scale-110 transition-transform" />
+                  {/* Dashboard Table Mockup */}
+                  <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] text-zinc-300">
+                    {/* Header bar */}
+                    <div className="flex items-center justify-between bg-slate-900/40 px-4 py-2.5 border-b border-slate-900">
+                      <div className="flex items-center gap-1.5">
+                        <span className="h-2.5 w-2.5 rounded-full bg-rose-500/40" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-amber-500/40" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/40" />
+                        <span className="ml-2 font-mono text-[10px] text-slate-500 flex items-center gap-1.5">
+                          <Database className="h-3 w-3" /> Core Data Model
+                        </span>
+                      </div>
+                      <span className="text-[9px] font-semibold px-2 py-0.5 rounded border border-slate-800 bg-[#09090b]/80 text-emerald-400 flex items-center gap-1">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Live
+                      </span>
                     </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
-                      WhatsApp Chats
+
+                    {/* Table View */}
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="border-b border-slate-900 text-slate-500 text-[10px] font-mono bg-slate-950/40">
+                            <th className="py-2.5 px-4 font-normal">Work Email</th>
+                            <th className="py-2.5 px-4 font-normal">Company</th>
+                            <th className="py-2.5 px-4 font-normal">Headcount</th>
+                            <th className="py-2.5 px-4 font-normal">Mobile Phone</th>
+                            <th className="py-2.5 px-4 font-normal">Job Title</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-900 font-sans">
+                          <tr>
+                            <td className="py-2.5 px-4 font-medium text-white">michelle.rivera@example.com</td>
+                            <td className="py-2.5 px-4 text-zinc-400">Attio</td>
+                            <td className="py-2.5 px-4 text-zinc-350">$3,385,492</td>
+                            <td className="py-2.5 px-4 text-zinc-500">+1 (415) 555-0142</td>
+                            <td className="py-2.5 px-4 text-zinc-400">Founding Engineer</td>
+                          </tr>
+                          <tr>
+                            <td className="py-2.5 px-4 font-medium text-white">felicia.reid@example.com</td>
+                            <td className="py-2.5 px-4 text-zinc-400">Amplemarket</td>
+                            <td className="py-2.5 px-4 text-zinc-350">$5,375,784</td>
+                            <td className="py-2.5 px-4 text-zinc-500">+1 (212) 555-0118</td>
+                            <td className="py-2.5 px-4 text-zinc-400">Head of Sales</td>
+                          </tr>
+                          <tr>
+                            <td className="py-2.5 px-4 font-medium text-white">james.smith@example.com</td>
+                            <td className="py-2.5 px-4 text-zinc-400">Apollo</td>
+                            <td className="py-2.5 px-4 text-zinc-350">$2,140,800</td>
+                            <td className="py-2.5 px-4 text-zinc-500">+1 (206) 555-0167</td>
+                            <td className="py-2.5 px-4 text-zinc-400">Field CTO</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
+                </div>
 
-                  {/* Source 3: Gmail */}
-                  <div className="absolute top-[50%] left-[8%] -translate-y-1/2 group z-10">
-                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300 cursor-pointer">
-                      <Mail className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-blue-400 group-hover:scale-110 transition-transform" />
+                {/* Showcase Card 2: Tools */}
+                <div className="rounded-2xl border border-slate-900 bg-[#09090b]/30 p-8 space-y-6 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                  
+                  <div className="space-y-4">
+                    {/* Badge */}
+                    <div className="flex items-center gap-2">
+                      <span className="h-6 w-6 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                        <Zap className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-purple-400">Tools</span>
                     </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
-                      Gmail Inboxes
-                    </div>
-                  </div>
-
-                  {/* Source 4: Calendar */}
-                  <div className="absolute top-[67.5%] left-[8%] -translate-y-1/2 group z-10">
-                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-amber-500/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.15)] transition-all duration-300 cursor-pointer">
-                      <Calendar className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-amber-400 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
-                      Calendar Events
-                    </div>
-                  </div>
-
-                  {/* Source 5: Slack */}
-                  <div className="absolute top-[85%] left-[8%] -translate-y-1/2 group z-10">
-                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-pink-500/50 hover:shadow-[0_0_15px_rgba(236,72,153,0.15)] transition-all duration-300 cursor-pointer">
-                      <Bot className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-pink-400 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
-                      Slack Workspace
-                    </div>
-                  </div>
-
-                  {/* Central Node: Coretify Brain Core */}
-                  <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center h-20 w-20 sm:h-24 sm:w-24 rounded-full border border-purple-500/40 bg-slate-950 shadow-[0_0_30px_rgba(139,92,246,0.25)] z-10 hover:scale-105 transition-transform duration-500 cursor-pointer group">
-                    {/* Ring animation */}
-                    <div className="absolute inset-[-4px] rounded-full border border-dashed border-emerald-500/30 animate-[spin_20s_linear_infinite]" />
-                    <div className="absolute inset-[-8px] rounded-full border border-dotted border-blue-500/20 animate-[spin_30s_linear_infinite_reverse]" />
                     
-                    <img src="/coretify.png" alt="Coretify Brain Core" className="h-8 w-auto sm:h-10 sm:w-auto object-contain select-none z-10" />
+                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                      Every tool you need to run your playbooks
+                    </h3>
+                    <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
+                      Tables, workspace ingestion, playbooks, and task routing - accessible to autonomous agents and the operators who manage them.
+                    </p>
 
-                    {/* Ping ripple */}
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-purple-500/10 opacity-75 animate-ping" />
-                  </div>
-
-                  {/* Right Column: AI Outputs */}
-                  {/* Output 1: Chat AI */}
-                  <div className="absolute top-[22.5%] right-[8%] -translate-y-1/2 group z-10">
-                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-purple-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.15)] transition-all duration-300 cursor-pointer">
-                      <Bot className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-purple-400 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
-                      Ask Chat AI
+                    <div>
+                      <button className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-850 text-[11px] font-semibold text-zinc-350 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer select-none">
+                        Learn More
+                      </button>
                     </div>
                   </div>
 
-                  {/* Output 2: Daily Brief */}
-                  <div className="absolute top-[50%] right-[8%] -translate-y-1/2 group z-10">
-                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-emerald-500/50 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all duration-300 cursor-pointer">
-                      <Mail className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-emerald-400 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
-                      Daily Brief Digests
+                  {/* Workflow Canvas Mockup */}
+                  <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] text-zinc-350 p-6 relative min-h-[260px] flex flex-col justify-center items-center">
+                    
+                    {/* Workflow nodes */}
+                    <div className="flex flex-col items-center gap-6 w-full max-w-[360px]">
+                      
+                      {/* Trigger Node */}
+                      <div className="w-full bg-[#0c0c0e] border border-slate-850 rounded-xl p-3.5 flex items-center justify-between hover:border-purple-500/30 transition-all">
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-7 w-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                            <Database className="h-4 w-4" />
+                          </div>
+                          <div className="text-left">
+                            <span className="text-[10px] text-zinc-500 font-bold block">TRIGGER</span>
+                            <span className="text-xs font-semibold text-white">New Workspace Event</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Connection Line */}
+                      <div className="h-6 w-[1.5px] bg-slate-900 relative">
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-[4px] border-r-[4px] border-t-[5px] border-l-transparent border-r-transparent border-t-slate-800" />
+                      </div>
+
+                      {/* Logic Node */}
+                      <div className="w-full bg-[#0c0c0e] border border-slate-850 rounded-xl p-3.5 flex items-center justify-between hover:border-purple-500/30 transition-all">
+                        <div className="flex items-center gap-2.5">
+                          <div className="h-7 w-7 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                            <Cpu className="h-4 w-4" />
+                          </div>
+                          <div className="text-left">
+                            <span className="text-[10px] text-zinc-550 font-bold block">ACTION LOGIC</span>
+                            <span className="text-xs font-semibold text-white">RLS Control & Semantic Mapping</span>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
-
-                  {/* Output 3: Workflows */}
-                  <div className="absolute top-[77.5%] right-[8%] -translate-y-1/2 group z-10">
-                    <div className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-slate-950/90 border border-slate-850 hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300 cursor-pointer">
-                      <TrendingUp className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-blue-400 group-hover:scale-110 transition-transform" />
-                    </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 scale-0 group-hover:scale-100 bg-[#0c0c0e] border border-slate-800 text-[10px] text-zinc-300 font-mono px-2 py-0.5 rounded shadow-lg transition-all duration-200 whitespace-nowrap z-20">
-                      Playbook Insights
-                    </div>
-                  </div>
-
                 </div>
 
               </div>
 
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
+      {/* SECTION 3: DAILY BRIEF */}
       <section className="w-full bg-[#070708]/40">
         <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
-
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
@@ -1256,161 +1191,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">03</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">04</span>
-                <span className="text-slate-700">]</span>
-                <span className="text-slate-650 mx-0.5">·</span>
-                <span className="uppercase text-slate-400 font-bold">PLAYGROUND</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Section Content Area */}
-          <div className="p-8 sm:p-12 lg:p-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
-
-              {/* Left Column: Title & Presets */}
-              <div className="lg:col-span-5 pr-0 lg:pr-8 space-y-6 text-left">
-                <div className="space-y-3">
-                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
-                    Ask your business anything
-                  </h2>
-                  <p className="text-slate-400 text-xs leading-relaxed font-normal">
-                    Query your company memory in plain English. Coretify resolves identities, details, and context across tools to give you direct answers with exact source references.
-                  </p>
-                </div>
-
-                {/* Clickable Preset Cards */}
-                <div className="space-y-3 pt-2">
-                  {presets.map((preset, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => clickPreset(idx)}
-                      className={`w-full text-left p-4.5 rounded-xl border transition-all flex items-center justify-between group cursor-pointer ${activePreset === idx
-                        ? "bg-[#0c0c0e]/90 border-slate-800 text-white"
-                        : "bg-transparent border-slate-900/60 text-slate-400 hover:text-slate-200 hover:border-slate-850"
-                        }`}
-                    >
-                      <span className="text-xs font-semibold">{preset.q}</span>
-                      <ArrowRight className={`h-4 w-4 shrink-0 transition-transform ${activePreset === idx ? "translate-x-0 text-white" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-slate-450"
-                        }`} />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Spacing Column */}
-              <div className="hidden lg:block lg:col-span-1 self-stretch relative">
-              </div>
-
-              {/* Right Column: Chat UI Window */}
-              <div className="lg:col-span-6 bg-[#0c0c0e] border border-slate-900 rounded-3xl p-6 shadow-xl relative min-h-[440px] flex flex-col justify-between overflow-hidden">
-
-                {/* Chat Header */}
-                <div className="flex justify-between items-center border-b border-slate-900 pb-3.5 mb-4">
-                  <span className="text-xs font-bold text-white flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    Coretify Memory AI
-                  </span>
-                  <Badge variant="outline" className="text-[9px] border-slate-850 text-slate-500 bg-slate-950 px-2 py-0.5 font-mono">
-                    RAG pgvector
-                  </Badge>
-                </div>
-
-                {/* Chat Conversation Area */}
-                <div className="flex-1 space-y-4 mb-4 text-xs">
-
-                  {/* Initial bot message */}
-                  <div className="flex gap-3 items-start justify-start">
-                    <div className="h-7 w-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
-                      <Bot className="h-4 w-4" />
-                    </div>
-                    <div className="bg-[#08080a]/60 border border-slate-900 text-slate-450 px-3.5 py-2.5 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed text-left">
-                      Hello! Ask me anything about your business memory. I can search through calendar schedules, email correspondence, chat exports, and document files.
-                    </div>
-                  </div>
-
-                  {/* User Typed Query */}
-                  {typedText && (
-                    <div className="flex gap-3 items-start justify-end animate-in fade-in duration-200">
-                      <div className="bg-[#18181b] border border-slate-850 text-white px-3.5 py-2.5 rounded-2xl rounded-tr-none max-w-[85%] leading-relaxed text-left">
-                        {typedText}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Loading/Typing Indicator */}
-                  {typedText && !demoAnswer && (
-                    <div className="flex gap-3 items-start justify-start animate-in fade-in duration-100">
-                      <div className="h-7 w-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
-                        <Bot className="h-4.5 w-4.5 animate-pulse" />
-                      </div>
-                      <div className="bg-[#08080a]/60 border border-slate-900 rounded-2xl rounded-tl-none px-3.5 py-2 flex items-center gap-1">
-                        <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: "0ms" }} />
-                        <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: "150ms" }} />
-                        <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: "300ms" }} />
-                      </div>
-                    </div>
-                  )}
-
-                  {/* AI Answer & Citations */}
-                  {demoAnswer && (
-                    <div className="flex gap-3 items-start justify-start animate-in fade-in slide-in-from-bottom-2 duration-300">
-                      <div className="h-7 w-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
-                        <Bot className="h-4.5 w-4.5" />
-                      </div>
-                      <div className="space-y-2 max-w-[85%] text-left">
-                        <div className="bg-[#08080a] border border-slate-900 text-slate-300 px-3.5 py-2.5 rounded-2xl rounded-tl-none leading-relaxed whitespace-pre-line">
-                          {demoAnswer}
-                        </div>
-
-                        {/* Citations list */}
-                        {demoCitations && demoCitations.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5 pt-0.5">
-                            <span className="text-[9px] text-slate-500 self-center">Sources:</span>
-                            {demoCitations.map((cite, cIdx) => (
-                              <span
-                                key={cIdx}
-                                className="text-[9px] font-semibold px-2 py-0.5 rounded border bg-slate-900 border-slate-850 text-slate-400 inline-flex items-center gap-1 font-sans cursor-pointer hover:text-white transition-colors"
-                              >
-                                {cite.name} <ExternalLink className="h-2.5 w-2.5" />
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                </div>
-
-                {/* Chat Input Bar */}
-                <div className="border border-slate-900 bg-[#08080a] p-1.5 rounded-xl text-xs text-slate-650 flex items-center justify-between mt-4">
-                  <span className="pl-2.5 select-none">Ask a question...</span>
-                  <button className="bg-slate-900 border border-slate-800 text-slate-400 p-1.5 rounded-lg hover:text-white transition-colors">
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: DAILY BRIEF */}
-      <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
-
-          {/* Section Header Band */}
-          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
-            <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
-              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
-                <span className="text-slate-700">[</span>
-                <span className="text-white font-bold">04</span>
-                <span className="text-slate-700">/</span>
-                <span className="text-slate-600">04</span>
+                <span className="text-slate-600">03</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">PROACTIVE</span>
