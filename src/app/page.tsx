@@ -613,7 +613,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">01</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">05</span>
+                <span className="text-slate-600">07</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">FEATURES</span>
@@ -941,7 +941,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">02</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">05</span>
+                <span className="text-slate-600">07</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">INFRASTRUCTURE</span>
@@ -1347,7 +1347,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">03</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">05</span>
+                <span className="text-slate-600">07</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">CONNECT</span>
@@ -1536,7 +1536,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">04</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">05</span>
+                <span className="text-slate-600">07</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">PRICING</span>
@@ -1797,7 +1797,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">05</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">05</span>
+                <span className="text-slate-600">07</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">FAQ</span>
@@ -1867,6 +1867,158 @@ export default function Home() {
 
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* SECTION 6: TESTIMONIALS */}
+      <section className="w-full bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+          
+          {/* Section Header Band */}
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+            <div className="flex items-center gap-2">
+              <div className="w-[3px] h-3.5 bg-rose-500 rounded-full" />
+              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                <span className="text-slate-700">[</span>
+                <span className="text-white font-bold">06</span>
+                <span className="text-slate-700">/</span>
+                <span className="text-slate-600">07</span>
+                <span className="text-slate-700">]</span>
+                <span className="text-slate-650 mx-0.5">·</span>
+                <span className="uppercase text-slate-400 font-bold">TESTIMONIALS</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Title block */}
+          <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4">
+            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+              Loved by forward-thinking teams.
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-2xl leading-relaxed">
+              See how Indonesian software houses, agencies, and startups run more efficiently with Coretify.
+            </p>
+          </div>
+
+          {/* Testimonials Grid */}
+          <div className="border-t border-slate-850/80 grid grid-cols-1 lg:grid-cols-3 bg-[#09090b]/10">
+            
+            {/* Testimonial 1 */}
+            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 lg:border-b-0 lg:border-r text-left">
+              <div className="space-y-6">
+                <p className="text-sm text-zinc-300 leading-relaxed font-normal">
+                  &ldquo;Coretify membantu kami mendeteksi scope creep 2 minggu lebih awal dari biasanya. Integrasi Gmail &amp; Slack RAG-nya berhasil menyelamatkan profit margin project kami.&rdquo;
+                </p>
+              </div>
+              <div className="flex items-center gap-3.5 pt-6 border-t border-slate-900/60 mt-6">
+                <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/20 to-transparent blur-[2px]" />
+                  RP
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-slate-200">Rian Pratama</div>
+                  <div className="text-[10px] text-zinc-500 font-mono mt-0.5">CEO, NexaTech · Software House (18 orang)</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 lg:border-b-0 lg:border-r text-left">
+              <div className="space-y-6">
+                <p className="text-sm text-zinc-300 leading-relaxed font-normal">
+                  &ldquo;Dulu, koordinasi dengan client sangat chaos karena info tersebar di WhatsApp &amp; email. Dengan Coretify, seluruh tim bisa mencari konteks meeting sebelumnya hanya dalam hitungan detik.&rdquo;
+                </p>
+              </div>
+              <div className="flex items-center gap-3.5 pt-6 border-t border-slate-900/60 mt-6">
+                <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-transparent blur-[2px]" />
+                  DS
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-slate-200">Dian Sastro</div>
+                  <div className="text-[10px] text-zinc-500 font-mono mt-0.5">Founder, Vibe Agency · Creative Agency (12 orang)</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="p-8 flex flex-col justify-between text-left">
+              <div className="space-y-6">
+                <p className="text-sm text-zinc-300 leading-relaxed font-normal">
+                  &ldquo;Proses onboarding engineer baru menjadi 3x lebih cepat karena mereka bisa menanyakan arsitektur dan keputusan masa lalu langsung ke &apos;Company Memory&apos; Coretify.&rdquo;
+                </p>
+              </div>
+              <div className="flex items-center gap-3.5 pt-6 border-t border-slate-900/60 mt-6">
+                <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent blur-[2px]" />
+                  BS
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-slate-200">Budi Santoso</div>
+                  <div className="text-[10px] text-zinc-500 font-mono mt-0.5">CTO, KopiSpace · Tech Startup (25 orang)</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 7: CTA */}
+      <section className="w-full bg-[#070708]/40">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+          
+          {/* Section Header Band */}
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+            <div className="flex items-center gap-2">
+              <div className="w-[3px] h-3.5 bg-white rounded-full" />
+              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                <span className="text-slate-700">[</span>
+                <span className="text-white font-bold">07</span>
+                <span className="text-slate-700">/</span>
+                <span className="text-slate-600">07</span>
+                <span className="text-slate-700">]</span>
+                <span className="text-slate-650 mx-0.5">·</span>
+                <span className="uppercase text-slate-400 font-bold">GET STARTED</span>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Banner Card Container */}
+          <div className="p-8 sm:p-12 lg:p-20 flex flex-col items-center justify-center text-center relative overflow-hidden bg-gradient-to-b from-slate-950/20 to-transparent">
+            {/* Glowing background */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-72 w-full max-w-2xl bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-48 w-full max-w-xl bg-purple-500/5 rounded-full blur-[80px] pointer-events-none" />
+
+            <div className="max-w-2xl space-y-6 z-10">
+              <h2 className="text-3xl sm:text-[44px] font-semibold tracking-[-0.03em] leading-[1.1] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+                Ready to unlock your company memory?
+              </h2>
+              <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-lg mx-auto">
+                Bergabunglah dengan ratusan perusahaan Indonesia yang telah mengintegrasikan memori tim mereka secara terpusat dan aman. Mulai uji coba gratis 14 hari sekarang.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+                <CoretifyButton
+                  onClick={handleStartOnboarding}
+                  variant="white"
+                  size="lg"
+                  className="px-8 py-5.5 text-[13px] font-semibold shadow-lg hover:shadow-indigo-500/10 w-full sm:w-auto"
+                >
+                  Try Coretify Free
+                </CoretifyButton>
+                <CoretifyButton
+                  onClick={handleStartOnboarding}
+                  variant="dark"
+                  size="lg"
+                  className="px-8 py-5.5 text-[13px] font-semibold w-full sm:w-auto"
+                >
+                  Request a Demo
+                </CoretifyButton>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
