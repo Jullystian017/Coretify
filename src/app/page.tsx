@@ -186,7 +186,7 @@ export default function Home() {
         {/* Smooth background transition fade to prevent harsh bottom line seam */}
         <div className="absolute bottom-0 left-0 right-0 h-72 bg-gradient-to-t from-[#070708] via-[#070708]/85 to-transparent pointer-events-none z-0" />
         {/* Hero Copywriting Row */}
-        <div className="relative z-10 w-full border-b border-slate-850/80">
+        <div className="relative z-10 w-full border-b border-slate-850/15">
           <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
 
@@ -221,12 +221,12 @@ export default function Home() {
         <div className="relative z-10 w-full">
           <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
             {/* Left spacer column with dashed border on the right */}
-            <div className="col-span-1 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-1 border-r border-slate-850/15" style={{ borderRightStyle: "dashed" }} />
 
             {/* Ask Coretify tab */}
             <button
               onClick={() => setActiveSectionTab("agent")}
-              className={`col-span-2 border-r border-b border-b-slate-850/80 border-r-slate-850/40 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "agent"
+              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "agent"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -240,7 +240,7 @@ export default function Home() {
             {/* Data model tab */}
             <button
               onClick={() => setActiveSectionTab("data")}
-              className={`col-span-2 border-r border-b border-b-slate-850/80 border-r-slate-850/40 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "data"
+              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "data"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -254,7 +254,7 @@ export default function Home() {
             {/* Workflows tab */}
             <button
               onClick={() => setActiveSectionTab("tools")}
-              className={`col-span-2 border-r border-b border-b-slate-850/80 border-r-slate-850/40 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "tools"
+              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "tools"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -268,7 +268,7 @@ export default function Home() {
             {/* Reporting tab with dashed border on the right */}
             <button
               onClick={() => setActiveSectionTab("governance")}
-              className={`col-span-2 border-r border-b border-b-slate-850/80 border-r-slate-850/80 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "governance"
+              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "governance"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -286,8 +286,8 @@ export default function Home() {
 
           {/* Extension row to project vertical lines down to the dashboard */}
           <div className="mx-auto max-w-[1360px] grid grid-cols-10 h-8">
-            <div className="col-span-1 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
-            <div className="col-span-8 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-1 border-r border-slate-850/15" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-8 border-r border-slate-850/15" style={{ borderRightStyle: "dashed" }} />
             <div className="col-span-1" />
           </div>
         </div>
