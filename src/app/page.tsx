@@ -143,7 +143,7 @@ export default function Home() {
       </header>
 
       {/* COMBINED HERO & DASHBOARD AREA (Spans full height of canvas) */}
-      <section className="relative border-b border-slate-850/15 w-full bg-[#070708]/25 overflow-hidden">
+      <section className="relative border-b border-slate-850/80 w-full bg-[#070708]/25 overflow-hidden">
 
         {/* Aurora Glowing Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
@@ -186,7 +186,7 @@ export default function Home() {
         {/* Smooth background transition fade to prevent harsh bottom line seam */}
         <div className="absolute bottom-0 left-0 right-0 h-72 bg-gradient-to-t from-[#070708] via-[#070708]/85 to-transparent pointer-events-none z-0" />
         {/* Hero Copywriting Row */}
-        <div className="relative z-10 w-full border-b border-slate-850/15">
+        <div className="relative z-10 w-full border-b border-slate-850/80">
           <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
 
@@ -221,54 +221,54 @@ export default function Home() {
         <div className="relative z-10 w-full">
           <div className="mx-auto max-w-[1360px] grid grid-cols-10 text-[13px] font-semibold text-slate-400">
             {/* Left spacer column with dashed border on the right */}
-            <div className="col-span-1 border-r border-slate-850/15" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-1 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
 
             {/* Ask Coretify tab */}
             <button
               onClick={() => setActiveSectionTab("agent")}
-              className={`col-span-2 border-r border-b border-slate-850/15 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "agent"
+              className={`col-span-2 border-r border-b border-b-slate-850/80 border-r-slate-850/40 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "agent"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
             >
               <span className="relative z-10">Ask Coretify</span>
               {activeSectionTab === "agent" && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/20 z-10" />
               )}
             </button>
 
             {/* Data model tab */}
             <button
               onClick={() => setActiveSectionTab("data")}
-              className={`col-span-2 border-r border-b border-slate-850/15 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "data"
+              className={`col-span-2 border-r border-b border-b-slate-850/80 border-r-slate-850/40 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "data"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
             >
               <span className="relative z-10">Data model</span>
               {activeSectionTab === "data" && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/20 z-10" />
               )}
             </button>
 
             {/* Workflows tab */}
             <button
               onClick={() => setActiveSectionTab("tools")}
-              className={`col-span-2 border-r border-b border-slate-850/15 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "tools"
+              className={`col-span-2 border-r border-b border-b-slate-850/80 border-r-slate-850/40 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "tools"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
             >
               <span className="relative z-10">Workflows</span>
               {activeSectionTab === "tools" && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/20 z-10" />
               )}
             </button>
 
             {/* Reporting tab with dashed border on the right */}
             <button
               onClick={() => setActiveSectionTab("governance")}
-              className={`col-span-2 border-r border-b border-slate-850/15 py-6 text-center cursor-pointer transition-all relative ${activeSectionTab === "governance"
+              className={`col-span-2 border-r border-b border-b-slate-850/80 border-r-slate-850/80 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "governance"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -276,7 +276,7 @@ export default function Home() {
             >
               <span className="relative z-10">Reporting</span>
               {activeSectionTab === "governance" && (
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_12px_rgba(255,255,255,0.6)]" />
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/20 z-10" />
               )}
             </button>
 
@@ -286,8 +286,8 @@ export default function Home() {
 
           {/* Extension row to project vertical lines down to the dashboard */}
           <div className="mx-auto max-w-[1360px] grid grid-cols-10 h-8">
-            <div className="col-span-1 border-r border-slate-850/15" style={{ borderRightStyle: "dashed" }} />
-            <div className="col-span-8 border-r border-slate-850/15" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-1 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
+            <div className="col-span-8 border-r border-slate-850/80" style={{ borderRightStyle: "dashed" }} />
             <div className="col-span-1" />
           </div>
         </div>
@@ -584,7 +584,7 @@ export default function Home() {
       </section>
 
       {/* BRAND LOGOS SECTION (Inside the vertical grid lines) */}
-      <section className="relative z-20 w-full bg-[#070708] border-t border-b border-slate-850/15 shadow-[0_-20px_50px_rgba(0,0,0,0.95)]">
+      <section className="relative z-20 w-full bg-[#070708] border-t border-b border-slate-850/80 shadow-[0_-20px_50px_rgba(0,0,0,0.95)]">
         <div className="mx-auto max-w-[1360px] px-8 py-9 flex flex-wrap items-center justify-between gap-x-12 gap-y-6 w-full text-white">
           {/* Vercel */}
           <div className="flex items-center gap-2 select-none">
@@ -652,10 +652,10 @@ export default function Home() {
 
       {/* SECTION: Tab Switcher (Introducing Default clone) */}
       <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/15 relative">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
 
           {/* Section Header Band */}
-          <div className="border-b border-slate-850/15 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
               <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
@@ -680,10 +680,10 @@ export default function Home() {
             </p>
           </div>
           {/* BENTO GRID CONTAINER WITH SIDE SPACERS */}
-          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full border-t border-slate-850/15">
+          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full border-t border-slate-850/80">
             {/* Left Spacer with diagonal stripes */}
             <div
-              className="hidden lg:block border-r border-slate-850/15"
+              className="hidden lg:block border-r border-slate-850/80"
               style={{
                 backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
               }}
@@ -693,7 +693,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 bg-[#09090b]/40 shadow-2xl">
 
               {/* Card 1: Company Memory Builder (Ingestion Layer) - spans 2 cols on lg */}
-              <div className="lg:col-span-2 border-b lg:border-r border-slate-850/15 flex flex-col justify-between h-full bg-[#08080a]/20">
+              <div className="lg:col-span-2 border-b lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="grid grid-cols-1 md:grid-cols-12 h-full w-full">
                   {/* Left Column: Description */}
                   <div className="md:col-span-5 p-8 sm:p-10 flex flex-col justify-center text-left">
@@ -706,7 +706,7 @@ export default function Home() {
                     </p>
                   </div>
                   {/* Right Column: Visualizer */}
-                  <div className="md:col-span-7 p-8 sm:p-10 border-t md:border-t-0 md:border-l border-slate-850/15 bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] flex items-center justify-center min-h-[320px] md:min-h-0">
+                  <div className="md:col-span-7 p-8 sm:p-10 border-t md:border-t-0 md:border-l border-slate-850/80 bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] flex items-center justify-center min-h-[320px] md:min-h-0">
                     <div className="flex flex-col items-center justify-center w-full max-w-[420px] relative z-10 gap-6">
                       {/* Connected Sources (Top Grid) */}
                       <div className="grid grid-cols-4 gap-3 w-full">
@@ -755,7 +755,7 @@ export default function Home() {
               </div>
 
               {/* Card 2: Ask Business Chat Console (Interactive Query) - spans 1 col on lg */}
-              <div className="lg:col-span-1 border-b border-slate-850/15 flex flex-col justify-between h-full bg-[#08080a]/20">
+              <div className="lg:col-span-1 border-b border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="p-8 sm:p-10 pb-4 text-left">
                   <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">02 . INTERACTIVE QUERY</span>
                   <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
@@ -765,7 +765,7 @@ export default function Home() {
                     Query Coretify Memory in plain English or Indonesian. Get instant answers regarding project statuses, meetings, and decisions.
                   </p>
                 </div>
-                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/10 flex-1 min-h-[320px]">
+                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
                   <div className="w-full max-w-[340px] bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl text-left space-y-3.5 relative z-10">
                     {/* Chat Mock Header */}
                     <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
@@ -809,7 +809,7 @@ export default function Home() {
               </div>
 
               {/* Card 3: Company Memory Graph (Knowledge Mapping) - spans 1 col on lg */}
-              <div className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-slate-850/15 flex flex-col justify-between h-full bg-[#08080a]/20">
+              <div className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="p-8 sm:p-10 pb-4 text-left">
                   <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">03 . KNOWLEDGE MAPPING</span>
                   <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
@@ -819,7 +819,7 @@ export default function Home() {
                     Visualize connections between Clients, Meetings, Decisions, Projects, and Tasks extracted by AI from your daily communications.
                   </p>
                 </div>
-                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/10 flex-1 min-h-[320px]">
+                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
                   <div className="w-full max-w-[340px] h-[240px] border border-zinc-800 rounded-2xl bg-[#0c0c0e]/95 relative overflow-hidden z-10 flex items-center justify-center">
                     {/* SVG Graph diagram */}
                     <svg className="w-full h-full" viewBox="0 0 400 280">
@@ -866,7 +866,7 @@ export default function Home() {
               </div>
 
               {/* Card 4: Daily Brief Digest (Proactive Alerts) - spans 1 col on lg */}
-              <div className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-slate-850/15 flex flex-col justify-between h-full bg-[#08080a]/20">
+              <div className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="p-8 sm:p-10 pb-4 text-left">
                   <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">04 . PROACTIVE ALERTS</span>
                   <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
@@ -876,7 +876,7 @@ export default function Home() {
                     Receive a daily intelligence email every morning. Spot delayed projects, client follow-up windows, and critical cash flow changes.
                   </p>
                 </div>
-                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/10 flex-1 min-h-[320px]">
+                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
                   <div className="w-full max-w-[300px] bg-[#0c0c0e]/95 border border-zinc-800 rounded-2xl p-4 shadow-xl text-left space-y-3 relative z-10">
                     {/* Header Band */}
                     <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
@@ -931,7 +931,7 @@ export default function Home() {
                     Insights customized for your exact business model. Whether you are a Software House, Creative Agency, or Startup.
                   </p>
                 </div>
-                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/10 flex-1 min-h-[320px]">
+                <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
                   <div className="w-full max-w-[340px] space-y-3 relative z-10 text-left">
                     {/* Playbook selector */}
                     <div className="flex gap-1.5 p-1 rounded-xl bg-slate-950/60 border border-zinc-800 text-[10px] font-semibold text-zinc-400">
@@ -969,7 +969,7 @@ export default function Home() {
 
             {/* Right Spacer with diagonal stripes */}
             <div
-              className="hidden lg:block border-l border-slate-850/15"
+              className="hidden lg:block border-l border-slate-850/80"
               style={{
                 backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
               }}
@@ -980,10 +980,10 @@ export default function Home() {
 
       {/* SECTION: ASK YOUR BUSINESS ANYTHING (Chat UI Playground) */}
       <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/15 relative">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
 
           {/* Section Header Band */}
-          <div className="border-b border-slate-850/15 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
               <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
@@ -1134,10 +1134,10 @@ export default function Home() {
 
       {/* SECTION 4: DAILY BRIEF */}
       <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/15 relative">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
 
           {/* Section Header Band */}
-          <div className="border-b border-slate-850/15 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
               <div className="w-[3px] h-3.5 bg-slate-455 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
@@ -1250,7 +1250,7 @@ export default function Home() {
 
       {/* TRUST SIGNALS FOOTER BLOCK */}
       <section className="w-full bg-[#070708]">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/15 relative pt-20 pb-12 px-8 sm:px-12 lg:px-16 flex flex-col gap-14">
+        <div className="mx-auto max-w-[1360px] border-l border-r border-slate-850/80 relative pt-20 pb-12 px-8 sm:px-12 lg:px-16 flex flex-col gap-14">
 
           {/* Main Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start w-full">
@@ -1331,7 +1331,7 @@ export default function Home() {
           </div>
 
           {/* Divider */}
-          <div className="w-full h-px bg-slate-850/15" />
+          <div className="w-full h-px bg-slate-850/80" />
 
           {/* Bottom Bar: Copyright & Socials */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-[13px] text-zinc-500 w-full">
