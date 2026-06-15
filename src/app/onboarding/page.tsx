@@ -196,7 +196,7 @@ export default function OnboardingPage() {
         <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-0">
             <img src="/coretify.png" alt="Coretify Logo" className="h-7.5 w-auto object-contain" />
-            <span className="font-bold text-[19px] tracking-tight text-white">
+            <span className="font-semibold text-[19px] tracking-tight text-white">
               Coretify Setup
             </span>
           </div>

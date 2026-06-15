@@ -104,7 +104,7 @@ export default function Home() {
           {/* Logo */}
           <div className="flex items-center gap-0 cursor-pointer" onClick={() => router.push("/")}>
             <img src="/coretify.png" alt="Coretify Logo" className="h-9 w-auto object-contain" />
-            <span className="text-[21px] font-bold tracking-tight text-white">
+            <span className="text-[21px] font-semibold tracking-tight text-white">
               Coretify
             </span>
           </div>
