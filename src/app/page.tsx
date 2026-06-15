@@ -348,11 +348,11 @@ export default function Home() {
               </div>
 
               {/* Inner Dashboard Layout */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]">
+              <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[460px]">
 
                 {/* Left Sidebar (Workspace Navigation) */}
-                <div className="lg:col-span-3 border-r border-slate-900 bg-[#09090b]/80 p-4.5 space-y-6 flex flex-col justify-between text-left">
-                  <div className="space-y-5">
+                <div className="lg:col-span-3 border-r border-slate-900 bg-[#09090b]/80 p-3.5 space-y-5 flex flex-col justify-between text-left">
+                  <div className="space-y-4">
 
                     {/* Search box (Quick Actions) */}
                     <div className="relative flex items-center bg-[#070708] border border-slate-900 rounded-lg p-2 text-xs text-slate-500 hover:border-slate-850 transition-all cursor-pointer">
@@ -364,35 +364,35 @@ export default function Home() {
 
                     {/* Nav list */}
                     <nav className="space-y-1 text-slate-400 text-xs font-semibold">
-                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-900 border border-slate-850 text-white cursor-pointer text-left">
+                      <button className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-850 text-white cursor-pointer text-left">
                         <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
                         <span>Home</span>
                       </button>
-                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <button className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
                         <Bell className="h-3.5 w-3.5 text-slate-550" />
                         <span>Notifications</span>
                       </button>
-                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <button className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
                         <CheckSquare className="h-3.5 w-3.5 text-slate-550" />
                         <span>Tasks</span>
                       </button>
-                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <button className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
                         <FileText className="h-3.5 w-3.5 text-slate-550" />
                         <span>Notes</span>
                       </button>
-                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <button className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
                         <Mail className="h-3.5 w-3.5 text-slate-550" />
                         <span>Emails</span>
                       </button>
-                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <button className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
                         <Phone className="h-3.5 w-3.5 text-slate-550" />
                         <span>Calls</span>
                       </button>
-                      <button className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <button className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
                         <BarChart2 className="h-3.5 w-3.5 text-slate-550" />
                         <span>Reports</span>
                       </button>
-                      <button className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
+                      <button className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg hover:bg-slate-900/50 hover:text-slate-200 cursor-pointer text-left">
                         <div className="flex items-center gap-2.5">
                           <Folder className="h-3.5 w-3.5 text-slate-550" />
                           <span>Automations</span>
@@ -407,7 +407,7 @@ export default function Home() {
                   </div>
 
                   {/* Favorites & PQL workflows */}
-                  <div className="space-y-4 pt-4 border-t border-slate-900/60">
+                  <div className="space-y-3 pt-3 border-t border-slate-900/60">
                     <div className="space-y-1">
                       <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider block">Favorites</span>
                       <div className="text-xs text-slate-400 font-semibold space-y-1.5 pl-1">
@@ -415,19 +415,11 @@ export default function Home() {
                           <span className="h-1.5 w-1.5 rounded-full bg-slate-650" />
                           <span>PQL workflows</span>
                         </div>
-                        <div className="pl-3.5 space-y-1.5 text-[11px] text-slate-500">
+                        <div className="pl-3.5 space-y-1 text-[11px] text-slate-500">
                           <div className="hover:text-slate-350 cursor-pointer">PQL Pipeline Deals</div>
                           <div className="hover:text-slate-350 cursor-pointer">PQL Workspace Outreach</div>
                           <div className="hover:text-slate-355 cursor-pointer">PQL Triage</div>
                         </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-1 pt-2">
-                      <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider block">Reports</span>
-                      <div className="text-[11px] text-slate-500 font-semibold space-y-2 pl-1">
-                        <div className="hover:text-slate-350 cursor-pointer">Revenue</div>
-                        <div className="hover:text-slate-355 cursor-pointer">Attribution</div>
                       </div>
                     </div>
                   </div>
