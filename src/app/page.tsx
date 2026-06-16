@@ -1076,15 +1076,7 @@ export default function Home() {
             </p>
           </div>
           {/* Section Content Area */}
-          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full">
-              {/* Left Spacer */}
-              <div
-                className="hidden lg:block border-r border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
-            <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
             
             {/* Left Column: Interactive Categories Switcher (Stretches full height, border runs all the way down) */}
             <div className="lg:col-span-4 lg:border-r lg:border-slate-850/80 relative h-full">
@@ -1779,14 +1771,6 @@ export default function Home() {
               </div>
 
             </div>
-            </div>
-              {/* Right Spacer */}
-              <div
-                className="hidden lg:block border-l border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
           </div>
         </div>
       </section>
