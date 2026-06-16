@@ -1063,10 +1063,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
                         <Database className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-white font-sans">Data</span>
+                      <span className="text-xs font-semibold text-white font-sans">Connect Data</span>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Coretify unifies every data source into one identity-resolved model.
+                      Securely link Google Workspace, WhatsApp chat exports, and CSV spreadsheets in one click.
                     </p>
                   </div>
                 </button>
@@ -1090,10 +1090,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
                         <Zap className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-white font-sans">Tools</span>
+                      <span className="text-xs font-semibold text-white font-sans">Company Memory</span>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Coretify gives agents and operators shared playbooks, workflows, and routing.
+                      Unify scattered operational context into a central, identity-resolved RAG index.
                     </p>
                   </div>
                 </button>
@@ -1117,10 +1117,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-750 flex items-center justify-center text-zinc-300">
                         <Cpu className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-white font-sans">Agent</span>
+                      <span className="text-xs font-semibold text-white font-sans">Ask Business</span>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Coretify&apos;s agents turn plain language into working systems.
+                      Query your business in plain language and get instant answers with clickable citations.
                     </p>
                   </div>
                 </button>
@@ -1144,10 +1144,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
                         <ShieldCheck className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-white font-sans">Governance</span>
+                      <span className="text-xs font-semibold text-white font-sans">Daily Brief</span>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Coretify&apos;s agents propose, you approve, anything rolls back.
+                      Start every morning with proactive alerts customized to your industry playbook.
                     </p>
                   </div>
                 </button>
@@ -1166,13 +1166,13 @@ export default function Home() {
                     <span className="h-5 w-5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                       <Database className="h-3 w-3" />
                     </span>
-                    <span>Data</span>
+                    <span className="font-sans uppercase tracking-wider text-[11px]">Connect Data</span>
                   </div>
-                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-none">
-                    One source of truth for every agent
+                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
+                    Connect your scattered business data in one click
                   </h3>
-                  <p className="text-sm text-zinc-455 leading-relaxed max-w-2xl font-normal">
-                    Coretify unifies data from CRM, website, forms, enrichment vendors, ad platforms, and conversation tools into a single identity-resolved model in real time.
+                  <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
+                    Coretify securely reads and integrates Gmail, Google Drive folders, Calendar schedules, WhatsApp chat exports, and financial CSV spreadsheets without requiring any write or delete permissions.
                   </p>
                   <div>
                     <CoretifyButton
@@ -1370,13 +1370,13 @@ export default function Home() {
                     <span className="h-5 w-5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
                       <Zap className="h-3 w-3" />
                     </span>
-                    <span>Tools</span>
+                    <span className="font-sans uppercase tracking-wider text-[11px]">Company Memory</span>
                   </div>
-                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-none">
-                    Every tool you need to run your go-to-market
+                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
+                    Unify scattered operational context into a central brain
                   </h3>
-                  <p className="text-sm text-zinc-450 leading-relaxed max-w-2xl font-normal">
-                    Tables, enrichment, workflows, routing, and scheduling – accessible to agents and the humans who manage them.
+                  <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
+                    Our progressive ingestion pipeline analyzes documents, meetings, and communications to map entities—linking Clients, Projects, Decisions, and Tasks into an identity-resolved relational graph.
                   </p>
                   <div>
                     <CoretifyButton
@@ -1518,13 +1518,13 @@ export default function Home() {
                     <span className="h-5 w-5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300">
                       <Cpu className="h-3 w-3" />
                     </span>
-                    <span>Agent</span>
+                    <span className="font-sans uppercase tracking-wider text-[11px]">Ask Business</span>
                   </div>
-                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-none">
-                    Turns prompts into insights and systems
+                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
+                    Ask your business operational questions in plain language
                   </h3>
-                  <p className="text-sm text-zinc-455 leading-relaxed max-w-2xl font-normal">
-                    Meet Bot, an agent that turns plain-language requests into working systems for reps, admins, and leaders.
+                  <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
+                    Query decisions, project bottlenecks, and client follow-ups instantly. Every AI response includes clickable source citations linking directly back to the original emails or documents.
                   </p>
                   <div>
                     <CoretifyButton
@@ -1617,13 +1617,13 @@ export default function Home() {
                     <span className="h-5 w-5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
                       <ShieldCheck className="h-3.5 w-3.5" />
                     </span>
-                    <span>Governance</span>
+                    <span className="font-sans uppercase tracking-wider text-[11px]">Daily Brief</span>
                   </div>
-                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-none">
-                    Every action is reviewed, logged, and reversible
+                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
+                    Start every morning with vertical-aware insights
                   </h3>
-                  <p className="text-sm text-zinc-455 leading-relaxed max-w-2xl font-normal">
-                    Agents propose changes, you approve before they ship, and any action rolls back in one click.
+                  <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
+                    Receive morning alerts tailored to your industry playbook (scope creep warning, client capacity risks, or stalled goals) and drill down to resolve issues in minutes.
                   </p>
                   <div>
                     <CoretifyButton
