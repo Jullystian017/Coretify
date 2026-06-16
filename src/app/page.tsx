@@ -44,6 +44,45 @@ export default function Home() {
   const [infraProgress, setInfraProgress] = useState<number>(0);
   const isProgrammaticScroll = useRef<boolean>(false);
 
+  const testimonials = [
+    {
+      name: "Rian Pratama",
+      handle: "@rian_pratama",
+      initials: "RP",
+      text: "Coretify membantu kami mendeteksi scope creep 2 minggu lebih awal. Integrasi Gmail & WhatsApp RAG-nya menyelamatkan profit margin project kami."
+    },
+    {
+      name: "Dian Sastro",
+      handle: "@diansastro_vibe",
+      initials: "DS",
+      text: "Dulu koordinasi dengan client sangat chaos karena info tersebar di WhatsApp & email. Dengan Coretify, seluruh tim bisa mencari konteks dalam hitungan detik."
+    },
+    {
+      name: "Budi Santoso",
+      handle: "@budis_kopispace",
+      initials: "BS",
+      text: "Proses onboarding engineer baru menjadi 3x lebih cepat karena mereka bisa menanyakan arsitektur dan keputusan masa lalu langsung ke Company Memory."
+    },
+    {
+      name: "Denny Siregar",
+      handle: "@denny_siregar",
+      initials: "DSi",
+      text: "Gokil sih, RAG search nya ada kutipan (citation) langsung ke email asal. Jadi gak ada lagi alasan 'katanya si A' atau 'lupa di email mana'."
+    },
+    {
+      name: "Sherly Annavita",
+      handle: "@sherly_annavita",
+      initials: "SA",
+      text: "Daily Brief yang dikirim setiap jam 7 pagi ngebantu banget buat monitoring project yang overdue tanpa harus buka Jira atau Trello manual."
+    },
+    {
+      name: "William Tanuwidjaja",
+      handle: "@william_tanu",
+      initials: "WT",
+      text: "Sebagai investor, saya mewajibkan portfolio company kami pakai Coretify agar knowledge retention aman meskipun ada pergantian tim."
+    }
+  ];
+
   // Scroll-spy and scroll progress calculation for Section 2 mockup cards
   useEffect(() => {
     const handleScroll = () => {
@@ -2285,7 +2324,7 @@ export default function Home() {
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-rose-500 rounded-full" />
+              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">06</span>
@@ -2308,185 +2347,52 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Marquee Wrapper (Clipped inside the vertical margin lines of max-w-[1360px]) */}
-          <div className="border-t border-slate-850/80 bg-[#09090b]/10 overflow-hidden relative w-full flex flex-col">
+          {/* Testimonials Grid Layout */}
+          <div className="relative border-t border-slate-850/80 bg-[#09090b]/10 w-full overflow-hidden">
+            {/* Soft background glow */}
+            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.015)_0%,_transparent_70%)] pointer-events-none" />
             
-            {/* Row 1: moves left */}
-            <div className="flex w-max animate-marquee-left border-b border-slate-850/80 py-0">
-              {[
-                {
-                  name: "Rian Pratama",
-                  handle: "@rian_pratama",
-                  initials: "RP",
-                  glowColor: "from-rose-500/20",
-                  hoverBorderClass: "group-hover:bg-rose-500",
-                  hoverTextClass: "group-hover:text-rose-400",
-                  text: "Coretify membantu kami mendeteksi scope creep 2 minggu lebih awal. Integrasi Gmail & WhatsApp RAG-nya menyelamatkan profit margin project kami."
-                },
-                {
-                  name: "Dian Sastro",
-                  handle: "@diansastro_vibe",
-                  initials: "DS",
-                  glowColor: "from-purple-500/20",
-                  hoverBorderClass: "group-hover:bg-purple-500",
-                  hoverTextClass: "group-hover:text-purple-400",
-                  text: "Dulu koordinasi dengan client sangat chaos karena info tersebar di WhatsApp & email. Dengan Coretify, seluruh tim bisa mencari konteks dalam hitungan detik."
-                },
-                {
-                  name: "Budi Santoso",
-                  handle: "@budis_kopispace",
-                  initials: "BS",
-                  glowColor: "from-emerald-500/20",
-                  hoverBorderClass: "group-hover:bg-emerald-500",
-                  hoverTextClass: "group-hover:text-emerald-400",
-                  text: "Proses onboarding engineer baru menjadi 3x lebih cepat karena mereka bisa menanyakan arsitektur dan keputusan masa lalu langsung ke Company Memory."
-                }
-              ].concat([
-                {
-                  name: "Rian Pratama",
-                  handle: "@rian_pratama",
-                  initials: "RP",
-                  glowColor: "from-rose-500/20",
-                  hoverBorderClass: "group-hover:bg-rose-500",
-                  hoverTextClass: "group-hover:text-rose-400",
-                  text: "Coretify membantu kami mendeteksi scope creep 2 minggu lebih awal. Integrasi Gmail & WhatsApp RAG-nya menyelamatkan profit margin project kami."
-                },
-                {
-                  name: "Dian Sastro",
-                  handle: "@diansastro_vibe",
-                  initials: "DS",
-                  glowColor: "from-purple-500/20",
-                  hoverBorderClass: "group-hover:bg-purple-500",
-                  hoverTextClass: "group-hover:text-purple-400",
-                  text: "Dulu koordinasi dengan client sangat chaos karena info tersebar di WhatsApp & email. Dengan Coretify, seluruh tim bisa mencari konteks dalam hitungan detik."
-                },
-                {
-                  name: "Budi Santoso",
-                  handle: "@budis_kopispace",
-                  initials: "BS",
-                  glowColor: "from-emerald-500/20",
-                  hoverBorderClass: "group-hover:bg-emerald-500",
-                  hoverTextClass: "group-hover:text-emerald-400",
-                  text: "Proses onboarding engineer baru menjadi 3x lebih cepat karena mereka bisa menanyakan arsitektur dan keputusan masa lalu langsung ke Company Memory."
-                }
-              ]).map((t, idx) => (
-                <div key={idx} className="w-[360px] flex flex-col justify-between border-r border-slate-850/80 text-left h-[170px] shrink-0 bg-[#09090b]/30 group hover:bg-white/[0.02] transition-all duration-300 relative select-none">
-                  {/* Left Hover Border Line (Thick colored line) */}
-                  <div className={`absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-300 ${t.hoverBorderClass}`} />
-                  
-                  {/* Card Header (Avatar + User Details + Arrow) */}
-                  <div className="flex items-center justify-between p-5 border-b border-slate-850/50">
-                    <div className="flex items-center gap-3.5 truncate">
-                      <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden shrink-0">
-                        <div className={`absolute inset-0 bg-gradient-to-tr ${t.glowColor} to-transparent blur-[2px]`} />
-                        {t.initials}
+            <div className="grid grid-cols-1 md:grid-cols-3 w-full">
+              {testimonials.map((t, idx) => {
+                const borderRightClass = (idx % 3 !== 2) ? "md:border-r border-slate-850/80" : "";
+                const borderBottomClass = idx < 3 
+                  ? "border-b border-slate-850/80" 
+                  : (idx < 5 ? "max-md:border-b border-slate-850/80" : "");
+                
+                return (
+                  <div 
+                    key={idx} 
+                    className={`flex flex-col justify-between p-8 text-left bg-transparent group hover:bg-white/[0.015] transition-all duration-300 relative select-none ${borderRightClass} ${borderBottomClass}`}
+                  >
+                    {/* Left Hover Border Line (Thick unified brand silver/slate line) */}
+                    <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-300 group-hover:bg-slate-400" />
+                    
+                    {/* Card Header (Avatar + User Details + Arrow) */}
+                    <div className="flex items-center justify-between pb-6 border-b border-slate-900/60">
+                      <div className="flex items-center gap-3.5 truncate">
+                        <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden shrink-0">
+                          {/* Unified soft slate glow */}
+                          <div className="absolute inset-0 bg-gradient-to-tr from-slate-500/10 to-transparent blur-[2px]" />
+                          {t.initials}
+                        </div>
+                        <div className="truncate">
+                          <div className="text-xs font-semibold text-slate-200 truncate">{t.name}</div>
+                          <div className="text-[10px] text-zinc-550 font-mono mt-0.5 truncate">{t.handle}</div>
+                        </div>
                       </div>
-                      <div className="truncate">
-                        <div className="text-xs font-semibold text-slate-200 truncate">{t.name}</div>
-                        <div className="text-[10px] text-zinc-550 font-mono mt-0.5 truncate">{t.handle}</div>
-                      </div>
+                      {/* Top-Right Arrow pointing top-right - highlights in unified brand silver/slate on hover */}
+                      <ArrowRight className="h-3.5 w-3.5 -rotate-45 text-zinc-700/60 transition-all duration-300 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-slate-350" />
                     </div>
-                    {/* Top-Right Arrow pointing top-right */}
-                    <ArrowRight className={`h-3.5 w-3.5 -rotate-45 text-zinc-700/60 transition-all duration-300 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${t.hoverTextClass}`} />
-                  </div>
-                  {/* Card Body (Quote Text) */}
-                  <div className="p-5 flex-1 flex items-center">
-                    <p className="text-[12px] sm:text-[13px] text-zinc-350 leading-relaxed font-normal">
-                      &ldquo;{t.text}&rdquo;
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Row 2: moves right */}
-            <div className="flex w-max animate-marquee-right border-b border-slate-850/80 py-0">
-              {[
-                {
-                  name: "Denny Siregar",
-                  handle: "@denny_siregar",
-                  initials: "DS",
-                  glowColor: "from-blue-500/20",
-                  hoverBorderClass: "group-hover:bg-blue-500",
-                  hoverTextClass: "group-hover:text-blue-400",
-                  text: "Gokil sih, RAG search nya ada kutipan (citation) langsung ke email asal. Jadi gak ada lagi alasan 'katanya si A' atau 'lupa di email mana'."
-                },
-                {
-                  name: "Sherly Annavita",
-                  handle: "@sherly_annavita",
-                  initials: "SA",
-                  glowColor: "from-amber-500/20",
-                  hoverBorderClass: "group-hover:bg-amber-500",
-                  hoverTextClass: "group-hover:text-amber-400",
-                  text: "Daily Brief yang dikirim setiap jam 7 pagi ngebantu banget buat monitoring project yang overdue tanpa harus buka Jira atau Trello manual."
-                },
-                {
-                  name: "William Tanuwidjaja",
-                  handle: "@william_tanu",
-                  initials: "WT",
-                  glowColor: "from-cyan-500/20",
-                  hoverBorderClass: "group-hover:bg-cyan-500",
-                  hoverTextClass: "group-hover:text-cyan-400",
-                  text: "Sebagai investor, saya mewajibkan portfolio company kami pakai Coretify agar knowledge retention aman meskipun ada pergantian tim."
-                }
-              ].concat([
-                {
-                  name: "Denny Siregar",
-                  handle: "@denny_siregar",
-                  initials: "DS",
-                  glowColor: "from-blue-500/20",
-                  hoverBorderClass: "group-hover:bg-blue-500",
-                  hoverTextClass: "group-hover:text-blue-400",
-                  text: "Gokil sih, RAG search nya ada kutipan (citation) langsung ke email asal. Jadi gak ada lagi alasan 'katanya si A' atau 'lupa di email mana'."
-                },
-                {
-                  name: "Sherly Annavita",
-                  handle: "@sherly_annavita",
-                  initials: "SA",
-                  glowColor: "from-amber-500/20",
-                  hoverBorderClass: "group-hover:bg-amber-500",
-                  hoverTextClass: "group-hover:text-amber-400",
-                  text: "Daily Brief yang dikirim setiap jam 7 pagi ngebantu banget buat monitoring project yang overdue tanpa harus buka Jira atau Trello manual."
-                },
-                {
-                  name: "William Tanuwidjaja",
-                  handle: "@william_tanu",
-                  initials: "WT",
-                  glowColor: "from-cyan-500/20",
-                  hoverBorderClass: "group-hover:bg-cyan-500",
-                  hoverTextClass: "group-hover:text-cyan-400",
-                  text: "Sebagai investor, saya mewajibkan portfolio company kami pakai Coretify agar knowledge retention aman meskipun ada pergantian tim."
-                }
-              ]).map((t, idx) => (
-                <div key={idx} className="w-[360px] flex flex-col justify-between border-r border-slate-850/80 text-left h-[170px] shrink-0 bg-[#09090b]/30 group hover:bg-white/[0.02] transition-all duration-300 relative select-none">
-                  {/* Left Hover Border Line (Thick colored line) */}
-                  <div className={`absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-300 ${t.hoverBorderClass}`} />
-                  
-                  {/* Card Header (Avatar + User Details + Arrow) */}
-                  <div className="flex items-center justify-between p-5 border-b border-slate-850/50">
-                    <div className="flex items-center gap-3.5 truncate">
-                      <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden shrink-0">
-                        <div className={`absolute inset-0 bg-gradient-to-tr ${t.glowColor} to-transparent blur-[2px]`} />
-                        {t.initials}
-                      </div>
-                      <div className="truncate">
-                        <div className="text-xs font-semibold text-slate-200 truncate">{t.name}</div>
-                        <div className="text-[10px] text-zinc-550 font-mono mt-0.5 truncate">{t.handle}</div>
-                      </div>
+                    {/* Card Body (Quote Text) */}
+                    <div className="pt-6 flex-1 flex items-start min-h-[90px]">
+                      <p className="text-[12.5px] sm:text-[13.5px] text-zinc-350 leading-relaxed font-normal">
+                        &ldquo;{t.text}&rdquo;
+                      </p>
                     </div>
-                    {/* Top-Right Arrow pointing top-right */}
-                    <ArrowRight className={`h-3.5 w-3.5 -rotate-45 text-zinc-700/60 transition-all duration-300 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${t.hoverTextClass}`} />
                   </div>
-                  {/* Card Body (Quote Text) */}
-                  <div className="p-5 flex-1 flex items-center">
-                    <p className="text-[12px] sm:text-[13px] text-zinc-350 leading-relaxed font-normal">
-                      &ldquo;{t.text}&rdquo;
-                    </p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
-
           </div>
         </div>
       </section>
