@@ -40,6 +40,7 @@ export default function Home() {
   const [expandedMeeting, setExpandedMeeting] = useState<string>("greenleaf");
   const [activePlaybookTab, setActivePlaybookTab] = useState<"software_house" | "agency" | "startup">("software_house");
   const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(null);
+  const [activeInfraTab, setActiveInfraTab] = useState<"data" | "tools" | "agent" | "governance">("data");
 
   const handleStartOnboarding = () => {
     router.push("/onboarding");
@@ -966,378 +967,432 @@ export default function Home() {
           {/* Section Content Area */}
           <div className="p-8 sm:p-12 lg:p-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-              
-              {/* Left Column: Sticky Sidebar */}
-              <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6 text-left">
-                <div className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold select-none">
+                         {/* Left Column: Interactive Categories Switcher */}
+              <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6 text-left lg:border-r lg:border-slate-850/80 lg:pr-8">
+                <div className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold select-none px-4">
                   Core Memory Layers
                 </div>
-                {/* Vertical Category List */}
-                <div className="space-y-6 pt-4 border-l border-slate-900 pl-4">
-                  {/* Category 1: Data */}
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                        <Database className="h-2.5 w-2.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-white">Data</span>
+                
+                {/* Vertical Category Tab Switcher List */}
+                <div className="space-y-0 border-t border-slate-900">
+                  {/* Tab 1: Data */}
+                  <button
+                    onClick={() => setActiveInfraTab("data")}
+                    className={`w-full text-left py-6 px-4 transition-all duration-200 cursor-pointer block border-b border-slate-900 ${
+                      activeInfraTab === "data" ? "opacity-100 bg-white/[0.02]" : "opacity-45 hover:opacity-75"
+                    }`}
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                          <Database className="h-2.5 w-2.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-white">Data</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
+                        Coretify unifies every company data source into one centralized knowledge graph.
+                      </p>
                     </div>
-                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
-                      Coretify unifies Gmail, Drive, Calendar, WhatsApp, and spreadsheets into one secure knowledge graph.
-                    </p>
-                  </div>
+                  </button>
 
-                  {/* Category 2: Tools */}
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                        <Zap className="h-2.5 w-2.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-zinc-450">Tools</span>
+                  {/* Tab 2: Tools */}
+                  <button
+                    onClick={() => setActiveInfraTab("tools")}
+                    className={`w-full text-left py-6 px-4 transition-all duration-200 cursor-pointer block border-b border-slate-900 ${
+                      activeInfraTab === "tools" ? "opacity-100 bg-white/[0.02]" : "opacity-45 hover:opacity-75"
+                    }`}
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                          <Zap className="h-2.5 w-2.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-white">Tools</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
+                        Coretify gives agents and operators shared playbooks, workflows, and routing.
+                      </p>
                     </div>
-                    <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
-                      Coretify gives agents shared playbooks and read-only connectors to your daily workspace tools.
-                    </p>
-                  </div>
+                  </button>
 
-                  {/* Category 3: Agent */}
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400">
-                        <Cpu className="h-2.5 w-2.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-zinc-455">Agent</span>
+                  {/* Tab 3: Agent */}
+                  <button
+                    onClick={() => setActiveInfraTab("agent")}
+                    className={`w-full text-left py-6 px-4 transition-all duration-200 cursor-pointer block border-b border-slate-900 ${
+                      activeInfraTab === "agent" ? "opacity-100 bg-white/[0.02]" : "opacity-45 hover:opacity-75"
+                    }`}
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-450">
+                          <Cpu className="h-2.5 w-2.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-white">Agent</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
+                        Coretify&apos;s agents turn plain language queries into working answers.
+                      </p>
                     </div>
-                    <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
-                      Coretify's agents turn natural language queries into instant answers with transparent source citations.
-                    </p>
-                  </div>
+                  </button>
 
-                  {/* Category 4: Governance */}
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-                        <ShieldCheck className="h-2.5 w-2.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-zinc-455">Governance</span>
+                  {/* Tab 4: Governance */}
+                  <button
+                    onClick={() => setActiveInfraTab("governance")}
+                    className={`w-full text-left py-6 px-4 transition-all duration-200 cursor-pointer block border-b border-slate-900 ${
+                      activeInfraTab === "governance" ? "opacity-100 bg-white/[0.02]" : "opacity-45 hover:opacity-75"
+                    }`}
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                          <ShieldCheck className="h-2.5 w-2.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-white">Governance</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
+                        3-role database RLS permissions: you approve, Coretify filters.
+                      </p>
                     </div>
-                    <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
-                      3-role permission architecture (Owner, Manager, Member) with strict database-level RLS.
-                    </p>
-                  </div>
+                  </button>
                 </div>
               </div>
 
-              {/* Right Column: Stacked Showcase Cards */}
-              <div className="lg:col-span-8 space-y-16 text-left">
+              {/* Right Column: Dynamic Active Category Showcase Card */}
+              <div className="lg:col-span-8 text-left">
                 
                 {/* Showcase Card 1: Data */}
-                <div className="rounded-2xl border border-slate-900 bg-[#09090b]/30 p-8 space-y-6 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                  
-                  <div className="space-y-4">
-                    {/* Badge */}
-                    <div className="flex items-center gap-2">
-                      <span className="h-6 w-6 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                        <Database className="h-3.5 w-3.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-emerald-400">Data</span>
-                    </div>
+                {activeInfraTab === "data" && (
+                  <div className="rounded-2xl border border-slate-900 bg-[#09090b]/50 p-8 space-y-6 relative overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
                     
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                      One company memory for every RAG query
-                    </h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
-                      Coretify automatically ingests and maps operational context across Google Workspace, spreadsheets, and WhatsApp chat exports in real time.
-                    </p>
-
-                    <div>
-                      <button className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-850 text-[11px] font-semibold text-zinc-350 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer select-none">
-                        Learn More
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Dashboard Table Mockup */}
-                  <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] text-zinc-300">
-                    {/* Header bar */}
-                    <div className="flex items-center justify-between bg-slate-900/40 px-4 py-2.5 border-b border-slate-900">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-2.5 w-2.5 rounded-full bg-rose-500/40" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-amber-500/40" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/40" />
-                        <span className="ml-2 font-mono text-[10px] text-slate-500 flex items-center gap-1.5">
-                          <Database className="h-3 w-3" /> Core Data Model
+                    <div className="space-y-4">
+                      {/* Badge */}
+                      <div className="flex items-center gap-2">
+                        <span className="h-6 w-6 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                          <Database className="h-3.5 w-3.5" />
                         </span>
+                        <span className="text-xs font-semibold text-emerald-400">Data</span>
                       </div>
-                      <span className="text-[9px] font-semibold px-2 py-0.5 rounded border border-slate-800 bg-[#09090b]/80 text-emerald-400 flex items-center gap-1">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Live
-                      </span>
-                    </div>
-
-                    {/* Table View */}
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left border-collapse">
-                        <thead>
-                          <tr className="border-b border-slate-900 text-slate-500 text-[10px] font-mono bg-slate-950/40">
-                            <th className="py-2.5 px-4 font-normal">Work Email</th>
-                            <th className="py-2.5 px-4 font-normal">Company</th>
-                            <th className="py-2.5 px-4 font-normal">Headcount</th>
-                            <th className="py-2.5 px-4 font-normal">Mobile Phone</th>
-                            <th className="py-2.5 px-4 font-normal">Job Title</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-900 font-sans">
-                          <tr>
-                            <td className="py-2.5 px-4 font-medium text-white">michelle.rivera@example.com</td>
-                            <td className="py-2.5 px-4 text-zinc-400">Attio</td>
-                            <td className="py-2.5 px-4 text-zinc-350">$3,385,492</td>
-                            <td className="py-2.5 px-4 text-zinc-500">+1 (415) 555-0142</td>
-                            <td className="py-2.5 px-4 text-zinc-400">Founding Engineer</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 px-4 font-medium text-white">felicia.reid@example.com</td>
-                            <td className="py-2.5 px-4 text-zinc-400">Amplemarket</td>
-                            <td className="py-2.5 px-4 text-zinc-350">$5,375,784</td>
-                            <td className="py-2.5 px-4 text-zinc-500">+1 (212) 555-0118</td>
-                            <td className="py-2.5 px-4 text-zinc-400">Head of Sales</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 px-4 font-medium text-white">james.smith@example.com</td>
-                            <td className="py-2.5 px-4 text-zinc-400">Apollo</td>
-                            <td className="py-2.5 px-4 text-zinc-350">$2,140,800</td>
-                            <td className="py-2.5 px-4 text-zinc-500">+1 (206) 555-0167</td>
-                            <td className="py-2.5 px-4 text-zinc-400">Field CTO</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Showcase Card 2: Tools */}
-                <div className="rounded-2xl border border-slate-900 bg-[#09090b]/30 p-8 space-y-6 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                  
-                  <div className="space-y-4">
-                    {/* Badge */}
-                    <div className="flex items-center gap-2">
-                      <span className="h-6 w-6 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                        <Zap className="h-3.5 w-3.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-purple-400">Tools</span>
-                    </div>
-                    
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                      Every connector your team needs
-                    </h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
-                      Enable your workspace connectors securely. Coretify operates on read-only permissions by default—never sending emails, modifying files, or writing data.
-                    </p>
-
-                    <div>
-                      <button className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-850 text-[11px] font-semibold text-zinc-350 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer select-none">
-                        Learn More
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Workflow Canvas Mockup */}
-                  <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] text-zinc-350 p-6 relative min-h-[260px] flex flex-col justify-center items-center">
-                    
-                    {/* Workflow nodes */}
-                    <div className="flex flex-col items-center gap-6 w-full max-w-[360px]">
                       
-                      {/* Trigger Node */}
-                      <div className="w-full bg-[#0c0c0e] border border-slate-850 rounded-xl p-3.5 flex items-center justify-between hover:border-purple-500/30 transition-all">
-                        <div className="flex items-center gap-2.5">
-                          <div className="h-7 w-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                            <Database className="h-4 w-4" />
-                          </div>
-                          <div className="text-left">
-                            <span className="text-[10px] text-zinc-500 font-bold block">TRIGGER</span>
-                            <span className="text-xs font-semibold text-white">New Workspace Event</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Connection Line */}
-                      <div className="h-6 w-[1.5px] bg-slate-900 relative">
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-[4px] border-r-[4px] border-t-[5px] border-l-transparent border-r-transparent border-t-slate-800" />
-                      </div>
-
-                      {/* Logic Node */}
-                      <div className="w-full bg-[#0c0c0e] border border-slate-850 rounded-xl p-3.5 flex items-center justify-between hover:border-purple-500/30 transition-all">
-                        <div className="flex items-center gap-2.5">
-                          <div className="h-7 w-7 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                            <Cpu className="h-4 w-4" />
-                          </div>
-                          <div className="text-left">
-                            <span className="text-[10px] text-zinc-555 font-bold block">ACTION LOGIC</span>
-                            <span className="text-xs font-semibold text-white">RLS Control & Semantic Mapping</span>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-
-                {/* Showcase Card 3: Agent */}
-                <div className="rounded-2xl border border-slate-900 bg-[#09090b]/30 p-8 space-y-6 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                  
-                  <div className="space-y-4">
-                    {/* Badge */}
-                    <div className="flex items-center gap-2">
-                      <span className="h-6 w-6 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400">
-                        <Cpu className="h-3.5 w-3.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-zinc-400">Agent</span>
-                    </div>
-                    
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                      Turn plain language into business answers
-                    </h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
-                      Query Coretify Memory in Indonesian or English. Coretify handles client details, project timelines, and email threads to return clear summaries with exact source citations.
-                    </p>
-
-                    <div>
-                      <button className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-850 text-[11px] font-semibold text-zinc-350 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer select-none">
-                        Learn More
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Chat RAG Mockup */}
-                  <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] p-5 space-y-4 text-left">
-                    <div className="flex justify-between items-center border-b border-slate-900 pb-2">
-                      <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" /> Ask Coretify
-                      </span>
-                      <span className="text-[9px] font-semibold text-slate-500 font-mono bg-slate-900 px-2 py-0.5 rounded border border-slate-850">
-                        RAG CITATION
-                      </span>
-                    </div>
-
-                    <div className="space-y-3.5">
-                      {/* User input */}
-                      <div className="flex justify-end">
-                        <div className="bg-[#18181b] border border-slate-850 text-white px-3 py-2 rounded-xl rounded-tr-none text-[10.5px]">
-                          Kenapa project Nexa Corp terlambat?
-                        </div>
-                      </div>
-
-                      {/* Bot response */}
-                      <div className="flex gap-2.5 items-start">
-                        <div className="h-6 w-6 rounded bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
-                          <Bot className="h-3.5 w-3.5" />
-                        </div>
-                        <div className="space-y-2">
-                          <div className="bg-[#08080a] border border-slate-900 text-zinc-300 px-3 py-2 rounded-xl rounded-tl-none leading-relaxed text-[10.5px]">
-                            Project **Nexa Web App** terlambat 5 hari karena adanya 4 revisi berturut-turut pada API autentikasi yang diajukan oleh client setelah fase development dimulai.
-                          </div>
-                          {/* Citations */}
-                          <div className="flex items-center gap-1.5 flex-wrap">
-                            <span className="text-[9px] text-slate-500">Sumber:</span>
-                            <span className="text-[9px] px-1.5 py-0.5 rounded border bg-slate-950 border-slate-900 text-zinc-400 inline-flex items-center gap-1">
-                              WhatsApp / Nexa Revision <ExternalLink className="h-2 w-2" />
-                            </span>
-                            <span className="text-[9px] px-1.5 py-0.5 rounded border bg-slate-950 border-slate-900 text-zinc-400 inline-flex items-center gap-1">
-                              Gmail / Client API request <ExternalLink className="h-2 w-2" />
-                            </span>
-                          </div>
-                        </div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                        One source of truth for every agent
+                      </h3>
+                      <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
+                        Coretify automatically ingests and maps operational context across Google Workspace, spreadsheets, and WhatsApp chat exports in real time.
+                      </p>
+  
+                      <div>
+                        <CoretifyButton
+                          onClick={handleStartOnboarding}
+                          variant="dark"
+                          size="default"
+                          className="px-5 py-2 text-xs font-semibold"
+                        >
+                          Learn More
+                        </CoretifyButton>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Showcase Card 4: Governance */}
-                <div className="rounded-2xl border border-slate-900 bg-[#09090b]/30 p-8 space-y-6 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                  
-                  <div className="space-y-4">
-                    {/* Badge */}
-                    <div className="flex items-center gap-2">
-                      <span className="h-6 w-6 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-                        <ShieldCheck className="h-3.5 w-3.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-blue-400">Governance</span>
-                    </div>
-                    
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                      Role-Based Access Control by default
-                    </h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
-                      Keep sensitive salary, payroll, and executive data safe. Row-Level Security (RLS) filters retrieval at the database level, ensuring non-owners never receive restricted chunks.
-                    </p>
-
-                    <div>
-                      <button className="px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-850 text-[11px] font-semibold text-zinc-350 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer select-none">
-                        Learn More
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* RLS Permissions Guard Mockup */}
-                  <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] text-zinc-300">
-                    <div className="flex items-center justify-between bg-slate-900/40 px-4 py-2.5 border-b border-slate-900">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-2.5 w-2.5 rounded-full bg-rose-500/40" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-amber-500/40" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/40" />
-                        <span className="ml-2 font-mono text-[10px] text-slate-500 flex items-center gap-1.5">
-                          <ShieldCheck className="h-3 w-3" /> Security Policies
+  
+                    {/* Dashboard Table Mockup */}
+                    <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] text-zinc-300">
+                      {/* Header bar */}
+                      <div className="flex items-center justify-between bg-slate-900/40 px-4 py-2.5 border-b border-slate-900">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-rose-500/40" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-amber-500/40" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/40" />
+                          <span className="ml-2 font-mono text-[10px] text-slate-500 flex items-center gap-1.5">
+                            <Database className="h-3 w-3" /> Core Data Model
+                          </span>
+                        </div>
+                        <span className="text-[9px] font-semibold px-2 py-0.5 rounded border border-slate-800 bg-[#09090b]/80 text-emerald-400 flex items-center gap-1">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live
                         </span>
                       </div>
-                      <span className="text-[9px] font-semibold px-2 py-0.5 rounded border border-slate-800 bg-[#09090b]/80 text-blue-400 flex items-center gap-1">
-                        Active Guard
-                      </span>
-                    </div>
-
-                    <div className="p-4 space-y-3">
-                      {/* Policy 1: Owner */}
-                      <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-900 bg-[#0c0c0e]/40">
-                        <div className="flex items-center gap-2">
-                          <div className="h-5 w-5 rounded bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-[9px] font-bold">OWN</div>
-                          <div className="text-left">
-                            <span className="text-xs font-semibold text-white block">Owner Access Role</span>
-                            <span className="text-[9px] text-slate-500">Unfiltered search including financial & payroll data</span>
-                          </div>
-                        </div>
-                        <span className="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-mono">Full Access</span>
-                      </div>
-
-                      {/* Policy 2: Manager */}
-                      <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-900 bg-[#0c0c0e]/40">
-                        <div className="flex items-center gap-2">
-                          <div className="h-5 w-5 rounded bg-amber-500/10 text-amber-400 flex items-center justify-center text-[9px] font-bold">MGR</div>
-                          <div className="text-left">
-                            <span className="text-xs font-semibold text-white block">Manager Access Role</span>
-                            <span className="text-[9px] text-slate-500">Operational projects, workload timelines, meeting logs</span>
-                          </div>
-                        </div>
-                        <span className="text-[9px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded font-mono">Restricted</span>
-                      </div>
-
-                      {/* Policy 3: Member */}
-                      <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-900 bg-[#0c0c0e]/40">
-                        <div className="flex items-center gap-2">
-                          <div className="h-5 w-5 rounded bg-blue-500/10 text-blue-400 flex items-center justify-center text-[9px] font-bold">MBR</div>
-                          <div className="text-left">
-                            <span className="text-xs font-semibold text-white block">Member Access Role</span>
-                            <span className="text-[9px] text-slate-500">Own assigned tasks, project overview, team meetings</span>
-                          </div>
-                        </div>
-                        <span className="text-[9px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono">Restricted</span>
+  
+                      {/* Table View */}
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse">
+                          <thead>
+                            <tr className="border-b border-slate-900 text-slate-500 text-[10px] font-mono bg-slate-950/40">
+                              <th className="py-2.5 px-4 font-normal">Work Email</th>
+                              <th className="py-2.5 px-4 font-normal">Company</th>
+                              <th className="py-2.5 px-4 font-normal">Headcount</th>
+                              <th className="py-2.5 px-4 font-normal">Mobile Phone</th>
+                              <th className="py-2.5 px-4 font-normal">Job Title</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-900 font-sans">
+                            <tr>
+                              <td className="py-2.5 px-4 font-medium text-white">michelle.rivera@example.com</td>
+                              <td className="py-2.5 px-4 text-zinc-400">Attio</td>
+                              <td className="py-2.5 px-4 text-zinc-350">$3,385,492</td>
+                              <td className="py-2.5 px-4 text-zinc-500">+1 (415) 555-0142</td>
+                              <td className="py-2.5 px-4 text-zinc-400">Founding Engineer</td>
+                            </tr>
+                            <tr>
+                              <td className="py-2.5 px-4 font-medium text-white">felicia.reid@example.com</td>
+                              <td className="py-2.5 px-4 text-zinc-400">Amplemarket</td>
+                              <td className="py-2.5 px-4 text-zinc-350">$5,375,784</td>
+                              <td className="py-2.5 px-4 text-zinc-500">+1 (212) 555-0118</td>
+                              <td className="py-2.5 px-4 text-zinc-400">Head of Sales</td>
+                            </tr>
+                            <tr>
+                              <td className="py-2.5 px-4 font-medium text-white">james.smith@example.com</td>
+                              <td className="py-2.5 px-4 text-zinc-400">Apollo</td>
+                              <td className="py-2.5 px-4 text-zinc-350">$2,140,800</td>
+                              <td className="py-2.5 px-4 text-zinc-500">+1 (206) 555-0167</td>
+                              <td className="py-2.5 px-4 text-zinc-400">Field CTO</td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
-                </div>
-
-              </div>
+                )}
+  
+                {/* Showcase Card 2: Tools */}
+                {activeInfraTab === "tools" && (
+                  <div className="rounded-2xl border border-slate-900 bg-[#09090b]/50 p-8 space-y-6 relative overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                    
+                    <div className="space-y-4">
+                      {/* Badge */}
+                      <div className="flex items-center gap-2">
+                        <span className="h-6 w-6 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                          <Zap className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-purple-400">Tools</span>
+                      </div>
+                      
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                        Every connector your team needs
+                      </h3>
+                      <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
+                        Enable your workspace connectors securely. Coretify operates on read-only permissions by default—never sending emails, modifying files, or writing data.
+                      </p>
+  
+                      <div>
+                        <CoretifyButton
+                          onClick={handleStartOnboarding}
+                          variant="dark"
+                          size="default"
+                          className="px-5 py-2 text-xs font-semibold"
+                        >
+                          Learn More
+                        </CoretifyButton>
+                      </div>
+                    </div>
+  
+                    {/* Workflow Canvas Mockup */}
+                    <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] text-zinc-355 p-6 relative min-h-[260px] flex flex-col justify-center items-center">
+                      
+                      {/* Workflow nodes */}
+                      <div className="flex flex-col items-center gap-6 w-full max-w-[360px]">
+                        
+                        {/* Trigger Node */}
+                        <div className="w-full bg-[#0c0c0e] border border-slate-850 rounded-xl p-3.5 flex items-center justify-between hover:border-purple-500/30 transition-all">
+                          <div className="flex items-center gap-2.5">
+                            <div className="h-7 w-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                              <Database className="h-4 w-4" />
+                            </div>
+                            <div className="text-left">
+                              <span className="text-[10px] text-zinc-500 font-bold block">TRIGGER</span>
+                              <span className="text-xs font-semibold text-white">New Workspace Event</span>
+                            </div>
+                          </div>
+                        </div>
+  
+                        {/* Connection Line */}
+                        <div className="h-6 w-[1.5px] bg-slate-900 relative">
+                          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-[4px] border-r-[4px] border-t-[5px] border-l-transparent border-r-transparent border-t-slate-800" />
+                        </div>
+  
+                        {/* Logic Node */}
+                        <div className="w-full bg-[#0c0c0e] border border-slate-850 rounded-xl p-3.5 flex items-center justify-between hover:border-purple-500/30 transition-all">
+                          <div className="flex items-center gap-2.5">
+                            <div className="h-7 w-7 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                              <Cpu className="h-4 w-4" />
+                            </div>
+                            <div className="text-left">
+                              <span className="text-[10px] text-zinc-555 font-bold block">ACTION LOGIC</span>
+                              <span className="text-xs font-semibold text-white">RLS Control & Semantic Mapping</span>
+                            </div>
+                          </div>
+                        </div>
+  
+                      </div>
+                    </div>
+                  </div>
+                )}
+  
+                {/* Showcase Card 3: Agent */}
+                {activeInfraTab === "agent" && (
+                  <div className="rounded-2xl border border-slate-900 bg-[#09090b]/50 p-8 space-y-6 relative overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                    
+                    <div className="space-y-4">
+                      {/* Badge */}
+                      <div className="flex items-center gap-2">
+                        <span className="h-6 w-6 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400">
+                          <Cpu className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-zinc-400">Agent</span>
+                      </div>
+                      
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                        Turn plain language into business answers
+                      </h3>
+                      <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
+                        Query Coretify Memory in Indonesian or English. Coretify handles client details, project timelines, and email threads to return clear summaries with exact source citations.
+                      </p>
+  
+                      <div>
+                        <CoretifyButton
+                          onClick={handleStartOnboarding}
+                          variant="dark"
+                          size="default"
+                          className="px-5 py-2 text-xs font-semibold"
+                        >
+                          Learn More
+                        </CoretifyButton>
+                      </div>
+                    </div>
+  
+                    {/* Chat RAG Mockup */}
+                    <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] p-5 space-y-4 text-left">
+                      <div className="flex justify-between items-center border-b border-slate-900 pb-2">
+                        <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
+                          <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" /> Ask Coretify
+                        </span>
+                        <span className="text-[9px] font-semibold text-slate-500 font-mono bg-slate-900 px-2 py-0.5 rounded border border-slate-850">
+                          RAG CITATION
+                        </span>
+                      </div>
+  
+                      <div className="space-y-3.5">
+                        {/* User input */}
+                        <div className="flex justify-end">
+                          <div className="bg-[#18181b] border border-slate-850 text-white px-3 py-2 rounded-xl rounded-tr-none text-[10.5px]">
+                            Kenapa project Nexa Corp terlambat?
+                          </div>
+                        </div>
+  
+                        {/* Bot response */}
+                        <div className="flex gap-2.5 items-start">
+                          <div className="h-6 w-6 rounded bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
+                            <Bot className="h-3.5 w-3.5" />
+                          </div>
+                          <div className="space-y-2">
+                            <div className="bg-[#08080a] border border-slate-900 text-zinc-300 px-3 py-2 rounded-xl rounded-tl-none leading-relaxed text-[10.5px]">
+                              Project **Nexa Web App** terlambat 5 hari karena adanya 4 revisi berturut-turut pada API autentikasi yang diajukan oleh client setelah fase development dimulai.
+                            </div>
+                            {/* Citations */}
+                            <div className="flex items-center gap-1.5 flex-wrap">
+                              <span className="text-[9px] text-slate-500">Sumber:</span>
+                              <span className="text-[9px] px-1.5 py-0.5 rounded border bg-slate-950 border-slate-900 text-zinc-400 inline-flex items-center gap-1">
+                                WhatsApp / Nexa Revision <ExternalLink className="h-2 w-2" />
+                              </span>
+                              <span className="text-[9px] px-1.5 py-0.5 rounded border bg-slate-950 border-slate-900 text-zinc-400 inline-flex items-center gap-1">
+                                Gmail / Client API request <ExternalLink className="h-2 w-2" />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+  
+                {/* Showcase Card 4: Governance */}
+                {activeInfraTab === "governance" && (
+                  <div className="rounded-2xl border border-slate-900 bg-[#09090b]/50 p-8 space-y-6 relative overflow-hidden shadow-2xl animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                    
+                    <div className="space-y-4">
+                      {/* Badge */}
+                      <div className="flex items-center gap-2">
+                        <span className="h-6 w-6 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                          <ShieldCheck className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-blue-400">Governance</span>
+                      </div>
+                      
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
+                        Role-Based Access Control by default
+                      </h3>
+                      <p className="text-xs text-zinc-400 leading-relaxed max-w-2xl font-normal">
+                        Keep sensitive salary, payroll, and executive data safe. Row-Level Security (RLS) filters retrieval at the database level, ensuring non-owners never receive restricted chunks.
+                      </p>
+  
+                      <div>
+                        <CoretifyButton
+                          onClick={handleStartOnboarding}
+                          variant="dark"
+                          size="default"
+                          className="px-5 py-2 text-xs font-semibold"
+                        >
+                          Learn More
+                        </CoretifyButton>
+                      </div>
+                    </div>
+  
+                    {/* RLS Permissions Guard Mockup */}
+                    <div className="border border-slate-900 bg-slate-950/80 rounded-xl overflow-hidden shadow-2xl text-[11px] text-zinc-300">
+                      <div className="flex items-center justify-between bg-slate-900/40 px-4 py-2.5 border-b border-slate-900">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-rose-500/40" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-amber-500/40" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/40" />
+                          <span className="ml-2 font-mono text-[10px] text-slate-500 flex items-center gap-1.5">
+                            <ShieldCheck className="h-3 w-3" /> Security Policies
+                          </span>
+                        </div>
+                        <span className="text-[9px] font-semibold px-2 py-0.5 rounded border border-slate-800 bg-[#09090b]/80 text-blue-400 flex items-center gap-1">
+                          Active Guard
+                        </span>
+                      </div>
+  
+                      <div className="p-4 space-y-3">
+                        {/* Policy 1: Owner */}
+                        <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-900 bg-[#0c0c0e]/40">
+                          <div className="flex items-center gap-2">
+                            <div className="h-5 w-5 rounded bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-[9px] font-bold">OWN</div>
+                            <div className="text-left">
+                              <span className="text-xs font-semibold text-white block">Owner Access Role</span>
+                              <span className="text-[9px] text-slate-500">Unfiltered search including financial &amp; payroll data</span>
+                            </div>
+                          </div>
+                          <span className="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-mono">Full Access</span>
+                        </div>
+  
+                        {/* Policy 2: Manager */}
+                        <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-900 bg-[#0c0c0e]/40">
+                          <div className="flex items-center gap-2">
+                            <div className="h-5 w-5 rounded bg-amber-500/10 text-amber-400 flex items-center justify-center text-[9px] font-bold">MGR</div>
+                            <div className="text-left">
+                              <span className="text-xs font-semibold text-white block">Manager Access Role</span>
+                              <span className="text-[9px] text-slate-500">Operational projects, workload timelines, meeting logs</span>
+                            </div>
+                          </div>
+                          <span className="text-[9px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded font-mono">Restricted</span>
+                        </div>
+  
+                        {/* Policy 3: Member */}
+                        <div className="flex items-center justify-between p-2.5 rounded-lg border border-slate-900 bg-[#0c0c0e]/40">
+                          <div className="flex items-center gap-2">
+                            <div className="h-5 w-5 rounded bg-blue-500/10 text-blue-400 flex items-center justify-center text-[9px] font-bold">MBR</div>
+                            <div className="text-left">
+                              <span className="text-xs font-semibold text-white block">Member Access Role</span>
+                              <span className="text-[9px] text-slate-500">Own assigned tasks, project overview, team meetings</span>
+                            </div>
+                          </div>
+                          <span className="text-[9px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded font-mono">Restricted</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}</div>
 
             </div>
           </div>
