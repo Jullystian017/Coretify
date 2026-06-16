@@ -954,10 +954,13 @@ export default function Home() {
           </div>
 
           {/* Section Title Block (spanning full width) */}
-          <div className="py-12 px-8 sm:px-12 lg:px-16 text-left border-b border-slate-850/80 bg-transparent">
+          <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4 border-b border-slate-850/80 bg-transparent">
             <h2 className="text-3xl sm:text-[38px] font-semibold tracking-[-0.03em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
-              The infrastructure agents need to run on your company memory
+              The secure infrastructure to unify your company memory.
             </h2>
+            <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-3xl">
+              Connect scattered context across emails, documents, calendars, and WhatsApp. Coretify builds a private, role-shielded RAG index for your team.
+            </p>
           </div>
 
           {/* Section Content Area */}
@@ -965,11 +968,9 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
               
               {/* Left Column: Sticky Sidebar */}
-              <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-8 text-left">
-                <div className="space-y-3">
-                  <div className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold">
-                    Introducing Coretify
-                  </div>
+              <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6 text-left">
+                <div className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold select-none">
+                  Core Memory Layers
                 </div>
                 {/* Vertical Category List */}
                 <div className="space-y-6 pt-4 border-l border-slate-900 pl-4">
