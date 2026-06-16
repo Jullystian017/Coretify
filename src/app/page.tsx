@@ -680,8 +680,8 @@ export default function Home() {
       </section>
 
       {/* SECTION: Tab Switcher (Introducing Default clone) */}
-      <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+        <div className="mx-auto max-w-[1360px] border-l border-r relative">
 
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
@@ -726,12 +726,12 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-12 h-full w-full">
                   {/* Left Column: Description */}
                   <div className="md:col-span-5 p-8 sm:p-10 flex flex-col justify-center text-left">
-                    <span className="text-[10px] text-zinc-450 font-mono tracking-widest uppercase mb-2 block font-bold">01 . INGESTION LAYER</span>
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                      Company Memory Builder
+                    <span className="text-[10px] text-zinc-450 font-mono tracking-widest uppercase mb-2 block font-bold">01 . CLIENT RETENTION</span>
+                    <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-sans">
+                      Catch Silence Before Churn
                     </h3>
-                    <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal">
-                      Auto-ingest emails, drive files, calendar schedules, and WhatsApp chat exports. Coretify acts as a read-only listener to centralize all company context.
+                    <p className="text-[13px] text-zinc-400 mt-4 leading-relaxed font-normal font-sans">
+                      Automatically monitors communication frequency across connected Gmail and WhatsApp exports. Coretify alerts managers when key client accounts go quiet for over 14 days.
                     </p>
                   </div>
                   {/* Right Column: Visualizer */}
@@ -786,12 +786,12 @@ export default function Home() {
               {/* Card 2: Ask Business Chat Console (Interactive Query) - spans 1 col on lg */}
               <div className="lg:col-span-1 border-b border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="p-8 sm:p-10 pb-4 text-left">
-                  <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">02 . INTERACTIVE QUERY</span>
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                    Ask your business anything
+                  <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">02 . OPERATIONAL HEALTH</span>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-sans">
+                    Predict Project Delays Early
                   </h3>
-                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal">
-                    Query Coretify Memory in plain English or Indonesian. Get instant answers regarding project statuses, meetings, and decisions.
+                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal font-sans">
+                    Identify operational bottlenecks before deadlines slip. Ask Coretify why a project is lagging and get immediate timelines mapped to client communications.
                   </p>
                 </div>
                 <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
@@ -840,12 +840,12 @@ export default function Home() {
               {/* Card 3: Company Memory Graph (Knowledge Mapping) - spans 1 col on lg */}
               <div className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="p-8 sm:p-10 pb-4 text-left">
-                  <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">03 . KNOWLEDGE MAPPING</span>
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                    Company Memory Graph
+                  <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">03 . DECISION AUDITING</span>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-sans">
+                    Auto-Captured Commitments
                   </h3>
-                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal">
-                    Visualize connections between Clients, Meetings, Decisions, Projects, and Tasks extracted by AI from your daily communications.
+                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal font-sans">
+                    No more digging through endless chat backups or threads. Coretify automatically parses meeting summaries and email threads to build a historical record of what was approved.
                   </p>
                 </div>
                 <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
@@ -897,12 +897,12 @@ export default function Home() {
               {/* Card 4: Daily Brief Digest (Proactive Alerts) - spans 1 col on lg */}
               <div className="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-slate-850/80 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="p-8 sm:p-10 pb-4 text-left">
-                  <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">04 . PROACTIVE ALERTS</span>
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                    Daily Brief Digest
+                  <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">04 . KNOWLEDGE RETENTION</span>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-sans">
+                    Zero-Maintenance Wiki
                   </h3>
-                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal">
-                    Receive a daily intelligence email every morning. Spot delayed projects, client follow-up windows, and critical cash flow changes.
+                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal font-sans">
+                    Stop forcing employees to write documentation. Coretify builds your organization's intellectual capital automatically as team members interact and work.
                   </p>
                 </div>
                 <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
@@ -952,12 +952,12 @@ export default function Home() {
               {/* Card 5: Vertical Playbooks (Industry Tailored) - spans 1 col on lg */}
               <div className="lg:col-span-1 flex flex-col justify-between h-full bg-[#08080a]/20">
                 <div className="p-8 sm:p-10 pb-4 text-left">
-                  <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">05 . INDUSTRY TAILORED</span>
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug">
-                    Vertical Playbooks
+                  <span className="text-[10px] text-zinc-455 font-mono tracking-widest uppercase mb-2 block font-bold">05 . PLAYBOOK ENGAGEMENT</span>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug font-sans">
+                    Tailored Operational Insights
                   </h3>
-                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal">
-                    Insights customized for your exact business model. Whether you are a Software House, Creative Agency, or Startup.
+                  <p className="text-[13px] text-zinc-400 mt-3 leading-relaxed font-normal font-sans">
+                    Get targeted warnings built for your business. Track developer workload and scope creep for Software Houses, or time leaks and client retention for Agencies.
                   </p>
                 </div>
                 <div className="px-8 sm:px-10 pb-10 pt-4 flex items-center justify-center bg-[#08080a]/60 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:12px_12px] border-t border-slate-850/40 flex-1 min-h-[320px]">
@@ -1008,8 +1008,8 @@ export default function Home() {
       </section>
 
       {/* SECTION: PLATFORM INFRASTRUCTURE */}
-      <section className="w-full bg-[#070708]">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+      <section className="w-full bg-[#070708] border-b border-slate-850/80">
+        <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
@@ -1030,10 +1030,10 @@ export default function Home() {
           {/* Section Title Block (spanning full width) */}
           <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4 border-b border-slate-850/80 bg-transparent">
             <h2 className="text-3xl sm:text-[38px] font-semibold tracking-[-0.03em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
-              The secure infrastructure to unify your company memory.
+              The architecture behind your company memory.
             </h2>
             <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-3xl">
-              Connect scattered context across emails, documents, calendars, and WhatsApp. Coretify builds a private, role-shielded RAG index for your team.
+              A secure, passive integration layer that processes scattered business data into a queryable knowledge graph. 100% read-only, encrypted, and role-restricted.
             </p>
           </div>
           {/* Section Content Area */}
@@ -1737,8 +1737,8 @@ export default function Home() {
       </section>
 
       {/* SECTION 3: INTEGRATIONS GRID */}
-      <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+        <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
@@ -1926,8 +1926,8 @@ export default function Home() {
       </section>
 
       {/* SECTION 4: PRICING */}
-      <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+        <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
@@ -2187,8 +2187,8 @@ export default function Home() {
       </section>
 
       {/* SECTION 5: FAQ */}
-      <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+        <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
@@ -2272,8 +2272,8 @@ export default function Home() {
       </section>
 
       {/* SECTION 6: TESTIMONIALS */}
-      <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+        <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
@@ -2366,8 +2366,8 @@ export default function Home() {
       </section>
 
       {/* SECTION 7: CTA */}
-      <section className="w-full bg-[#070708]/40">
-        <div className="mx-auto max-w-[1360px] border-l border-r border-b border-slate-850/80 relative">
+      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+        <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
