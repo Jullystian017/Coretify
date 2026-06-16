@@ -2207,66 +2207,73 @@ export default function Home() {
           </div>
 
           {/* Section Content Area */}
-          <div className="p-8 sm:p-12 lg:p-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
-              
-              {/* Left Column: Headline */}
-              <div className="lg:col-span-4 lg:sticky lg:top-28 text-left space-y-4">
-                <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
-                  Frequently asked questions.
+          <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
+            
+            {/* Left Column Container (full height to make vertical line stretch) */}
+            <div className="lg:col-span-5 lg:border-r border-slate-850/80 relative h-full">
+              {/* Inner Sticky Content */}
+              <div className="lg:sticky lg:top-28 py-16 px-8 sm:px-12 lg:pl-16 lg:pr-12 text-left space-y-5">
+                <h2 className="text-4xl sm:text-[44px] font-medium tracking-tight leading-[1.1] text-white">
+                  Frequent<br />questions
                 </h2>
-                <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed">
-                  Semua hal yang perlu Anda ketahui tentang keamanan, performa, dan integrasi di Coretify.
+                <p className="text-sm sm:text-base text-zinc-400 leading-relaxed max-w-sm">
+                  All the answers you may need about Coretify to help you understand our platform.
                 </p>
               </div>
-
-              {/* Right Column: Interactive Accordion */}
-              <div className="lg:col-span-8 space-y-4 text-left">
-                {[
-                  {
-                    question: "Apakah Coretify aman dan 100% read-only?",
-                    answer: "Ya, keamanan data adalah prioritas utama kami. Coretify dirancang dengan prinsip 100% read-only untuk semua integrasi tools (seperti Gmail, Slack, dan Jurnal.id). Kami tidak pernah memodifikasi, menghapus, atau menulis data ke dalam workspace asal Anda."
-                  },
-                  {
-                    question: "Bagaimana Coretify melindungi data sensitif seperti gaji atau keuangan?",
-                    answer: "Kami menggunakan Database-Level Row Level Security (RLS) dan Role-Based Access Control (RBAC) yang ketat. Data gaji, transaksi keuangan, atau dokumen legal terlindung di balik enkripsi tingkat tinggi dan hanya dapat diakses oleh personil yang memiliki otorisasi eksklusif."
-                  },
-                  {
-                    question: "Bagaimana cara kerja WhatsApp Lite tanpa WhatsApp Business API?",
-                    answer: "WhatsApp Lite memungkinkan Anda mengunggah riwayat chat penting secara manual via ekspor file .txt standar. Coretify langsung memproses, mengekstrak entitas penting, dan mengindeks konteks percakapan tersebut ke dalam memori perusahaan Anda tanpa perlu setup API yang rumit."
-                  },
-                  {
-                    question: "Apakah saya bisa menghapus memori data perusahaan secara permanen?",
-                    answer: "Tentu. Kami mendukung kebijakan kedaulatan data penuh. Anda dapat melakukan Instant Wipe kapan saja melalui dashboard admin. Semua data terindeks, representasi vektor, dan cache AI yang berkaitan dengan organisasi Anda akan dihapus secara permanen dari server kami dalam hitungan detik."
-                  },
-                  {
-                    question: "Berapa lama waktu untuk sinkronisasi awal memori?",
-                    answer: "Sinkronisasi awal biasanya selesai dalam waktu 5 hingga 15 menit, tergantung pada volume data pada email, kalender, dan dokumen yang Anda hubungkan. AI Coretify akan langsung dapat menjawab pertanyaan tentang operasional Anda setelah sinkronisasi pertama selesai."
-                  }
-                ].map((faq, index) => {
-                  const isOpen = activeFaqIndex === index;
-                  return (
-                    <div key={index} className="border border-slate-900 bg-[#09090b]/40 rounded-xl overflow-hidden transition-all duration-300">
-                      <button
-                        onClick={() => setActiveFaqIndex(isOpen ? null : index)}
-                        className="w-full py-4.5 px-5 flex items-center justify-between text-left cursor-pointer transition-colors hover:bg-slate-900/10 focus:outline-none"
-                      >
-                        <span className="text-sm font-semibold text-slate-200 pr-4">{faq.question}</span>
-                        <ChevronDown className={`h-4 w-4 text-slate-500 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-white" : ""}`} />
-                      </button>
-                      <div 
-                        className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                          isOpen ? "max-h-60 opacity-100 border-t border-slate-900/60 p-5 bg-[#09090b]/20" : "max-h-0 opacity-0"
-                        }`}
-                      >
-                        <p className="text-[13px] text-zinc-400 leading-relaxed font-normal">{faq.answer}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
             </div>
+
+            {/* Right Column: Interactive Accordion */}
+            <div className="lg:col-span-7 divide-y divide-slate-850/80 border-t lg:border-t-0 border-b border-slate-850/80">
+              {[
+                {
+                  question: "Apakah Coretify aman dan 100% read-only?",
+                  answer: "Ya, keamanan data adalah prioritas utama kami. Coretify dirancang dengan prinsip 100% read-only untuk semua integrasi tools (seperti Gmail, Slack, dan Jurnal.id). Kami tidak pernah memodifikasi, menghapus, atau menulis data ke dalam workspace asal Anda."
+                },
+                {
+                  question: "Bagaimana Coretify melindungi data sensitif seperti gaji atau keuangan?",
+                  answer: "Kami menggunakan Database-Level Row Level Security (RLS) dan Role-Based Access Control (RBAC) yang ketat. Data gaji, transaksi keuangan, atau dokumen legal terlindung di balik enkripsi tingkat tinggi dan hanya dapat diakses oleh personil yang memiliki otorisasi eksklusif."
+                },
+                {
+                  question: "Bagaimana cara kerja WhatsApp Lite tanpa WhatsApp Business API?",
+                  answer: "WhatsApp Lite memungkinkan Anda mengunggah riwayat chat penting secara manual via ekspor file .txt standar. Coretify langsung memproses, mengekstrak entitas penting, dan mengindeks konteks percakapan tersebut ke dalam memori perusahaan Anda tanpa perlu setup API yang rumit."
+                },
+                {
+                  question: "Apakah saya bisa menghapus memori data perusahaan secara permanen?",
+                  answer: "Tentu. Kami mendukung kebijakan kedaulatan data penuh. Anda dapat melakukan Instant Wipe kapan saja melalui dashboard admin. Semua data terindeks, representasi vektor, dan cache AI yang berkaitan dengan organisasi Anda akan dihapus secara permanen dari server kami dalam hitungan detik."
+                },
+                {
+                  question: "Berapa lama waktu untuk sinkronisasi awal memori?",
+                  answer: "Sinkronisasi awal biasanya selesai dalam waktu 5 hingga 15 menit, tergantung pada volume data pada email, kalender, dan dokumen yang Anda hubungkan. AI Coretify akan langsung dapat menjawab pertanyaan tentang operasional Anda setelah sinkronisasi pertama selesai."
+                },
+                {
+                  question: "Apakah saya bisa menyesuaikan playbook operasional di Coretify?",
+                  answer: "Ya. Coretify menyediakan Playbook Engine bawaan untuk Software House, Creative Agency, dan Startup. Playbook ini menyaring insight secara spesifik seperti melacak kebocoran waktu pengerjaan, potensi keterlambatan rilis, hingga kepatuhan pengerjaan task sesuai SOP tim."
+                }
+              ].map((faq, index) => {
+                const isOpen = activeFaqIndex === index;
+                return (
+                  <div key={index} className="transition-all duration-300">
+                    <button
+                      onClick={() => setActiveFaqIndex(isOpen ? null : index)}
+                      className="w-full py-7 px-8 sm:px-12 flex items-center justify-between text-left cursor-pointer transition-colors hover:bg-white/[0.015] focus:outline-none"
+                    >
+                      <span className="text-[15px] sm:text-[17px] font-normal text-slate-100 pr-6">{faq.question}</span>
+                      <span className="text-2xl font-light text-slate-400 select-none shrink-0">
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    <div 
+                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                        isOpen ? "max-h-60 opacity-100 px-8 sm:px-12 pb-7" : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <p className="text-[13.5px] text-zinc-455 leading-relaxed font-normal">{faq.answer}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
           </div>
         </div>
       </section>
