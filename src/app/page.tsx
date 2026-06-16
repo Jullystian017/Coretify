@@ -98,32 +98,32 @@ export default function Home() {
 
         {/* Aurora Glowing Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
-          {/* Subtle Grid Pattern Motif */}
+          {/* Subtle Grid Pattern Motif - Fading from bottom to top */}
           <div
             className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:48px_48px]"
             style={{
-              WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)',
-              maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)'
+              WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at 50% 85%, #000 45%, transparent 100%)',
+              maskImage: 'radial-gradient(ellipse 80% 70% at 50% 85%, #000 45%, transparent 100%)'
             }}
           />
 
-          {/* Spotlight Glows from Top-Center */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-indigo-500/40 via-indigo-500/10 to-transparent blur-[110px] rounded-full mix-blend-screen" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-gradient-to-b from-purple-500/30 via-purple-500/5 to-transparent blur-[90px] rounded-full mix-blend-screen" />
-          <div className="absolute top-0 left-[48%] -translate-x-1/2 w-[350px] h-[200px] bg-gradient-to-b from-emerald-500/20 to-transparent blur-[70px] rounded-full mix-blend-screen" />
+          {/* Spotlight Glows from Bottom-Center flowing upwards */}
+          <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-t from-indigo-500/30 via-indigo-500/5 to-transparent blur-[110px] rounded-full mix-blend-screen" />
+          <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-t from-purple-500/25 via-purple-500/5 to-transparent blur-[90px] rounded-full mix-blend-screen" />
+          <div className="absolute bottom-[15%] left-[48%] -translate-x-1/2 w-[400px] h-[250px] bg-gradient-to-t from-emerald-500/15 to-transparent blur-[80px] rounded-full mix-blend-screen" />
 
-          {/* Side & Bottom Glowing Blobs */}
-          <div className="absolute -top-[10%] -left-[15%] h-[550px] w-[750px] rounded-full bg-indigo-500/20 blur-[130px] mix-blend-screen" />
-          <div className="absolute top-[20%] left-[20%] h-[500px] w-[700px] rounded-full bg-emerald-500/15 blur-[110px] mix-blend-screen" />
-          <div className="absolute -top-[10%] -right-[15%] h-[550px] w-[750px] rounded-full bg-purple-500/25 blur-[130px] mix-blend-screen" />
-          <div className="absolute bottom-[10%] left-[30%] h-[500px] w-[750px] rounded-full bg-blue-500/15 blur-[120px] mix-blend-screen" />
+          {/* Side & Bottom Glowing Blobs clustered near the bottom-half */}
+          <div className="absolute bottom-[20%] -left-[15%] h-[550px] w-[750px] rounded-full bg-indigo-500/15 blur-[130px] mix-blend-screen" />
+          <div className="absolute bottom-[10%] left-[20%] h-[500px] w-[700px] rounded-full bg-emerald-500/10 blur-[110px] mix-blend-screen" />
+          <div className="absolute bottom-[20%] -right-[15%] h-[550px] w-[750px] rounded-full bg-purple-500/20 blur-[130px] mix-blend-screen" />
+          <div className="absolute bottom-[5%] left-[30%] h-[500px] w-[750px] rounded-full bg-blue-500/10 blur-[120px] mix-blend-screen" />
         </div>
-        {/* Aurora WebGL Background spanning the entire combined height with a smooth radial mask */}
+        {/* Aurora WebGL Background centered near bottom to glow upwards */}
         <div 
           className="absolute inset-0 pointer-events-none z-0 opacity-40"
           style={{
-            WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%)',
-            maskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%)'
+            WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 75%, #000 40%, transparent 100%)',
+            maskImage: 'radial-gradient(ellipse 90% 70% at 50% 75%, #000 40%, transparent 100%)'
           }}
         >
           <Aurora
