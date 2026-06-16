@@ -2308,64 +2308,145 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Testimonials Grid */}
-          <div className="border-t border-slate-850/80 grid grid-cols-1 lg:grid-cols-3 bg-[#09090b]/10">
+          {/* Marquee Wrapper (Clipped inside the vertical margin lines of max-w-[1360px]) */}
+          <div className="border-t border-slate-850/80 bg-[#09090b]/10 overflow-hidden relative w-full flex flex-col">
             
-            {/* Testimonial 1 */}
-            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 lg:border-b-0 lg:border-r text-left">
-              <div className="space-y-6">
-                <p className="text-sm text-zinc-300 leading-relaxed font-normal">
-                  &ldquo;Coretify membantu kami mendeteksi scope creep 2 minggu lebih awal dari biasanya. Integrasi Gmail &amp; Slack RAG-nya berhasil menyelamatkan profit margin project kami.&rdquo;
-                </p>
-              </div>
-              <div className="flex items-center gap-3.5 pt-6 border-t border-slate-900/60 mt-6">
-                <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/20 to-transparent blur-[2px]" />
-                  RP
+            {/* Row 1: moves left */}
+            <div className="flex w-max animate-marquee-left py-0">
+              {[
+                {
+                  name: "Rian Pratama",
+                  handle: "@rian_pratama",
+                  initials: "RP",
+                  glowColor: "from-rose-500/20",
+                  text: "Coretify membantu kami mendeteksi scope creep 2 minggu lebih awal. Integrasi Gmail & WhatsApp RAG-nya menyelamatkan profit margin project kami."
+                },
+                {
+                  name: "Dian Sastro",
+                  handle: "@diansastro_vibe",
+                  initials: "DS",
+                  glowColor: "from-purple-500/20",
+                  text: "Dulu koordinasi dengan client sangat chaos karena info tersebar di WhatsApp & email. Dengan Coretify, seluruh tim bisa mencari konteks dalam hitungan detik."
+                },
+                {
+                  name: "Budi Santoso",
+                  handle: "@budis_kopispace",
+                  initials: "BS",
+                  glowColor: "from-emerald-500/20",
+                  text: "Proses onboarding engineer baru menjadi 3x lebih cepat karena mereka bisa menanyakan arsitektur dan keputusan masa lalu langsung ke Company Memory."
+                }
+              ].concat([
+                {
+                  name: "Rian Pratama",
+                  handle: "@rian_pratama",
+                  initials: "RP",
+                  glowColor: "from-rose-500/20",
+                  text: "Coretify membantu kami mendeteksi scope creep 2 minggu lebih awal. Integrasi Gmail & WhatsApp RAG-nya menyelamatkan profit margin project kami."
+                },
+                {
+                  name: "Dian Sastro",
+                  handle: "@diansastro_vibe",
+                  initials: "DS",
+                  glowColor: "from-purple-500/20",
+                  text: "Dulu koordinasi dengan client sangat chaos karena info tersebar di WhatsApp & email. Dengan Coretify, seluruh tim bisa mencari konteks dalam hitungan detik."
+                },
+                {
+                  name: "Budi Santoso",
+                  handle: "@budis_kopispace",
+                  initials: "BS",
+                  glowColor: "from-emerald-500/20",
+                  text: "Proses onboarding engineer baru menjadi 3x lebih cepat karena mereka bisa menanyakan arsitektur dan keputusan masa lalu langsung ke Company Memory."
+                }
+              ]).map((t, idx) => (
+                <div key={idx} className="w-[360px] flex flex-col justify-between border-r border-b border-slate-850/80 text-left h-[170px] shrink-0 bg-[#09090b]/30">
+                  {/* Card Header (Avatar + User Details) */}
+                  <div className="flex items-center gap-3.5 p-5 border-b border-slate-850/50">
+                    <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden shrink-0">
+                      <div className={`absolute inset-0 bg-gradient-to-tr ${t.glowColor} to-transparent blur-[2px]`} />
+                      {t.initials}
+                    </div>
+                    <div className="truncate">
+                      <div className="text-xs font-semibold text-slate-200 truncate">{t.name}</div>
+                      <div className="text-[10px] text-zinc-550 font-mono mt-0.5 truncate">{t.handle}</div>
+                    </div>
+                  </div>
+                  {/* Card Body (Quote Text) */}
+                  <div className="p-5 flex-1 flex items-center">
+                    <p className="text-[12px] sm:text-[13px] text-zinc-350 leading-relaxed font-normal">
+                      &ldquo;{t.text}&rdquo;
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-xs font-semibold text-slate-200">Rian Pratama</div>
-                  <div className="text-[10px] text-zinc-500 font-mono mt-0.5">CEO, NexaTech · Software House (18 orang)</div>
-                </div>
-              </div>
+              ))}
             </div>
 
-            {/* Testimonial 2 */}
-            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 lg:border-b-0 lg:border-r text-left">
-              <div className="space-y-6">
-                <p className="text-sm text-zinc-300 leading-relaxed font-normal">
-                  &ldquo;Dulu, koordinasi dengan client sangat chaos karena info tersebar di WhatsApp &amp; email. Dengan Coretify, seluruh tim bisa mencari konteks meeting sebelumnya hanya dalam hitungan detik.&rdquo;
-                </p>
-              </div>
-              <div className="flex items-center gap-3.5 pt-6 border-t border-slate-900/60 mt-6">
-                <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-transparent blur-[2px]" />
-                  DS
+            {/* Row 2: moves right */}
+            <div className="flex w-max animate-marquee-right py-0">
+              {[
+                {
+                  name: "Denny Siregar",
+                  handle: "@denny_siregar",
+                  initials: "DS",
+                  glowColor: "from-blue-500/20",
+                  text: "Gokil sih, RAG search nya ada kutipan (citation) langsung ke email asal. Jadi gak ada lagi alasan 'katanya si A' atau 'lupa di email mana'."
+                },
+                {
+                  name: "Sherly Annavita",
+                  handle: "@sherly_annavita",
+                  initials: "SA",
+                  glowColor: "from-amber-500/20",
+                  text: "Daily Brief yang dikirim setiap jam 7 pagi ngebantu banget buat monitoring project yang overdue tanpa harus buka Jira atau Trello manual."
+                },
+                {
+                  name: "William Tanuwidjaja",
+                  handle: "@william_tanu",
+                  initials: "WT",
+                  glowColor: "from-cyan-500/20",
+                  text: "Sebagai investor, saya mewajibkan portfolio company kami pakai Coretify agar knowledge retention aman meskipun ada pergantian tim."
+                }
+              ].concat([
+                {
+                  name: "Denny Siregar",
+                  handle: "@denny_siregar",
+                  initials: "DS",
+                  glowColor: "from-blue-500/20",
+                  text: "Gokil sih, RAG search nya ada kutipan (citation) langsung ke email asal. Jadi gak ada lagi alasan 'katanya si A' atau 'lupa di email mana'."
+                },
+                {
+                  name: "Sherly Annavita",
+                  handle: "@sherly_annavita",
+                  initials: "SA",
+                  glowColor: "from-amber-500/20",
+                  text: "Daily Brief yang dikirim setiap jam 7 pagi ngebantu banget buat monitoring project yang overdue tanpa harus buka Jira atau Trello manual."
+                },
+                {
+                  name: "William Tanuwidjaja",
+                  handle: "@william_tanu",
+                  initials: "WT",
+                  glowColor: "from-cyan-500/20",
+                  text: "Sebagai investor, saya mewajibkan portfolio company kami pakai Coretify agar knowledge retention aman meskipun ada pergantian tim."
+                }
+              ]).map((t, idx) => (
+                <div key={idx} className="w-[360px] flex flex-col justify-between border-r border-b border-slate-850/80 text-left h-[170px] shrink-0 bg-[#09090b]/30">
+                  {/* Card Header (Avatar + User Details) */}
+                  <div className="flex items-center gap-3.5 p-5 border-b border-slate-850/50">
+                    <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden shrink-0">
+                      <div className={`absolute inset-0 bg-gradient-to-tr ${t.glowColor} to-transparent blur-[2px]`} />
+                      {t.initials}
+                    </div>
+                    <div className="truncate">
+                      <div className="text-xs font-semibold text-slate-200 truncate">{t.name}</div>
+                      <div className="text-[10px] text-zinc-550 font-mono mt-0.5 truncate">{t.handle}</div>
+                    </div>
+                  </div>
+                  {/* Card Body (Quote Text) */}
+                  <div className="p-5 flex-1 flex items-center">
+                    <p className="text-[12px] sm:text-[13px] text-zinc-350 leading-relaxed font-normal">
+                      &ldquo;{t.text}&rdquo;
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-xs font-semibold text-slate-200">Dian Sastro</div>
-                  <div className="text-[10px] text-zinc-500 font-mono mt-0.5">Founder, Vibe Agency · Creative Agency (12 orang)</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div className="p-8 flex flex-col justify-between text-left">
-              <div className="space-y-6">
-                <p className="text-sm text-zinc-300 leading-relaxed font-normal">
-                  &ldquo;Proses onboarding engineer baru menjadi 3x lebih cepat karena mereka bisa menanyakan arsitektur dan keputusan masa lalu langsung ke &apos;Company Memory&apos; Coretify.&rdquo;
-                </p>
-              </div>
-              <div className="flex items-center gap-3.5 pt-6 border-t border-slate-900/60 mt-6">
-                <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent blur-[2px]" />
-                  BS
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-slate-200">Budi Santoso</div>
-                  <div className="text-[10px] text-zinc-500 font-mono mt-0.5">CTO, KopiSpace · Tech Startup (25 orang)</div>
-                </div>
-              </div>
+              ))}
             </div>
 
           </div>
