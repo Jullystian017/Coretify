@@ -1076,7 +1076,15 @@ export default function Home() {
             </p>
           </div>
           {/* Section Content Area */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
+          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full">
+              {/* Left Spacer */}
+              <div
+                className="hidden lg:block border-r border-slate-850/80"
+                style={{
+                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+                }}
+              />
+            <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
             
             {/* Left Column: Interactive Categories Switcher (Stretches full height, border runs all the way down) */}
             <div className="lg:col-span-4 lg:border-r lg:border-slate-850/80 relative h-full">
@@ -1771,6 +1779,14 @@ export default function Home() {
               </div>
 
             </div>
+            </div>
+              {/* Right Spacer */}
+              <div
+                className="hidden lg:block border-l border-slate-850/80"
+                style={{
+                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+                }}
+              />
           </div>
         </div>
       </section>
@@ -1808,7 +1824,15 @@ export default function Home() {
           </div>
 
           {/* Pricing Grid */}
-          <div className="border-t border-slate-850/80 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-[#09090b]/10">
+          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full border-t border-slate-850/80">
+              {/* Left Spacer */}
+              <div
+                className="hidden lg:block border-r border-slate-850/80"
+                style={{
+                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+                }}
+              />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-[#09090b]/10">
             
             {/* Free Tier */}
             <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r lg:border-b-0">
@@ -2034,6 +2058,14 @@ export default function Home() {
               </div>
             </div>
 
+            </div>
+              {/* Right Spacer */}
+              <div
+                className="hidden lg:block border-l border-slate-850/80"
+                style={{
+                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+                }}
+              />
           </div>
         </div>
       </section>
@@ -2244,7 +2276,15 @@ export default function Home() {
           </div>
 
           {/* Testimonials Grid Layout */}
-          <div className="relative border-t border-slate-850/80 bg-[#09090b]/10 w-full overflow-hidden">
+          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full border-t border-slate-850/80">
+              {/* Left Spacer */}
+              <div
+                className="hidden lg:block border-r border-slate-850/80"
+                style={{
+                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+                }}
+              />
+            <div className="relative bg-[#09090b]/10 w-full overflow-hidden">
             {/* Soft background glow */}
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.015)_0%,_transparent_70%)] pointer-events-none" />
             
@@ -2289,6 +2329,14 @@ export default function Home() {
                 );
               })}
             </div>
+            </div>
+              {/* Right Spacer */}
+              <div
+                className="hidden lg:block border-l border-slate-850/80"
+                style={{
+                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+                }}
+              />
           </div>
         </div>
       </section>
