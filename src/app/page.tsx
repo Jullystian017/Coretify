@@ -1808,18 +1808,10 @@ export default function Home() {
           </div>
 
           {/* Pricing Grid */}
-          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full border-t border-slate-850/80">
-              {/* Left Spacer */}
-              <div
-                className="hidden lg:block border-r border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-[#09090b]/10">
+          <div className="border-t border-slate-850/80 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-8 lg:p-12 w-full bg-transparent">
             
             {/* Free Tier */}
-            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r lg:border-b-0">
+            <div className="p-8 rounded-2xl border border-slate-850/60 bg-[#0c0c0e]/30 backdrop-blur-sm flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:border-slate-700/80 hover:bg-[#0c0c0e]/70 hover:shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-base font-semibold text-slate-200">Free</h3>
@@ -1832,25 +1824,25 @@ export default function Home() {
                 <div className="w-full h-px bg-slate-850/50" />
                 <ul className="space-y-3.5 text-xs text-zinc-400">
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Maksimal 2 konektor data (Gmail & Calendar)</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>50 pertanyaan AI / bulan</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Batas 500 dokumen memori</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Akses 1 pengguna saja</span>
@@ -1869,7 +1861,7 @@ export default function Home() {
             </div>
 
             {/* Starter Tier */}
-            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 lg:border-r lg:border-b-0">
+            <div className="p-8 rounded-2xl border border-slate-850/60 bg-[#0c0c0e]/30 backdrop-blur-sm flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:border-slate-700/80 hover:bg-[#0c0c0e]/70 hover:shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-base font-semibold text-slate-200">Starter</h3>
@@ -1882,31 +1874,31 @@ export default function Home() {
                 <div className="w-full h-px bg-slate-850/50" />
                 <ul className="space-y-3.5 text-xs text-zinc-400">
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Hingga 5 konektor data aktif</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>500 pertanyaan AI / bulan</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Batas 10.000 dokumen memori</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Hingga 3 anggota tim</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Insights playbook standar</span>
@@ -1925,15 +1917,16 @@ export default function Home() {
             </div>
 
             {/* Growth Tier [Popular] */}
-            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r md:border-b-0 lg:border-b-0 lg:border-r relative bg-gradient-to-b from-purple-950/10 via-[#0c0c0e]/30 to-transparent">
+            <div className="p-8 rounded-2xl border border-zinc-700/80 bg-gradient-to-b from-[#111114]/40 via-[#0c0c0e]/70 to-[#070708]/90 backdrop-blur-sm flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:bg-[#0c0c0e]/80 hover:shadow-[0_15px_35px_rgba(255,255,255,0.06)] relative">
               
-              {/* Popular Badge & Glow effect */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-36 w-full max-w-[240px] bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
+              {/* Popular Badge & Glow effect (Monochrome/Silver) */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-36 w-full max-w-[240px] bg-white/[0.04] rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.06),transparent_65%)] pointer-events-none" />
               
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-semibold text-slate-200">Growth</h3>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-purple-500/15 text-purple-400 border border-purple-500/20">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-white/10 text-white border border-white/20">
                     POPULAR
                   </span>
                 </div>
@@ -1941,34 +1934,34 @@ export default function Home() {
                   <span className="text-3xl font-bold text-white tracking-tight">Rp 499k</span>
                   <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
                 </div>
-                <div className="w-full h-px bg-purple-500/20" />
+                <div className="w-full h-px bg-slate-800/50" />
                 <ul className="space-y-3.5 text-xs text-zinc-300">
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="font-medium text-slate-200">Konektor data tanpa batas</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>5.000 pertanyaan AI / bulan</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="font-medium text-slate-200">Dokumen memori tanpa batas</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Hingga 10 anggota tim</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Prioritas playbook & insight kustom</span>
@@ -1979,7 +1972,7 @@ export default function Home() {
                 <CoretifyButton
                   onClick={handleStartOnboarding}
                   variant="white"
-                  className="w-full py-5 text-xs font-semibold shadow-lg hover:shadow-purple-500/10"
+                  className="w-full py-5 text-xs font-semibold shadow-lg hover:shadow-white/5"
                 >
                   Try Growth Free
                 </CoretifyButton>
@@ -1987,7 +1980,7 @@ export default function Home() {
             </div>
 
             {/* Business Tier */}
-            <div className="p-8 flex flex-col justify-between">
+            <div className="p-8 rounded-2xl border border-slate-850/60 bg-[#0c0c0e]/30 backdrop-blur-sm flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:border-slate-700/80 hover:bg-[#0c0c0e]/70 hover:shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-base font-semibold text-slate-200">Business</h3>
@@ -2000,31 +1993,31 @@ export default function Home() {
                 <div className="w-full h-px bg-slate-850/50" />
                 <ul className="space-y-3.5 text-xs text-zinc-400">
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Konektor standard + custom API</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="font-medium text-slate-200">Pertanyaan AI tanpa batas</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Anggota tim tanpa batas</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Kustomisasi kepatuhan & log audit</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Dukungan khusus & SLA 99.9%</span>
@@ -2041,15 +2034,6 @@ export default function Home() {
                 </CoretifyButton>
               </div>
             </div>
-
-            </div>
-              {/* Right Spacer */}
-              <div
-                className="hidden lg:block border-l border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
           </div>
         </div>
       </section>
