@@ -1053,7 +1053,7 @@ export default function Home() {
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-purple-500 rounded-full" />
+              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">02</span>
@@ -1782,7 +1782,7 @@ export default function Home() {
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-amber-500 rounded-full" />
+              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">03</span>
@@ -1971,7 +1971,7 @@ export default function Home() {
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-indigo-500 rounded-full" />
+              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">04</span>
@@ -2232,7 +2232,7 @@ export default function Home() {
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-emerald-500 rounded-full" />
+              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">05</span>
@@ -2404,7 +2404,7 @@ export default function Home() {
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-white rounded-full" />
+              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
               <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">07</span>
