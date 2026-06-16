@@ -44,79 +44,61 @@ export default function Home() {
   const [infraProgress, setInfraProgress] = useState<number>(0);
   const isProgrammaticScroll = useRef<boolean>(false);
 
-  // Reset progress to 0 when active tab changes
+  // Scroll-spy and scroll progress calculation for Section 2 mockup cards
   useEffect(() => {
-    setInfraProgress(0);
-  }, [activeInfraTab]);
+    const handleScroll = () => {
+      const tabs: ("data" | "tools" | "agent" | "governance")[] = ["data", "tools", "agent", "governance"];
+      const windowHeight = window.innerHeight;
+      const centerOfScreen = windowHeight / 2;
 
-  // Autoplay effect for Platform Infrastructure tabs (Section 2)
-  useEffect(() => {
-    const duration = 6000; // 6 seconds per tab
-    const intervalTime = 30; // Update every 30ms for 60fps feel
-    const step = (intervalTime / duration) * 100;
+      // Find which card is closest to the middle of the screen
+      let closestTab = activeInfraTab;
+      let minDistance = Infinity;
 
-    const timer = setInterval(() => {
-      setInfraProgress((prev) => {
-        if (prev >= 100) {
-          setActiveInfraTab((current) => {
-            const tabs: ("data" | "tools" | "agent" | "governance")[] = ["data", "tools", "agent", "governance"];
-            const currentIndex = tabs.indexOf(current);
-            const nextIndex = (currentIndex + 1) % tabs.length;
-            const nextTab = tabs[nextIndex];
-            
-            isProgrammaticScroll.current = true;
-            const element = document.getElementById(`infra-card-${nextTab}`);
-            if (element) {
-              element.scrollIntoView({ behavior: "smooth", block: "center" });
-            }
-            setTimeout(() => {
-              isProgrammaticScroll.current = false;
-            }, 850);
-
-            return nextTab;
-          });
-          return 0;
+      tabs.forEach((tab) => {
+        const el = document.getElementById(`infra-card-${tab}`);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const cardCenter = rect.top + rect.height / 2;
+          const distance = Math.abs(cardCenter - centerOfScreen);
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestTab = tab;
+          }
         }
-        return prev + step;
       });
-    }, intervalTime);
 
-    return () => clearInterval(timer);
-  }, [activeInfraTab]);
+      // Update active tab only if not in programmatic scroll
+      if (!isProgrammaticScroll.current && closestTab !== activeInfraTab) {
+        setActiveInfraTab(closestTab);
+      }
 
-  // Scroll-Spy detection for Section 2 mockup cards
-  useEffect(() => {
-    const cards = ["data", "tools", "agent", "governance"];
-    const observers = cards.map((tab) => {
-      const el = document.getElementById(`infra-card-${tab}`);
-      if (!el) return null;
+      // Calculate scroll progress for the active tab (how far it has scrolled relative to the viewport center)
+      const activeEl = document.getElementById(`infra-card-${activeInfraTab}`);
+      if (activeEl) {
+        const rect = activeEl.getBoundingClientRect();
+        
+        // Progress runs from 0% when the element top is at 80% height of the screen
+        // to 100% when the element bottom is at 20% height of the screen
+        const startPoint = windowHeight * 0.8;
+        const endPoint = windowHeight * 0.2;
+        const scrollRange = rect.height + (startPoint - endPoint);
+        const scrolledDistance = startPoint - rect.top;
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && !isProgrammaticScroll.current) {
-              setActiveInfraTab(tab as "data" | "tools" | "agent" | "governance");
-            }
-          });
-        },
-        {
-          rootMargin: "-25% 0px -55% 0px", // focus on the middle-upper part of viewport
-          threshold: 0.1,
-        }
-      );
+        const percentage = (scrolledDistance / scrollRange) * 100;
+        const clamped = Math.max(0, Math.min(100, percentage));
+        setInfraProgress(clamped);
+      }
+    };
 
-      observer.observe(el);
-      return { observer, el };
-    });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Run once initially
+    handleScroll();
 
     return () => {
-      observers.forEach((obs) => {
-        if (obs) {
-          obs.observer.unobserve(obs.el);
-        }
-      });
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [activeInfraTab]);
 
   const handleInfraTabChange = (tab: "data" | "tools" | "agent" | "governance") => {
     setActiveInfraTab(tab);
@@ -1057,123 +1039,129 @@ export default function Home() {
           {/* Section Content Area */}
           <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
             
-            {/* Left Column: Interactive Categories Switcher (Sticky) */}
-            <div className="lg:col-span-4 lg:sticky lg:top-28 text-left lg:border-r lg:border-slate-850/80 flex flex-col justify-start h-fit">
-              
-              {/* Tab 1: Data */}
-              <button
-                onClick={() => handleInfraTabChange("data")}
-                className={`w-full text-left py-7 px-8 sm:px-10 transition-all duration-205 cursor-pointer block border-b border-slate-850/80 relative overflow-hidden ${
-                  activeInfraTab === "data" ? "opacity-100 bg-white/[0.02]" : "opacity-45 hover:opacity-75"
-                }`}
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                      <Database className="h-2.5 w-2.5" />
-                    </span>
-                    <span className="text-xs font-semibold text-white">Data</span>
+            {/* Left Column: Interactive Categories Switcher (Stretches full height, border runs all the way down) */}
+            <div className="lg:col-span-4 lg:border-r lg:border-slate-850/80 relative h-full">
+              {/* Inner sticky content */}
+              <div className="lg:sticky lg:top-28 py-12 px-6 sm:px-8 flex flex-col gap-6 text-left">
+                
+                {/* Tab 1: Data */}
+                <button
+                  onClick={() => handleInfraTabChange("data")}
+                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
+                    activeInfraTab === "data" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
+                  }`}
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
+                  {activeInfraTab === "data" && (
+                    <div 
+                      className="absolute left-0 top-0 w-[2px] bg-emerald-500 rounded-full transition-all duration-75 ease-out"
+                      style={{ height: `${infraProgress}%` }}
+                    />
+                  )}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                        <Database className="h-2.5 w-2.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-white font-sans">Data</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
+                      Coretify unifies every data source into one identity-resolved model.
+                    </p>
                   </div>
-                  <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
-                    Coretify unifies every data source into one identity-resolved model.
-                  </p>
-                </div>
-                {activeInfraTab === "data" && (
-                  <div 
-                    className="absolute bottom-0 left-0 h-[2px] bg-emerald-500 transition-all duration-75 ease-linear"
-                    style={{ width: `${infraProgress}%` }}
-                  />
-                )}
-              </button>
+                </button>
 
-              {/* Tab 2: Tools */}
-              <button
-                onClick={() => handleInfraTabChange("tools")}
-                className={`w-full text-left py-7 px-8 sm:px-10 transition-all duration-205 cursor-pointer block border-b border-slate-850/80 relative overflow-hidden ${
-                  activeInfraTab === "tools" ? "opacity-100 bg-white/[0.02]" : "opacity-45 hover:opacity-75"
-                }`}
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                      <Zap className="h-2.5 w-2.5" />
-                    </span>
-                    <span className="text-xs font-semibold text-white">Tools</span>
+                {/* Tab 2: Tools */}
+                <button
+                  onClick={() => handleInfraTabChange("tools")}
+                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
+                    activeInfraTab === "tools" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
+                  }`}
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
+                  {activeInfraTab === "tools" && (
+                    <div 
+                      className="absolute left-0 top-0 w-[2px] bg-purple-500 rounded-full transition-all duration-75 ease-out"
+                      style={{ height: `${infraProgress}%` }}
+                    />
+                  )}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                        <Zap className="h-2.5 w-2.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-white font-sans">Tools</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
+                      Coretify gives agents and operators shared playbooks, workflows, and routing.
+                    </p>
                   </div>
-                  <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
-                    Coretify gives agents and operators shared playbooks, workflows, and routing.
-                  </p>
-                </div>
-                {activeInfraTab === "tools" && (
-                  <div 
-                    className="absolute bottom-0 left-0 h-[2px] bg-purple-500 transition-all duration-75 ease-linear"
-                    style={{ width: `${infraProgress}%` }}
-                  />
-                )}
-              </button>
+                </button>
 
-              {/* Tab 3: Agent */}
-              <button
-                onClick={() => handleInfraTabChange("agent")}
-                className={`w-full text-left py-7 px-8 sm:px-10 transition-all duration-205 cursor-pointer block border-b border-slate-850/80 relative overflow-hidden ${
-                  activeInfraTab === "agent" ? "opacity-100 bg-white/[0.02]" : "opacity-45 hover:opacity-75"
-                }`}
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-750 flex items-center justify-center text-zinc-300">
-                      <Cpu className="h-2.5 w-2.5" />
-                    </span>
-                    <span className="text-xs font-semibold text-white">Agent</span>
+                {/* Tab 3: Agent */}
+                <button
+                  onClick={() => handleInfraTabChange("agent")}
+                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
+                    activeInfraTab === "agent" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
+                  }`}
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
+                  {activeInfraTab === "agent" && (
+                    <div 
+                      className="absolute left-0 top-0 w-[2px] bg-zinc-300 rounded-full transition-all duration-75 ease-out"
+                      style={{ height: `${infraProgress}%` }}
+                    />
+                  )}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-750 flex items-center justify-center text-zinc-300">
+                        <Cpu className="h-2.5 w-2.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-white font-sans">Agent</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
+                      Coretify&apos;s agents turn plain language into working systems.
+                    </p>
                   </div>
-                  <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
-                    Coretify&apos;s agents turn plain language into working systems.
-                  </p>
-                </div>
-                {activeInfraTab === "agent" && (
-                  <div 
-                    className="absolute bottom-0 left-0 h-[2px] bg-zinc-400 transition-all duration-75 ease-linear"
-                    style={{ width: `${infraProgress}%` }}
-                  />
-                )}
-              </button>
+                </button>
 
-              {/* Tab 4: Governance */}
-              <button
-                onClick={() => handleInfraTabChange("governance")}
-                className={`w-full text-left py-7 px-8 sm:px-10 transition-all duration-205 cursor-pointer block border-b border-slate-850/80 relative overflow-hidden ${
-                  activeInfraTab === "governance" ? "opacity-100 bg-white/[0.02]" : "opacity-45 hover:opacity-75"
-                }`}
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-                      <ShieldCheck className="h-2.5 w-2.5" />
-                    </span>
-                    <span className="text-xs font-semibold text-white">Governance</span>
+                {/* Tab 4: Governance */}
+                <button
+                  onClick={() => handleInfraTabChange("governance")}
+                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
+                    activeInfraTab === "governance" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
+                  }`}
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
+                  {activeInfraTab === "governance" && (
+                    <div 
+                      className="absolute left-0 top-0 w-[2px] bg-blue-500 rounded-full transition-all duration-75 ease-out"
+                      style={{ height: `${infraProgress}%` }}
+                    />
+                  )}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                        <ShieldCheck className="h-2.5 w-2.5" />
+                      </span>
+                      <span className="text-xs font-semibold text-white font-sans">Governance</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
+                      Coretify&apos;s agents propose, you approve, anything rolls back.
+                    </p>
                   </div>
-                  <p className="text-[11px] text-zinc-400 leading-relaxed font-normal">
-                    Coretify&apos;s agents propose, you approve, anything rolls back.
-                  </p>
-                </div>
-                {activeInfraTab === "governance" && (
-                  <div 
-                    className="absolute bottom-0 left-0 h-[2px] bg-blue-500 transition-all duration-75 ease-linear"
-                    style={{ width: `${infraProgress}%` }}
-                  />
-                )}
-              </button>
+                </button>
+              </div>
             </div>
-
             {/* Right Column: Stacked High-Fidelity Showcase Cards */}
-            <div className="lg:col-span-8 p-6 sm:p-10 lg:p-12 flex flex-col gap-28 bg-[#070708]/20 w-full">
+            <div className="lg:col-span-8 p-6 sm:p-8 lg:p-10 flex flex-col gap-10 bg-[#070708]/20 w-full">
               
               {/* Showcase Card 1: Data */}
-              <div id="infra-card-data" className="w-full space-y-6 text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+              <div id="infra-card-data" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
                 
                 {/* Header & Description */}
-                <div className="space-y-4">
+                <div className="p-8 pb-6 space-y-4">
                   <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold">
                     <span className="h-5 w-5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                       <Database className="h-3 w-3" />
@@ -1183,7 +1171,7 @@ export default function Home() {
                   <h3 className="text-3xl font-semibold text-white tracking-tight leading-none">
                     One source of truth for every agent
                   </h3>
-                  <p className="text-sm text-zinc-450 leading-relaxed max-w-2xl font-normal">
+                  <p className="text-sm text-zinc-455 leading-relaxed max-w-2xl font-normal">
                     Coretify unifies data from CRM, website, forms, enrichment vendors, ad platforms, and conversation tools into a single identity-resolved model in real time.
                   </p>
                   <div>
@@ -1198,8 +1186,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* HIGH FIDELITY WINDOW MOCKUP */}
-                <div className="border border-[#1a1a1f] bg-[#0c0c0e] rounded-xl overflow-hidden shadow-2xl flex flex-col w-full">
+                <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
                   {/* Mockup macOS Title Bar & Tabs */}
                   <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
                     <div className="flex items-center gap-4">
@@ -1374,11 +1361,11 @@ export default function Home() {
               </div>
 
               {/* Showcase Card 2: Tools */}
-              <div id="infra-card-tools" className="w-full space-y-6 text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+              <div id="infra-card-tools" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
                 
                 {/* Header & Description */}
-                <div className="space-y-4">
+                <div className="p-8 pb-6 space-y-4">
                   <div className="flex items-center gap-2 text-purple-400 text-xs font-semibold">
                     <span className="h-5 w-5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
                       <Zap className="h-3 w-3" />
@@ -1403,8 +1390,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* HIGH FIDELITY WINDOW MOCKUP */}
-                <div className="border border-[#1a1a1f] bg-[#0c0c0e] rounded-xl overflow-hidden shadow-2xl flex flex-col w-full">
+                {/* HIGH FIDELITY WINDOW MOCKUP (touches left, right, and bottom borders) */}
+                <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
                   {/* Mockup macOS Title Bar */}
                   <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
                     <div className="flex items-center gap-4">
@@ -1522,11 +1509,11 @@ export default function Home() {
               </div>
 
               {/* Showcase Card 3: Agent */}
-              <div id="infra-card-agent" className="w-full space-y-6 text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+              <div id="infra-card-agent" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
                 
                 {/* Header & Description */}
-                <div className="space-y-4">
+                <div className="p-8 pb-6 space-y-4">
                   <div className="flex items-center gap-2 text-zinc-400 text-xs font-semibold">
                     <span className="h-5 w-5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300">
                       <Cpu className="h-3 w-3" />
@@ -1536,7 +1523,7 @@ export default function Home() {
                   <h3 className="text-3xl font-semibold text-white tracking-tight leading-none">
                     Turns prompts into insights and systems
                   </h3>
-                  <p className="text-sm text-zinc-450 leading-relaxed max-w-2xl font-normal">
+                  <p className="text-sm text-zinc-455 leading-relaxed max-w-2xl font-normal">
                     Meet Bot, an agent that turns plain-language requests into working systems for reps, admins, and leaders.
                   </p>
                   <div>
@@ -1551,8 +1538,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* HIGH FIDELITY WINDOW MOCKUP */}
-                <div className="border border-[#1a1a1f] bg-[#0c0c0e] rounded-xl overflow-hidden shadow-2xl flex flex-col w-full">
+                <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
                   {/* Mockup macOS Title Bar */}
                   <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
                     <div className="flex items-center gap-4">
@@ -1622,11 +1608,11 @@ export default function Home() {
               </div>
 
               {/* Showcase Card 4: Governance */}
-              <div id="infra-card-governance" className="w-full space-y-6 text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+              <div id="infra-card-governance" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
                 
                 {/* Header & Description */}
-                <div className="space-y-4">
+                <div className="p-8 pb-6 space-y-4">
                   <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold">
                     <span className="h-5 w-5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
                       <ShieldCheck className="h-3.5 w-3.5" />
@@ -1651,8 +1637,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* HIGH FIDELITY WINDOW MOCKUP */}
-                <div className="border border-[#1a1a1f] bg-[#0c0c0e] rounded-xl overflow-hidden shadow-2xl flex flex-col w-full">
+                {/* HIGH FIDELITY WINDOW MOCKUP (touches left, right, and bottom borders) */}
+                <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
                   {/* Mockup macOS Title Bar */}
                   <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
                     <div className="flex items-center gap-4">
