@@ -730,7 +730,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">01</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">07</span>
+                <span className="text-slate-600">06</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">FEATURES</span>
@@ -1058,7 +1058,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">02</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">07</span>
+                <span className="text-slate-600">06</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">INFRASTRUCTURE</span>
@@ -1775,7 +1775,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 3: INTEGRATIONS GRID */}
+      {/* SECTION 4: PRICING */}
       <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
@@ -1787,196 +1787,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">03</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">07</span>
-                <span className="text-slate-700">]</span>
-                <span className="text-slate-650 mx-0.5">·</span>
-                <span className="uppercase text-slate-400 font-bold">CONNECT</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Section Content Area */}
-          <div className="p-8 sm:p-12 lg:p-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-              
-              {/* Left Column: Copywriting & CTA */}
-              <div className="lg:col-span-5 space-y-8 text-left">
-                <div className="space-y-4">
-                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none font-sans">
-                    Connect with your favorite tools.
-                  </h2>
-                  <p className="text-zinc-400 text-[13px] leading-relaxed font-normal">
-                    Coretify reads your operational data securely in one click. Zero write permissions, zero deletion rights—pure read-only intelligence that unifies Gmail, Drive, Calendar, WhatsApp, and spreadsheets into one central brain.
-                  </p>
-                </div>
-
-                <div>
-                  <CoretifyButton
-                    onClick={handleStartOnboarding}
-                    variant="white"
-                    size="lg"
-                    className="px-7 py-5.5 text-[13px] font-semibold shadow-lg"
-                  >
-                    Start Connecting
-                  </CoretifyButton>
-                </div>
-              </div>
-
-              {/* Spacing Column */}
-              <div className="hidden lg:block lg:col-span-1" />
-
-              {/* Right Column: SaaS Integrations Grid */}
-              <div className="lg:col-span-6 w-full">
-                
-                <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 select-none relative">
-                  
-                  {/* Subtle radial glow under grid */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/5 via-indigo-500/5 to-emerald-500/5 blur-3xl rounded-full -z-10 pointer-events-none" />
-
-                  {/* Row 1 */}
-                  {/* Cell 1: Empty */}
-                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
-
-                  {/* Cell 2: WhatsApp Lite */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
-                    <svg viewBox="0 0 24 24" className="h-8.5 w-8.5 fill-current text-[#25D366] group-hover:scale-110 transition-transform duration-300">
-                      <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12c0 2.14.68 4.18 1.97 5.9L2.03 22l4.22-1.1c1.63.9 3.5 1.4 5.75 1.4 5.5 0 10-4.5 10-10S17.5 2 12.004 2zm5.73 14.28c-.24.68-1.2 1.25-1.65 1.3-.46.06-.9.1-2.9-.7-2.55-1.03-4.2-3.6-4.32-3.77-.13-.17-1.07-1.4-1.07-2.7 0-1.28.67-1.92.9-2.2.25-.26.54-.33.72-.33.18 0 .36 0 .5.02.16 0 .37-.06.57.43.2.5.7 1.7.75 1.8.06.12.1.27.02.43-.08.16-.12.26-.25.4-.12.14-.26.3-.37.42-.12.12-.25.26-.1.5.14.24.62 1.03 1.32 1.66.9.8 1.66 1.05 1.9 1.17.24.12.38.1.52-.06.14-.16.6-1.03.77-1.37.16-.34.33-.28.56-.2.23.08 1.48.7 1.73.82.25.12.4.18.46.3.06.1.06.67-.18 1.34z"/>
-                    </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">WA Lite</span>
-                  </div>
-
-                  {/* Cell 3: Empty */}
-                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
-
-                  {/* Cell 4: Google Calendar */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-blue-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(59,130,246,0.08)] group cursor-pointer">
-                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <path d="M26 4H8C5.8 4 4 5.8 4 8v32c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V22L26 4z" fill="#4285F4"/>
-                      <path d="M44 22H26V4l18 18z" fill="#1565C0"/>
-                      <text x="22" y="34" fill="#FFF" fontSize="21" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">31</text>
-                    </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Calendar</span>
-                  </div>
-
-                  {/* Cell 5: Empty */}
-                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
-
-                  {/* Cell 6: Notion */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-zinc-700 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(255,255,255,0.04)] group cursor-pointer">
-                    <svg viewBox="0 0 24 24" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300">
-                      <rect x="2" y="2" width="20" height="20" rx="4" fill="#FFF" stroke="#000" strokeWidth="1.5"/>
-                      <path d="M6 6h2.5l7.5 9.5V6h2.5v12h-2.5L8.5 8.5V18H6V6z" fill="#000"/>
-                    </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Notion</span>
-                  </div>
-
-                  {/* Row 2 */}
-                  {/* Cell 7: Gmail */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-rose-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(239,68,68,0.08)] group cursor-pointer">
-                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <path d="M4 12v24c0 2.2 1.8 4 4 4h6V18L4 12z" fill="#4285F4"/>
-                      <path d="M44 12v24c0 2.2-1.8 4-4 4h-6V18l10-6z" fill="#34A853"/>
-                      <path d="M14 18h20V8L24 16 14 8v10z" fill="#EA4335"/>
-                      <path d="M4 12l20 15 20-15v-4L24 22 4 8v4z" fill="#FBBC05"/>
-                    </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Gmail</span>
-                  </div>
-
-                  {/* Cell 8: Empty */}
-                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
-
-                  {/* Cell 9: Google Drive */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-amber-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] group cursor-pointer">
-                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <path d="M16 6h16l15 26H31L16 6z" fill="#FFCC00"/>
-                      <path d="M32 32H2L10 18h30l-8 14z" fill="#00AA47"/>
-                      <path d="M16 6L1 32l8 14 23-40H16z" fill="#4285F4"/>
-                    </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Drive</span>
-                  </div>
-
-                  {/* Cell 10: Empty */}
-                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
-
-                  {/* Cell 11: Zapier */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-orange-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(249,115,22,0.08)] group cursor-pointer">
-                    <svg viewBox="0 0 48 48" className="h-8.5 w-8.5 group-hover:scale-110 transition-transform duration-300">
-                      <circle cx="24" cy="24" r="22" fill="#FF4F00"/>
-                      <g stroke="#FFF" strokeWidth="5.5" strokeLinecap="round">
-                        <line x1="24" y1="12" x2="24" y2="36" />
-                        <line x1="13.6" y1="18" x2="34.4" y2="30" />
-                        <line x1="13.6" y1="30" x2="34.4" y2="18" />
-                      </g>
-                    </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Zapier</span>
-                  </div>
-
-                  {/* Cell 12: Empty */}
-                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
-
-                  {/* Row 3 */}
-                  {/* Cell 13: Empty */}
-                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
-
-                  {/* Cell 14: CSV/Excel */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-teal-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(20,184,166,0.08)] group cursor-pointer">
-                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <rect x="4" y="4" width="40" height="40" rx="6" fill="#107C41" />
-                      <path d="M26 14h10v20H26z" fill="#FFF" opacity="0.15" />
-                      <path d="M12 14l8 10-8 10h5l5.5-7 5.5 7h5L25 24l8-10h-5l-5.5 7-5.5-7h-5z" fill="#FFF" />
-                    </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Excel/CSV</span>
-                  </div>
-
-                  {/* Cell 15: Empty */}
-                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
-
-                  {/* Cell 16: Slack */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-purple-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(168,85,247,0.08)] group cursor-pointer">
-                    <svg viewBox="0 0 100 100" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <path d="M20 50a10 10 0 1 1 10-10v10H20zm10 10a10 10 0 1 1 0-20h20v20H30z" fill="#36C5F0"/>
-                      <path d="M50 20a10 10 0 1 1 10 10H50V20zm10 10a10 10 0 1 1-20 0V10h20v20z" fill="#2EB67D"/>
-                      <path d="M80 50a10 10 0 1 1-10 10V50h10zm-10-10a10 10 0 1 1 0 20H50V40h20z" fill="#ECB22E"/>
-                      <path d="M50 80a10 10 0 1 1-10-10h10v10zm-10-10a10 10 0 1 1 20 0v10H40v-20z" fill="#E01E5A"/>
-                    </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Slack</span>
-                  </div>
-
-                  {/* Cell 17: Empty */}
-                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
-
-                  {/* Cell 18: Accurate/Jurnal */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
-                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <path d="M30 6L14 22v14h8V26l12-12-4-8z" fill="#007AFF" />
-                      <path d="M22 36a8 8 0 0 1-8-8v-6l-6 6v8a8 8 0 0 0 8 8h12l-6-8z" fill="#0051A8" />
-                      <path d="M34 14l-4-8-8 8h8a4 4 0 0 1 4 4v4l6-6v-2z" fill="#3395FF" />
-                    </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Jurnal.id</span>
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: PRICING */}
-      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
-        <div className="mx-auto max-w-[1360px] border-l border-r relative">
-          
-          {/* Section Header Band */}
-          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
-            <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
-              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
-                <span className="text-slate-700">[</span>
-                <span className="text-white font-bold">04</span>
-                <span className="text-slate-700">/</span>
-                <span className="text-slate-600">07</span>
+                <span className="text-slate-600">06</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">PRICING</span>
@@ -2227,6 +2038,261 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SECTION 3: INTEGRATIONS GRID */}
+      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+        <div className="mx-auto max-w-[1360px] border-l border-r relative">
+          
+          {/* Section Content Area */}
+          <div className="p-8 sm:p-12 lg:p-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+              
+              {/* Left Column: Copywriting & CTA */}
+              <div className="lg:col-span-5 space-y-8 text-left">
+                <div className="space-y-4">
+                  <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none font-sans">
+                    Connect with your favorite tools.
+                  </h2>
+                  <p className="text-zinc-400 text-[13px] leading-relaxed font-normal">
+                    Coretify reads your operational data securely in one click. Zero write permissions, zero deletion rights—pure read-only intelligence that unifies Gmail, Drive, Calendar, WhatsApp, and spreadsheets into one central brain.
+                  </p>
+                </div>
+
+                <div>
+                  <CoretifyButton
+                    onClick={handleStartOnboarding}
+                    variant="white"
+                    size="lg"
+                    className="px-7 py-5.5 text-[13px] font-semibold shadow-lg"
+                  >
+                    Start Connecting
+                  </CoretifyButton>
+                </div>
+              </div>
+
+              {/* Spacing Column */}
+              <div className="hidden lg:block lg:col-span-1" />
+
+              {/* Right Column: SaaS Integrations Grid */}
+              <div className="lg:col-span-6 w-full">
+                
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 select-none relative">
+                  
+                  {/* Subtle radial glow under grid */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/5 via-indigo-500/5 to-emerald-500/5 blur-3xl rounded-full -z-10 pointer-events-none" />
+
+                  {/* Row 1 */}
+                  {/* Cell 1: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 2: WhatsApp Lite */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
+                    <svg viewBox="0 0 24 24" className="h-8.5 w-8.5 fill-current text-[#25D366] group-hover:scale-110 transition-transform duration-300">
+                      <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12c0 2.14.68 4.18 1.97 5.9L2.03 22l4.22-1.1c1.63.9 3.5 1.4 5.75 1.4 5.5 0 10-4.5 10-10S17.5 2 12.004 2zm5.73 14.28c-.24.68-1.2 1.25-1.65 1.3-.46.06-.9.1-2.9-.7-2.55-1.03-4.2-3.6-4.32-3.77-.13-.17-1.07-1.4-1.07-2.7 0-1.28.67-1.92.9-2.2.25-.26.54-.33.72-.33.18 0 .36 0 .5.02.16 0 .37-.06.57.43.2.5.7 1.7.75 1.8.06.12.1.27.02.43-.08.16-.12.26-.25.4-.12.14-.26.3-.37.42-.12.12-.25.26-.1.5.14.24.62 1.03 1.32 1.66.9.8 1.66 1.05 1.9 1.17.24.12.38.1.52-.06.14-.16.6-1.03.77-1.37.16-.34.33-.28.56-.2.23.08 1.48.7 1.73.82.25.12.4.18.46.3.06.1.06.67-.18 1.34z"/>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">WA Lite</span>
+                  </div>
+
+                  {/* Cell 3: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 4: Google Calendar */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-blue-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(59,130,246,0.08)] group cursor-pointer">
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M26 4H8C5.8 4 4 5.8 4 8v32c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V22L26 4z" fill="#4285F4"/>
+                      <path d="M44 22H26V4l18 18z" fill="#1565C0"/>
+                      <text x="22" y="34" fill="#FFF" fontSize="21" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">31</text>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Calendar</span>
+                  </div>
+
+                  {/* Cell 5: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 6: Notion */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-zinc-700 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(255,255,255,0.04)] group cursor-pointer">
+                    <svg viewBox="0 0 24 24" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300">
+                      <rect x="2" y="2" width="20" height="20" rx="4" fill="#FFF" stroke="#000" strokeWidth="1.5"/>
+                      <path d="M6 6h2.5l7.5 9.5V6h2.5v12h-2.5L8.5 8.5V18H6V6z" fill="#000"/>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Notion</span>
+                  </div>
+
+                  {/* Row 2 */}
+                  {/* Cell 7: Gmail */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-rose-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(239,68,68,0.08)] group cursor-pointer">
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M4 12v24c0 2.2 1.8 4 4 4h6V18L4 12z" fill="#4285F4"/>
+                      <path d="M44 12v24c0 2.2-1.8 4-4 4h-6V18l10-6z" fill="#34A853"/>
+                      <path d="M14 18h20V8L24 16 14 8v10z" fill="#EA4335"/>
+                      <path d="M4 12l20 15 20-15v-4L24 22 4 8v4z" fill="#FBBC05"/>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Gmail</span>
+                  </div>
+
+                  {/* Cell 8: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 9: Google Drive */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-amber-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] group cursor-pointer">
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M16 6h16l15 26H31L16 6z" fill="#FFCC00"/>
+                      <path d="M32 32H2L10 18h30l-8 14z" fill="#00AA47"/>
+                      <path d="M16 6L1 32l8 14 23-40H16z" fill="#4285F4"/>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Drive</span>
+                  </div>
+
+                  {/* Cell 10: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 11: Zapier */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-orange-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(249,115,22,0.08)] group cursor-pointer">
+                    <svg viewBox="0 0 48 48" className="h-8.5 w-8.5 group-hover:scale-110 transition-transform duration-300">
+                      <circle cx="24" cy="24" r="22" fill="#FF4F00"/>
+                      <g stroke="#FFF" strokeWidth="5.5" strokeLinecap="round">
+                        <line x1="24" y1="12" x2="24" y2="36" />
+                        <line x1="13.6" y1="18" x2="34.4" y2="30" />
+                        <line x1="13.6" y1="30" x2="34.4" y2="18" />
+                      </g>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Zapier</span>
+                  </div>
+
+                  {/* Cell 12: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Row 3 */}
+                  {/* Cell 13: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 14: CSV/Excel */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-teal-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(20,184,166,0.08)] group cursor-pointer">
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <rect x="4" y="4" width="40" height="40" rx="6" fill="#107C41" />
+                      <path d="M26 14h10v20H26z" fill="#FFF" opacity="0.15" />
+                      <path d="M12 14l8 10-8 10h5l5.5-7 5.5 7h5L25 24l8-10h-5l-5.5 7-5.5-7h-5z" fill="#FFF" />
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Excel/CSV</span>
+                  </div>
+
+                  {/* Cell 15: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 16: Slack */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-purple-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(168,85,247,0.08)] group cursor-pointer">
+                    <svg viewBox="0 0 100 100" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M20 50a10 10 0 1 1 10-10v10H20zm10 10a10 10 0 1 1 0-20h20v20H30z" fill="#36C5F0"/>
+                      <path d="M50 20a10 10 0 1 1 10 10H50V20zm10 10a10 10 0 1 1-20 0V10h20v20z" fill="#2EB67D"/>
+                      <path d="M80 50a10 10 0 1 1-10 10V50h10zm-10-10a10 10 0 1 1 0 20H50V40h20z" fill="#ECB22E"/>
+                      <path d="M50 80a10 10 0 1 1-10-10h10v10zm-10-10a10 10 0 1 1 20 0v10H40v-20z" fill="#E01E5A"/>
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Slack</span>
+                  </div>
+
+                  {/* Cell 17: Empty */}
+                  <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
+
+                  {/* Cell 18: Accurate/Jurnal */}
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
+                    <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
+                      <path d="M30 6L14 22v14h8V26l12-12-4-8z" fill="#007AFF" />
+                      <path d="M22 36a8 8 0 0 1-8-8v-6l-6 6v8a8 8 0 0 0 8 8h12l-6-8z" fill="#0051A8" />
+                      <path d="M34 14l-4-8-8 8h8a4 4 0 0 1 4 4v4l6-6v-2z" fill="#3395FF" />
+                    </svg>
+                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Jurnal.id</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6: TESTIMONIALS */}
+      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+        <div className="mx-auto max-w-[1360px] border-l border-r relative">
+          
+          {/* Section Header Band */}
+          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
+            <div className="flex items-center gap-2">
+              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
+              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
+                <span className="text-slate-700">[</span>
+                <span className="text-white font-bold">04</span>
+                <span className="text-slate-700">/</span>
+                <span className="text-slate-600">06</span>
+                <span className="text-slate-700">]</span>
+                <span className="text-slate-650 mx-0.5">·</span>
+                <span className="uppercase text-slate-400 font-bold">TESTIMONIALS</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Centered Title block */}
+          <div className="py-16 px-8 sm:px-12 lg:px-16 text-center flex flex-col items-center justify-center space-y-4 bg-transparent">
+            {/* Large centered title */}
+            <h2 className="text-3xl sm:text-[42px] font-semibold tracking-[-0.03em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none max-w-3xl">
+              Loved by forward-thinking teams.
+            </h2>
+            {/* Centered description */}
+            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-xl leading-relaxed">
+              See how Indonesian software houses, agencies, and startups run more efficiently with Coretify.
+            </p>
+          </div>
+
+          {/* Testimonials Grid Layout */}
+          <div className="relative border-t border-slate-850/80 bg-[#09090b]/10 w-full overflow-hidden">
+            {/* Soft background glow */}
+            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.015)_0%,_transparent_70%)] pointer-events-none" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 w-full">
+              {testimonials.map((t, idx) => {
+                const borderRightClass = (idx % 3 !== 2) ? "md:border-r border-slate-850/80" : "";
+                const borderBottomClass = idx < 3 
+                  ? "border-b border-slate-850/80" 
+                  : (idx < 5 ? "max-md:border-b border-slate-850/80" : "");
+                
+                return (
+                  <div 
+                    key={idx} 
+                    className={`flex flex-col justify-between p-8 text-left bg-transparent group hover:bg-white/[0.015] transition-all duration-300 relative select-none ${borderRightClass} ${borderBottomClass}`}
+                  >
+                    {/* Left Hover Border Line (Thick unified brand silver/slate line) */}
+                    <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-300 group-hover:bg-slate-400" />
+                    
+                    {/* Card Header (Avatar + User Details + Arrow) */}
+                    <div className="flex items-center justify-between pb-6 border-b border-slate-900/60">
+                      <div className="flex items-center gap-3.5 truncate">
+                        <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden shrink-0">
+                          {/* Unified soft slate glow */}
+                          <div className="absolute inset-0 bg-gradient-to-tr from-slate-500/10 to-transparent blur-[2px]" />
+                          {t.initials}
+                        </div>
+                        <div className="truncate">
+                          <div className="text-xs font-semibold text-slate-200 truncate">{t.name}</div>
+                          <div className="text-[10px] text-zinc-550 font-mono mt-0.5 truncate">{t.handle}</div>
+                        </div>
+                      </div>
+                      {/* Top-Right Arrow pointing top-right - highlights in unified brand silver/slate on hover */}
+                      <ArrowRight className="h-3.5 w-3.5 -rotate-45 text-zinc-700/60 transition-all duration-300 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-slate-350" />
+                    </div>
+                    {/* Card Body (Quote Text) */}
+                    <div className="pt-6 flex-1 flex items-start min-h-[90px]">
+                      <p className="text-[12.5px] sm:text-[13.5px] text-zinc-350 leading-relaxed font-normal">
+                        &ldquo;{t.text}&rdquo;
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 5: FAQ */}
       <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
@@ -2239,7 +2305,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">05</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">07</span>
+                <span className="text-slate-600">06</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">FAQ</span>
@@ -2319,7 +2385,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 6: TESTIMONIALS */}
+      {/* SECTION 7: CTA */}
       <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
@@ -2331,89 +2397,7 @@ export default function Home() {
                 <span className="text-slate-700">[</span>
                 <span className="text-white font-bold">06</span>
                 <span className="text-slate-700">/</span>
-                <span className="text-slate-600">07</span>
-                <span className="text-slate-700">]</span>
-                <span className="text-slate-650 mx-0.5">·</span>
-                <span className="uppercase text-slate-400 font-bold">TESTIMONIALS</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Centered Title block */}
-          <div className="py-16 px-8 sm:px-12 lg:px-16 text-center flex flex-col items-center justify-center space-y-4 bg-transparent">
-            {/* Large centered title */}
-            <h2 className="text-3xl sm:text-[42px] font-semibold tracking-[-0.03em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none max-w-3xl">
-              Loved by forward-thinking teams.
-            </h2>
-            {/* Centered description */}
-            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-xl leading-relaxed">
-              See how Indonesian software houses, agencies, and startups run more efficiently with Coretify.
-            </p>
-          </div>
-
-          {/* Testimonials Grid Layout */}
-          <div className="relative border-t border-slate-850/80 bg-[#09090b]/10 w-full overflow-hidden">
-            {/* Soft background glow */}
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.015)_0%,_transparent_70%)] pointer-events-none" />
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 w-full">
-              {testimonials.map((t, idx) => {
-                const borderRightClass = (idx % 3 !== 2) ? "md:border-r border-slate-850/80" : "";
-                const borderBottomClass = idx < 3 
-                  ? "border-b border-slate-850/80" 
-                  : (idx < 5 ? "max-md:border-b border-slate-850/80" : "");
-                
-                return (
-                  <div 
-                    key={idx} 
-                    className={`flex flex-col justify-between p-8 text-left bg-transparent group hover:bg-white/[0.015] transition-all duration-300 relative select-none ${borderRightClass} ${borderBottomClass}`}
-                  >
-                    {/* Left Hover Border Line (Thick unified brand silver/slate line) */}
-                    <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-300 group-hover:bg-slate-400" />
-                    
-                    {/* Card Header (Avatar + User Details + Arrow) */}
-                    <div className="flex items-center justify-between pb-6 border-b border-slate-900/60">
-                      <div className="flex items-center gap-3.5 truncate">
-                        <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden shrink-0">
-                          {/* Unified soft slate glow */}
-                          <div className="absolute inset-0 bg-gradient-to-tr from-slate-500/10 to-transparent blur-[2px]" />
-                          {t.initials}
-                        </div>
-                        <div className="truncate">
-                          <div className="text-xs font-semibold text-slate-200 truncate">{t.name}</div>
-                          <div className="text-[10px] text-zinc-550 font-mono mt-0.5 truncate">{t.handle}</div>
-                        </div>
-                      </div>
-                      {/* Top-Right Arrow pointing top-right - highlights in unified brand silver/slate on hover */}
-                      <ArrowRight className="h-3.5 w-3.5 -rotate-45 text-zinc-700/60 transition-all duration-300 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-slate-350" />
-                    </div>
-                    {/* Card Body (Quote Text) */}
-                    <div className="pt-6 flex-1 flex items-start min-h-[90px]">
-                      <p className="text-[12.5px] sm:text-[13.5px] text-zinc-350 leading-relaxed font-normal">
-                        &ldquo;{t.text}&rdquo;
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 7: CTA */}
-      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
-        <div className="mx-auto max-w-[1360px] border-l border-r relative">
-          
-          {/* Section Header Band */}
-          <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
-            <div className="flex items-center gap-2">
-              <div className="w-[3px] h-3.5 bg-slate-450 rounded-full" />
-              <div className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-slate-500">
-                <span className="text-slate-700">[</span>
-                <span className="text-white font-bold">07</span>
-                <span className="text-slate-700">/</span>
-                <span className="text-slate-600">07</span>
+                <span className="text-slate-600">06</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
                 <span className="uppercase text-slate-400 font-bold">GET STARTED</span>
