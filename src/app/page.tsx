@@ -33,6 +33,54 @@ import {
   Database,
   Zap
 } from "lucide-react";
+import { motion, HTMLMotionProps } from "framer-motion";
+
+interface FadeInProps extends HTMLMotionProps<"div"> {
+  delay?: number;
+  direction?: "up" | "down" | "left" | "right" | "none";
+  duration?: number;
+}
+
+function FadeIn({
+  children,
+  delay = 0,
+  direction = "up",
+  duration = 0.5,
+  className,
+  ...props
+}: FadeInProps) {
+  const directions = {
+    up: { y: 20, x: 0 },
+    down: { y: -20, x: 0 },
+    left: { x: 20, y: 0 },
+    right: { x: -20, y: 0 },
+    none: { x: 0, y: 0 },
+  };
+
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        ...directions[direction]
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        y: 0
+      }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        duration,
+        delay,
+        ease: [0.16, 1, 0.3, 1]
+      }}
+      className={className}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function Home() {
   const router = useRouter();
@@ -41,8 +89,27 @@ export default function Home() {
   const [activePlaybookTab, setActivePlaybookTab] = useState<"software_house" | "agency" | "startup">("software_house");
   const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(null);
   const [activeInfraTab, setActiveInfraTab] = useState<"data" | "tools" | "agent" | "governance">("data");
-  const [infraProgress, setInfraProgress] = useState<number>(0);
   const isProgrammaticScroll = useRef<boolean>(false);
+  const rafId = useRef<number | null>(null);
+  const activeInfraTabRef = useRef(activeInfraTab);
+  const infraProgressRef = useRef<number>(0);
+
+  // Keep activeInfraTab ref in sync
+  useEffect(() => { activeInfraTabRef.current = activeInfraTab; }, [activeInfraTab]);
+
+  // Directly write progress to DOM — zero React re-render
+  const setProgressBarDOM = (pct: number, tab?: string) => {
+    const targetTab = tab ?? activeInfraTabRef.current;
+    const el = document.getElementById(`infra-progress-${targetTab}`);
+    if (el) el.style.height = `${pct}%`;
+  };
+
+  const resetAllProgressBars = () => {
+    ["data", "tools", "agent", "governance"].forEach(t => {
+      const el = document.getElementById(`infra-progress-${t}`);
+      if (el) el.style.height = "0%";
+    });
+  };
 
   const testimonials = [
     {
@@ -85,13 +152,13 @@ export default function Home() {
 
   // Scroll-spy and scroll progress calculation for Section 2 mockup cards
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScrollFrame = () => {
       const tabs: ("data" | "tools" | "agent" | "governance")[] = ["data", "tools", "agent", "governance"];
       const windowHeight = window.innerHeight;
       const centerOfScreen = windowHeight / 2;
 
       // Find which card is closest to the middle of the screen
-      let closestTab = activeInfraTab;
+      let closestTab = activeInfraTabRef.current;
       let minDistance = Infinity;
 
       tabs.forEach((tab) => {
@@ -108,12 +175,12 @@ export default function Home() {
       });
 
       // Update active tab only if not in programmatic scroll
-      if (!isProgrammaticScroll.current && closestTab !== activeInfraTab) {
+      if (!isProgrammaticScroll.current && closestTab !== activeInfraTabRef.current) {
         setActiveInfraTab(closestTab);
       }
 
       // Calculate scroll progress for the active tab (how far it has scrolled relative to the viewport center)
-      const activeEl = document.getElementById(`infra-card-${activeInfraTab}`);
+      const activeEl = document.getElementById(`infra-card-${activeInfraTabRef.current}`);
       if (activeEl) {
         const rect = activeEl.getBoundingClientRect();
         
@@ -126,22 +193,37 @@ export default function Home() {
 
         const percentage = (scrolledDistance / scrollRange) * 100;
         const clamped = Math.max(0, Math.min(100, percentage));
-        setInfraProgress(clamped);
+        // Only update DOM if change is meaningful (avoid excessive paint)
+        if (Math.abs(clamped - infraProgressRef.current) > 0.5) {
+          infraProgressRef.current = clamped;
+          setProgressBarDOM(clamped);
+        }
       }
+    };
+
+    const handleScroll = () => {
+      if (rafId.current !== null) return;
+      rafId.current = requestAnimationFrame(() => {
+        handleScrollFrame();
+        rafId.current = null;
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     // Run once initially
-    handleScroll();
+    handleScrollFrame();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
     };
-  }, [activeInfraTab]);
+  }, []);
 
   const handleInfraTabChange = (tab: "data" | "tools" | "agent" | "governance") => {
     setActiveInfraTab(tab);
-    setInfraProgress(0);
+    infraProgressRef.current = 0;
+    resetAllProgressBars();
+
     isProgrammaticScroll.current = true;
     
     const element = document.getElementById(`infra-card-${tab}`);
@@ -294,7 +376,7 @@ export default function Home() {
             {/* Ask Coretify tab */}
             <button
               onClick={() => setActiveSectionTab("agent")}
-              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "agent"
+              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-[color,background-color,border-color] duration-150 ease-out relative ${activeSectionTab === "agent"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -308,7 +390,7 @@ export default function Home() {
             {/* Data model tab */}
             <button
               onClick={() => setActiveSectionTab("data")}
-              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "data"
+              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-[color,background-color,border-color] duration-150 ease-out relative ${activeSectionTab === "data"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -322,7 +404,7 @@ export default function Home() {
             {/* Workflows tab */}
             <button
               onClick={() => setActiveSectionTab("tools")}
-              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "tools"
+              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-[color,background-color,border-color] duration-150 ease-out relative ${activeSectionTab === "tools"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -336,7 +418,7 @@ export default function Home() {
             {/* Reporting tab with dashed border on the right */}
             <button
               onClick={() => setActiveSectionTab("governance")}
-              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-all relative ${activeSectionTab === "governance"
+              className={`col-span-2 border-r border-b border-slate-850/15 py-3.5 text-center cursor-pointer transition-[color,background-color,border-color] duration-150 ease-out relative ${activeSectionTab === "governance"
                 ? "text-white bg-white/[0.04] font-semibold"
                 : "hover:text-slate-200 hover:bg-white/[0.01]"
                 }`}
@@ -508,7 +590,7 @@ export default function Home() {
                     </div>
 
                     {/* AI Search Card (glowing search input) */}
-                    <div className="bg-[#0c0c0e] border border-slate-900 rounded-xl p-4.5 shadow-lg relative group transition-all duration-300 hover:border-slate-800">
+                    <div className="bg-[#0c0c0e] border border-slate-900 rounded-xl p-4.5 shadow-lg relative group transition-colors duration-150 hover:border-slate-800">
                       <div className="flex items-start gap-4">
                         <div className="flex-1 space-y-1 text-slate-300 font-mono text-xs">
                           <div className="min-h-[24px]">How do I win m</div>
@@ -805,7 +887,7 @@ export default function Home() {
                       </div>
 
                       {/* Central Memory Core */}
-                      <div className="border border-indigo-500/30 bg-indigo-950/20 rounded-2xl p-5 w-full shadow-lg relative group transition-all duration-300 hover:border-indigo-500/50 flex items-center justify-between">
+                      <div className="border border-indigo-500/30 bg-indigo-950/20 rounded-2xl p-5 w-full shadow-lg relative group transition-colors duration-150 hover:border-indigo-500/50 flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <div className="h-8 w-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
                             <Bot className="h-5 w-5" />
@@ -1086,17 +1168,16 @@ export default function Home() {
                 {/* Tab 1: Data */}
                 <button
                   onClick={() => handleInfraTabChange("data")}
-                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
+                  className={`w-full text-left py-4 pl-8 pr-5 transition-colors duration-150 cursor-pointer block relative rounded-xl ${
                     activeInfraTab === "data" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
                   }`}
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
-                  {activeInfraTab === "data" && (
-                    <div 
-                      className="absolute left-0 top-0 w-[2px] bg-emerald-500 rounded-full transition-all duration-75 ease-out"
-                      style={{ height: `${infraProgress}%` }}
-                    />
-                  )}
+                  <div 
+                    id="infra-progress-data"
+                    className="absolute left-0 top-0 w-[2px] bg-emerald-500 rounded-full"
+                    style={{ height: '0%' }}
+                  />
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
@@ -1113,17 +1194,16 @@ export default function Home() {
                 {/* Tab 2: Tools */}
                 <button
                   onClick={() => handleInfraTabChange("tools")}
-                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
+                  className={`w-full text-left py-4 pl-8 pr-5 transition-colors duration-150 cursor-pointer block relative rounded-xl ${
                     activeInfraTab === "tools" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
                   }`}
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
-                  {activeInfraTab === "tools" && (
-                    <div 
-                      className="absolute left-0 top-0 w-[2px] bg-purple-500 rounded-full transition-all duration-75 ease-out"
-                      style={{ height: `${infraProgress}%` }}
-                    />
-                  )}
+                  <div 
+                    id="infra-progress-tools"
+                    className="absolute left-0 top-0 w-[2px] bg-purple-500 rounded-full"
+                    style={{ height: '0%' }}
+                  />
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
@@ -1140,17 +1220,16 @@ export default function Home() {
                 {/* Tab 3: Agent */}
                 <button
                   onClick={() => handleInfraTabChange("agent")}
-                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
+                  className={`w-full text-left py-4 pl-8 pr-5 transition-colors duration-150 cursor-pointer block relative rounded-xl ${
                     activeInfraTab === "agent" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
                   }`}
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
-                  {activeInfraTab === "agent" && (
-                    <div 
-                      className="absolute left-0 top-0 w-[2px] bg-zinc-300 rounded-full transition-all duration-75 ease-out"
-                      style={{ height: `${infraProgress}%` }}
-                    />
-                  )}
+                  <div 
+                    id="infra-progress-agent"
+                    className="absolute left-0 top-0 w-[2px] bg-zinc-300 rounded-full"
+                    style={{ height: '0%' }}
+                  />
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-750 flex items-center justify-center text-zinc-300">
@@ -1167,17 +1246,16 @@ export default function Home() {
                 {/* Tab 4: Governance */}
                 <button
                   onClick={() => handleInfraTabChange("governance")}
-                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
+                  className={`w-full text-left py-4 pl-8 pr-5 transition-colors duration-150 cursor-pointer block relative rounded-xl ${
                     activeInfraTab === "governance" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
                   }`}
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
-                  {activeInfraTab === "governance" && (
-                    <div 
-                      className="absolute left-0 top-0 w-[2px] bg-blue-500 rounded-full transition-all duration-75 ease-out"
-                      style={{ height: `${infraProgress}%` }}
-                    />
-                  )}
+                  <div 
+                    id="infra-progress-governance"
+                    className="absolute left-0 top-0 w-[2px] bg-blue-500 rounded-full"
+                    style={{ height: '0%' }}
+                  />
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
@@ -1811,7 +1889,7 @@ export default function Home() {
           <div className="border-t border-slate-850/80 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-8 lg:p-12 w-full bg-transparent">
             
             {/* Free Tier */}
-            <div className="p-8 rounded-2xl border border-slate-850/60 bg-[#0c0c0e]/30 backdrop-blur-sm flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:border-slate-700/80 hover:bg-[#0c0c0e]/70 hover:shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
+            <div className="pricing-card p-8 rounded-2xl border border-slate-850/60 bg-[#0c0c0e]/60 flex flex-col justify-between h-full">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-base font-semibold text-slate-200">Free</h3>
@@ -1861,7 +1939,7 @@ export default function Home() {
             </div>
 
             {/* Starter Tier */}
-            <div className="p-8 rounded-2xl border border-slate-850/60 bg-[#0c0c0e]/30 backdrop-blur-sm flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:border-slate-700/80 hover:bg-[#0c0c0e]/70 hover:shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
+            <div className="pricing-card p-8 rounded-2xl border border-slate-850/60 bg-[#0c0c0e]/60 flex flex-col justify-between h-full">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-base font-semibold text-slate-200">Starter</h3>
@@ -1917,10 +1995,9 @@ export default function Home() {
             </div>
 
             {/* Growth Tier [Popular] */}
-            <div className="p-8 rounded-2xl border border-zinc-700/80 bg-gradient-to-b from-[#111114]/40 via-[#0c0c0e]/70 to-[#070708]/90 backdrop-blur-sm flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:bg-[#0c0c0e]/80 hover:shadow-[0_15px_35px_rgba(255,255,255,0.06)] relative">
+            <div className="pricing-card pricing-card--popular p-8 rounded-2xl border border-zinc-700/80 bg-gradient-to-b from-[#111114] via-[#0c0c0e] to-[#070708] flex flex-col justify-between h-full relative">
               
-              {/* Popular Badge & Glow effect (Monochrome/Silver) */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-36 w-full max-w-[240px] bg-white/[0.04] rounded-full blur-2xl pointer-events-none" />
+              {/* Popular badge radial highlight */}
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.06),transparent_65%)] pointer-events-none" />
               
               <div className="space-y-6">
@@ -1980,7 +2057,7 @@ export default function Home() {
             </div>
 
             {/* Business Tier */}
-            <div className="p-8 rounded-2xl border border-slate-850/60 bg-[#0c0c0e]/30 backdrop-blur-sm flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:border-slate-700/80 hover:bg-[#0c0c0e]/70 hover:shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
+            <div className="pricing-card p-8 rounded-2xl border border-slate-850/60 bg-[#0c0c0e]/60 flex flex-col justify-between h-full">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-base font-semibold text-slate-200">Business</h3>
@@ -2077,15 +2154,14 @@ export default function Home() {
                 
                 <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 select-none relative">
                   
-                  {/* Subtle radial glow under grid */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/5 via-indigo-500/5 to-emerald-500/5 blur-3xl rounded-full -z-10 pointer-events-none" />
+
 
                   {/* Row 1 */}
                   {/* Cell 1: Empty */}
                   <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
 
                   {/* Cell 2: WhatsApp Lite */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-[border-color,background-color,transform,box-shadow] duration-150 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 24 24" className="h-8.5 w-8.5 fill-current text-[#25D366] group-hover:scale-110 transition-transform duration-300">
                       <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12c0 2.14.68 4.18 1.97 5.9L2.03 22l4.22-1.1c1.63.9 3.5 1.4 5.75 1.4 5.5 0 10-4.5 10-10S17.5 2 12.004 2zm5.73 14.28c-.24.68-1.2 1.25-1.65 1.3-.46.06-.9.1-2.9-.7-2.55-1.03-4.2-3.6-4.32-3.77-.13-.17-1.07-1.4-1.07-2.7 0-1.28.67-1.92.9-2.2.25-.26.54-.33.72-.33.18 0 .36 0 .5.02.16 0 .37-.06.57.43.2.5.7 1.7.75 1.8.06.12.1.27.02.43-.08.16-.12.26-.25.4-.12.14-.26.3-.37.42-.12.12-.25.26-.1.5.14.24.62 1.03 1.32 1.66.9.8 1.66 1.05 1.9 1.17.24.12.38.1.52-.06.14-.16.6-1.03.77-1.37.16-.34.33-.28.56-.2.23.08 1.48.7 1.73.82.25.12.4.18.46.3.06.1.06.67-.18 1.34z"/>
                     </svg>
@@ -2096,7 +2172,7 @@ export default function Home() {
                   <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
 
                   {/* Cell 4: Google Calendar */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-blue-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(59,130,246,0.08)] group cursor-pointer">
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-[border-color,background-color,transform,box-shadow] duration-150 hover:-translate-y-1 hover:border-blue-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(59,130,246,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
                       <path d="M26 4H8C5.8 4 4 5.8 4 8v32c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V22L26 4z" fill="#4285F4"/>
                       <path d="M44 22H26V4l18 18z" fill="#1565C0"/>
@@ -2109,7 +2185,7 @@ export default function Home() {
                   <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
 
                   {/* Cell 6: Notion */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-zinc-700 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(255,255,255,0.04)] group cursor-pointer">
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-[border-color,background-color,transform,box-shadow] duration-150 hover:-translate-y-1 hover:border-zinc-700 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(255,255,255,0.04)] group cursor-pointer">
                     <svg viewBox="0 0 24 24" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300">
                       <rect x="2" y="2" width="20" height="20" rx="4" fill="#FFF" stroke="#000" strokeWidth="1.5"/>
                       <path d="M6 6h2.5l7.5 9.5V6h2.5v12h-2.5L8.5 8.5V18H6V6z" fill="#000"/>
@@ -2119,7 +2195,7 @@ export default function Home() {
 
                   {/* Row 2 */}
                   {/* Cell 7: Gmail */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-rose-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(239,68,68,0.08)] group cursor-pointer">
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-[border-color,background-color,transform,box-shadow] duration-150 hover:-translate-y-1 hover:border-rose-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(239,68,68,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
                       <path d="M4 12v24c0 2.2 1.8 4 4 4h6V18L4 12z" fill="#4285F4"/>
                       <path d="M44 12v24c0 2.2-1.8 4-4 4h-6V18l10-6z" fill="#34A853"/>
@@ -2133,7 +2209,7 @@ export default function Home() {
                   <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
 
                   {/* Cell 9: Google Drive */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-amber-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] group cursor-pointer">
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-[border-color,background-color,transform,box-shadow] duration-150 hover:-translate-y-1 hover:border-amber-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
                       <path d="M16 6h16l15 26H31L16 6z" fill="#FFCC00"/>
                       <path d="M32 32H2L10 18h30l-8 14z" fill="#00AA47"/>
@@ -2146,7 +2222,7 @@ export default function Home() {
                   <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
 
                   {/* Cell 11: Zapier */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-orange-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(249,115,22,0.08)] group cursor-pointer">
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-[border-color,background-color,transform,box-shadow] duration-150 hover:-translate-y-1 hover:border-orange-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(249,115,22,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-8.5 w-8.5 group-hover:scale-110 transition-transform duration-300">
                       <circle cx="24" cy="24" r="22" fill="#FF4F00"/>
                       <g stroke="#FFF" strokeWidth="5.5" strokeLinecap="round">
@@ -2166,7 +2242,7 @@ export default function Home() {
                   <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
 
                   {/* Cell 14: CSV/Excel */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-teal-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(20,184,166,0.08)] group cursor-pointer">
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-[border-color,background-color,transform,box-shadow] duration-150 hover:-translate-y-1 hover:border-teal-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(20,184,166,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
                       <rect x="4" y="4" width="40" height="40" rx="6" fill="#107C41" />
                       <path d="M26 14h10v20H26z" fill="#FFF" opacity="0.15" />
@@ -2179,7 +2255,7 @@ export default function Home() {
                   <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
 
                   {/* Cell 16: Slack */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-purple-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(168,85,247,0.08)] group cursor-pointer">
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-[border-color,background-color,transform,box-shadow] duration-150 hover:-translate-y-1 hover:border-purple-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(168,85,247,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 100 100" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
                       <path d="M20 50a10 10 0 1 1 10-10v10H20zm10 10a10 10 0 1 1 0-20h20v20H30z" fill="#36C5F0"/>
                       <path d="M50 20a10 10 0 1 1 10 10H50V20zm10 10a10 10 0 1 1-20 0V10h20v20z" fill="#2EB67D"/>
@@ -2193,17 +2269,16 @@ export default function Home() {
                   <div className="aspect-square rounded-2xl border border-slate-900/40 bg-transparent flex items-center justify-center" />
 
                   {/* Cell 18: Accurate/Jurnal */}
-                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
+                  <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-[border-color,background-color,transform,box-shadow] duration-150 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
                       <path d="M30 6L14 22v14h8V26l12-12-4-8z" fill="#007AFF" />
                       <path d="M22 36a8 8 0 0 1-8-8v-6l-6 6v8a8 8 0 0 0 8 8h12l-6-8z" fill="#0051A8" />
                       <path d="M34 14l-4-8-8 8h8a4 4 0 0 1 4 4v4l6-6v-2z" fill="#3395FF" />
                     </svg>
-                    <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Jurnal.id</span>
+                    <span className="text-[9px] font-bold text-zinc-550 mt-2.5 font-mono">Jurnal.id</span>
                   </div>
 
                 </div>
-
               </div>
 
             </div>
@@ -2266,7 +2341,7 @@ export default function Home() {
                 return (
                   <div 
                     key={idx} 
-                    className={`flex flex-col justify-between p-8 text-left bg-transparent group hover:bg-white/[0.015] transition-all duration-300 relative select-none ${borderRightClass} ${borderBottomClass}`}
+                    className={`flex flex-col justify-between p-8 text-left bg-transparent group hover:bg-white/[0.015] transition-[background-color] duration-150 relative select-none ${borderRightClass} ${borderBottomClass}`}
                   >
                     {/* Left Hover Border Line (Thick unified brand silver/slate line) */}
                     <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-300 group-hover:bg-slate-400" />
@@ -2285,7 +2360,7 @@ export default function Home() {
                         </div>
                       </div>
                       {/* Top-Right Arrow pointing top-right - highlights in unified brand silver/slate on hover */}
-                      <ArrowRight className="h-3.5 w-3.5 -rotate-45 text-zinc-700/60 transition-all duration-300 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-slate-350" />
+                      <ArrowRight className="h-3.5 w-3.5 -rotate-45 text-zinc-700/60 transition-all duration-300 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-slate-355" />
                     </div>
                     {/* Card Body (Quote Text) */}
                     <div className="pt-6 flex-1 flex items-start min-h-[90px]">
@@ -2386,7 +2461,7 @@ export default function Home() {
                       </span>
                     </button>
                     <div 
-                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                      className={`transition-[max-height,opacity] duration-200 ease-in-out overflow-hidden ${
                         isOpen ? "max-h-60 opacity-100 px-8 sm:px-12 pb-7" : "max-h-0 opacity-0"
                       }`}
                     >
