@@ -108,15 +108,19 @@ export default function Home() {
           />
 
           {/* Spotlight Glows from Bottom-Center flowing upwards */}
-          <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-gradient-to-t from-indigo-500/30 via-indigo-500/5 to-transparent blur-[110px] rounded-full mix-blend-screen" />
-          <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-t from-purple-500/25 via-purple-500/5 to-transparent blur-[90px] rounded-full mix-blend-screen" />
-          <div className="absolute bottom-[15%] left-[48%] -translate-x-1/2 w-[400px] h-[250px] bg-gradient-to-t from-emerald-500/15 to-transparent blur-[80px] rounded-full mix-blend-screen" />
+          <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-t from-indigo-500/35 via-indigo-500/5 to-transparent blur-[130px] rounded-full mix-blend-screen" />
+          <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-t from-purple-500/30 via-purple-500/5 to-transparent blur-[110px] rounded-full mix-blend-screen" />
+          <div className="absolute bottom-[15%] left-[48%] -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-t from-emerald-500/15 to-transparent blur-[95px] rounded-full mix-blend-screen" />
+
+          {/* Left & Right Wing Spotlights to expand light field width */}
+          <div className="absolute bottom-[15%] left-[20%] -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-t from-indigo-500/20 to-transparent blur-[130px] rounded-full mix-blend-screen" />
+          <div className="absolute bottom-[15%] right-[20%] translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-t from-purple-500/20 to-transparent blur-[130px] rounded-full mix-blend-screen" />
 
           {/* Side & Bottom Glowing Blobs clustered near the bottom-half */}
-          <div className="absolute bottom-[20%] -left-[15%] h-[550px] w-[750px] rounded-full bg-indigo-500/15 blur-[130px] mix-blend-screen" />
-          <div className="absolute bottom-[10%] left-[20%] h-[500px] w-[700px] rounded-full bg-emerald-500/10 blur-[110px] mix-blend-screen" />
-          <div className="absolute bottom-[20%] -right-[15%] h-[550px] w-[750px] rounded-full bg-purple-500/20 blur-[130px] mix-blend-screen" />
-          <div className="absolute bottom-[5%] left-[30%] h-[500px] w-[750px] rounded-full bg-blue-500/10 blur-[120px] mix-blend-screen" />
+          <div className="absolute bottom-0 -left-[20%] h-[700px] w-[900px] rounded-full bg-indigo-500/20 blur-[150px] mix-blend-screen" />
+          <div className="absolute bottom-[10%] left-[20%] h-[600px] w-[800px] rounded-full bg-emerald-500/12 blur-[130px] mix-blend-screen" />
+          <div className="absolute bottom-[20%] -right-[20%] h-[700px] w-[900px] rounded-full bg-purple-500/25 blur-[150px] mix-blend-screen" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[500px] w-[1100px] rounded-full bg-blue-500/15 blur-[140px] mix-blend-screen" />
         </div>
         {/* Aurora WebGL Background centered near bottom to glow upwards */}
         <div 
