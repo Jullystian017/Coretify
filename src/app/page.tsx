@@ -953,6 +953,13 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Section Title Block (spanning full width) */}
+          <div className="py-12 px-8 sm:px-12 lg:px-16 text-left border-b border-slate-850/80 bg-transparent">
+            <h2 className="text-3xl sm:text-[38px] font-semibold tracking-[-0.03em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+              The infrastructure agents need to run on your company memory
+            </h2>
+          </div>
+
           {/* Section Content Area */}
           <div className="p-8 sm:p-12 lg:p-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -963,9 +970,6 @@ export default function Home() {
                   <div className="text-[11px] font-mono tracking-widest text-purple-400 uppercase font-bold">
                     Introducing Coretify
                   </div>
-                  <h2 className="text-3xl sm:text-[38px] font-semibold tracking-[-0.03em] leading-[1.12] text-white">
-                    The infrastructure agents need to run on your company memory
-                  </h2>
                 </div>
                 {/* Vertical Category List */}
                 <div className="space-y-6 pt-4 border-l border-slate-900 pl-4">
