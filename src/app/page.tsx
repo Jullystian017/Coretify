@@ -1984,13 +1984,15 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Title block */}
-          <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4">
-            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
-              Simple, transparent pricing.
+          {/* Centered Title block */}
+          <div className="py-16 px-8 sm:px-12 lg:px-16 text-center flex flex-col items-center justify-center space-y-4 bg-transparent">
+            {/* Large centered title */}
+            <h2 className="text-3xl sm:text-[42px] font-semibold tracking-[-0.03em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none max-w-3xl">
+              Simple pricing that scales with you
             </h2>
-            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-2xl leading-relaxed">
-              Start for free, then scale up as your company memory grows. All paid plans include custom playbook insights.
+            {/* Centered description */}
+            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-xl leading-relaxed">
+              Choose a plan that fits your team today and upgrade anytime as your data, users, and ambitions grow.
             </p>
           </div>
 
@@ -2337,12 +2339,14 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Title block */}
-          <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4">
-            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+          {/* Centered Title block */}
+          <div className="py-16 px-8 sm:px-12 lg:px-16 text-center flex flex-col items-center justify-center space-y-4 bg-transparent">
+            {/* Large centered title */}
+            <h2 className="text-3xl sm:text-[42px] font-semibold tracking-[-0.03em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none max-w-3xl">
               Loved by forward-thinking teams.
             </h2>
-            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-2xl leading-relaxed">
+            {/* Centered description */}
+            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-xl leading-relaxed">
               See how Indonesian software houses, agencies, and startups run more efficiently with Coretify.
             </p>
           </div>
