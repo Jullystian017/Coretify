@@ -282,23 +282,34 @@ export default function Home() {
 
         {/* Smooth background transition fade to prevent harsh bottom line seam */}
         <div className="absolute bottom-0 left-0 right-0 h-72 bg-gradient-to-t from-[#070708] via-[#070708]/85 to-transparent pointer-events-none z-0" />
+        {/* Hero Copywriting Row */}
         <div className="relative z-10 w-full border-b border-slate-850/15">
-          <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24 flex flex-col items-center text-center space-y-6">
-            <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] leading-[1.08] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none max-w-4xl">
-              The AI operating system <br className="hidden sm:inline" />for your growing companies.
-            </h1>
-            <p className="text-base sm:text-[16px] text-zinc-400 leading-relaxed font-normal max-w-2xl">
-              Sync your workspace tools in one click. Coretify builds<br className="hidden sm:inline" /> your company brain to query context instantly.
-            </p>
-            <div className="pt-2">
-              <CoretifyButton
-                onClick={handleStartOnboarding}
-                variant="white"
-                size="lg"
-                className="px-7 py-5.5 text-[13px] font-semibold shadow-lg"
-              >
-                Try Coretify
-              </CoretifyButton>
+          <div className="mx-auto max-w-[1360px] px-8 py-16 sm:py-20 lg:py-24">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-start">
+
+              {/* Left Column: Headline */}
+              <div className="lg:col-span-8 pr-0 lg:pr-12 text-left space-y-6">
+                <h1 className="text-4xl sm:text-[54px] font-semibold tracking-[-0.03em] leading-[1.08] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+                  The AI operating system <br className="hidden sm:inline" />for your growing companies.
+                </h1>
+              </div>
+
+              {/* Right Column: Description & Primary CTA */}
+              <div className="lg:col-span-4 pl-0 lg:pl-6 text-left space-y-6 lg:pt-2">
+                <p className="text-base sm:text-[16px] text-zinc-400 leading-relaxed font-normal">
+                  Sync your workspace tools in one click. Coretify builds<br className="hidden sm:inline" /> your company brain to query context instantly.
+                </p>
+                <div>
+                  <CoretifyButton
+                    onClick={handleStartOnboarding}
+                    variant="white"
+                    size="lg"
+                    className="px-7 py-5.5 text-[13px] font-semibold shadow-lg"
+                  >
+                    Try Coretify
+                  </CoretifyButton>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -758,11 +769,11 @@ export default function Home() {
           </div>
 
           {/* Section Title Block (spanning full width) */}
-          <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4 bg-transparent">
-            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+          <div className="py-12 px-8 sm:px-12 lg:px-16 text-center flex flex-col items-center justify-center space-y-4 bg-transparent">
+            <h2 className="text-3xl sm:text-[40px] font-semibold tracking-[-0.025em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none max-w-3xl">
               The intelligent system that never sleeps.
             </h2>
-            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-none leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-400 font-normal max-w-xl leading-relaxed">
               Picks up leads at 2am. Catches renewals before they slip. Hands you the answer before you ask.
             </p>
           </div>
