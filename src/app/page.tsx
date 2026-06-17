@@ -33,6 +33,7 @@ import {
   Database,
   Zap
 } from "lucide-react";
+import LoginPage from "./login/page";
 
 export default function Home() {
   const router = useRouter();
@@ -200,7 +201,7 @@ export default function Home() {
               onClick={() => scrollToSection("infrastructure")}
               className="px-3.5 py-1.5 rounded-md transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
-              Infrastructure
+              How It Works
             </button>
             <button
               onClick={() => scrollToSection("integrations")}
@@ -235,7 +236,7 @@ export default function Home() {
               </CoretifyButton>
             ) : (
               <CoretifyButton
-                onClick={handleStartOnboarding}
+                onClick={() => router.push('/login')}
                 variant="dark"
                 size="default"
                 className="px-5 py-4.5 font-medium"
@@ -1114,7 +1115,7 @@ export default function Home() {
                 <span className="text-slate-600">06</span>
                 <span className="text-slate-700">]</span>
                 <span className="text-slate-650 mx-0.5">·</span>
-                <span className="uppercase text-slate-400 font-bold">INFRASTRUCTURE</span>
+                <span className="uppercase text-slate-400 font-bold">HOW IT WORKS</span>
               </div>
             </div>
           </div>
@@ -1122,10 +1123,10 @@ export default function Home() {
           {/* Section Title Block (spanning full width) */}
           <div className="py-12 px-8 sm:px-12 lg:px-16 text-left space-y-4 border-b border-slate-850/80 bg-transparent">
             <h2 className="text-3xl sm:text-[38px] font-semibold tracking-[-0.03em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
-              The architecture behind your company memory.
+              From raw data to instant answers, in 4 steps.
             </h2>
             <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-3xl">
-              A secure, passive integration layer that processes scattered business data into a queryable knowledge graph. 100% read-only, encrypted, and role-restricted.
+              Connect your tools once. Coretify handles the rest — indexing, unifying, and making your entire business knowledge instantly queryable.
             </p>
           </div>
           {/* Section Content Area */}
@@ -1154,10 +1155,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
                         <Database className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-white font-sans">Connect Data</span>
+                      <span className="text-xs font-semibold text-white font-sans">Step 1 · Connect</span>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Securely link Google Workspace, WhatsApp chat exports, and CSV spreadsheets in one click.
+                      Link Gmail, Google Drive, WhatsApp exports, and CSV sheets in one click — read-only, no setup required.
                     </p>
                   </div>
                 </button>
@@ -1180,10 +1181,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
                         <Zap className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-white font-sans">Company Memory</span>
+                      <span className="text-xs font-semibold text-white font-sans">Step 2 · Index & Unify</span>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Unify scattered operational context into a central, identity-resolved RAG index.
+                      Coretify maps entities — clients, projects, decisions, tasks — into one identity-resolved knowledge graph.
                     </p>
                   </div>
                 </button>
@@ -1206,10 +1207,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-750 flex items-center justify-center text-zinc-300">
                         <Cpu className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-white font-sans">Ask Business</span>
+                      <span className="text-xs font-semibold text-white font-sans">Step 3 · Ask Anything</span>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Query your business in plain language and get instant answers with clickable citations.
+                      Ask operational questions in plain language. Get instant answers with clickable citations back to the source.
                     </p>
                   </div>
                 </button>
@@ -1232,10 +1233,10 @@ export default function Home() {
                       <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
                         <ShieldCheck className="h-2.5 w-2.5" />
                       </span>
-                      <span className="text-xs font-semibold text-white font-sans">Daily Brief</span>
+                      <span className="text-xs font-semibold text-white font-sans">Step 4 · Stay Ahead</span>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Start every morning with proactive alerts customized to your industry playbook.
+                      Every morning, Coretify surfaces proactive alerts before issues escalate — tailored to your industry.
                     </p>
                   </div>
                 </button>
@@ -1254,13 +1255,13 @@ export default function Home() {
                     <span className="h-5 w-5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                       <Database className="h-3 w-3" />
                     </span>
-                    <span className="font-sans uppercase tracking-wider text-[11px]">Connect Data</span>
+                    <span className="font-sans uppercase tracking-wider text-[11px]">Step 1 · Connect</span>
                   </div>
                   <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
-                    Connect your scattered business data in one click
+                    Connect your tools once, in one click
                   </h3>
                   <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
-                    Coretify securely reads and integrates Gmail, Google Drive folders, Calendar schedules, WhatsApp chat exports, and financial CSV spreadsheets without requiring any write or delete permissions.
+                    Securely link Gmail, Google Drive, Calendar, WhatsApp exports, and financial CSV files. Coretify works read-only — zero write or delete permissions required.
                   </p>
                   <div>
                     <CoretifyButton
@@ -1458,13 +1459,13 @@ export default function Home() {
                     <span className="h-5 w-5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
                       <Zap className="h-3 w-3" />
                     </span>
-                    <span className="font-sans uppercase tracking-wider text-[11px]">Company Memory</span>
+                    <span className="font-sans uppercase tracking-wider text-[11px]">Step 2 · Index & Unify</span>
                   </div>
                   <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
-                    Unify scattered operational context into a central brain
+                    Everything indexed, linked, and ready to query
                   </h3>
                   <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
-                    Our progressive ingestion pipeline analyzes documents, meetings, and communications to map entities—linking Clients, Projects, Decisions, and Tasks into an identity-resolved relational graph.
+                    Coretify's ingestion pipeline parses documents, emails, and chats — linking Clients, Projects, Decisions, and Tasks into a unified, identity-resolved knowledge graph.
                   </p>
                   <div>
                     <CoretifyButton
@@ -1606,13 +1607,13 @@ export default function Home() {
                     <span className="h-5 w-5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300">
                       <Cpu className="h-3 w-3" />
                     </span>
-                    <span className="font-sans uppercase tracking-wider text-[11px]">Ask Business</span>
+                    <span className="font-sans uppercase tracking-wider text-[11px]">Step 3 · Ask Anything</span>
                   </div>
                   <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
-                    Ask your business operational questions in plain language
+                    Ask anything. Get answers with proof.
                   </h3>
                   <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
-                    Query decisions, project bottlenecks, and client follow-ups instantly. Every AI response includes clickable source citations linking directly back to the original emails or documents.
+                    Type a question in plain language. Coretify surfaces the answer instantly — with clickable citations that trace back to the exact email, doc, or chat where it came from.
                   </p>
                   <div>
                     <CoretifyButton
@@ -1705,13 +1706,13 @@ export default function Home() {
                     <span className="h-5 w-5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
                       <ShieldCheck className="h-3.5 w-3.5" />
                     </span>
-                    <span className="font-sans uppercase tracking-wider text-[11px]">Daily Brief</span>
+                    <span className="font-sans uppercase tracking-wider text-[11px]">Step 4 · Stay Ahead</span>
                   </div>
                   <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
-                    Start every morning with vertical-aware insights
+                    Wake up knowing what needs your attention.
                   </h3>
                   <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
-                    Receive morning alerts tailored to your industry playbook (scope creep warning, client capacity risks, or stalled goals) and drill down to resolve issues in minutes.
+                    Every morning, Coretify delivers a proactive brief — scope creep warnings, silent clients, stalled goals — tailored to your industry vertical. Issues surfaced before they escalate.
                   </p>
                   <div>
                     <CoretifyButton
@@ -1908,7 +1909,7 @@ export default function Home() {
                 </div>
                 <div className="pt-8">
                   <CoretifyButton
-                    onClick={handleStartOnboarding}
+                    onClick={() => router.push('/login')}
                     variant="dark"
                     className="w-full py-5 text-xs font-semibold"
                   >

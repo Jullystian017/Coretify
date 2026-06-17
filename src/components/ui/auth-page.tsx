@@ -48,7 +48,7 @@ export function AuthPage() {
 				<div className="z-10 mt-auto">
 					<blockquote className="space-y-2">
 						<p className="text-lg text-zinc-200 font-sans font-medium leading-relaxed italic">
-							&ldquo;Platform ini membantu saya memantau komunikasi klien secara real-time, mendeteksi risiko churn lebih awal, dan menyelaraskan keputusan tim secara instan.&rdquo;
+							&ldquo;Platform ini memantau komunikasi klien secara real-time, mendeteksi risiko churn lebih dini, dan menyelaraskan keputusan tim.&rdquo;
 						</p>
 						<footer className="font-mono text-xs font-semibold text-zinc-500 tracking-wider uppercase mt-2">
 							— Julian Albertus
