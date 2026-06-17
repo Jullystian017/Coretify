@@ -219,7 +219,10 @@ export default function Home() {
 
           {/* Right actions */}
           <div className="flex items-center gap-6">
-            <button className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors cursor-pointer">
+            <button 
+              onClick={() => router.push("/login")}
+              className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors cursor-pointer"
+            >
               Login
             </button>
             <CoretifyButton
