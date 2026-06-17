@@ -247,7 +247,8 @@ export default function Home() {
             colorStops={["#ffffff", "#09090b", "#94a3b8"]}
             blend={0.6}
             amplitude={1.1}
-            speed={0.35}
+            time={55}
+            speed={1}
           />
         </div>
 
@@ -374,7 +375,8 @@ export default function Home() {
               colorStops={["#ffffff", "#09090b", "#94a3b8"]}
               blend={0.6}
               amplitude={1.0}
-              speed={0.3}
+              time={55}
+              speed={1}
             />
           </div>
           <div className="mx-auto max-w-[1360px] px-8">
