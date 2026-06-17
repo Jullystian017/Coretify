@@ -36,6 +36,14 @@ import {
 
 export default function Home() {
   const router = useRouter();
+  
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const [activeSectionTab, setActiveSectionTab] = useState<"data" | "tools" | "agent" | "governance">("data");
   const [expandedMeeting, setExpandedMeeting] = useState<string>("greenleaf");
   const [activePlaybookTab, setActivePlaybookTab] = useState<"software_house" | "agency" | "startup">("software_house");
@@ -177,15 +185,35 @@ export default function Home() {
 
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-8 text-[13px] font-medium text-slate-400">
-            <button className="flex items-center gap-1 transition-colors hover:text-white">
-              Platform
-              <ChevronDown className="h-3.5 w-3.5 opacity-60" />
+            <button 
+              onClick={() => scrollToSection("features")} 
+              className="transition-colors hover:text-white cursor-pointer"
+            >
+              Features
             </button>
-            <button className="transition-colors hover:text-white" onClick={handleStartOnboarding}>
-              Agent
+            <button 
+              onClick={() => scrollToSection("infrastructure")} 
+              className="transition-colors hover:text-white cursor-pointer"
+            >
+              Infrastructure
             </button>
-            <button className="transition-colors hover:text-white">
-              Resources
+            <button 
+              onClick={() => scrollToSection("integrations")} 
+              className="transition-colors hover:text-white cursor-pointer"
+            >
+              Integrations
+            </button>
+            <button 
+              onClick={() => scrollToSection("pricing")} 
+              className="transition-colors hover:text-white cursor-pointer"
+            >
+              Pricing
+            </button>
+            <button 
+              onClick={() => scrollToSection("faq")} 
+              className="transition-colors hover:text-white cursor-pointer"
+            >
+              FAQ
             </button>
           </nav>
 
@@ -721,7 +749,7 @@ export default function Home() {
       </section>
 
       {/* SECTION: Tab Switcher (Introducing Default clone) */}
-      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+      <section id="features" className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
 
           {/* Section Header Band */}
@@ -1049,7 +1077,7 @@ export default function Home() {
       </section>
 
       {/* SECTION: PLATFORM INFRASTRUCTURE */}
-      <section className="w-full bg-[#070708] border-b border-slate-850/80">
+      <section id="infrastructure" className="w-full bg-[#070708] border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Header Band */}
@@ -1794,7 +1822,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 4: PRICING */}
-      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+      <section id="pricing" className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Header Band */}
@@ -1943,15 +1971,15 @@ export default function Home() {
             </div>
 
             {/* Growth Tier [Popular] */}
-            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r md:border-b-0 lg:border-b-0 lg:border-r relative bg-gradient-to-b from-purple-950/10 via-[#0c0c0e]/30 to-transparent">
+            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r md:border-b-0 lg:border-b-0 lg:border-r relative bg-gradient-to-b from-slate-900/20 via-[#0c0c0e]/30 to-transparent">
               
               {/* Popular Badge & Glow effect */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-36 w-full max-w-[240px] bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-36 w-full max-w-[240px] bg-slate-500/10 rounded-full blur-2xl pointer-events-none" />
               
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-semibold text-slate-200">Growth</h3>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-purple-500/15 text-purple-400 border border-purple-500/20">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-slate-500/15 text-slate-300 border border-slate-500/20">
                     POPULAR
                   </span>
                 </div>
@@ -1959,34 +1987,34 @@ export default function Home() {
                   <span className="text-3xl font-bold text-white tracking-tight">Rp 499k</span>
                   <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
                 </div>
-                <div className="w-full h-px bg-purple-500/20" />
+                <div className="w-full h-px bg-slate-800" />
                 <ul className="space-y-3.5 text-xs text-zinc-300">
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="font-medium text-slate-200">Konektor data tanpa batas</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>5.000 pertanyaan AI / bulan</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="font-medium text-slate-200">Dokumen memori tanpa batas</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Hingga 10 anggota tim</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Prioritas playbook & insight kustom</span>
@@ -1997,7 +2025,7 @@ export default function Home() {
                 <CoretifyButton
                   onClick={handleStartOnboarding}
                   variant="white"
-                  className="w-full py-5 text-xs font-semibold shadow-lg hover:shadow-purple-500/10"
+                  className="w-full py-5 text-xs font-semibold shadow-lg hover:shadow-slate-500/10"
                 >
                   Try Growth Free
                 </CoretifyButton>
@@ -2073,7 +2101,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 3: INTEGRATIONS GRID */}
-      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+      <section id="integrations" className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Content Area */}
@@ -2344,7 +2372,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 5: FAQ */}
-      <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
+      <section id="faq" className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
           
           {/* Section Header Band */}
@@ -2466,9 +2494,9 @@ export default function Home() {
               }}
             />
             {/* Spotlight Glows */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[600px] bg-indigo-500/10 rounded-full blur-[110px] pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[250px] w-[400px] bg-purple-500/10 rounded-full blur-[90px] pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[180px] w-[300px] bg-emerald-500/5 rounded-full blur-[70px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[600px] bg-slate-500/10 rounded-full blur-[110px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[250px] w-[400px] bg-zinc-500/8 rounded-full blur-[90px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[180px] w-[300px] bg-white/5 rounded-full blur-[70px] pointer-events-none" />
 
             <div className="max-w-2xl space-y-6 z-10">
               <h2 className="text-3xl sm:text-[44px] font-semibold tracking-[-0.03em] leading-[1.1] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
@@ -2483,7 +2511,7 @@ export default function Home() {
                   onClick={handleStartOnboarding}
                   variant="white"
                   size="lg"
-                  className="px-8 py-5.5 text-[13px] font-semibold shadow-lg hover:shadow-indigo-500/10 w-full sm:w-auto"
+                  className="px-8 py-5.5 text-[13px] font-semibold shadow-lg hover:shadow-slate-500/10 w-full sm:w-auto"
                 >
                   Try Coretify Free
                 </CoretifyButton>
