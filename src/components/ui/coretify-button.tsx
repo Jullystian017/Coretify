@@ -13,7 +13,7 @@ export const CoretifyButton = React.forwardRef<HTMLButtonElement, CoretifyButton
         ref={ref}
         size={size}
         className={cn(
-          "rounded-full transition-all active:scale-[0.98] cursor-pointer",
+          "rounded-md transition-all active:scale-[0.98] cursor-pointer",
           // Custom styles for white and dark variants to match the original landing page design
           variant === "white" && [
             "bg-white hover:bg-slate-100 text-black font-semibold border border-transparent shadow-lg hover:scale-[1.01]"

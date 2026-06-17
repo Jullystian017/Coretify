@@ -2552,7 +2552,7 @@ export default function Home() {
                 The AI operating system for growing companies. Continuous read-only semantic integration.
               </p>
               <div className="pt-1">
-                <button className="inline-flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full border border-zinc-850/60 bg-zinc-900/10 hover:bg-zinc-900/50 hover:border-zinc-700 text-[11px] font-medium text-zinc-400 hover:text-white transition-all duration-200 cursor-pointer select-none">
+                <button className="inline-flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-md border border-zinc-850/60 bg-zinc-900/10 hover:bg-zinc-900/50 hover:border-zinc-700 text-[11px] font-medium text-zinc-400 hover:text-white transition-all duration-200 cursor-pointer select-none">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-105 text-black">
                     <Play className="h-1.5 w-1.5 fill-current ml-0.5" />
                   </span>

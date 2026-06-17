@@ -343,7 +343,7 @@ export default function SyncPage() {
                   {currentStepIndex === 5 ? (
                     <Button
                       onClick={() => router.push("/dashboard")}
-                      className="w-full bg-white hover:bg-slate-100 text-black font-bold text-xs py-3.5 rounded-full shadow"
+                      className="w-full bg-white hover:bg-slate-100 text-black font-bold text-xs py-3.5 rounded-md shadow"
                     >
                       Masuk Dashboard
                       <ArrowRight className="h-4 w-4 ml-1.5" />

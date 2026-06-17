@@ -115,7 +115,7 @@ export default function PrivacyPage() {
           </p>
           <Button
             onClick={() => router.push("/onboarding")}
-            className="bg-white hover:bg-slate-100 text-black font-semibold text-xs rounded-full px-6 py-4.5 shadow"
+            className="bg-white hover:bg-slate-100 text-black font-semibold text-xs rounded-md px-6 py-4.5 shadow"
           >
             Mulai Setup Coretify Sekarang
           </Button>
