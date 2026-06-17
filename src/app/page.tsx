@@ -174,7 +174,7 @@ export default function Home() {
 
       {/* NAVBAR */}
       <header className="border-b border-slate-900 bg-[#070708]/85 backdrop-blur-md sticky top-0 z-50 w-full">
-        <div className="mx-auto max-w-[1360px] px-8 flex h-20 items-center justify-between">
+        <div className="mx-auto max-w-[1360px] px-8 flex h-20 items-center justify-between relative">
           {/* Logo */}
           <div className="flex items-center gap-0 cursor-pointer" onClick={() => router.push("/")}>
             <img src="/coretify.png" alt="Coretify Logo" className="h-9 w-auto object-contain" />
@@ -184,34 +184,34 @@ export default function Home() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-[13px] font-medium text-slate-400">
+          <nav className="hidden md:flex items-center gap-1.5 text-[13px] font-medium text-slate-400 absolute left-1/2 -translate-x-1/2">
             <button 
               onClick={() => scrollToSection("features")} 
-              className="transition-colors hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Features
             </button>
             <button 
               onClick={() => scrollToSection("infrastructure")} 
-              className="transition-colors hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Infrastructure
             </button>
             <button 
               onClick={() => scrollToSection("integrations")} 
-              className="transition-colors hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Integrations
             </button>
             <button 
               onClick={() => scrollToSection("pricing")} 
-              className="transition-colors hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Pricing
             </button>
             <button 
               onClick={() => scrollToSection("faq")} 
-              className="transition-colors hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               FAQ
             </button>
@@ -219,7 +219,7 @@ export default function Home() {
 
           {/* Right actions */}
           <div className="flex items-center gap-6">
-            <button className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors">
+            <button className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors cursor-pointer">
               Login
             </button>
             <CoretifyButton
@@ -228,7 +228,7 @@ export default function Home() {
               size="default"
               className="px-5 py-4.5 font-medium"
             >
-              Request a Demo
+              Get Started
             </CoretifyButton>
           </div>
         </div>
