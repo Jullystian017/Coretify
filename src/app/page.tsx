@@ -748,6 +748,16 @@ export default function Home() {
         </div>
       </section>
 
+      {/* STANDALONE HORIZONTAL STRIPED SPACER SECTION */}
+      <section className="w-full bg-[#070708]/40 relative z-20">
+        <div 
+          className="mx-auto max-w-[1360px] border-b border-l border-r border-b-slate-850/80 border-l-slate-850/30 border-r-slate-850/30 h-8 w-full relative overflow-hidden bg-transparent"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.08) 0px, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px, transparent 7px)'
+          }}
+        />
+      </section>
+
       {/* SECTION: Tab Switcher (Introducing Default clone) */}
       <section id="features" className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
