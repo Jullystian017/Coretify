@@ -2467,7 +2467,7 @@ export default function Home() {
           </div>
 
           {/* CTA Banner Card Container */}
-          <div className="p-8 sm:p-12 lg:p-24 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#070708] border-b border-slate-900">
+          <div className="p-8 sm:p-12 lg:py-16 lg:px-24 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#070708] border-b border-slate-900">
             {/* Grid Pattern Motif */}
             <div
               className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
@@ -2491,29 +2491,38 @@ export default function Home() {
 
             <div className="max-w-2xl flex flex-col items-center justify-center z-10">
               {/* Little uppercase section tag */}
-              <span className="text-[11px] font-bold tracking-[0.24em] text-zinc-500 block uppercase select-none mb-5 font-mono">
+              <span className="text-[11px] font-bold tracking-[0.24em] text-zinc-505 block uppercase select-none mb-4 font-mono">
                 TAKE ACTION
               </span>
 
               {/* Bold Headline */}
-              <h2 className="text-3xl sm:text-[46px] font-semibold tracking-[-0.03em] leading-[1.12] text-white select-none max-w-xl mx-auto">
+              <h2 className="text-3xl sm:text-[42px] font-semibold tracking-[-0.03em] leading-[1.12] text-white select-none max-w-xl mx-auto">
                 Ready to unlock your company memory?
               </h2>
 
               {/* Description */}
-              <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-lg mx-auto mt-4.5">
+              <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-lg mx-auto mt-4">
                 Bergabunglah dengan ratusan perusahaan Indonesia yang telah mengintegrasikan memori tim mereka secara terpusat dan aman. Mulai uji coba gratis 14 hari sekarang.
               </p>
 
-              {/* Glossy Gradient Button */}
-              <div className="pt-8">
-                <button
+              {/* Capsule Coretify Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 w-full sm:w-auto">
+                <CoretifyButton
                   onClick={handleStartOnboarding}
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-[4px] bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-350 hover:from-white hover:via-zinc-100 hover:to-zinc-300 text-black text-xs font-bold tracking-[0.08em] uppercase shadow-[0_4px_20px_rgba(255,255,255,0.06)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.18)] transition-all duration-300 cursor-pointer select-none active:scale-[0.98]"
+                  variant="white"
+                  size="default"
+                  className="px-8 py-4 text-[12px] font-semibold shadow-lg hover:shadow-slate-500/10 w-full sm:w-auto"
                 >
-                  <span className="font-sans text-[13px] font-medium leading-none mb-[1px]">&rarr;</span>
-                  <span>TRY CORETIFY FREE</span>
-                </button>
+                  Try Coretify Free
+                </CoretifyButton>
+                <CoretifyButton
+                  onClick={handleStartOnboarding}
+                  variant="dark"
+                  size="default"
+                  className="px-8 py-4 text-[12px] font-semibold w-full sm:w-auto"
+                >
+                  Request a Demo
+                </CoretifyButton>
               </div>
             </div>
           </div>
