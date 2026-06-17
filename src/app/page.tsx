@@ -2616,9 +2616,20 @@ export default function Home() {
             {/* Background glowing gradient mask under the wordmark */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[120px] bg-gradient-to-t from-slate-500/10 via-zinc-500/3 to-transparent blur-[60px]" />
             
-            <h1 className="text-[14vw] font-bold tracking-[-0.04em] leading-[0.8] text-center w-full bg-gradient-to-b from-white via-zinc-450/40 to-transparent bg-clip-text text-transparent font-sans">
-              Coretify
-            </h1>
+            <div className="flex items-center justify-center gap-0">
+              <img 
+                src="/coretify.png" 
+                alt="Coretify Logo Image" 
+                className="h-[11vw] sm:h-[10vw] w-auto object-contain opacity-85 translate-y-[0.7vw] mr-[-1vw]"
+                style={{
+                  WebkitMaskImage: 'linear-gradient(to bottom, white 10%, rgba(255, 255, 255, 0.25) 50%, transparent 85%)',
+                  maskImage: 'linear-gradient(to bottom, white 10%, rgba(255, 255, 255, 0.25) 50%, transparent 85%)'
+                }}
+              />
+              <h1 className="text-[12vw] sm:text-[11vw] font-bold tracking-[-0.04em] leading-[0.8] text-center bg-gradient-to-b from-white via-zinc-450/40 to-transparent bg-clip-text text-transparent font-sans">
+                Coretify
+              </h1>
+            </div>
           </div>
 
           {/* Bottom Bar: Copyright & Clean Text Socials */}
