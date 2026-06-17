@@ -2468,9 +2468,9 @@ export default function Home() {
 
           {/* CTA Banner Card Container */}
           <div className="p-8 sm:p-12 lg:py-16 lg:px-24 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#070708] border-b border-slate-900">
-            {/* Grid Pattern Motif - Masked to be visible only where the lights shine */}
+            {/* Diagonal Striped Line Motif - Masked to be visible only where the lights shine */}
             <div
-              className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
+              className="absolute inset-0 bg-[repeating-linear-gradient(45deg,rgba(255,255,255,0.06)_0px,rgba(255,255,255,0.06)_1px,transparent_1px,transparent_10px)] pointer-events-none"
               style={{
                 WebkitMaskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 70%), radial-gradient(circle at top right, black 25%, transparent 70%), radial-gradient(circle at center, black 15%, transparent 60%)',
                 maskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 70%), radial-gradient(circle at top right, black 25%, transparent 70%), radial-gradient(circle at center, black 15%, transparent 60%)'
