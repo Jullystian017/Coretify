@@ -36,7 +36,7 @@ import {
 
 export default function Home() {
   const router = useRouter();
-  
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -124,7 +124,7 @@ export default function Home() {
       const activeEl = document.getElementById(`infra-card-${activeInfraTab}`);
       if (activeEl) {
         const rect = activeEl.getBoundingClientRect();
-        
+
         // Progress runs from 0% when the element top is at 80% height of the screen
         // to 100% when the element bottom is at 20% height of the screen
         const startPoint = windowHeight * 0.8;
@@ -151,7 +151,7 @@ export default function Home() {
     setActiveInfraTab(tab);
     setInfraProgress(0);
     isProgrammaticScroll.current = true;
-    
+
     const element = document.getElementById(`infra-card-${tab}`);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -185,32 +185,32 @@ export default function Home() {
 
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-1.5 text-[13px] font-medium text-slate-400 absolute left-1/2 -translate-x-1/2">
-            <button 
-              onClick={() => scrollToSection("features")} 
+            <button
+              onClick={() => scrollToSection("features")}
               className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Features
             </button>
-            <button 
-              onClick={() => scrollToSection("infrastructure")} 
+            <button
+              onClick={() => scrollToSection("infrastructure")}
               className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Infrastructure
             </button>
-            <button 
-              onClick={() => scrollToSection("integrations")} 
+            <button
+              onClick={() => scrollToSection("integrations")}
               className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Integrations
             </button>
-            <button 
-              onClick={() => scrollToSection("pricing")} 
+            <button
+              onClick={() => scrollToSection("pricing")}
               className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Pricing
             </button>
-            <button 
-              onClick={() => scrollToSection("faq")} 
+            <button
+              onClick={() => scrollToSection("faq")}
               className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               FAQ
@@ -264,7 +264,7 @@ export default function Home() {
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[500px] w-[1100px] rounded-full bg-blue-500/15 blur-[140px] mix-blend-screen" />
         </div>
         {/* Aurora WebGL Background centered near bottom to glow upwards */}
-        <div 
+        <div
           className="absolute inset-0 pointer-events-none z-0 opacity-40"
           style={{
             WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 75%, #000 40%, transparent 100%)',
@@ -392,7 +392,7 @@ export default function Home() {
         {/* INTERACTIVE PRODUCT MOCKUP SECTION (No side grid lines, full width) */}
         <div className="relative z-10 w-full pt-0 pb-0 -mb-16 lg:-mb-24">
           {/* Aurora WebGL Background at the bottom of the dashboard */}
-          <div 
+          <div
             className="absolute inset-0 pointer-events-none -z-10 opacity-25"
             style={{
               WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 70%, #000 10%, transparent 100%)',
@@ -1079,7 +1079,7 @@ export default function Home() {
       {/* SECTION: PLATFORM INFRASTRUCTURE */}
       <section id="infrastructure" className="w-full bg-[#070708] border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
-          
+
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
@@ -1106,717 +1106,697 @@ export default function Home() {
             </p>
           </div>
           {/* Section Content Area */}
-          <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full">
-              {/* Left Spacer */}
-              <div
-                className="hidden lg:block border-r border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
-            <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
-            
-            {/* Left Column: Interactive Categories Switcher (Stretches full height, border runs all the way down) */}
-            <div className="lg:col-span-4 lg:border-r lg:border-slate-850/80 relative h-full">
-              {/* Inner sticky content */}
-              <div className="lg:sticky lg:top-28 py-12 px-6 sm:px-8 flex flex-col gap-6 text-left">
-                
-                {/* Tab 1: Data */}
-                <button
-                  onClick={() => handleInfraTabChange("data")}
-                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
-                    activeInfraTab === "data" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
-                  }`}
-                >
-                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
-                  {activeInfraTab === "data" && (
-                    <div 
-                      className="absolute left-0 top-0 w-[2px] bg-emerald-500 rounded-full transition-all duration-75 ease-out"
-                      style={{ height: `${infraProgress}%` }}
-                    />
-                  )}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                        <Database className="h-2.5 w-2.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-white font-sans">Connect Data</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Securely link Google Workspace, WhatsApp chat exports, and CSV spreadsheets in one click.
-                    </p>
-                  </div>
-                </button>
+          <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
 
-                {/* Tab 2: Tools */}
-                <button
-                  onClick={() => handleInfraTabChange("tools")}
-                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
-                    activeInfraTab === "tools" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
-                  }`}
-                >
-                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
-                  {activeInfraTab === "tools" && (
-                    <div 
-                      className="absolute left-0 top-0 w-[2px] bg-purple-500 rounded-full transition-all duration-75 ease-out"
-                      style={{ height: `${infraProgress}%` }}
-                    />
-                  )}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                        <Zap className="h-2.5 w-2.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-white font-sans">Company Memory</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Unify scattered operational context into a central, identity-resolved RAG index.
-                    </p>
-                  </div>
-                </button>
+              {/* Left Column: Interactive Categories Switcher (Stretches full height, border runs all the way down) */}
+              <div className="lg:col-span-4 lg:border-r lg:border-slate-850/80 relative h-full">
+                {/* Inner sticky content */}
+                <div className="lg:sticky lg:top-28 py-12 px-6 sm:px-8 flex flex-col gap-6 text-left">
 
-                {/* Tab 3: Agent */}
-                <button
-                  onClick={() => handleInfraTabChange("agent")}
-                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
-                    activeInfraTab === "agent" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
-                  }`}
-                >
-                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
-                  {activeInfraTab === "agent" && (
-                    <div 
-                      className="absolute left-0 top-0 w-[2px] bg-zinc-300 rounded-full transition-all duration-75 ease-out"
-                      style={{ height: `${infraProgress}%` }}
-                    />
-                  )}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-750 flex items-center justify-center text-zinc-300">
-                        <Cpu className="h-2.5 w-2.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-white font-sans">Ask Business</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Query your business in plain language and get instant answers with clickable citations.
-                    </p>
-                  </div>
-                </button>
-
-                {/* Tab 4: Governance */}
-                <button
-                  onClick={() => handleInfraTabChange("governance")}
-                  className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${
-                    activeInfraTab === "governance" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
-                  }`}
-                >
-                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
-                  {activeInfraTab === "governance" && (
-                    <div 
-                      className="absolute left-0 top-0 w-[2px] bg-blue-500 rounded-full transition-all duration-75 ease-out"
-                      style={{ height: `${infraProgress}%` }}
-                    />
-                  )}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-                        <ShieldCheck className="h-2.5 w-2.5" />
-                      </span>
-                      <span className="text-xs font-semibold text-white font-sans">Daily Brief</span>
-                    </div>
-                    <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
-                      Start every morning with proactive alerts customized to your industry playbook.
-                    </p>
-                  </div>
-                </button>
-              </div>
-            </div>
-            {/* Right Column: Stacked High-Fidelity Showcase Cards */}
-            <div className="lg:col-span-8 p-6 sm:p-8 lg:p-10 flex flex-col gap-10 bg-[#070708]/20 w-full">
-              
-              {/* Showcase Card 1: Data */}
-              <div id="infra-card-data" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                
-                {/* Header & Description */}
-                <div className="p-8 pb-6 space-y-4">
-                  <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold">
-                    <span className="h-5 w-5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                      <Database className="h-3 w-3" />
-                    </span>
-                    <span className="font-sans uppercase tracking-wider text-[11px]">Connect Data</span>
-                  </div>
-                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
-                    Connect your scattered business data in one click
-                  </h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
-                    Coretify securely reads and integrates Gmail, Google Drive folders, Calendar schedules, WhatsApp chat exports, and financial CSV spreadsheets without requiring any write or delete permissions.
-                  </p>
-                  <div>
-                    <CoretifyButton
-                      onClick={handleStartOnboarding}
-                      variant="dark"
-                      size="default"
-                      className="px-5 py-2.5 text-xs font-semibold border border-zinc-800 bg-[#131316] text-white rounded-lg hover:bg-zinc-900 transition-colors"
-                    >
-                      Learn More
-                    </CoretifyButton>
-                  </div>
-                </div>
-
-                <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
-                  {/* Mockup macOS Title Bar & Tabs */}
-                  <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                  {/* Tab 1: Data */}
+                  <button
+                    onClick={() => handleInfraTabChange("data")}
+                    className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${activeInfraTab === "data" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
+                      }`}
+                  >
+                    <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
+                    {activeInfraTab === "data" && (
+                      <div
+                        className="absolute left-0 top-0 w-[2px] bg-emerald-500 rounded-full transition-all duration-75 ease-out"
+                        style={{ height: `${infraProgress}%` }}
+                      />
+                    )}
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-4.5 w-4.5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                          <Database className="h-2.5 w-2.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-white font-sans">Connect Data</span>
                       </div>
-                      {/* Tab Buttons */}
-                      <div className="flex items-center gap-1.5 ml-4 text-[10.5px]">
-                        <div className="flex items-center gap-1.5 bg-[#0c0c0e] border-t border-l border-r border-[#1a1a1f] px-3.5 py-1 rounded-t-md text-white font-medium select-none">
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                          <span>Core Data Model</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-zinc-500 hover:text-zinc-350 px-3.5 py-1 cursor-pointer select-none">
-                          <span className="h-1.5 w-1.5 rounded-full bg-blue-500/60" />
-                          <span>Companies last week</span>
-                        </div>
-                        <span className="text-zinc-650 font-bold ml-1 text-xs cursor-pointer">+</span>
-                      </div>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
+                        Securely link Google Workspace, WhatsApp chat exports, and CSV spreadsheets in one click.
+                      </p>
                     </div>
-                  </div>
+                  </button>
 
-                  {/* Window Content Area (Split Sidebar & Table) */}
-                  <div className="grid grid-cols-12 min-h-[380px] w-full">
-                    {/* Left Sidebar inside Mockup */}
-                    <div className="col-span-12 md:col-span-3 border-b md:border-b-0 md:border-r border-[#1a1a1f] bg-[#08080a]/60 p-3.5 space-y-4 text-left">
-                      <button className="w-full flex items-center justify-center gap-1.5 border border-[#1a1a1f] bg-[#0c0c0e] hover:bg-[#131316] text-[10.5px] font-semibold text-zinc-300 py-1.5 px-3 rounded-lg transition-colors cursor-pointer">
-                        <span>+</span>
-                        <span>Create new view</span>
-                      </button>
-
-                      <div className="space-y-1 text-zinc-400 text-[11px] font-medium">
-                        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
-                          <span className="h-3 w-3 text-emerald-500 flex items-center justify-center font-bold">⌂</span>
-                          <span>Home</span>
-                        </div>
-                        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
-                          <span className="h-3 w-3 text-blue-400 flex items-center justify-center font-bold">::</span>
-                          <span>All Contacts</span>
-                        </div>
-                        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
-                          <span className="h-3 w-3 text-blue-500 flex items-center justify-center font-bold">📁</span>
-                          <span>All Accounts</span>
-                        </div>
-                        <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
-                          <span className="h-3 w-3 text-yellow-500 flex items-center justify-center font-bold">★</span>
-                          <span>All Opportunities</span>
-                        </div>
+                  {/* Tab 2: Tools */}
+                  <button
+                    onClick={() => handleInfraTabChange("tools")}
+                    className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${activeInfraTab === "tools" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
+                      }`}
+                  >
+                    <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
+                    {activeInfraTab === "tools" && (
+                      <div
+                        className="absolute left-0 top-0 w-[2px] bg-purple-500 rounded-full transition-all duration-75 ease-out"
+                        style={{ height: `${infraProgress}%` }}
+                      />
+                    )}
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-4.5 w-4.5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                          <Zap className="h-2.5 w-2.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-white font-sans">Company Memory</span>
                       </div>
-
-                      <div className="space-y-1">
-                        <div className="text-[9px] font-bold text-zinc-650 uppercase tracking-wider px-2.5 py-1">My views</div>
-                        <div className="space-y-0.5 text-[11px] text-zinc-400 font-medium">
-                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-[#131316] text-white">
-                            <span className="text-[9px]">▤</span>
-                            <span className="truncate">Core Data Model</span>
-                          </div>
-                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
-                            <span className="text-[9px] text-zinc-600">▤</span>
-                            <span className="truncate">Leads from All Booking ...</span>
-                          </div>
-                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
-                            <span className="text-[9px] text-zinc-600">▤</span>
-                            <span className="truncate">Leads from All Forms</span>
-                          </div>
-                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
-                            <span className="text-[9px] text-zinc-600">▤</span>
-                            <span className="truncate">New startups in NY</span>
-                          </div>
-                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
-                            <span className="text-[9px] text-zinc-600">▤</span>
-                            <span className="truncate">All Closed-Won Opps</span>
-                          </div>
-                        </div>
-                      </div>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
+                        Unify scattered operational context into a central, identity-resolved RAG index.
+                      </p>
                     </div>
+                  </button>
 
-                    {/* Right Table Panel inside Mockup */}
-                    <div className="col-span-12 md:col-span-9 flex flex-col bg-[#0c0c0e]">
-                      <div className="h-10 border-b border-[#1a1a1f] px-4.5 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="flex items-center bg-[#08080a] border border-[#1a1a1f] rounded-md px-2.5 py-1 text-[10.5px] text-zinc-550 w-44">
-                            <Search className="h-3 w-3 mr-1.5 text-zinc-600" />
-                            <span>Search records</span>
-                          </div>
-                          <span className="h-7 w-7 flex items-center justify-center border border-[#1a1a1f] rounded-md bg-[#08080a] text-zinc-500 hover:text-white text-[11px] cursor-pointer">⇅</span>
-                          <span className="h-7 w-7 flex items-center justify-center border border-[#1a1a1f] rounded-md bg-[#08080a] text-zinc-500 hover:text-white text-[11px] cursor-pointer">☰</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 font-semibold text-[9.5px] px-2.5 py-0.5 rounded-full select-none">
-                          <span className="h-1 w-1 rounded-full bg-emerald-400 animate-pulse" />
-                          <span>Live</span>
-                        </div>
+                  {/* Tab 3: Agent */}
+                  <button
+                    onClick={() => handleInfraTabChange("agent")}
+                    className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${activeInfraTab === "agent" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
+                      }`}
+                  >
+                    <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
+                    {activeInfraTab === "agent" && (
+                      <div
+                        className="absolute left-0 top-0 w-[2px] bg-zinc-300 rounded-full transition-all duration-75 ease-out"
+                        style={{ height: `${infraProgress}%` }}
+                      />
+                    )}
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-4.5 w-4.5 rounded bg-zinc-800 border border-zinc-750 flex items-center justify-center text-zinc-300">
+                          <Cpu className="h-2.5 w-2.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-white font-sans">Ask Business</span>
                       </div>
-
-                      {/* Database Records Table */}
-                      <div className="overflow-auto flex-1 text-[10.5px]">
-                        <table className="w-full text-left border-collapse min-w-[500px]">
-                          <thead>
-                            <tr className="border-b border-[#1a1a1f] text-zinc-550 font-mono bg-[#08080a]/30 h-8">
-                              <th className="py-2 px-3.5 w-6"><input type="checkbox" className="rounded border-zinc-800 accent-emerald-500 bg-transparent" readOnly /></th>
-                              <th className="py-2 px-3 font-normal">@ Work Email</th>
-                              <th className="py-2 px-3 font-normal">Company name</th>
-                              <th className="py-2 px-3 font-normal"># Headcount</th>
-                              <th className="py-2 px-3 font-normal">Mobile phone</th>
-                              <th className="py-2 px-3 font-normal">Job title</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-[#18181b] text-zinc-300">
-                            <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
-                              <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
-                              <td className="py-2 px-3 text-white font-medium">michelle.rivera@example.com</td>
-                              <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-zinc-900 border border-zinc-800 text-[8px] font-bold text-center text-zinc-400 flex items-center justify-center">a</span>Attio</span></td>
-                              <td className="py-2 px-3 text-zinc-400">$3,385,492</td>
-                              <td className="py-2 px-3 text-zinc-550">+1 (415) 555 0142</td>
-                              <td className="py-2 px-3 text-zinc-450">Founding Engineer</td>
-                            </tr>
-                            <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
-                              <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
-                              <td className="py-2 px-3 text-white font-medium">felicia.reid@example.com</td>
-                              <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-blue-900/40 border border-blue-800/40 text-[8px] font-bold text-center text-blue-400 flex items-center justify-center">a</span>Amplemarket</span></td>
-                              <td className="py-2 px-3 text-zinc-400">$5,375,784</td>
-                              <td className="py-2 px-3 text-zinc-550">+1 (212) 555 0118</td>
-                              <td className="py-2 px-3 text-zinc-450">Head of Sales</td>
-                            </tr>
-                            <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
-                              <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
-                              <td className="py-2 px-3 text-white font-medium">james.smith@example.com</td>
-                              <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-amber-900/30 border border-amber-800/40 text-[8px] font-bold text-center text-amber-500 flex items-center justify-center">☼</span>Apollo</span></td>
-                              <td className="py-2 px-3 text-zinc-400">$2,140,800</td>
-                              <td className="py-2 px-3 text-zinc-550">+1 (206) 555 0167</td>
-                              <td className="py-2 px-3 text-zinc-450">Field CTO</td>
-                            </tr>
-                            <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
-                              <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
-                              <td className="py-2 px-3 text-white font-medium">patricia.johnson@example.com</td>
-                              <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-blue-500/20 border border-blue-500/30 text-[8px] font-bold text-center text-blue-400 flex items-center justify-center">c</span>Calendly</span></td>
-                              <td className="py-2 px-3 text-zinc-400">$890,250</td>
-                              <td className="py-2 px-3 text-zinc-550">+1 (404) 555 01...</td>
-                              <td className="py-2 px-3 text-zinc-450">Account Executive</td>
-                            </tr>
-                            <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
-                              <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
-                              <td className="py-2 px-3 text-white font-medium">robert.brown@example.com</td>
-                              <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-cyan-950 border border-cyan-800 text-[8px] font-bold text-center text-cyan-400 flex items-center justify-center">c</span>Clearbit</span></td>
-                              <td className="py-2 px-3 text-zinc-400">$1,275,310</td>
-                              <td className="py-2 px-3 text-zinc-550">+1 (415) 555 0190</td>
-                              <td className="py-2 px-3 text-zinc-450">Sr. AE, Mid-Market</td>
-                            </tr>
-                            <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
-                              <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
-                              <td className="py-2 px-3 text-white font-medium">elena.cortez@example.com</td>
-                              <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-[#09090b] border border-blue-900 text-[8px] font-bold text-center text-blue-400 flex items-center justify-center">❄</span>Snowflake</span></td>
-                              <td className="py-2 px-3 text-zinc-400">$8,920,400</td>
-                              <td className="py-2 px-3 text-zinc-550">+1 (617) 555 0144</td>
-                              <td className="py-2 px-3 text-zinc-450">VP Sales</td>
-                            </tr>
-                            <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
-                              <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
-                              <td className="py-2 px-3 text-white font-medium">marcus.lee@example.com</td>
-                              <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-[#09090b] border border-zinc-800 text-[8px] font-black text-center text-white flex items-center justify-center">▲</span>Vercel</span></td>
-                              <td className="py-2 px-3 text-zinc-400">$4,510,675</td>
-                              <td className="py-2 px-3 text-zinc-550">+1 (737) 555 0173</td>
-                              <td className="py-2 px-3 text-zinc-450">Strategic Account Executive</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
+                        Query your business in plain language and get instant answers with clickable citations.
+                      </p>
                     </div>
-                  </div>
+                  </button>
+
+                  {/* Tab 4: Governance */}
+                  <button
+                    onClick={() => handleInfraTabChange("governance")}
+                    className={`w-full text-left py-4 pl-8 pr-5 transition-all duration-250 cursor-pointer block relative rounded-xl ${activeInfraTab === "governance" ? "opacity-100 bg-white/[0.02]" : "opacity-40 hover:opacity-70"
+                      }`}
+                  >
+                    <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-zinc-900/60 rounded-full" />
+                    {activeInfraTab === "governance" && (
+                      <div
+                        className="absolute left-0 top-0 w-[2px] bg-blue-500 rounded-full transition-all duration-75 ease-out"
+                        style={{ height: `${infraProgress}%` }}
+                      />
+                    )}
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className="h-4.5 w-4.5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                          <ShieldCheck className="h-2.5 w-2.5" />
+                        </span>
+                        <span className="text-xs font-semibold text-white font-sans">Daily Brief</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed font-normal font-sans">
+                        Start every morning with proactive alerts customized to your industry playbook.
+                      </p>
+                    </div>
+                  </button>
                 </div>
               </div>
+              {/* Right Column: Stacked High-Fidelity Showcase Cards */}
+              <div className="lg:col-span-8 p-6 sm:p-8 lg:p-10 flex flex-col gap-10 bg-[#070708]/20 w-full">
 
-              {/* Showcase Card 2: Tools */}
-              <div id="infra-card-tools" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                
-                {/* Header & Description */}
-                <div className="p-8 pb-6 space-y-4">
-                  <div className="flex items-center gap-2 text-purple-400 text-xs font-semibold">
-                    <span className="h-5 w-5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-                      <Zap className="h-3 w-3" />
-                    </span>
-                    <span className="font-sans uppercase tracking-wider text-[11px]">Company Memory</span>
+                {/* Showcase Card 1: Data */}
+                <div id="infra-card-data" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+
+                  {/* Header & Description */}
+                  <div className="p-8 pb-6 space-y-4">
+                    <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold">
+                      <span className="h-5 w-5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                        <Database className="h-3 w-3" />
+                      </span>
+                      <span className="font-sans uppercase tracking-wider text-[11px]">Connect Data</span>
+                    </div>
+                    <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
+                      Connect your scattered business data in one click
+                    </h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
+                      Coretify securely reads and integrates Gmail, Google Drive folders, Calendar schedules, WhatsApp chat exports, and financial CSV spreadsheets without requiring any write or delete permissions.
+                    </p>
+                    <div>
+                      <CoretifyButton
+                        onClick={handleStartOnboarding}
+                        variant="dark"
+                        size="default"
+                        className="px-5 py-2.5 text-xs font-semibold border border-zinc-800 bg-[#131316] text-white rounded-lg hover:bg-zinc-900 transition-colors"
+                      >
+                        Learn More
+                      </CoretifyButton>
+                    </div>
                   </div>
-                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
-                    Unify scattered operational context into a central brain
-                  </h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
-                    Our progressive ingestion pipeline analyzes documents, meetings, and communications to map entities—linking Clients, Projects, Decisions, and Tasks into an identity-resolved relational graph.
-                  </p>
-                  <div>
-                    <CoretifyButton
-                      onClick={handleStartOnboarding}
-                      variant="dark"
-                      size="default"
-                      className="px-5 py-2.5 text-xs font-semibold border border-zinc-800 bg-[#131316] text-white rounded-lg hover:bg-zinc-900 transition-colors"
-                    >
-                      Learn More
-                    </CoretifyButton>
+
+                  <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
+                    {/* Mockup macOS Title Bar & Tabs */}
+                    <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                        </div>
+                        {/* Tab Buttons */}
+                        <div className="flex items-center gap-1.5 ml-4 text-[10.5px]">
+                          <div className="flex items-center gap-1.5 bg-[#0c0c0e] border-t border-l border-r border-[#1a1a1f] px-3.5 py-1 rounded-t-md text-white font-medium select-none">
+                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                            <span>Core Data Model</span>
+                          </div>
+                          <div className="flex items-center gap-1.5 text-zinc-500 hover:text-zinc-350 px-3.5 py-1 cursor-pointer select-none">
+                            <span className="h-1.5 w-1.5 rounded-full bg-blue-500/60" />
+                            <span>Companies last week</span>
+                          </div>
+                          <span className="text-zinc-650 font-bold ml-1 text-xs cursor-pointer">+</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Window Content Area (Split Sidebar & Table) */}
+                    <div className="grid grid-cols-12 min-h-[380px] w-full">
+                      {/* Left Sidebar inside Mockup */}
+                      <div className="col-span-12 md:col-span-3 border-b md:border-b-0 md:border-r border-[#1a1a1f] bg-[#08080a]/60 p-3.5 space-y-4 text-left">
+                        <button className="w-full flex items-center justify-center gap-1.5 border border-[#1a1a1f] bg-[#0c0c0e] hover:bg-[#131316] text-[10.5px] font-semibold text-zinc-300 py-1.5 px-3 rounded-lg transition-colors cursor-pointer">
+                          <span>+</span>
+                          <span>Create new view</span>
+                        </button>
+
+                        <div className="space-y-1 text-zinc-400 text-[11px] font-medium">
+                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
+                            <span className="h-3 w-3 text-emerald-500 flex items-center justify-center font-bold">⌂</span>
+                            <span>Home</span>
+                          </div>
+                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
+                            <span className="h-3 w-3 text-blue-400 flex items-center justify-center font-bold">::</span>
+                            <span>All Contacts</span>
+                          </div>
+                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
+                            <span className="h-3 w-3 text-blue-500 flex items-center justify-center font-bold">📁</span>
+                            <span>All Accounts</span>
+                          </div>
+                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
+                            <span className="h-3 w-3 text-yellow-500 flex items-center justify-center font-bold">★</span>
+                            <span>All Opportunities</span>
+                          </div>
+                        </div>
+
+                        <div className="space-y-1">
+                          <div className="text-[9px] font-bold text-zinc-650 uppercase tracking-wider px-2.5 py-1">My views</div>
+                          <div className="space-y-0.5 text-[11px] text-zinc-400 font-medium">
+                            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-[#131316] text-white">
+                              <span className="text-[9px]">▤</span>
+                              <span className="truncate">Core Data Model</span>
+                            </div>
+                            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
+                              <span className="text-[9px] text-zinc-600">▤</span>
+                              <span className="truncate">Leads from All Booking ...</span>
+                            </div>
+                            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
+                              <span className="text-[9px] text-zinc-600">▤</span>
+                              <span className="truncate">Leads from All Forms</span>
+                            </div>
+                            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
+                              <span className="text-[9px] text-zinc-600">▤</span>
+                              <span className="truncate">New startups in NY</span>
+                            </div>
+                            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer">
+                              <span className="text-[9px] text-zinc-600">▤</span>
+                              <span className="truncate">All Closed-Won Opps</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right Table Panel inside Mockup */}
+                      <div className="col-span-12 md:col-span-9 flex flex-col bg-[#0c0c0e]">
+                        <div className="h-10 border-b border-[#1a1a1f] px-4.5 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center bg-[#08080a] border border-[#1a1a1f] rounded-md px-2.5 py-1 text-[10.5px] text-zinc-550 w-44">
+                              <Search className="h-3 w-3 mr-1.5 text-zinc-600" />
+                              <span>Search records</span>
+                            </div>
+                            <span className="h-7 w-7 flex items-center justify-center border border-[#1a1a1f] rounded-md bg-[#08080a] text-zinc-500 hover:text-white text-[11px] cursor-pointer">⇅</span>
+                            <span className="h-7 w-7 flex items-center justify-center border border-[#1a1a1f] rounded-md bg-[#08080a] text-zinc-500 hover:text-white text-[11px] cursor-pointer">☰</span>
+                          </div>
+                          <div className="flex items-center gap-1.5 border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 font-semibold text-[9.5px] px-2.5 py-0.5 rounded-full select-none">
+                            <span className="h-1 w-1 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>Live</span>
+                          </div>
+                        </div>
+
+                        {/* Database Records Table */}
+                        <div className="overflow-auto flex-1 text-[10.5px]">
+                          <table className="w-full text-left border-collapse min-w-[500px]">
+                            <thead>
+                              <tr className="border-b border-[#1a1a1f] text-zinc-550 font-mono bg-[#08080a]/30 h-8">
+                                <th className="py-2 px-3.5 w-6"><input type="checkbox" className="rounded border-zinc-800 accent-emerald-500 bg-transparent" readOnly /></th>
+                                <th className="py-2 px-3 font-normal">@ Work Email</th>
+                                <th className="py-2 px-3 font-normal">Company name</th>
+                                <th className="py-2 px-3 font-normal"># Headcount</th>
+                                <th className="py-2 px-3 font-normal">Mobile phone</th>
+                                <th className="py-2 px-3 font-normal">Job title</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-[#18181b] text-zinc-300">
+                              <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
+                                <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
+                                <td className="py-2 px-3 text-white font-medium">michelle.rivera@example.com</td>
+                                <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-zinc-900 border border-zinc-800 text-[8px] font-bold text-center text-zinc-400 flex items-center justify-center">a</span>Attio</span></td>
+                                <td className="py-2 px-3 text-zinc-400">$3,385,492</td>
+                                <td className="py-2 px-3 text-zinc-550">+1 (415) 555 0142</td>
+                                <td className="py-2 px-3 text-zinc-450">Founding Engineer</td>
+                              </tr>
+                              <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
+                                <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
+                                <td className="py-2 px-3 text-white font-medium">felicia.reid@example.com</td>
+                                <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-blue-900/40 border border-blue-800/40 text-[8px] font-bold text-center text-blue-400 flex items-center justify-center">a</span>Amplemarket</span></td>
+                                <td className="py-2 px-3 text-zinc-400">$5,375,784</td>
+                                <td className="py-2 px-3 text-zinc-550">+1 (212) 555 0118</td>
+                                <td className="py-2 px-3 text-zinc-450">Head of Sales</td>
+                              </tr>
+                              <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
+                                <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
+                                <td className="py-2 px-3 text-white font-medium">james.smith@example.com</td>
+                                <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-amber-900/30 border border-amber-800/40 text-[8px] font-bold text-center text-amber-500 flex items-center justify-center">☼</span>Apollo</span></td>
+                                <td className="py-2 px-3 text-zinc-400">$2,140,800</td>
+                                <td className="py-2 px-3 text-zinc-550">+1 (206) 555 0167</td>
+                                <td className="py-2 px-3 text-zinc-450">Field CTO</td>
+                              </tr>
+                              <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
+                                <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
+                                <td className="py-2 px-3 text-white font-medium">patricia.johnson@example.com</td>
+                                <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-blue-500/20 border border-blue-500/30 text-[8px] font-bold text-center text-blue-400 flex items-center justify-center">c</span>Calendly</span></td>
+                                <td className="py-2 px-3 text-zinc-400">$890,250</td>
+                                <td className="py-2 px-3 text-zinc-550">+1 (404) 555 01...</td>
+                                <td className="py-2 px-3 text-zinc-450">Account Executive</td>
+                              </tr>
+                              <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
+                                <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
+                                <td className="py-2 px-3 text-white font-medium">robert.brown@example.com</td>
+                                <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-cyan-950 border border-cyan-800 text-[8px] font-bold text-center text-cyan-400 flex items-center justify-center">c</span>Clearbit</span></td>
+                                <td className="py-2 px-3 text-zinc-400">$1,275,310</td>
+                                <td className="py-2 px-3 text-zinc-550">+1 (415) 555 0190</td>
+                                <td className="py-2 px-3 text-zinc-450">Sr. AE, Mid-Market</td>
+                              </tr>
+                              <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
+                                <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
+                                <td className="py-2 px-3 text-white font-medium">elena.cortez@example.com</td>
+                                <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-[#09090b] border border-blue-900 text-[8px] font-bold text-center text-blue-400 flex items-center justify-center">❄</span>Snowflake</span></td>
+                                <td className="py-2 px-3 text-zinc-400">$8,920,400</td>
+                                <td className="py-2 px-3 text-zinc-550">+1 (617) 555 0144</td>
+                                <td className="py-2 px-3 text-zinc-450">VP Sales</td>
+                              </tr>
+                              <tr className="h-9 hover:bg-[#131316]/40 transition-colors">
+                                <td className="py-2 px-3.5"><input type="checkbox" className="rounded border-zinc-800 bg-transparent" readOnly /></td>
+                                <td className="py-2 px-3 text-white font-medium">marcus.lee@example.com</td>
+                                <td className="py-2 px-3"><span className="inline-flex items-center gap-1"><span className="h-3.5 w-3.5 rounded bg-[#09090b] border border-zinc-800 text-[8px] font-black text-center text-white flex items-center justify-center">▲</span>Vercel</span></td>
+                                <td className="py-2 px-3 text-zinc-400">$4,510,675</td>
+                                <td className="py-2 px-3 text-zinc-550">+1 (737) 555 0173</td>
+                                <td className="py-2 px-3 text-zinc-450">Strategic Account Executive</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* HIGH FIDELITY WINDOW MOCKUP (touches left, right, and bottom borders) */}
-                <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
-                  {/* Mockup macOS Title Bar */}
-                  <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                      </div>
-                      <div className="flex items-center gap-1.5 ml-4 text-[10.5px]">
-                        <div className="flex items-center gap-1.5 bg-[#0c0c0e] border-t border-l border-r border-[#1a1a1f] px-3.5 py-1 rounded-t-md text-white font-medium select-none">
-                          <Zap className="h-3 w-3 text-purple-400" />
-                          <span>Default Inbound Workflow</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-zinc-550 px-3.5 py-1 select-none">
-                          <span>Untitled Workflow</span>
-                        </div>
-                        <span className="text-zinc-650 font-bold ml-1 text-xs cursor-pointer">+</span>
-                      </div>
+                {/* Showcase Card 2: Tools */}
+                <div id="infra-card-tools" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+
+                  {/* Header & Description */}
+                  <div className="p-8 pb-6 space-y-4">
+                    <div className="flex items-center gap-2 text-purple-400 text-xs font-semibold">
+                      <span className="h-5 w-5 rounded bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                        <Zap className="h-3 w-3" />
+                      </span>
+                      <span className="font-sans uppercase tracking-wider text-[11px]">Company Memory</span>
+                    </div>
+                    <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
+                      Unify scattered operational context into a central brain
+                    </h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
+                      Our progressive ingestion pipeline analyzes documents, meetings, and communications to map entities—linking Clients, Projects, Decisions, and Tasks into an identity-resolved relational graph.
+                    </p>
+                    <div>
+                      <CoretifyButton
+                        onClick={handleStartOnboarding}
+                        variant="dark"
+                        size="default"
+                        className="px-5 py-2.5 text-xs font-semibold border border-zinc-800 bg-[#131316] text-white rounded-lg hover:bg-zinc-900 transition-colors"
+                      >
+                        Learn More
+                      </CoretifyButton>
                     </div>
                   </div>
 
-                  {/* Window Content Area (Split Sidebar & Visual Canvas) */}
-                  <div className="grid grid-cols-12 min-h-[380px] w-full">
-                    {/* Left Sidebar */}
-                    <div className="col-span-12 md:col-span-4 border-b md:border-b-0 md:border-r border-[#1a1a1f] bg-[#08080a]/60 p-4 space-y-4 text-left">
-                      <div className="relative flex items-center bg-[#08080a] border border-[#1a1a1f] rounded-lg p-2 text-xs text-zinc-550">
-                        <Search className="h-3.5 w-3.5 mr-2 text-zinc-600" />
-                        <span>Search steps</span>
+                  {/* HIGH FIDELITY WINDOW MOCKUP (touches left, right, and bottom borders) */}
+                  <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
+                    {/* Mockup macOS Title Bar */}
+                    <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                        </div>
+                        <div className="flex items-center gap-1.5 ml-4 text-[10.5px]">
+                          <div className="flex items-center gap-1.5 bg-[#0c0c0e] border-t border-l border-r border-[#1a1a1f] px-3.5 py-1 rounded-t-md text-white font-medium select-none">
+                            <Zap className="h-3 w-3 text-purple-400" />
+                            <span>Default Inbound Workflow</span>
+                          </div>
+                          <div className="flex items-center gap-1.5 text-zinc-550 px-3.5 py-1 select-none">
+                            <span>Untitled Workflow</span>
+                          </div>
+                          <span className="text-zinc-650 font-bold ml-1 text-xs cursor-pointer">+</span>
+                        </div>
                       </div>
+                    </div>
 
-                      <div className="space-y-3">
-                        {/* Triggers Category */}
-                        <div>
-                          <div className="text-[9px] font-bold text-zinc-600 uppercase tracking-wider mb-1 px-1">Logic</div>
-                          <div className="grid grid-cols-2 gap-1.5 text-[10px] text-zinc-350">
-                            <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-zinc-800 transition-colors">
-                              <span className="text-orange-400">☼</span>
-                              <span className="font-semibold">If / else</span>
+                    {/* Window Content Area (Split Sidebar & Visual Canvas) */}
+                    <div className="grid grid-cols-12 min-h-[380px] w-full">
+                      {/* Left Sidebar */}
+                      <div className="col-span-12 md:col-span-4 border-b md:border-b-0 md:border-r border-[#1a1a1f] bg-[#08080a]/60 p-4 space-y-4 text-left">
+                        <div className="relative flex items-center bg-[#08080a] border border-[#1a1a1f] rounded-lg p-2 text-xs text-zinc-550">
+                          <Search className="h-3.5 w-3.5 mr-2 text-zinc-600" />
+                          <span>Search steps</span>
+                        </div>
+
+                        <div className="space-y-3">
+                          {/* Triggers Category */}
+                          <div>
+                            <div className="text-[9px] font-bold text-zinc-600 uppercase tracking-wider mb-1 px-1">Logic</div>
+                            <div className="grid grid-cols-2 gap-1.5 text-[10px] text-zinc-350">
+                              <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-zinc-800 transition-colors">
+                                <span className="text-orange-400">☼</span>
+                                <span className="font-semibold">If / else</span>
+                              </div>
+                              <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-zinc-800 transition-colors">
+                                <span className="text-yellow-400">☼</span>
+                                <span className="font-semibold">Multi-route</span>
+                              </div>
+                              <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-zinc-800 transition-colors">
+                                <span className="text-blue-400">⟳</span>
+                                <span className="font-semibold">Loop</span>
+                              </div>
                             </div>
-                            <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-zinc-800 transition-colors">
-                              <span className="text-yellow-400">☼</span>
-                              <span className="font-semibold">Multi-route</span>
-                            </div>
-                            <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-zinc-800 transition-colors">
-                              <span className="text-blue-400">⟳</span>
-                              <span className="font-semibold">Loop</span>
+                          </div>
+
+                          {/* Actions Category */}
+                          <div>
+                            <div className="text-[9px] font-bold text-zinc-600 uppercase tracking-wider mb-1 px-1">Actions</div>
+                            <div className="grid grid-cols-2 gap-1.5 text-[10px] text-zinc-350">
+                              <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
+                                <span className="text-purple-400">✉</span>
+                                <span className="font-semibold truncate">Send msg</span>
+                              </div>
+                              <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
+                                <span className="text-indigo-400">⚡</span>
+                                <span className="font-semibold truncate">Process RAG</span>
+                              </div>
+                              <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
+                                <span className="text-emerald-400">▤</span>
+                                <span className="font-semibold truncate">Add row</span>
+                              </div>
+                              <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
+                                <span className="text-blue-400">👥</span>
+                                <span className="font-semibold truncate">Route owner</span>
+                              </div>
+                              <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
+                                <span className="text-red-400">✖</span>
+                                <span className="font-semibold truncate">End delay</span>
+                              </div>
+                              <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
+                                <span className="text-amber-500">⏰</span>
+                                <span className="font-semibold truncate">Delay workflow</span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                      </div>
 
-                        {/* Actions Category */}
-                        <div>
-                          <div className="text-[9px] font-bold text-zinc-600 uppercase tracking-wider mb-1 px-1">Actions</div>
-                          <div className="grid grid-cols-2 gap-1.5 text-[10px] text-zinc-350">
-                            <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
-                              <span className="text-purple-400">✉</span>
-                              <span className="font-semibold truncate">Send msg</span>
+                      {/* Right Canvas Panel */}
+                      <div className="col-span-12 md:col-span-8 flex flex-col bg-[#0c0c0e] p-6 items-center justify-center relative select-none min-h-[300px]">
+                        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.012)_1.5px,transparent_1.5px)] bg-[size:18px_18px] pointer-events-none" />
+
+                        <div className="flex flex-col items-center gap-4 w-full max-w-[320px] z-10">
+                          {/* Node 1: Trigger */}
+                          <div className="w-full bg-[#08080a] border border-[#1a1a1f] rounded-xl p-3 flex flex-col gap-1 shadow-md text-left">
+                            <span className="text-[8px] text-zinc-550 font-bold tracking-wide">TRIGGER</span>
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-semibold text-white">Default Inbound</span>
+                              <span className="text-[8.5px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-bold">Live</span>
                             </div>
-                            <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
-                              <span className="text-indigo-400">⚡</span>
-                              <span className="font-semibold truncate">Process RAG</span>
-                            </div>
-                            <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
-                              <span className="text-emerald-400">▤</span>
-                              <span className="font-semibold truncate">Add row</span>
-                            </div>
-                            <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
-                              <span className="text-blue-400">👥</span>
-                              <span className="font-semibold truncate">Route owner</span>
-                            </div>
-                            <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
-                              <span className="text-red-400">✖</span>
-                              <span className="font-semibold truncate">End delay</span>
-                            </div>
-                            <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center gap-1.5 cursor-pointer hover:border-purple-500/20 transition-colors">
-                              <span className="text-amber-500">⏰</span>
-                              <span className="font-semibold truncate">Delay workflow</span>
+                          </div>
+
+                          {/* Arrow */}
+                          <div className="h-6 w-[1px] bg-slate-800 relative">
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-[3.5px] border-r-[3.5px] border-t-[5px] border-l-transparent border-r-transparent border-t-slate-800" />
+                          </div>
+
+                          {/* Node 2: Action logic */}
+                          <div className="w-full bg-[#08080a] border border-[#1a1a1f] rounded-xl p-3 flex flex-col gap-1 shadow-md text-left relative">
+                            <span className="text-[8px] text-zinc-550 font-bold tracking-wide">ACTION LOGIC</span>
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-semibold text-white">Process RAG & Sync</span>
+                              <span className="text-[8.5px] text-zinc-400">Step 2</span>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
 
-                    {/* Right Canvas Panel */}
-                    <div className="col-span-12 md:col-span-8 flex flex-col bg-[#0c0c0e] p-6 items-center justify-center relative select-none min-h-[300px]">
-                      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.012)_1.5px,transparent_1.5px)] bg-[size:18px_18px] pointer-events-none" />
-                      
-                      <div className="flex flex-col items-center gap-4 w-full max-w-[320px] z-10">
-                        {/* Node 1: Trigger */}
-                        <div className="w-full bg-[#08080a] border border-[#1a1a1f] rounded-xl p-3 flex flex-col gap-1 shadow-md text-left">
-                          <span className="text-[8px] text-zinc-550 font-bold tracking-wide">TRIGGER</span>
+                {/* Showcase Card 3: Agent */}
+                <div id="infra-card-agent" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+
+                  {/* Header & Description */}
+                  <div className="p-8 pb-6 space-y-4">
+                    <div className="flex items-center gap-2 text-zinc-400 text-xs font-semibold">
+                      <span className="h-5 w-5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300">
+                        <Cpu className="h-3 w-3" />
+                      </span>
+                      <span className="font-sans uppercase tracking-wider text-[11px]">Ask Business</span>
+                    </div>
+                    <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
+                      Ask your business operational questions in plain language
+                    </h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
+                      Query decisions, project bottlenecks, and client follow-ups instantly. Every AI response includes clickable source citations linking directly back to the original emails or documents.
+                    </p>
+                    <div>
+                      <CoretifyButton
+                        onClick={handleStartOnboarding}
+                        variant="dark"
+                        size="default"
+                        className="px-5 py-2.5 text-xs font-semibold border border-zinc-800 bg-[#131316] text-white rounded-lg hover:bg-zinc-900 transition-colors"
+                      >
+                        Learn More
+                      </CoretifyButton>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
+                    {/* Mockup macOS Title Bar */}
+                    <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                        </div>
+                        <div className="flex items-center gap-1.5 ml-4 text-[10.5px]">
+                          <div className="flex items-center gap-1.5 bg-[#0c0c0e] border-t border-l border-r border-[#1a1a1f] px-3.5 py-1 rounded-t-md text-white font-medium select-none">
+                            <Bot className="h-3.5 w-3.5 text-zinc-400" />
+                            <span>Coretify Agent Console</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Window Content Area (Split Sidebar & Chat Box) */}
+                    <div className="grid grid-cols-12 min-h-[380px] w-full">
+                      {/* Left Sidebar */}
+                      <div className="col-span-12 md:col-span-4 border-b md:border-b-0 md:border-r border-[#1a1a1f] bg-[#08080a]/60 p-4 space-y-4 text-left">
+                        <button className="w-full flex items-center justify-center gap-1.5 border border-[#1a1a1f] bg-[#0c0c0e] hover:bg-[#131316] text-[10.5px] font-semibold text-zinc-300 py-1.5 px-3 rounded-lg transition-colors cursor-pointer">
+                          <span>+</span>
+                          <span>New Chat</span>
+                        </button>
+
+                        <div className="space-y-1">
+                          <div className="text-[9px] font-bold text-zinc-600 uppercase tracking-wider px-2.5 py-1">Chats</div>
+                          <div className="space-y-0.5 text-[11px] text-zinc-400 font-medium">
+                            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer text-zinc-300">
+                              <span>▤</span>
+                              <span className="truncate">Churning Leads</span>
+                            </div>
+                            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer text-zinc-300">
+                              <span>▤</span>
+                              <span className="truncate">Leads from All Booking Links</span>
+                            </div>
+                            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer text-zinc-300">
+                              <span>▤</span>
+                              <span className="truncate">Churning Leads</span>
+                            </div>
+                            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer text-zinc-300">
+                              <span>▤</span>
+                              <span className="truncate">Leads from All Booking Links</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right Chat Panel */}
+                      <div className="col-span-12 md:col-span-8 flex flex-col bg-[#0c0c0e] justify-between p-6 text-left relative min-h-[300px]">
+                        <div className="flex-1 flex flex-col items-center justify-center space-y-4">
+                          <span className="text-zinc-600 text-3xl">💬</span>
+                          <h4 className="text-lg font-semibold text-zinc-300">How can I help today?</h4>
+
+                          <div className="w-full max-w-[320px] bg-[#08080a] border border-[#1a1a1f] rounded-xl p-3.5 flex items-center justify-between text-zinc-550 text-[10.5px]">
+                            <span>Type anything...</span>
+                            <div className="flex items-center gap-1.5">
+                              <span>📎</span>
+                              <span>⎆</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Showcase Card 4: Governance */}
+                <div id="infra-card-governance" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+
+                  {/* Header & Description */}
+                  <div className="p-8 pb-6 space-y-4">
+                    <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold">
+                      <span className="h-5 w-5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                        <ShieldCheck className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="font-sans uppercase tracking-wider text-[11px]">Daily Brief</span>
+                    </div>
+                    <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
+                      Start every morning with vertical-aware insights
+                    </h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
+                      Receive morning alerts tailored to your industry playbook (scope creep warning, client capacity risks, or stalled goals) and drill down to resolve issues in minutes.
+                    </p>
+                    <div>
+                      <CoretifyButton
+                        onClick={handleStartOnboarding}
+                        variant="dark"
+                        size="default"
+                        className="px-5 py-2.5 text-xs font-semibold border border-zinc-800 bg-[#131316] text-white rounded-lg hover:bg-zinc-900 transition-colors"
+                      >
+                        Learn More
+                      </CoretifyButton>
+                    </div>
+                  </div>
+
+                  {/* HIGH FIDELITY WINDOW MOCKUP (touches left, right, and bottom borders) */}
+                  <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
+                    {/* Mockup macOS Title Bar */}
+                    <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
+                        </div>
+                        <div className="flex items-center gap-1.5 ml-4 text-[10.5px]">
+                          <div className="flex items-center gap-1.5 bg-[#0c0c0e] border-t border-l border-r border-[#1a1a1f] px-3.5 py-1 rounded-t-md text-white font-medium select-none">
+                            <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
+                            <span>Inbound Workflow History</span>
+                          </div>
+                          <div className="flex items-center gap-1.5 text-zinc-550 px-3.5 py-1 select-none">
+                            <span>Outbound Workflow</span>
+                          </div>
+                          <span className="text-zinc-650 font-bold ml-1 text-xs cursor-pointer">+</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Window Content Area (Split Sidebar & Audit Panel) */}
+                    <div className="grid grid-cols-12 min-h-[380px] w-full">
+                      {/* Left Sidebar (Version History) */}
+                      <div className="col-span-12 md:col-span-4 border-b md:border-b-0 md:border-r border-[#1a1a1f] bg-[#08080a]/60 p-4 space-y-4 text-left">
+                        <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Version History</div>
+
+                        <div className="space-y-2 text-[10px]">
+                          <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center justify-between">
+                            <div>
+                              <span className="font-semibold text-white block">Current Version</span>
+                              <span className="text-zinc-500 text-[8px]">Just now</span>
+                            </div>
+                            <span className="text-[8px] bg-blue-500/10 text-blue-400 px-1.5 py-0.5 rounded font-mono font-bold">Dot</span>
+                          </div>
+
+                          <div className="p-2 border border-transparent rounded-lg flex items-center justify-between text-zinc-400 hover:bg-[#131316]/30 cursor-pointer">
+                            <div>
+                              <span className="font-semibold block">Version 7</span>
+                              <span className="text-zinc-500 text-[8px]">Yesterday, 5:30 PM</span>
+                            </div>
+                            <span className="text-[8px] text-zinc-500 font-mono">Dot</span>
+                          </div>
+
+                          <div className="p-2 border border-transparent rounded-lg flex items-center justify-between text-zinc-400 hover:bg-[#131316]/30 cursor-pointer">
+                            <div>
+                              <span className="font-semibold block">Version 6</span>
+                              <span className="text-zinc-500 text-[8px]">Today, 4:15 PM</span>
+                            </div>
+                            <span className="text-[8px] text-zinc-500 font-mono">Dot</span>
+                          </div>
+
+                          <div className="p-2 border border-transparent rounded-lg flex items-center justify-between text-zinc-400 hover:bg-[#131316]/30 cursor-pointer">
+                            <div>
+                              <span className="font-semibold block">Version 5</span>
+                              <span className="text-zinc-500 text-[8px]">Today, 3:00 PM</span>
+                            </div>
+                            <span className="text-[8px] text-zinc-500 font-mono">Dot</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right Panel (Workflow Node View) */}
+                      <div className="col-span-12 md:col-span-8 flex flex-col bg-[#0c0c0e] p-6 items-center justify-center relative min-h-[300px]">
+                        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.012)_1.5px,transparent_1.5px)] bg-[size:18px_18px] pointer-events-none" />
+
+                        <div className="w-full max-w-[320px] bg-[#08080a] border border-[#1a1a1f] rounded-xl p-3 flex flex-col gap-1.5 shadow-md text-left z-10">
                           <div className="flex items-center justify-between">
-                            <span className="text-xs font-semibold text-white">Default Inbound</span>
-                            <span className="text-[8.5px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-bold">Live</span>
+                            <span className="text-[9px] text-emerald-400 font-bold">● Live</span>
+                            <span className="text-zinc-650 text-[10px]">Default Inbound...</span>
                           </div>
-                        </div>
+                          <div className="w-full h-px bg-slate-900" />
 
-                        {/* Arrow */}
-                        <div className="h-6 w-[1px] bg-slate-800 relative">
-                          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-l-[3.5px] border-r-[3.5px] border-t-[5px] border-l-transparent border-r-transparent border-t-slate-800" />
-                        </div>
+                          <div className="flex flex-col gap-2">
+                            <div className="p-2.5 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg">
+                              <span className="text-[8px] text-zinc-550 font-bold block">TRIGGER</span>
+                              <span className="text-[10px] text-white font-semibold block">New Form Submission 2</span>
+                            </div>
 
-                        {/* Node 2: Action logic */}
-                        <div className="w-full bg-[#08080a] border border-[#1a1a1f] rounded-xl p-3 flex flex-col gap-1 shadow-md text-left relative">
-                          <span className="text-[8px] text-zinc-550 font-bold tracking-wide">ACTION LOGIC</span>
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-semibold text-white">Process RAG & Sync</span>
-                            <span className="text-[8.5px] text-zinc-400">Step 2</span>
+                            <div className="h-4 w-[1px] bg-slate-800 self-center" />
+
+                            <div className="p-2.5 bg-blue-500/5 border border-blue-500/20 rounded-lg">
+                              <span className="text-[8px] text-blue-400 font-bold block">ACTION</span>
+                              <span className="text-[10px] text-white font-semibold block">Deploy Scheduler</span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
               </div>
-
-              {/* Showcase Card 3: Agent */}
-              <div id="infra-card-agent" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                
-                {/* Header & Description */}
-                <div className="p-8 pb-6 space-y-4">
-                  <div className="flex items-center gap-2 text-zinc-400 text-xs font-semibold">
-                    <span className="h-5 w-5 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300">
-                      <Cpu className="h-3 w-3" />
-                    </span>
-                    <span className="font-sans uppercase tracking-wider text-[11px]">Ask Business</span>
-                  </div>
-                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
-                    Ask your business operational questions in plain language
-                  </h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
-                    Query decisions, project bottlenecks, and client follow-ups instantly. Every AI response includes clickable source citations linking directly back to the original emails or documents.
-                  </p>
-                  <div>
-                    <CoretifyButton
-                      onClick={handleStartOnboarding}
-                      variant="dark"
-                      size="default"
-                      className="px-5 py-2.5 text-xs font-semibold border border-zinc-800 bg-[#131316] text-white rounded-lg hover:bg-zinc-900 transition-colors"
-                    >
-                      Learn More
-                    </CoretifyButton>
-                  </div>
-                </div>
-
-                <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
-                  {/* Mockup macOS Title Bar */}
-                  <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                      </div>
-                      <div className="flex items-center gap-1.5 ml-4 text-[10.5px]">
-                        <div className="flex items-center gap-1.5 bg-[#0c0c0e] border-t border-l border-r border-[#1a1a1f] px-3.5 py-1 rounded-t-md text-white font-medium select-none">
-                          <Bot className="h-3.5 w-3.5 text-zinc-400" />
-                          <span>Coretify Agent Console</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Window Content Area (Split Sidebar & Chat Box) */}
-                  <div className="grid grid-cols-12 min-h-[380px] w-full">
-                    {/* Left Sidebar */}
-                    <div className="col-span-12 md:col-span-4 border-b md:border-b-0 md:border-r border-[#1a1a1f] bg-[#08080a]/60 p-4 space-y-4 text-left">
-                      <button className="w-full flex items-center justify-center gap-1.5 border border-[#1a1a1f] bg-[#0c0c0e] hover:bg-[#131316] text-[10.5px] font-semibold text-zinc-300 py-1.5 px-3 rounded-lg transition-colors cursor-pointer">
-                        <span>+</span>
-                        <span>New Chat</span>
-                      </button>
-
-                      <div className="space-y-1">
-                        <div className="text-[9px] font-bold text-zinc-600 uppercase tracking-wider px-2.5 py-1">Chats</div>
-                        <div className="space-y-0.5 text-[11px] text-zinc-400 font-medium">
-                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer text-zinc-300">
-                            <span>▤</span>
-                            <span className="truncate">Churning Leads</span>
-                          </div>
-                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer text-zinc-300">
-                            <span>▤</span>
-                            <span className="truncate">Leads from All Booking Links</span>
-                          </div>
-                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer text-zinc-300">
-                            <span>▤</span>
-                            <span className="truncate">Churning Leads</span>
-                          </div>
-                          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-zinc-900 cursor-pointer text-zinc-300">
-                            <span>▤</span>
-                            <span className="truncate">Leads from All Booking Links</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right Chat Panel */}
-                    <div className="col-span-12 md:col-span-8 flex flex-col bg-[#0c0c0e] justify-between p-6 text-left relative min-h-[300px]">
-                      <div className="flex-1 flex flex-col items-center justify-center space-y-4">
-                        <span className="text-zinc-600 text-3xl">💬</span>
-                        <h4 className="text-lg font-semibold text-zinc-300">How can I help today?</h4>
-                        
-                        <div className="w-full max-w-[320px] bg-[#08080a] border border-[#1a1a1f] rounded-xl p-3.5 flex items-center justify-between text-zinc-550 text-[10.5px]">
-                          <span>Type anything...</span>
-                          <div className="flex items-center gap-1.5">
-                            <span>📎</span>
-                            <span>⎆</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Showcase Card 4: Governance */}
-              <div id="infra-card-governance" className="w-full text-left scroll-mt-28 border border-slate-900 bg-[#09090b]/40 rounded-2xl shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                
-                {/* Header & Description */}
-                <div className="p-8 pb-6 space-y-4">
-                  <div className="flex items-center gap-2 text-blue-400 text-xs font-semibold">
-                    <span className="h-5 w-5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                      <ShieldCheck className="h-3.5 w-3.5" />
-                    </span>
-                    <span className="font-sans uppercase tracking-wider text-[11px]">Daily Brief</span>
-                  </div>
-                  <h3 className="text-3xl font-semibold text-white tracking-tight leading-[1.15] font-sans">
-                    Start every morning with vertical-aware insights
-                  </h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed max-w-2xl font-normal font-sans">
-                    Receive morning alerts tailored to your industry playbook (scope creep warning, client capacity risks, or stalled goals) and drill down to resolve issues in minutes.
-                  </p>
-                  <div>
-                    <CoretifyButton
-                      onClick={handleStartOnboarding}
-                      variant="dark"
-                      size="default"
-                      className="px-5 py-2.5 text-xs font-semibold border border-zinc-800 bg-[#131316] text-white rounded-lg hover:bg-zinc-900 transition-colors"
-                    >
-                      Learn More
-                    </CoretifyButton>
-                  </div>
-                </div>
-
-                {/* HIGH FIDELITY WINDOW MOCKUP (touches left, right, and bottom borders) */}
-                <div className="border-t border-[#1a1a1f] bg-[#0c0c0e] flex flex-col w-full">
-                  {/* Mockup macOS Title Bar */}
-                  <div className="h-10 border-b border-[#1a1a1f] bg-[#08080a] flex items-center justify-between px-4">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-slate-800" />
-                      </div>
-                      <div className="flex items-center gap-1.5 ml-4 text-[10.5px]">
-                        <div className="flex items-center gap-1.5 bg-[#0c0c0e] border-t border-l border-r border-[#1a1a1f] px-3.5 py-1 rounded-t-md text-white font-medium select-none">
-                          <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
-                          <span>Inbound Workflow History</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-zinc-550 px-3.5 py-1 select-none">
-                          <span>Outbound Workflow</span>
-                        </div>
-                        <span className="text-zinc-650 font-bold ml-1 text-xs cursor-pointer">+</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Window Content Area (Split Sidebar & Audit Panel) */}
-                  <div className="grid grid-cols-12 min-h-[380px] w-full">
-                    {/* Left Sidebar (Version History) */}
-                    <div className="col-span-12 md:col-span-4 border-b md:border-b-0 md:border-r border-[#1a1a1f] bg-[#08080a]/60 p-4 space-y-4 text-left">
-                      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Version History</div>
-                      
-                      <div className="space-y-2 text-[10px]">
-                        <div className="p-2 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg flex items-center justify-between">
-                          <div>
-                            <span className="font-semibold text-white block">Current Version</span>
-                            <span className="text-zinc-500 text-[8px]">Just now</span>
-                          </div>
-                          <span className="text-[8px] bg-blue-500/10 text-blue-400 px-1.5 py-0.5 rounded font-mono font-bold">Dot</span>
-                        </div>
-
-                        <div className="p-2 border border-transparent rounded-lg flex items-center justify-between text-zinc-400 hover:bg-[#131316]/30 cursor-pointer">
-                          <div>
-                            <span className="font-semibold block">Version 7</span>
-                            <span className="text-zinc-500 text-[8px]">Yesterday, 5:30 PM</span>
-                          </div>
-                          <span className="text-[8px] text-zinc-500 font-mono">Dot</span>
-                        </div>
-
-                        <div className="p-2 border border-transparent rounded-lg flex items-center justify-between text-zinc-400 hover:bg-[#131316]/30 cursor-pointer">
-                          <div>
-                            <span className="font-semibold block">Version 6</span>
-                            <span className="text-zinc-500 text-[8px]">Today, 4:15 PM</span>
-                          </div>
-                          <span className="text-[8px] text-zinc-500 font-mono">Dot</span>
-                        </div>
-
-                        <div className="p-2 border border-transparent rounded-lg flex items-center justify-between text-zinc-400 hover:bg-[#131316]/30 cursor-pointer">
-                          <div>
-                            <span className="font-semibold block">Version 5</span>
-                            <span className="text-zinc-500 text-[8px]">Today, 3:00 PM</span>
-                          </div>
-                          <span className="text-[8px] text-zinc-500 font-mono">Dot</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right Panel (Workflow Node View) */}
-                    <div className="col-span-12 md:col-span-8 flex flex-col bg-[#0c0c0e] p-6 items-center justify-center relative min-h-[300px]">
-                      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.012)_1.5px,transparent_1.5px)] bg-[size:18px_18px] pointer-events-none" />
-                      
-                      <div className="w-full max-w-[320px] bg-[#08080a] border border-[#1a1a1f] rounded-xl p-3 flex flex-col gap-1.5 shadow-md text-left z-10">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[9px] text-emerald-400 font-bold">● Live</span>
-                          <span className="text-zinc-650 text-[10px]">Default Inbound...</span>
-                        </div>
-                        <div className="w-full h-px bg-slate-900" />
-                        
-                        <div className="flex flex-col gap-2">
-                          <div className="p-2.5 bg-[#0c0c0e] border border-[#1a1a1f] rounded-lg">
-                            <span className="text-[8px] text-zinc-550 font-bold block">TRIGGER</span>
-                            <span className="text-[10px] text-white font-semibold block">New Form Submission 2</span>
-                          </div>
-                          
-                          <div className="h-4 w-[1px] bg-slate-800 self-center" />
-                          
-                          <div className="p-2.5 bg-blue-500/5 border border-blue-500/20 rounded-lg">
-                            <span className="text-[8px] text-blue-400 font-bold block">ACTION</span>
-                            <span className="text-[10px] text-white font-semibold block">Deploy Scheduler</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            </div>
-              {/* Right Spacer */}
-              <div
-                className="hidden lg:block border-l border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
           </div>
         </div>
       </section>
@@ -1824,7 +1804,7 @@ export default function Home() {
       {/* SECTION 4: PRICING */}
       <section id="pricing" className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
-          
+
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
@@ -1855,247 +1835,247 @@ export default function Home() {
 
           {/* Pricing Grid */}
           <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full border-t border-slate-850/80">
-              {/* Left Spacer */}
-              <div
-                className="hidden lg:block border-r border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
+            {/* Left Spacer */}
+            <div
+              className="hidden lg:block border-r border-slate-850/80"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+              }}
+            />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-[#09090b]/10">
-            
-            {/* Free Tier */}
-            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r lg:border-b-0">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-base font-semibold text-slate-200">Free</h3>
-                  <p className="text-xs text-zinc-500 mt-1">Sempurna untuk uji coba personal.</p>
-                </div>
-                <div className="flex items-baseline">
-                  <span className="text-3xl font-bold text-white tracking-tight">Rp 0</span>
-                  <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
-                </div>
-                <div className="w-full h-px bg-slate-850/50" />
-                <ul className="space-y-3.5 text-xs text-zinc-400">
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Maksimal 2 konektor data (Gmail & Calendar)</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>50 pertanyaan AI / bulan</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Batas 500 dokumen memori</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Akses 1 pengguna saja</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="pt-8">
-                <CoretifyButton
-                  onClick={handleStartOnboarding}
-                  variant="dark"
-                  className="w-full py-5 text-xs font-semibold"
-                >
-                  Get Started
-                </CoretifyButton>
-              </div>
-            </div>
 
-            {/* Starter Tier */}
-            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 lg:border-r lg:border-b-0">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-base font-semibold text-slate-200">Starter</h3>
-                  <p className="text-xs text-zinc-500 mt-1">Untuk tim kecil yang mulai berkolaborasi.</p>
+              {/* Free Tier */}
+              <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r lg:border-b-0">
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-base font-semibold text-slate-200">Free</h3>
+                    <p className="text-xs text-zinc-500 mt-1">Sempurna untuk uji coba personal.</p>
+                  </div>
+                  <div className="flex items-baseline">
+                    <span className="text-3xl font-bold text-white tracking-tight">Rp 0</span>
+                    <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                  </div>
+                  <div className="w-full h-px bg-slate-850/50" />
+                  <ul className="space-y-3.5 text-xs text-zinc-400">
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Maksimal 2 konektor data (Gmail & Calendar)</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>50 pertanyaan AI / bulan</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Batas 500 dokumen memori</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Akses 1 pengguna saja</span>
+                    </li>
+                  </ul>
                 </div>
-                <div className="flex items-baseline">
-                  <span className="text-3xl font-bold text-white tracking-tight">Rp 199k</span>
-                  <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                <div className="pt-8">
+                  <CoretifyButton
+                    onClick={handleStartOnboarding}
+                    variant="dark"
+                    className="w-full py-5 text-xs font-semibold"
+                  >
+                    Get Started
+                  </CoretifyButton>
                 </div>
-                <div className="w-full h-px bg-slate-850/50" />
-                <ul className="space-y-3.5 text-xs text-zinc-400">
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Hingga 5 konektor data aktif</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>500 pertanyaan AI / bulan</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Batas 10.000 dokumen memori</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Hingga 3 anggota tim</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Insights playbook standar</span>
-                  </li>
-                </ul>
               </div>
-              <div className="pt-8">
-                <CoretifyButton
-                  onClick={handleStartOnboarding}
-                  variant="dark"
-                  className="w-full py-5 text-xs font-semibold"
-                >
-                  Upgrade to Starter
-                </CoretifyButton>
-              </div>
-            </div>
 
-            {/* Growth Tier [Popular] */}
-            <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r md:border-b-0 lg:border-b-0 lg:border-r relative bg-gradient-to-b from-slate-900/20 via-[#0c0c0e]/30 to-transparent">
-              
-              {/* Popular Badge & Glow effect */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-36 w-full max-w-[240px] bg-slate-500/10 rounded-full blur-2xl pointer-events-none" />
-              
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base font-semibold text-slate-200">Growth</h3>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-slate-500/15 text-slate-300 border border-slate-500/20">
-                    POPULAR
-                  </span>
+              {/* Starter Tier */}
+              <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 lg:border-r lg:border-b-0">
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-base font-semibold text-slate-200">Starter</h3>
+                    <p className="text-xs text-zinc-500 mt-1">Untuk tim kecil yang mulai berkolaborasi.</p>
+                  </div>
+                  <div className="flex items-baseline">
+                    <span className="text-3xl font-bold text-white tracking-tight">Rp 199k</span>
+                    <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                  </div>
+                  <div className="w-full h-px bg-slate-850/50" />
+                  <ul className="space-y-3.5 text-xs text-zinc-400">
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Hingga 5 konektor data aktif</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>500 pertanyaan AI / bulan</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Batas 10.000 dokumen memori</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Hingga 3 anggota tim</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Insights playbook standar</span>
+                    </li>
+                  </ul>
                 </div>
-                <div className="flex items-baseline">
-                  <span className="text-3xl font-bold text-white tracking-tight">Rp 499k</span>
-                  <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                <div className="pt-8">
+                  <CoretifyButton
+                    onClick={handleStartOnboarding}
+                    variant="dark"
+                    className="w-full py-5 text-xs font-semibold"
+                  >
+                    Upgrade to Starter
+                  </CoretifyButton>
                 </div>
-                <div className="w-full h-px bg-slate-800" />
-                <ul className="space-y-3.5 text-xs text-zinc-300">
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="font-medium text-slate-200">Konektor data tanpa batas</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>5.000 pertanyaan AI / bulan</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="font-medium text-slate-200">Dokumen memori tanpa batas</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Hingga 10 anggota tim</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Prioritas playbook & insight kustom</span>
-                  </li>
-                </ul>
               </div>
-              <div className="pt-8">
-                <CoretifyButton
-                  onClick={handleStartOnboarding}
-                  variant="white"
-                  className="w-full py-5 text-xs font-semibold shadow-lg hover:shadow-slate-500/10"
-                >
-                  Try Growth Free
-                </CoretifyButton>
-              </div>
-            </div>
 
-            {/* Business Tier */}
-            <div className="p-8 flex flex-col justify-between">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-base font-semibold text-slate-200">Business</h3>
-                  <p className="text-xs text-zinc-500 mt-1">Untuk perusahaan besar dengan tata kelola khusus.</p>
+              {/* Growth Tier [Popular] */}
+              <div className="p-8 flex flex-col justify-between border-b border-slate-850/80 md:border-r md:border-b-0 lg:border-b-0 lg:border-r relative bg-gradient-to-b from-slate-900/20 via-[#0c0c0e]/30 to-transparent">
+
+                {/* Popular Badge & Glow effect */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-36 w-full max-w-[240px] bg-slate-500/10 rounded-full blur-2xl pointer-events-none" />
+
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-base font-semibold text-slate-200">Growth</h3>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-slate-500/15 text-slate-300 border border-slate-500/20">
+                      POPULAR
+                    </span>
+                  </div>
+                  <div className="flex items-baseline">
+                    <span className="text-3xl font-bold text-white tracking-tight">Rp 499k</span>
+                    <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                  </div>
+                  <div className="w-full h-px bg-slate-800" />
+                  <ul className="space-y-3.5 text-xs text-zinc-300">
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="font-medium text-slate-200">Konektor data tanpa batas</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>5.000 pertanyaan AI / bulan</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="font-medium text-slate-200">Dokumen memori tanpa batas</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Hingga 10 anggota tim</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Prioritas playbook & insight kustom</span>
+                    </li>
+                  </ul>
                 </div>
-                <div className="flex items-baseline">
-                  <span className="text-3xl font-bold text-white tracking-tight">Rp 1.99M</span>
-                  <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                <div className="pt-8">
+                  <CoretifyButton
+                    onClick={handleStartOnboarding}
+                    variant="white"
+                    className="w-full py-5 text-xs font-semibold shadow-lg hover:shadow-slate-500/10"
+                  >
+                    Try Growth Free
+                  </CoretifyButton>
                 </div>
-                <div className="w-full h-px bg-slate-850/50" />
-                <ul className="space-y-3.5 text-xs text-zinc-400">
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Konektor standard + custom API</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="font-medium text-slate-200">Pertanyaan AI tanpa batas</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Anggota tim tanpa batas</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Kustomisasi kepatuhan & log audit</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Dukungan khusus & SLA 99.9%</span>
-                  </li>
-                </ul>
               </div>
-              <div className="pt-8">
-                <CoretifyButton
-                  onClick={handleStartOnboarding}
-                  variant="dark"
-                  className="w-full py-5 text-xs font-semibold"
-                >
-                  Contact Sales
-                </CoretifyButton>
+
+              {/* Business Tier */}
+              <div className="p-8 flex flex-col justify-between">
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-base font-semibold text-slate-200">Business</h3>
+                    <p className="text-xs text-zinc-500 mt-1">Untuk perusahaan besar dengan tata kelola khusus.</p>
+                  </div>
+                  <div className="flex items-baseline">
+                    <span className="text-3xl font-bold text-white tracking-tight">Rp 1.99M</span>
+                    <span className="text-zinc-500 text-xs font-semibold ml-1">/ bulan</span>
+                  </div>
+                  <div className="w-full h-px bg-slate-850/50" />
+                  <ul className="space-y-3.5 text-xs text-zinc-400">
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Konektor standard + custom API</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="font-medium text-slate-200">Pertanyaan AI tanpa batas</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Anggota tim tanpa batas</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Kustomisasi kepatuhan & log audit</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <svg className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Dukungan khusus & SLA 99.9%</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="pt-8">
+                  <CoretifyButton
+                    onClick={handleStartOnboarding}
+                    variant="dark"
+                    className="w-full py-5 text-xs font-semibold"
+                  >
+                    Contact Sales
+                  </CoretifyButton>
+                </div>
               </div>
-            </div>
 
             </div>
-              {/* Right Spacer */}
-              <div
-                className="hidden lg:block border-l border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
+            {/* Right Spacer */}
+            <div
+              className="hidden lg:block border-l border-slate-850/80"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+              }}
+            />
           </div>
         </div>
       </section>
@@ -2103,11 +2083,11 @@ export default function Home() {
       {/* SECTION 3: INTEGRATIONS GRID */}
       <section id="integrations" className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
-          
+
           {/* Section Content Area */}
           <div className="p-8 sm:p-12 lg:p-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-              
+
               {/* Left Column: Copywriting & CTA */}
               <div className="lg:col-span-5 space-y-8 text-left">
                 <div className="space-y-4">
@@ -2136,9 +2116,9 @@ export default function Home() {
 
               {/* Right Column: SaaS Integrations Grid */}
               <div className="lg:col-span-6 w-full">
-                
+
                 <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 select-none relative">
-                  
+
                   {/* Subtle radial glow under grid */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/5 via-indigo-500/5 to-emerald-500/5 blur-3xl rounded-full -z-10 pointer-events-none" />
 
@@ -2149,7 +2129,7 @@ export default function Home() {
                   {/* Cell 2: WhatsApp Lite */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-emerald-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 24 24" className="h-8.5 w-8.5 fill-current text-[#25D366] group-hover:scale-110 transition-transform duration-300">
-                      <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12c0 2.14.68 4.18 1.97 5.9L2.03 22l4.22-1.1c1.63.9 3.5 1.4 5.75 1.4 5.5 0 10-4.5 10-10S17.5 2 12.004 2zm5.73 14.28c-.24.68-1.2 1.25-1.65 1.3-.46.06-.9.1-2.9-.7-2.55-1.03-4.2-3.6-4.32-3.77-.13-.17-1.07-1.4-1.07-2.7 0-1.28.67-1.92.9-2.2.25-.26.54-.33.72-.33.18 0 .36 0 .5.02.16 0 .37-.06.57.43.2.5.7 1.7.75 1.8.06.12.1.27.02.43-.08.16-.12.26-.25.4-.12.14-.26.3-.37.42-.12.12-.25.26-.1.5.14.24.62 1.03 1.32 1.66.9.8 1.66 1.05 1.9 1.17.24.12.38.1.52-.06.14-.16.6-1.03.77-1.37.16-.34.33-.28.56-.2.23.08 1.48.7 1.73.82.25.12.4.18.46.3.06.1.06.67-.18 1.34z"/>
+                      <path d="M12.004 2C6.51 2 2.014 6.5 2.014 12c0 2.14.68 4.18 1.97 5.9L2.03 22l4.22-1.1c1.63.9 3.5 1.4 5.75 1.4 5.5 0 10-4.5 10-10S17.5 2 12.004 2zm5.73 14.28c-.24.68-1.2 1.25-1.65 1.3-.46.06-.9.1-2.9-.7-2.55-1.03-4.2-3.6-4.32-3.77-.13-.17-1.07-1.4-1.07-2.7 0-1.28.67-1.92.9-2.2.25-.26.54-.33.72-.33.18 0 .36 0 .5.02.16 0 .37-.06.57.43.2.5.7 1.7.75 1.8.06.12.1.27.02.43-.08.16-.12.26-.25.4-.12.14-.26.3-.37.42-.12.12-.25.26-.1.5.14.24.62 1.03 1.32 1.66.9.8 1.66 1.05 1.9 1.17.24.12.38.1.52-.06.14-.16.6-1.03.77-1.37.16-.34.33-.28.56-.2.23.08 1.48.7 1.73.82.25.12.4.18.46.3.06.1.06.67-.18 1.34z" />
                     </svg>
                     <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">WA Lite</span>
                   </div>
@@ -2160,8 +2140,8 @@ export default function Home() {
                   {/* Cell 4: Google Calendar */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-blue-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(59,130,246,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <path d="M26 4H8C5.8 4 4 5.8 4 8v32c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V22L26 4z" fill="#4285F4"/>
-                      <path d="M44 22H26V4l18 18z" fill="#1565C0"/>
+                      <path d="M26 4H8C5.8 4 4 5.8 4 8v32c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V22L26 4z" fill="#4285F4" />
+                      <path d="M44 22H26V4l18 18z" fill="#1565C0" />
                       <text x="22" y="34" fill="#FFF" fontSize="21" fontWeight="900" textAnchor="middle" fontFamily="sans-serif">31</text>
                     </svg>
                     <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Calendar</span>
@@ -2173,8 +2153,8 @@ export default function Home() {
                   {/* Cell 6: Notion */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-zinc-700 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(255,255,255,0.04)] group cursor-pointer">
                     <svg viewBox="0 0 24 24" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300">
-                      <rect x="2" y="2" width="20" height="20" rx="4" fill="#FFF" stroke="#000" strokeWidth="1.5"/>
-                      <path d="M6 6h2.5l7.5 9.5V6h2.5v12h-2.5L8.5 8.5V18H6V6z" fill="#000"/>
+                      <rect x="2" y="2" width="20" height="20" rx="4" fill="#FFF" stroke="#000" strokeWidth="1.5" />
+                      <path d="M6 6h2.5l7.5 9.5V6h2.5v12h-2.5L8.5 8.5V18H6V6z" fill="#000" />
                     </svg>
                     <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Notion</span>
                   </div>
@@ -2183,10 +2163,10 @@ export default function Home() {
                   {/* Cell 7: Gmail */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-rose-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(239,68,68,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <path d="M4 12v24c0 2.2 1.8 4 4 4h6V18L4 12z" fill="#4285F4"/>
-                      <path d="M44 12v24c0 2.2-1.8 4-4 4h-6V18l10-6z" fill="#34A853"/>
-                      <path d="M14 18h20V8L24 16 14 8v10z" fill="#EA4335"/>
-                      <path d="M4 12l20 15 20-15v-4L24 22 4 8v4z" fill="#FBBC05"/>
+                      <path d="M4 12v24c0 2.2 1.8 4 4 4h6V18L4 12z" fill="#4285F4" />
+                      <path d="M44 12v24c0 2.2-1.8 4-4 4h-6V18l10-6z" fill="#34A853" />
+                      <path d="M14 18h20V8L24 16 14 8v10z" fill="#EA4335" />
+                      <path d="M4 12l20 15 20-15v-4L24 22 4 8v4z" fill="#FBBC05" />
                     </svg>
                     <span className="text-[9px] font-bold text-zinc-500 mt-2.5 font-mono">Gmail</span>
                   </div>
@@ -2197,9 +2177,9 @@ export default function Home() {
                   {/* Cell 9: Google Drive */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-amber-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <path d="M16 6h16l15 26H31L16 6z" fill="#FFCC00"/>
-                      <path d="M32 32H2L10 18h30l-8 14z" fill="#00AA47"/>
-                      <path d="M16 6L1 32l8 14 23-40H16z" fill="#4285F4"/>
+                      <path d="M16 6h16l15 26H31L16 6z" fill="#FFCC00" />
+                      <path d="M32 32H2L10 18h30l-8 14z" fill="#00AA47" />
+                      <path d="M16 6L1 32l8 14 23-40H16z" fill="#4285F4" />
                     </svg>
                     <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Drive</span>
                   </div>
@@ -2210,7 +2190,7 @@ export default function Home() {
                   {/* Cell 11: Zapier */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-orange-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(249,115,22,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 48 48" className="h-8.5 w-8.5 group-hover:scale-110 transition-transform duration-300">
-                      <circle cx="24" cy="24" r="22" fill="#FF4F00"/>
+                      <circle cx="24" cy="24" r="22" fill="#FF4F00" />
                       <g stroke="#FFF" strokeWidth="5.5" strokeLinecap="round">
                         <line x1="24" y1="12" x2="24" y2="36" />
                         <line x1="13.6" y1="18" x2="34.4" y2="30" />
@@ -2243,10 +2223,10 @@ export default function Home() {
                   {/* Cell 16: Slack */}
                   <div className="aspect-square rounded-2xl border border-slate-850 bg-[#0c0c0e]/80 flex flex-col items-center justify-center relative transition-all duration-305 hover:-translate-y-1 hover:border-purple-500/20 hover:bg-[#0c0c0e] hover:shadow-[0_0_30px_rgba(168,85,247,0.08)] group cursor-pointer">
                     <svg viewBox="0 0 100 100" className="h-9 w-9 group-hover:scale-110 transition-transform duration-300">
-                      <path d="M20 50a10 10 0 1 1 10-10v10H20zm10 10a10 10 0 1 1 0-20h20v20H30z" fill="#36C5F0"/>
-                      <path d="M50 20a10 10 0 1 1 10 10H50V20zm10 10a10 10 0 1 1-20 0V10h20v20z" fill="#2EB67D"/>
-                      <path d="M80 50a10 10 0 1 1-10 10V50h10zm-10-10a10 10 0 1 1 0 20H50V40h20z" fill="#ECB22E"/>
-                      <path d="M50 80a10 10 0 1 1-10-10h10v10zm-10-10a10 10 0 1 1 20 0v10H40v-20z" fill="#E01E5A"/>
+                      <path d="M20 50a10 10 0 1 1 10-10v10H20zm10 10a10 10 0 1 1 0-20h20v20H30z" fill="#36C5F0" />
+                      <path d="M50 20a10 10 0 1 1 10 10H50V20zm10 10a10 10 0 1 1-20 0V10h20v20z" fill="#2EB67D" />
+                      <path d="M80 50a10 10 0 1 1-10 10V50h10zm-10-10a10 10 0 1 1 0 20H50V40h20z" fill="#ECB22E" />
+                      <path d="M50 80a10 10 0 1 1-10-10h10v10zm-10-10a10 10 0 1 1 20 0v10H40v-20z" fill="#E01E5A" />
                     </svg>
                     <span className="text-[9px] font-bold text-zinc-500 mt-2 font-mono">Slack</span>
                   </div>
@@ -2276,7 +2256,7 @@ export default function Home() {
       {/* SECTION 6: TESTIMONIALS */}
       <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
-          
+
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
@@ -2307,66 +2287,66 @@ export default function Home() {
 
           {/* Testimonials Grid Layout */}
           <div className="grid grid-cols-[1fr] lg:grid-cols-[50px_1fr_50px] w-full border-t border-slate-850/80">
-              {/* Left Spacer */}
-              <div
-                className="hidden lg:block border-r border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
+            {/* Left Spacer */}
+            <div
+              className="hidden lg:block border-r border-slate-850/80"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+              }}
+            />
             <div className="relative bg-[#09090b]/10 w-full overflow-hidden">
-            {/* Soft background glow */}
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.015)_0%,_transparent_70%)] pointer-events-none" />
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 w-full">
-              {testimonials.map((t, idx) => {
-                const borderRightClass = (idx % 3 !== 2) ? "md:border-r border-slate-850/80" : "";
-                const borderBottomClass = idx < 3 
-                  ? "border-b border-slate-850/80" 
-                  : (idx < 5 ? "max-md:border-b border-slate-850/80" : "");
-                
-                return (
-                  <div 
-                    key={idx} 
-                    className={`flex flex-col justify-between p-8 text-left bg-transparent group hover:bg-white/[0.015] transition-all duration-300 relative select-none ${borderRightClass} ${borderBottomClass}`}
-                  >
-                    {/* Left Hover Border Line (Thick unified brand silver/slate line) */}
-                    <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-300 group-hover:bg-slate-400" />
-                    
-                    {/* Card Header (Avatar + User Details + Arrow) */}
-                    <div className="flex items-center justify-between pb-6 border-b border-slate-900/60">
-                      <div className="flex items-center gap-3.5 truncate">
-                        <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden shrink-0">
-                          {/* Unified soft slate glow */}
-                          <div className="absolute inset-0 bg-gradient-to-tr from-slate-500/10 to-transparent blur-[2px]" />
-                          {t.initials}
+              {/* Soft background glow */}
+              <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.015)_0%,_transparent_70%)] pointer-events-none" />
+
+              <div className="grid grid-cols-1 md:grid-cols-3 w-full">
+                {testimonials.map((t, idx) => {
+                  const borderRightClass = (idx % 3 !== 2) ? "md:border-r border-slate-850/80" : "";
+                  const borderBottomClass = idx < 3
+                    ? "border-b border-slate-850/80"
+                    : (idx < 5 ? "max-md:border-b border-slate-850/80" : "");
+
+                  return (
+                    <div
+                      key={idx}
+                      className={`flex flex-col justify-between p-8 text-left bg-transparent group hover:bg-white/[0.015] transition-all duration-300 relative select-none ${borderRightClass} ${borderBottomClass}`}
+                    >
+                      {/* Left Hover Border Line (Thick unified brand silver/slate line) */}
+                      <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-300 group-hover:bg-slate-400" />
+
+                      {/* Card Header (Avatar + User Details + Arrow) */}
+                      <div className="flex items-center justify-between pb-6 border-b border-slate-900/60">
+                        <div className="flex items-center gap-3.5 truncate">
+                          <div className="h-9 w-9 rounded-full bg-[#18181b] border border-slate-850 flex items-center justify-center text-[11px] font-bold text-white relative overflow-hidden shrink-0">
+                            {/* Unified soft slate glow */}
+                            <div className="absolute inset-0 bg-gradient-to-tr from-slate-500/10 to-transparent blur-[2px]" />
+                            {t.initials}
+                          </div>
+                          <div className="truncate">
+                            <div className="text-xs font-semibold text-slate-200 truncate">{t.name}</div>
+                            <div className="text-[10px] text-zinc-550 font-mono mt-0.5 truncate">{t.handle}</div>
+                          </div>
                         </div>
-                        <div className="truncate">
-                          <div className="text-xs font-semibold text-slate-200 truncate">{t.name}</div>
-                          <div className="text-[10px] text-zinc-550 font-mono mt-0.5 truncate">{t.handle}</div>
-                        </div>
+                        {/* Top-Right Arrow pointing top-right - highlights in unified brand silver/slate on hover */}
+                        <ArrowRight className="h-3.5 w-3.5 -rotate-45 text-zinc-700/60 transition-all duration-300 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-slate-350" />
                       </div>
-                      {/* Top-Right Arrow pointing top-right - highlights in unified brand silver/slate on hover */}
-                      <ArrowRight className="h-3.5 w-3.5 -rotate-45 text-zinc-700/60 transition-all duration-300 shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-slate-350" />
+                      {/* Card Body (Quote Text) */}
+                      <div className="pt-6 flex-1 flex items-start min-h-[90px]">
+                        <p className="text-[12.5px] sm:text-[13.5px] text-zinc-350 leading-relaxed font-normal">
+                          &ldquo;{t.text}&rdquo;
+                        </p>
+                      </div>
                     </div>
-                    {/* Card Body (Quote Text) */}
-                    <div className="pt-6 flex-1 flex items-start min-h-[90px]">
-                      <p className="text-[12.5px] sm:text-[13.5px] text-zinc-350 leading-relaxed font-normal">
-                        &ldquo;{t.text}&rdquo;
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-            </div>
-              {/* Right Spacer */}
-              <div
-                className="hidden lg:block border-l border-slate-850/80"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
-                }}
-              />
+            {/* Right Spacer */}
+            <div
+              className="hidden lg:block border-l border-slate-850/80"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px, transparent 7px)'
+              }}
+            />
           </div>
         </div>
       </section>
@@ -2374,7 +2354,7 @@ export default function Home() {
       {/* SECTION 5: FAQ */}
       <section id="faq" className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
-          
+
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
@@ -2393,7 +2373,7 @@ export default function Home() {
 
           {/* Section Content Area */}
           <div className="grid grid-cols-1 lg:grid-cols-12 w-full">
-            
+
             {/* Left Column Container (full height to make vertical line stretch) */}
             <div className="lg:col-span-5 lg:border-r border-slate-850/80 relative h-full">
               {/* Inner Sticky Content */}
@@ -2447,10 +2427,9 @@ export default function Home() {
                         {isOpen ? "−" : "+"}
                       </span>
                     </button>
-                    <div 
-                      className={`grid transition-all duration-300 ease-in-out ${
-                        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                      }`}
+                    <div
+                      className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                        }`}
                     >
                       <div className="overflow-hidden">
                         <div className="px-8 sm:px-12 pb-7">
@@ -2470,7 +2449,7 @@ export default function Home() {
       {/* SECTION 7: CTA */}
       <section className="w-full bg-[#070708]/40 border-b border-slate-850/80">
         <div className="mx-auto max-w-[1360px] border-l border-r relative">
-          
+
           {/* Section Header Band */}
           <div className="border-b border-slate-850/80 py-4 px-8 sm:px-12 lg:px-16 flex items-center select-none bg-[#0c0c0e]/20">
             <div className="flex items-center gap-2">
@@ -2490,7 +2469,7 @@ export default function Home() {
           {/* CTA Banner Card Container */}
           <div className="p-8 sm:p-12 lg:p-24 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#08080a] border-b border-slate-900">
             {/* Grid Pattern Motif */}
-            <div 
+            <div
               className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
               style={{
                 WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 85%)',
@@ -2509,7 +2488,7 @@ export default function Home() {
               <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-lg mx-auto">
                 Bergabunglah dengan ratusan perusahaan Indonesia yang telah mengintegrasikan memori tim mereka secara terpusat dan aman. Mulai uji coba gratis 14 hari sekarang.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
                 <CoretifyButton
                   onClick={handleStartOnboarding}
