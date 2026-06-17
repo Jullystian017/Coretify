@@ -2468,22 +2468,23 @@ export default function Home() {
 
           {/* CTA Banner Card Container */}
           <div className="p-8 sm:p-12 lg:py-16 lg:px-24 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#070708] border-b border-slate-900">
-            {/* Grid Pattern Motif */}
+            {/* Grid Pattern Motif - Masked to be visible only where the lights shine */}
             <div
-              className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
+              className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
               style={{
-                WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 90%)',
-                maskImage: 'radial-gradient(circle at center, black 40%, transparent 90%)'
+                WebkitMaskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 70%), radial-gradient(circle at top right, black 25%, transparent 70%), radial-gradient(circle at center, black 15%, transparent 60%)',
+                maskImage: 'radial-gradient(circle at bottom left, black 25%, transparent 70%), radial-gradient(circle at top right, black 25%, transparent 70%), radial-gradient(circle at center, black 15%, transparent 60%)'
               }}
             />
-            {/* Symmetrical Corner/Edge Vignette Glows (Vibe from reference image but Coretify silver/slate theme) */}
-            <div className="absolute -bottom-1/4 -left-1/4 w-[60%] h-[130%] bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-slate-400/45 via-slate-650/15 to-transparent blur-[90px] pointer-events-none" />
-            <div className="absolute -top-1/4 -right-1/4 w-[60%] h-[130%] bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-zinc-400/40 via-slate-650/15 to-transparent blur-[90px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-slate-500/25 to-transparent blur-[50px] pointer-events-none" />
+            {/* Brighter Symmetrical Corner/Edge Vignette Glows & Central Text Backlight */}
+            <div className="absolute -bottom-1/4 -left-1/4 w-[60%] h-[130%] bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-slate-400/65 via-slate-650/15 to-transparent blur-[70px] pointer-events-none" />
+            <div className="absolute -top-1/4 -right-1/4 w-[60%] h-[130%] bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-zinc-400/60 via-slate-650/15 to-transparent blur-[70px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-slate-500/35 to-transparent blur-[40px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[500px] bg-slate-500/18 rounded-full blur-[100px] pointer-events-none" />
             
             {/* Organic Noise/Grain Overlay */}
             <div 
-              className="absolute inset-0 pointer-events-none opacity-[0.045] mix-blend-overlay"
+              className="absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-overlay"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
               }}
