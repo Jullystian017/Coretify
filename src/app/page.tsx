@@ -187,31 +187,31 @@ export default function Home() {
           <nav className="hidden md:flex items-center gap-1.5 text-[13px] font-medium text-slate-400 absolute left-1/2 -translate-x-1/2">
             <button
               onClick={() => scrollToSection("features")}
-              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-md transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Features
             </button>
             <button
               onClick={() => scrollToSection("infrastructure")}
-              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-md transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Infrastructure
             </button>
             <button
               onClick={() => scrollToSection("integrations")}
-              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-md transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Integrations
             </button>
             <button
               onClick={() => scrollToSection("pricing")}
-              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-md transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               Pricing
             </button>
             <button
               onClick={() => scrollToSection("faq")}
-              className="px-3.5 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
+              className="px-3.5 py-1.5 rounded-md transition-all duration-200 hover:bg-white/[0.07] hover:text-white cursor-pointer"
             >
               FAQ
             </button>
@@ -2502,7 +2502,7 @@ export default function Home() {
 
               {/* Description */}
               <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-lg mx-auto mt-4">
-                Bergabunglah dengan ratusan perusahaan Indonesia yang telah mengintegrasikan memori tim mereka secara terpusat dan aman. Mulai uji coba gratis 14 hari sekarang.
+                Integrasikan seluruh memori tim secara terpusat dan aman. Mulai uji coba gratis 14 hari sekarang.
               </p>
 
               {/* Capsule Coretify Buttons */}
@@ -2510,16 +2510,16 @@ export default function Home() {
                 <CoretifyButton
                   onClick={handleStartOnboarding}
                   variant="white"
-                  size="default"
-                  className="px-8 py-4 text-[12px] font-semibold shadow-lg hover:shadow-slate-500/10 w-full sm:w-auto"
+                  size="lg"
+                  className="px-8 py-5.5 text-[13px] font-semibold shadow-lg hover:shadow-slate-500/10 w-full sm:w-auto"
                 >
                   Try Coretify Free
                 </CoretifyButton>
                 <CoretifyButton
                   onClick={handleStartOnboarding}
                   variant="dark"
-                  size="default"
-                  className="px-8 py-4 text-[12px] font-semibold w-full sm:w-auto"
+                  size="lg"
+                  className="px-8 py-5.5 text-[13px] font-semibold w-full sm:w-auto"
                 >
                   Request a Demo
                 </CoretifyButton>
