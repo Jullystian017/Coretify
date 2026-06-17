@@ -2378,7 +2378,7 @@ export default function Home() {
             <div className="lg:col-span-5 lg:border-r border-slate-850/80 relative h-full">
               {/* Inner Sticky Content */}
               <div className="lg:sticky lg:top-28 py-16 px-8 sm:px-12 lg:pl-16 lg:pr-12 text-left space-y-5">
-                <h2 className="text-4xl sm:text-[44px] font-medium tracking-tight leading-[1.1] text-white">
+                <h2 className="text-4xl sm:text-[44px] font-semibold tracking-[-0.03em] leading-[1.1] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
                   Frequent<br />questions
                 </h2>
                 <p className="text-sm sm:text-base text-zinc-400 leading-relaxed max-w-sm">
@@ -2497,7 +2497,7 @@ export default function Home() {
               </span>
 
               {/* Bold Headline */}
-              <h2 className="text-3xl sm:text-[42px] font-semibold tracking-[-0.03em] leading-[1.12] text-white select-none max-w-xl mx-auto">
+              <h2 className="text-3xl sm:text-[42px] font-semibold tracking-[-0.03em] leading-[1.12] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none max-w-xl mx-auto">
                 Ready to unlock your company memory?
               </h2>
 
@@ -2554,7 +2554,7 @@ export default function Home() {
               </p>
               <div className="pt-1">
                 <button className="inline-flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-md border border-zinc-850/60 bg-zinc-900/10 hover:bg-zinc-900/50 hover:border-zinc-700 text-[11px] font-medium text-zinc-400 hover:text-white transition-all duration-200 cursor-pointer select-none">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-105 text-black">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-100 text-zinc-900">
                     <Play className="h-1.5 w-1.5 fill-current ml-0.5" />
                   </span>
                   <span>Watch launch presentation</span>
