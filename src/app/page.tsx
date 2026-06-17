@@ -2467,45 +2467,53 @@ export default function Home() {
           </div>
 
           {/* CTA Banner Card Container */}
-          <div className="p-8 sm:p-12 lg:p-24 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#08080a] border-b border-slate-900">
+          <div className="p-8 sm:p-12 lg:p-24 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#070708] border-b border-slate-900">
             {/* Grid Pattern Motif */}
             <div
-              className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
+              className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none"
               style={{
-                WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 85%)',
-                maskImage: 'radial-gradient(circle at center, black 30%, transparent 85%)'
+                WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 90%)',
+                maskImage: 'radial-gradient(circle at center, black 40%, transparent 90%)'
               }}
             />
-            {/* Spotlight Glows */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[350px] w-[600px] bg-slate-500/10 rounded-full blur-[110px] pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[250px] w-[400px] bg-zinc-500/8 rounded-full blur-[90px] pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[180px] w-[300px] bg-white/5 rounded-full blur-[70px] pointer-events-none" />
+            {/* Symmetrical Corner/Edge Vignette Glows (Vibe from reference image but Coretify silver/slate theme) */}
+            <div className="absolute -bottom-1/4 -left-1/4 w-[60%] h-[130%] bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-slate-400/45 via-slate-650/15 to-transparent blur-[90px] pointer-events-none" />
+            <div className="absolute -top-1/4 -right-1/4 w-[60%] h-[130%] bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-zinc-400/40 via-slate-650/15 to-transparent blur-[90px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-slate-500/25 to-transparent blur-[50px] pointer-events-none" />
+            
+            {/* Organic Noise/Grain Overlay */}
+            <div 
+              className="absolute inset-0 pointer-events-none opacity-[0.045] mix-blend-overlay"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+              }}
+            />
 
-            <div className="max-w-2xl space-y-6 z-10">
-              <h2 className="text-3xl sm:text-[44px] font-semibold tracking-[-0.03em] leading-[1.1] bg-gradient-to-b from-white via-white to-zinc-400/90 bg-clip-text text-transparent pb-1 select-none">
+            <div className="max-w-2xl flex flex-col items-center justify-center z-10">
+              {/* Little uppercase section tag */}
+              <span className="text-[11px] font-bold tracking-[0.24em] text-zinc-500 block uppercase select-none mb-5 font-mono">
+                TAKE ACTION
+              </span>
+
+              {/* Bold Headline */}
+              <h2 className="text-3xl sm:text-[46px] font-semibold tracking-[-0.03em] leading-[1.12] text-white select-none max-w-xl mx-auto">
                 Ready to unlock your company memory?
               </h2>
-              <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-lg mx-auto">
+
+              {/* Description */}
+              <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed max-w-lg mx-auto mt-4.5">
                 Bergabunglah dengan ratusan perusahaan Indonesia yang telah mengintegrasikan memori tim mereka secara terpusat dan aman. Mulai uji coba gratis 14 hari sekarang.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
-                <CoretifyButton
+              {/* Glossy Gradient Button */}
+              <div className="pt-8">
+                <button
                   onClick={handleStartOnboarding}
-                  variant="white"
-                  size="lg"
-                  className="px-8 py-5.5 text-[13px] font-semibold shadow-lg hover:shadow-slate-500/10 w-full sm:w-auto"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-[4px] bg-gradient-to-r from-zinc-200 via-zinc-100 to-zinc-350 hover:from-white hover:via-zinc-100 hover:to-zinc-300 text-black text-xs font-bold tracking-[0.08em] uppercase shadow-[0_4px_20px_rgba(255,255,255,0.06)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.18)] transition-all duration-300 cursor-pointer select-none active:scale-[0.98]"
                 >
-                  Try Coretify Free
-                </CoretifyButton>
-                <CoretifyButton
-                  onClick={handleStartOnboarding}
-                  variant="dark"
-                  size="lg"
-                  className="px-8 py-5.5 text-[13px] font-semibold w-full sm:w-auto"
-                >
-                  Request a Demo
-                </CoretifyButton>
+                  <span className="font-sans text-[13px] font-medium leading-none mb-[1px]">&rarr;</span>
+                  <span>TRY CORETIFY FREE</span>
+                </button>
               </div>
             </div>
           </div>
