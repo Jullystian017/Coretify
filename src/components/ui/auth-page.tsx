@@ -20,30 +20,42 @@ export function AuthPage() {
 
 	const handleAuth = (e?: React.FormEvent) => {
 		if (e) e.preventDefault();
-		router.push('/onboarding');
+		localStorage.setItem("isLoggedIn", "true");
+		
+		const isRegister = typeof window !== 'undefined' && window.location.pathname.includes('register');
+		if (isRegister) {
+			router.push('/onboarding');
+		} else {
+			router.push('/dashboard');
+		}
 	};
 
 	return (
 		<main className="relative md:h-screen md:overflow-hidden lg:grid lg:grid-cols-2 bg-[#070708] text-slate-100">
 			{/* Left Decorative Column */}
-			<div className="bg-[#0e0e11] relative hidden h-full flex-col border-r border-slate-900 p-10 lg:flex">
-				<div className="from-black/40 via-transparent to-transparent absolute inset-0 z-10 bg-gradient-to-t" />
+			<div className="bg-[#070708] relative hidden h-full flex-col border-r border-slate-900 p-10 lg:flex overflow-hidden">
+				{/* Subtle center glow for depth */}
+				<div className="pointer-events-none absolute inset-0 z-0">
+					{/* Soft center backlight */}
+					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.035)_0%,transparent_70%)]" />
+					{/* Edge vignette for depth */}
+					<div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.6)_100%)]" />
+				</div>
 				<div className="z-10 flex items-center gap-1 cursor-pointer" onClick={() => router.push('/')}>
 					<img src="/coretify.png" alt="Coretify Logo" className="h-8 w-auto object-contain" />
 					<p className="text-[19px] font-semibold tracking-tight text-white">Coretify</p>
 				</div>
 				<div className="z-10 mt-auto">
 					<blockquote className="space-y-2">
-						<p className="text-xl text-zinc-300 font-sans font-medium leading-relaxed">
-							&ldquo;This Platform has helped me to save time and serve my
-							clients faster than ever before.&rdquo;
+						<p className="text-lg text-zinc-200 font-sans font-medium leading-relaxed italic">
+							&ldquo;Platform ini membantu saya memantau komunikasi klien secara real-time, mendeteksi risiko churn lebih awal, dan menyelaraskan keputusan tim secara instan.&rdquo;
 						</p>
-						<footer className="font-mono text-sm font-semibold text-zinc-500">
-							~ Ali Hassan
+						<footer className="font-mono text-xs font-semibold text-zinc-500 tracking-wider uppercase mt-2">
+							— Julian Albertus
 						</footer>
 					</blockquote>
 				</div>
-				<div className="absolute inset-0">
+				<div className="absolute inset-0 z-0">
 					<FloatingPaths position={1} />
 					<FloatingPaths position={-1} />
 				</div>
@@ -155,7 +167,7 @@ function FloatingPaths({ position }: { position: number }) {
 	return (
 		<div className="pointer-events-none absolute inset-0 overflow-hidden opacity-95">
 			<svg
-				className="h-full w-full text-zinc-500"
+					className="h-full w-full text-zinc-400"
 				viewBox="0 0 696 316"
 				fill="none"
 			>
@@ -166,11 +178,11 @@ function FloatingPaths({ position }: { position: number }) {
 						d={path.d}
 						stroke="currentColor"
 						strokeWidth={path.width}
-						strokeOpacity={0.15 + path.id * 0.02}
+						strokeOpacity={0.2 + path.id * 0.022}
 						initial={{ pathLength: 0.3, opacity: 0.6 }}
 						animate={{
 							pathLength: 1,
-							opacity: [0.4, 0.8, 0.4],
+							opacity: [0.5, 1, 0.5],
 							pathOffset: [0, 1, 0],
 						}}
 						transition={{

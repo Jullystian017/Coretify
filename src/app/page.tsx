@@ -51,6 +51,11 @@ export default function Home() {
   const [activeInfraTab, setActiveInfraTab] = useState<"data" | "tools" | "agent" | "governance">("data");
   const [infraProgress, setInfraProgress] = useState<number>(0);
   const isProgrammaticScroll = useRef<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+  }, []);
 
   const testimonials = [
     {
@@ -219,20 +224,25 @@ export default function Home() {
 
           {/* Right actions */}
           <div className="flex items-center gap-6">
-            <button 
-              onClick={() => router.push("/login")}
-              className="text-[13px] font-medium text-slate-300 hover:text-white transition-colors cursor-pointer"
-            >
-              Login
-            </button>
-            <CoretifyButton
-              onClick={handleStartOnboarding}
-              variant="dark"
-              size="default"
-              className="px-5 py-4.5 font-medium"
-            >
-              Get Started
-            </CoretifyButton>
+            {isLoggedIn ? (
+              <CoretifyButton
+                onClick={() => router.push("/dashboard")}
+                variant="dark"
+                size="default"
+                className="px-5 py-4.5 font-medium"
+              >
+                Dashboard
+              </CoretifyButton>
+            ) : (
+              <CoretifyButton
+                onClick={handleStartOnboarding}
+                variant="dark"
+                size="default"
+                className="px-5 py-4.5 font-medium"
+              >
+                Get Started
+              </CoretifyButton>
+            )}
           </div>
         </div>
       </header>

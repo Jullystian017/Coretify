@@ -225,6 +225,7 @@ export default function DashboardPage() {
     const confirmDelete = window.confirm("PERINGATAN: Tindakan ini akan menghapus seluruh data Company Memory, embedding vector, entitas, dan riwayat sinkronisasi secara permanen. Apakah Anda yakin?");
     if (confirmDelete) {
       localStorage.removeItem("coretify_company");
+      localStorage.removeItem("isLoggedIn");
       showToast("Company Memory berhasil dihapus secara permanen. Mereset aplikasi...");
       setTimeout(() => {
         router.push("/onboarding");
