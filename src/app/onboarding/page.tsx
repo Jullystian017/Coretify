@@ -48,48 +48,48 @@ const goalsList = [
 function AuroraBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {/* Blob 1 – top right, large, slow drift */}
+      {/* Blob 1 – top-center, primary glow */}
       <motion.div
-        className="absolute -top-[20%] -right-[10%] w-[80%] aspect-square rounded-full"
+        className="absolute -top-[10%] left-[10%] w-[85%] aspect-square rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(255,255,255,0.055) 0%, rgba(200,200,220,0.025) 45%, transparent 70%)",
-          filter: "blur(72px)",
+          background: "radial-gradient(circle, rgba(255,255,255,0.13) 0%, rgba(220,220,235,0.06) 45%, transparent 70%)",
+          filter: "blur(55px)",
         }}
-        animate={{ scale: [1, 1.12, 1], x: [0, 18, 0], y: [0, -14, 0] }}
+        animate={{ scale: [1, 1.1, 1], x: [0, 14, 0], y: [0, -10, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
-      {/* Blob 2 – bottom left, medium */}
+      {/* Blob 2 – bottom left */}
       <motion.div
-        className="absolute -bottom-[15%] -left-[15%] w-[70%] aspect-square rounded-full"
+        className="absolute -bottom-[10%] -left-[10%] w-[65%] aspect-square rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(180,180,200,0.04) 0%, rgba(120,120,160,0.018) 50%, transparent 70%)",
-          filter: "blur(90px)",
+          background: "radial-gradient(circle, rgba(190,190,215,0.10) 0%, rgba(140,140,175,0.045) 50%, transparent 70%)",
+          filter: "blur(70px)",
         }}
-        animate={{ scale: [1, 1.08, 1], x: [0, -12, 0], y: [0, 10, 0] }}
+        animate={{ scale: [1, 1.08, 1], x: [0, -10, 0], y: [0, 8, 0] }}
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 4 }}
       />
-      {/* Blob 3 – center core glow, subtle */}
+      {/* Blob 3 – center breathing core */}
       <motion.div
-        className="absolute top-[30%] left-[20%] w-[60%] aspect-square rounded-full"
+        className="absolute top-[25%] left-[15%] w-[65%] aspect-square rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(255,255,255,0.028) 0%, transparent 65%)",
-          filter: "blur(100px)",
+          background: "radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 65%)",
+          filter: "blur(80px)",
         }}
-        animate={{ scale: [1, 1.06, 0.97, 1], opacity: [0.7, 1, 0.8, 0.7] }}
+        animate={{ scale: [1, 1.07, 0.97, 1], opacity: [0.7, 1, 0.75, 0.7] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
-      {/* Blob 4 – top left corner accent */}
+      {/* Blob 4 – top-left accent shimmer */}
       <motion.div
-        className="absolute -top-[5%] -left-[5%] w-[40%] aspect-square rounded-full"
+        className="absolute -top-[5%] -left-[5%] w-[42%] aspect-square rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(210,210,240,0.032) 0%, transparent 60%)",
-          filter: "blur(60px)",
+          background: "radial-gradient(circle, rgba(230,230,255,0.09) 0%, transparent 60%)",
+          filter: "blur(45px)",
         }}
-        animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
+        animate={{ scale: [1, 1.14, 1], opacity: [0.55, 1, 0.55] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 7 }}
       />
-      {/* Vignette to darken edges and focus the glow at center-ish */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_40%,transparent_30%,rgba(7,7,8,0.7)_100%)]" />
+      {/* Edge vignette – keeps glow contained */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_35%,transparent_25%,rgba(7,7,8,0.75)_100%)]" />
     </div>
   );
 }
@@ -127,8 +127,8 @@ export default function OnboardingPage() {
   };
 
   const goBack      = () => { if (step > 1) { setDir(-1); setStep((s) => s - 1); } };
-  const pickVertical = (v: string) => { setBusinessType(v); setDir(1); setTimeout(() => setStep(3), 180); };
-  const pickScale   = (s: string) => { setTeamSize(s);     setDir(1); setTimeout(() => setStep(4), 180); };
+  const pickVertical = (v: string) => { setBusinessType(v); };
+  const pickScale   = (s: string) => { setTeamSize(s); };
   const toggleTool  = (t: string) => setToolsUsed((p) => p.includes(t) ? p.filter((x) => x !== t) : [...p, t]);
   const toggleGoal  = (g: string) => setPainPoints((p) => p.includes(g) ? p.filter((x) => x !== g) : [...p, g]);
 
@@ -168,32 +168,34 @@ export default function OnboardingPage() {
         </button>
 
         {/* Step navigator */}
-        <nav className="relative z-10 mt-10 space-y-px">
-          {STEPS.map((s, idx) => {
-            const Icon    = s.icon;
-            const isDone  = step > s.id;
+        <nav className="relative z-10 mt-10">
+          {/* Single continuous track spanning badge-center to badge-center */}
+          <div
+            className="absolute w-px bg-zinc-800/50"
+            style={{ left: "calc(0.5rem + 18px)", top: "30px", height: "calc(100% - 60px)" }}
+          />
+
+          {STEPS.map((s) => {
+            const Icon     = s.icon;
+            const isDone   = step > s.id;
             const isActive = step === s.id;
             return (
-              <div key={s.id} className="relative flex items-start gap-3.5 px-2 py-3">
-                {/* Connector line */}
-                {idx < STEPS.length - 1 && (
-                  <div className="absolute left-[24px] top-[44px] w-px h-[calc(100%-8px)]">
-                    <div className={`w-full h-full transition-all duration-500 ${isDone ? "bg-zinc-500" : "bg-zinc-800"}`} />
-                  </div>
-                )}
-                {/* Icon badge */}
-                <div className={`shrink-0 h-9 w-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
-                  isDone   ? "bg-white text-black shadow-[0_0_16px_rgba(255,255,255,0.15)]"
-                  : isActive ? "bg-zinc-800 text-white ring-1 ring-white/10"
-                  : "bg-transparent border border-zinc-800/60 text-zinc-700"
+              <div key={s.id} className="relative flex items-start gap-3.5 px-2 min-h-[60px]">
+                {/* Badge — sits on top of track via z-10 + solid bg */}
+                <div className={`shrink-0 mt-3 h-9 w-9 rounded-lg flex items-center justify-center relative z-10 transition-all duration-300 ${
+                  isDone
+                    ? "bg-white text-black shadow-[0_0_18px_rgba(255,255,255,0.18)]"
+                    : isActive
+                    ? "bg-zinc-800 text-white ring-1 ring-white/10"
+                    : "bg-[#070708] border border-zinc-800/60 text-zinc-700"
                 }`}>
                   {isDone
                     ? <Check className="h-4 w-4 stroke-[2.5px]" />
                     : <Icon className="h-4 w-4" />
                   }
                 </div>
-                {/* Label + sub */}
-                <div className="pt-1.5">
+                {/* Label */}
+                <div className="pt-[18px] pb-3">
                   <p className={`text-[13px] font-semibold leading-none transition-all duration-200 ${
                     isDone   ? "text-zinc-500"
                     : isActive ? "text-white"
@@ -203,7 +205,7 @@ export default function OnboardingPage() {
                     <motion.p
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
-                      className="text-[11px] text-zinc-500 mt-1 leading-snug"
+                      className="text-[11px] text-zinc-500 mt-1.5 leading-snug"
                     >
                       {s.desc}
                     </motion.p>
