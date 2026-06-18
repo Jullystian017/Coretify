@@ -5,410 +5,397 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowRight,
-  ArrowLeft,
-  Check
-} from "lucide-react";
+import { ArrowRight, ArrowLeft, Check } from "lucide-react";
 
 export default function OnboardingPage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
-  
-  // Accumulated data
   const [companyName, setCompanyName] = useState("");
   const [ownerName, setOwnerName] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [teamSize, setTeamSize] = useState("");
   const [toolsUsed, setToolsUsed] = useState<string[]>([]);
   const [painPoints, setPainPoints] = useState<string[]>([]);
+  const [dir, setDir] = useState<1 | -1>(1);
 
-  const progressPercent = (step / 4) * 100;
+  const TOTAL_STEPS = 4;
+  const progressPercent = (step / TOTAL_STEPS) * 100;
 
-  const handleNext = () => {
-    if (step < 4) {
+  const goNext = () => {
+    setDir(1);
+    if (step < TOTAL_STEPS) {
       setStep(step + 1);
     } else {
-      const companyData = {
-        name: companyName || "Coretify Workspace",
-        businessType: businessType || "Startup",
-        teamSize: teamSize || "1-10",
-        toolsUsed: toolsUsed.length > 0 ? toolsUsed : ["Gmail", "Drive"],
-        painPoints: painPoints.length > 0 ? painPoints : ["Knowledge loss"],
-        createdAt: new Date().toISOString()
-      };
-      localStorage.setItem("coretify_company", JSON.stringify(companyData));
+      localStorage.setItem(
+        "coretify_company",
+        JSON.stringify({
+          name: companyName || "Coretify Workspace",
+          businessType: businessType || "Startup",
+          teamSize: teamSize || "1-10",
+          toolsUsed: toolsUsed.length > 0 ? toolsUsed : ["Gmail", "Drive"],
+          painPoints: painPoints.length > 0 ? painPoints : ["Knowledge loss"],
+          createdAt: new Date().toISOString(),
+        })
+      );
       router.push("/connect");
     }
   };
 
-  const handleBack = () => {
-    if (step > 1) {
-      setStep(step - 1);
-    }
+  const goBack = () => {
+    setDir(-1);
+    if (step > 1) setStep(step - 1);
   };
 
-  const handleVerticalSelect = (value: string) => {
-    setBusinessType(value);
-    setTimeout(() => {
-      setStep(3);
-    }, 220);
+  const selectVertical = (v: string) => {
+    setBusinessType(v);
+    setDir(1);
+    setTimeout(() => setStep(3), 200);
   };
 
-  const handleScaleSelect = (value: string) => {
-    setTeamSize(value);
-    setTimeout(() => {
-      setStep(4);
-    }, 220);
+  const selectScale = (s: string) => {
+    setTeamSize(s);
+    setDir(1);
+    setTimeout(() => setStep(4), 200);
   };
 
-  const toggleTool = (tool: string) => {
-    if (toolsUsed.includes(tool)) {
-      setToolsUsed(toolsUsed.filter((t) => t !== tool));
-    } else {
-      setToolsUsed([...toolsUsed, tool]);
-    }
-  };
+  const toggleTool = (t: string) =>
+    setToolsUsed((prev) =>
+      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
+    );
 
-  const toggleGoal = (goal: string) => {
-    if (painPoints.includes(goal)) {
-      setPainPoints(painPoints.filter((g) => g !== goal));
-    } else {
-      setPainPoints([...painPoints, goal]);
-    }
-  };
+  const toggleGoal = (g: string) =>
+    setPainPoints((prev) =>
+      prev.includes(g) ? prev.filter((x) => x !== g) : [...prev, g]
+    );
+
+  const canAdvance =
+    (step === 1 && companyName.trim() !== "" && ownerName.trim() !== "") ||
+    (step === 2 && businessType !== "") ||
+    (step === 3 && teamSize !== "") ||
+    (step === 4 && toolsUsed.length > 0);
 
   const verticals = [
-    { label: "🏢 Software House", value: "Software House", desc: "Playbook kustom untuk workload, code logs, & scope creep." },
-    { label: "🎨 Creative Agency", value: "Agency", desc: "Mengoptimalkan margins, kolaborasi client, & retensi akun." },
-    { label: "🚀 Tech Startup", value: "Startup", desc: "Fokus akselerasi produk & data decision logs secara otomatis." },
-    { label: "💼 Professional Services", value: "Consultant", desc: "Akurasi data audit legal, konsultasi, dan timeline deliverables." },
-    { label: "📦 Lainnya / Retail", value: "Lainnya", desc: "Koordinasi operasional internal & monitoring bookkeeping." }
+    { label: "Software House", value: "Software House", desc: "Workload, code logs & scope creep monitoring" },
+    { label: "Creative Agency", value: "Agency", desc: "Client retention, margins & revision tracking" },
+    { label: "Tech Startup", value: "Startup", desc: "Decision logs, product velocity & sprint analytics" },
+    { label: "Professional Services", value: "Consultant", desc: "Legal audit trails, deliverable timelines" },
+    { label: "Lainnya / Retail / Dagang", value: "Lainnya", desc: "Operational coordination & bookkeeping sync" },
   ];
 
   const scales = [
-    { label: "👥 1 - 10 Orang", value: "1-10", desc: "Tim Butik / Small studio / Small business" },
-    { label: "🏢 10 - 50 Orang", value: "10-50", desc: "Tim Berkembang / Mid-size organization" },
-    { label: "🏛️ 50+ Orang", value: "50+", desc: "Skala Korporat / Enterprise solution" }
+    { label: "1 – 10 Orang", value: "1-10", desc: "Small studio, founder-led, or boutique team" },
+    { label: "10 – 50 Orang", value: "10-50", desc: "Growing mid-size organization" },
+    { label: "50+ Orang", value: "50+", desc: "Corporate or enterprise-scale deployment" },
   ];
 
   const toolsList = [
-    { label: "📧 Gmail", value: "Gmail" },
-    { label: "📅 Google Calendar", value: "Calendar" },
-    { label: "💾 Google Drive", value: "Drive" },
-    { label: "💬 WhatsApp Chat", value: "WhatsApp" },
-    { label: "📊 CSV/Excel", value: "CSV" }
+    { label: "Gmail", value: "Gmail" },
+    { label: "Google Calendar", value: "Calendar" },
+    { label: "Google Drive", value: "Drive" },
+    { label: "WhatsApp Chat", value: "WhatsApp" },
+    { label: "CSV / Excel", value: "CSV" },
   ];
 
   const goalsList = [
-    { label: "⚠️ Project Delay", value: "Project terlambat" },
-    { label: "🧠 Knowledge Loss", value: "Knowledge loss" },
-    { label: "📊 Overcapacity", value: "Tim monitoring" },
-    { label: "💬 Client Revision", value: "Client chaos" },
-    { label: "💵 Sales Chaos", value: "Sales chaos" }
+    { label: "Project sering terlambat", value: "Project terlambat" },
+    { label: "Knowledge hilang saat resign", value: "Knowledge loss" },
+    { label: "Kapasitas tim sulit dipantau", value: "Tim monitoring" },
+    { label: "Komunikasi client chaos", value: "Client chaos" },
+    { label: "Invoice & sales tidak terpantau", value: "Sales chaos" },
   ];
 
+  const stepMeta = [
+    { tag: "Workspace", title: "Tell us about your workspace.", desc: "Enter your company name and your name to initialize the memory space." },
+    { tag: "Playbook", title: "Which vertical should we configure?", desc: "Coretify activates specialized risk detection rules and prompts based on your industry." },
+    { tag: "Team Size", title: "How large is your team?", desc: "This configures data allocation thresholds and memory capacity for your workspace." },
+    { tag: "Connect", title: "What do you want to achieve?", desc: "Choose the tools you'll connect and the top business challenges to resolve first." },
+  ];
+
+  const current = stepMeta[step - 1];
+
+  const variants = {
+    enter: (d: number) => ({ opacity: 0, x: d * 18, y: 4 }),
+    center: { opacity: 1, x: 0, y: 0 },
+    exit: (d: number) => ({ opacity: 0, x: d * -18, y: -4 }),
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-[#070708] text-zinc-100 selection:bg-white/10 selection:text-white relative overflow-hidden font-sans antialiased">
-      
-      {/* Background concentric rings visual decoration */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 opacity-[0.12]">
-        <div className="w-[85vw] h-[85vw] rounded-full border border-zinc-950 border-dashed animate-[spin_120s_linear_infinite]" />
-        <div className="w-[55vw] h-[55vw] rounded-full border border-zinc-950 border-dashed animate-[spin_80s_linear_infinite_reverse]" />
-      </div>
+    <div className="h-screen w-screen overflow-hidden bg-[#070708] text-zinc-100 font-sans antialiased relative flex flex-col">
 
-      {/* Atmospheric radial flows */}
-      <div className="absolute top-[-15%] left-[-10%] w-[50%] aspect-square rounded-full bg-white/[0.01] blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute bottom-[-15%] right-[-10%] w-[50%] aspect-square rounded-full bg-zinc-500/[0.015] blur-[120px] pointer-events-none -z-10" />
+      {/* ── Hero-style glows ─────────────────────────────── */}
+      {/* Top-left atmospheric glow */}
+      <div className="pointer-events-none absolute -top-[20%] -left-[10%] w-[60vw] h-[60vw] rounded-full bg-white/[0.028] blur-[140px] -z-10" />
+      {/* Bottom-right atmospheric glow */}
+      <div className="pointer-events-none absolute -bottom-[20%] -right-[10%] w-[55vw] h-[55vw] rounded-full bg-zinc-400/[0.025] blur-[130px] -z-10" />
+      {/* Center radial soft spotlight */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45vw] h-[45vw] rounded-full bg-white/[0.012] blur-[160px] -z-10" />
 
-      {/* Center Layout Container with Dashed Side Borders */}
-      <div className="mx-auto max-w-[1360px] w-full min-h-screen border-l border-r border-zinc-800/10 border-dashed flex flex-col justify-between relative z-10">
-        
-        {/* Header bar */}
-        <header className="border-b border-zinc-900/40 bg-[#070708]/85 backdrop-blur-md sticky top-0 z-50 w-full select-none">
-          <div className="px-8 flex h-20 items-center justify-between">
-            <div className="flex items-center gap-0 cursor-pointer" onClick={() => router.push("/")}>
-              <img src="/coretify.png" alt="Coretify Logo" className="h-8 w-auto object-contain" />
-              <span className="text-[19px] font-semibold tracking-tight text-white">
-                Coretify
+      {/* Subtle grid-dot background */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.018]"
+        style={{
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      {/* ── Navbar ──────────────────────────────────────── */}
+      <header className="shrink-0 border-b border-zinc-900/50 bg-[#070708]/80 backdrop-blur-md z-50 select-none">
+        <div className="max-w-[1360px] mx-auto px-8 flex h-[68px] items-center justify-between">
+          <button
+            onClick={() => router.push("/")}
+            className="flex items-center gap-0 hover:opacity-80 transition-opacity"
+          >
+            <img src="/coretify.png" alt="Coretify" className="h-8 w-auto object-contain" />
+            <span className="text-[19px] font-semibold tracking-tight text-white">Coretify</span>
+          </button>
+
+          {/* Step dots */}
+          <div className="flex items-center gap-1.5">
+            {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
+              <div
+                key={i}
+                className={`rounded-full transition-all duration-300 ${
+                  i + 1 === step
+                    ? "w-4 h-1.5 bg-white"
+                    : i + 1 < step
+                    ? "w-1.5 h-1.5 bg-zinc-500"
+                    : "w-1.5 h-1.5 bg-zinc-800"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Progress line */}
+        <div className="w-full h-[1px] bg-zinc-900/60">
+          <div
+            className="h-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)] transition-all duration-500 ease-out"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+      </header>
+
+      {/* ── Main content ────────────────────────────────── */}
+      <main className="flex-1 overflow-hidden flex items-center justify-center px-6">
+        <div className="w-full max-w-[560px]">
+
+          {/* Tag + headline */}
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.div
+              key={`head-${step}`}
+              custom={dir}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="mb-8"
+            >
+              <span className="inline-block mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 font-mono border border-zinc-900 rounded px-2.5 py-1">
+                {current.tag}
               </span>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider font-mono">
-                SECURE CONNECTOR · TLS 1.3
-              </span>
-            </div>
-          </div>
-        </header>
+              <h1 className="text-[26px] sm:text-[30px] font-semibold tracking-tight text-white leading-[1.18] mb-3">
+                {current.title}
+              </h1>
+              <p className="text-zinc-400 text-[13px] leading-relaxed">
+                {current.desc}
+              </p>
+            </motion.div>
+          </AnimatePresence>
 
-        {/* Setup wizard workspace (Flat & Borderless) */}
-        <main className="flex-1 max-w-2xl w-full mx-auto px-6 py-16 md:py-24 flex flex-col justify-center">
-          
-          {/* Step Metadata bar */}
-          <div className="flex items-center justify-between border-b border-zinc-900/40 pb-3 mb-8 select-none">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest font-mono flex items-center gap-1.5">
-              <span className="text-zinc-500">★</span> STEP {step} OF 4
-            </span>
-            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest font-mono">
-              {Math.round(progressPercent)}% Completed
-            </span>
-          </div>
-
-          {/* Progress bar indicator */}
-          <div className="w-full h-[2px] bg-zinc-900/60 relative overflow-hidden rounded-full mb-8">
-            <div
-              className="h-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.4)] transition-all duration-300 ease-out"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-
-          {/* Monospace Step Badge Category Tag */}
-          <div className="self-start inline-block px-3 py-1 rounded-md border border-zinc-850 bg-zinc-950/20 text-[9px] font-extrabold uppercase tracking-[0.2em] text-zinc-400 font-mono mb-6">
-            {step === 1 && "WORKSPACE IDENTITY"}
-            {step === 2 && "VERTICAL PLAYBOOK"}
-            {step === 3 && "TEAM SCALE"}
-            {step === 4 && "DATA & OUTCOMES"}
-          </div>
-
-          {/* Big Typography Question Headline */}
-          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white mb-3 leading-tight">
-            {step === 1 && "Tell us about your workspace."}
-            {step === 2 && "Which vertical playbook should we deploy?"}
-            {step === 3 && "How many members are in your team?"}
-            {step === 4 && "Select data sources and target outcomes."}
-          </h1>
-
-          <p className="text-zinc-400 text-xs sm:text-[13px] leading-relaxed mb-10 select-none">
-            {step === 1 && "Enter your company name and owner details to initialize the company memory."}
-            {step === 2 && "Coretify will automatically customize risk detection rules and daily brief templates."}
-            {step === 3 && "This sets the data allocation and capacity thresholds for your memory stream."}
-            {step === 4 && "Choose the platforms you plan to connect and the key challenges you want to solve first."}
-          </p>
-
-          {/* Steps Switcher Content Container */}
-          <div className="min-h-[200px]">
-            <AnimatePresence mode="wait">
+          {/* Step content */}
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.div
+              key={`body-${step}`}
+              custom={dir}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              {/* Step 1 */}
               {step === 1 && (
-                <motion.div
-                  key="step-1"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.18 }}
-                  className="space-y-5"
-                >
-                  <div className="space-y-2">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.18em] text-zinc-500 font-mono block">Nama Bisnis / Perusahaan</label>
+                <div className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500 font-mono">
+                      Nama Bisnis
+                    </label>
                     <Input
+                      autoFocus
                       type="text"
                       placeholder="e.g. Acme Corporation"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      className="bg-transparent border-zinc-900 focus:border-zinc-700 transition-all text-sm rounded-md py-6 px-4 text-white placeholder-zinc-650"
+                      onKeyDown={(e) => e.key === "Enter" && ownerName.trim() && goNext()}
+                      className="bg-zinc-950/60 border-zinc-800/80 focus:border-zinc-600 text-white placeholder:text-zinc-600 text-sm rounded-lg py-5.5 px-4 transition-all"
                     />
                   </div>
-
-                  <div className="space-y-2">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.18em] text-zinc-500 font-mono block">Nama Anda (Owner / Admin)</label>
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500 font-mono">
+                      Nama Anda
+                    </label>
                     <Input
                       type="text"
                       placeholder="e.g. Alex Henderson"
                       value={ownerName}
                       onChange={(e) => setOwnerName(e.target.value)}
-                      className="bg-transparent border-zinc-900 focus:border-zinc-700 transition-all text-sm rounded-md py-6 px-4 text-white placeholder-zinc-650"
+                      onKeyDown={(e) => e.key === "Enter" && companyName.trim() && goNext()}
+                      className="bg-zinc-950/60 border-zinc-800/80 focus:border-zinc-600 text-white placeholder:text-zinc-600 text-sm rounded-lg py-5.5 px-4 transition-all"
                     />
                   </div>
-                </motion.div>
+                </div>
               )}
 
+              {/* Step 2 */}
               {step === 2 && (
-                <motion.div
-                  key="step-2"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.18 }}
-                  className="space-y-3"
-                >
+                <div className="space-y-2">
                   {verticals.map((v) => {
-                    const isSelected = businessType === v.value;
+                    const sel = businessType === v.value;
                     return (
                       <button
                         key={v.value}
-                        onClick={() => handleVerticalSelect(v.value)}
-                        className={`w-full flex items-center justify-between p-5 rounded-xl border text-left transition-all duration-200 select-none ${
-                          isSelected
-                            ? "bg-zinc-950/40 border-zinc-500 text-white shadow-[0_0_20px_rgba(255,255,255,0.02)]"
-                            : "bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-400 hover:text-white"
+                        onClick={() => selectVertical(v.value)}
+                        className={`w-full flex items-center justify-between px-5 py-4 rounded-xl border text-left transition-all duration-150 ${
+                          sel
+                            ? "border-zinc-600 bg-zinc-900/60 text-white"
+                            : "border-zinc-900 bg-transparent hover:border-zinc-800 hover:bg-zinc-950/30 text-zinc-400 hover:text-zinc-200"
                         }`}
                       >
                         <div>
-                          <div className="text-xs font-semibold">{v.label}</div>
-                          <div className="text-[11px] text-zinc-500 mt-1 font-normal leading-relaxed">{v.desc}</div>
+                          <p className="text-[13px] font-semibold">{v.label}</p>
+                          <p className={`text-[11px] mt-0.5 ${sel ? "text-zinc-400" : "text-zinc-600"}`}>{v.desc}</p>
                         </div>
-                        <div className={`h-4.5 w-4.5 rounded-full border flex items-center justify-center shrink-0 transition-all ${
-                          isSelected ? "border-white bg-white" : "border-zinc-800 bg-transparent"
+                        <div className={`shrink-0 h-4 w-4 rounded-full border flex items-center justify-center ml-4 transition-all ${
+                          sel ? "border-white bg-white" : "border-zinc-700 bg-transparent"
                         }`}>
-                          {isSelected && <div className="h-1.5 w-1.5 rounded-full bg-black" />}
+                          {sel && <div className="h-1.5 w-1.5 rounded-full bg-black" />}
                         </div>
                       </button>
                     );
                   })}
-                </motion.div>
+                </div>
               )}
 
+              {/* Step 3 */}
               {step === 3 && (
-                <motion.div
-                  key="step-3"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.18 }}
-                  className="space-y-3"
-                >
+                <div className="space-y-2">
                   {scales.map((s) => {
-                    const isSelected = teamSize === s.value;
+                    const sel = teamSize === s.value;
                     return (
                       <button
                         key={s.value}
-                        onClick={() => handleScaleSelect(s.value)}
-                        className={`w-full flex items-center justify-between p-5 rounded-xl border text-left transition-all duration-200 select-none ${
-                          isSelected
-                            ? "bg-zinc-950/40 border-zinc-500 text-white shadow-[0_0_20px_rgba(255,255,255,0.02)]"
-                            : "bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-450 hover:text-white"
+                        onClick={() => selectScale(s.value)}
+                        className={`w-full flex items-center justify-between px-5 py-4 rounded-xl border text-left transition-all duration-150 ${
+                          sel
+                            ? "border-zinc-600 bg-zinc-900/60 text-white"
+                            : "border-zinc-900 bg-transparent hover:border-zinc-800 hover:bg-zinc-950/30 text-zinc-400 hover:text-zinc-200"
                         }`}
                       >
                         <div>
-                          <div className="text-xs font-semibold">{s.label}</div>
-                          <div className="text-[11px] text-zinc-500 mt-1 font-normal">{s.desc}</div>
+                          <p className="text-[13px] font-semibold">{s.label}</p>
+                          <p className={`text-[11px] mt-0.5 ${sel ? "text-zinc-400" : "text-zinc-600"}`}>{s.desc}</p>
                         </div>
-                        <div className={`h-4.5 w-4.5 rounded-full border flex items-center justify-center shrink-0 transition-all ${
-                          isSelected ? "border-white bg-white" : "border-zinc-800 bg-transparent"
+                        <div className={`shrink-0 h-4 w-4 rounded-full border flex items-center justify-center ml-4 transition-all ${
+                          sel ? "border-white bg-white" : "border-zinc-700 bg-transparent"
                         }`}>
-                          {isSelected && <div className="h-1.5 w-1.5 rounded-full bg-black" />}
+                          {sel && <div className="h-1.5 w-1.5 rounded-full bg-black" />}
                         </div>
                       </button>
                     );
                   })}
-                </motion.div>
+                </div>
               )}
 
+              {/* Step 4 */}
               {step === 4 && (
-                <motion.div
-                  key="step-4"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.18 }}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                >
-                  {/* Left: Tools selection */}
-                  <div className="space-y-3">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.18em] text-zinc-550 font-mono block">
-                      Rencana Data Source
-                    </label>
-                    <div className="space-y-2">
-                      {toolsList.map((t) => {
-                        const isSelected = toolsUsed.includes(t.value);
-                        return (
-                          <button
-                            key={t.value}
-                            onClick={() => toggleTool(t.value)}
-                            className={`w-full flex items-center justify-between p-4 rounded-xl border text-xs font-semibold text-left transition-all duration-200 ${
-                              isSelected
-                                ? "bg-zinc-950/40 border-zinc-500 text-white"
-                                : "bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-400 hover:text-white"
-                            }`}
-                          >
-                            <span>{t.label}</span>
-                            <div className={`h-4.5 w-4.5 rounded border flex items-center justify-center transition-all ${
-                              isSelected ? "border-white bg-white text-black" : "border-zinc-800 bg-transparent"
-                            }`}>
-                              {isSelected && <Check className="h-3 w-3 stroke-[3px]" />}
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500 font-mono mb-2">Data Source</p>
+                    {toolsList.map((t) => {
+                      const sel = toolsUsed.includes(t.value);
+                      return (
+                        <button
+                          key={t.value}
+                          onClick={() => toggleTool(t.value)}
+                          className={`w-full flex items-center justify-between px-4 py-3 rounded-lg border text-[12px] font-medium text-left transition-all duration-150 ${
+                            sel
+                              ? "border-zinc-600 bg-zinc-900/60 text-white"
+                              : "border-zinc-900 bg-transparent hover:border-zinc-800 text-zinc-400 hover:text-zinc-200"
+                          }`}
+                        >
+                          <span>{t.label}</span>
+                          <div className={`shrink-0 h-3.5 w-3.5 rounded border flex items-center justify-center transition-all ${
+                            sel ? "border-white bg-white" : "border-zinc-700 bg-transparent"
+                          }`}>
+                            {sel && <Check className="h-2.5 w-2.5 text-black stroke-[3px]" />}
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
 
-                  {/* Right: Goals selection */}
-                  <div className="space-y-3">
-                    <label className="text-[9px] font-bold uppercase tracking-[0.18em] text-zinc-550 font-mono block">
-                      Target Outcomes Utama
-                    </label>
-                    <div className="space-y-2">
-                      {goalsList.map((g) => {
-                        const isSelected = painPoints.includes(g.value);
-                        return (
-                          <button
-                            key={g.value}
-                            onClick={() => toggleGoal(g.value)}
-                            className={`w-full flex items-center justify-between p-4 rounded-xl border text-xs font-semibold text-left transition-all duration-200 ${
-                              isSelected
-                                ? "bg-zinc-950/40 border-zinc-500 text-white"
-                                : "bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-400 hover:text-white"
-                            }`}
-                          >
-                            <span>{g.label}</span>
-                            <div className={`h-4.5 w-4.5 rounded border flex items-center justify-center transition-all ${
-                              isSelected ? "border-white bg-white text-black" : "border-zinc-800 bg-transparent"
-                            }`}>
-                              {isSelected && <Check className="h-3 w-3 stroke-[3px]" />}
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
+                  <div className="space-y-1.5">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500 font-mono mb-2">Target Outcome</p>
+                    {goalsList.map((g) => {
+                      const sel = painPoints.includes(g.value);
+                      return (
+                        <button
+                          key={g.value}
+                          onClick={() => toggleGoal(g.value)}
+                          className={`w-full flex items-center justify-between px-4 py-3 rounded-lg border text-[12px] font-medium text-left transition-all duration-150 ${
+                            sel
+                              ? "border-zinc-600 bg-zinc-900/60 text-white"
+                              : "border-zinc-900 bg-transparent hover:border-zinc-800 text-zinc-400 hover:text-zinc-200"
+                          }`}
+                        >
+                          <span>{g.label}</span>
+                          <div className={`shrink-0 h-3.5 w-3.5 rounded border flex items-center justify-center transition-all ${
+                            sel ? "border-white bg-white" : "border-zinc-700 bg-transparent"
+                          }`}>
+                            {sel && <Check className="h-2.5 w-2.5 text-black stroke-[3px]" />}
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
-          </div>
+            </motion.div>
+          </AnimatePresence>
 
-          {/* Stepper Footer actions */}
-          <div className="border-t border-zinc-900/40 mt-12 pt-6 flex items-center justify-between">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleBack}
+          {/* Footer nav */}
+          <div className="mt-8 flex items-center justify-between">
+            <button
+              onClick={goBack}
               disabled={step === 1}
-              className="bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-450 hover:text-white rounded-md text-xs py-2.5 px-4 font-semibold transition-all disabled:opacity-30 disabled:pointer-events-none"
+              className="flex items-center gap-1.5 text-[12px] text-zinc-500 hover:text-zinc-300 font-medium transition-all disabled:opacity-25 disabled:pointer-events-none"
             >
-              <ArrowLeft className="h-3.5 w-3.5 mr-2" />
-              Kembali
-            </Button>
+              <ArrowLeft className="h-3.5 w-3.5" />
+              Back
+            </button>
 
             <Button
-              size="sm"
-              onClick={handleNext}
-              disabled={
-                (step === 1 && (!companyName.trim() || !ownerName.trim())) ||
-                (step === 2 && !businessType) ||
-                (step === 3 && !teamSize) ||
-                (step === 4 && toolsUsed.length === 0)
-              }
-              className="bg-white hover:bg-zinc-100 text-black font-bold rounded-md text-xs py-2.5 px-6 shadow border-0 duration-200 transition-all disabled:opacity-30 disabled:pointer-events-none"
+              onClick={goNext}
+              disabled={!canAdvance}
+              className="bg-white hover:bg-zinc-100 text-black font-bold rounded-lg text-[12px] px-6 py-2.5 border-0 shadow-[0_0_20px_rgba(255,255,255,0.08)] transition-all disabled:opacity-30 disabled:pointer-events-none"
             >
-              {step === 4 ? "Selesaikan Setup" : "Lanjut"}
-              <ArrowRight className="h-3.5 w-3.5 ml-2" />
+              {step === TOTAL_STEPS ? "Finish Setup" : "Continue"}
+              <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
             </Button>
           </div>
 
-        </main>
+        </div>
+      </main>
 
-        {/* Footer */}
-        <footer className="border-t border-zinc-900/40 py-6 px-8 flex items-center justify-between select-none">
-          <p className="text-[10px] text-zinc-550 font-mono">
-            &copy; 2026 Coretify Inc. All rights reserved.
-          </p>
-          <p className="text-[10px] text-zinc-550 font-mono">
-            Secure Read-Only Access
-          </p>
-        </footer>
-
+      {/* ── Bottom step counter ──────────────────────────── */}
+      <div className="shrink-0 h-12 flex items-center justify-center border-t border-zinc-900/40 select-none">
+        <span className="text-[10px] font-mono text-zinc-600 tracking-widest uppercase">
+          Step {step} of {TOTAL_STEPS}
+        </span>
       </div>
+
     </div>
   );
 }
