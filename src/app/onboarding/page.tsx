@@ -2,38 +2,102 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, Check } from "lucide-react";
+import { ArrowRight, Check, Database, Building2, Users, Cpu } from "lucide-react";
+
+const STEPS = [
+  {
+    id: 1,
+    icon: Building2,
+    label: "Workspace",
+    title: "Beri nama\nworkspace Anda.",
+    desc: "Inisialisasi company memory dengan identitas bisnis Anda.",
+  },
+  {
+    id: 2,
+    icon: Cpu,
+    label: "Playbook",
+    title: "Pilih vertical\nbisnis Anda.",
+    desc: "Coretify mengaktifkan playbook deteksi risiko yang spesifik untuk industri Anda.",
+  },
+  {
+    id: 3,
+    icon: Users,
+    label: "Tim",
+    title: "Berapa jumlah\nanggota tim Anda?",
+    desc: "Menentukan alokasi memori dan kapasitas data stream workspace.",
+  },
+  {
+    id: 4,
+    icon: Database,
+    label: "Koneksi",
+    title: "Apa yang ingin\nAnda capai?",
+    desc: "Pilih tools yang akan terhubung dan tantangan bisnis utama yang ingin diselesaikan.",
+  },
+];
+
+const verticals = [
+  { value: "Software House", label: "Software House", desc: "Workload, code logs & scope creep" },
+  { value: "Agency", label: "Creative Agency", desc: "Client retention, margins & revisions" },
+  { value: "Startup", label: "Tech Startup", desc: "Decision logs & product velocity" },
+  { value: "Consultant", label: "Professional Services", desc: "Legal audit trails & deliverables" },
+  { value: "Lainnya", label: "Lainnya / Retail", desc: "Koordinasi operasional internal" },
+];
+
+const scales = [
+  { value: "1-10", label: "1 – 10 Orang", desc: "Small studio / founder-led" },
+  { value: "10-50", label: "10 – 50 Orang", desc: "Mid-size organization" },
+  { value: "50+", label: "50+ Orang", desc: "Enterprise / corporate scale" },
+];
+
+const toolsList = [
+  { value: "Gmail", label: "Gmail" },
+  { value: "Calendar", label: "Google Calendar" },
+  { value: "Drive", label: "Google Drive" },
+  { value: "WhatsApp", label: "WhatsApp Chat" },
+  { value: "CSV", label: "CSV / Excel" },
+];
+
+const goalsList = [
+  { value: "Project terlambat", label: "Project sering terlambat" },
+  { value: "Knowledge loss", label: "Knowledge hilang saat resign" },
+  { value: "Tim monitoring", label: "Kapasitas tim sulit dipantau" },
+  { value: "Client chaos", label: "Komunikasi client chaos" },
+  { value: "Sales chaos", label: "Invoice & sales tidak terpantau" },
+];
 
 export default function OnboardingPage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
+  const [dir, setDir] = useState<1 | -1>(1);
   const [companyName, setCompanyName] = useState("");
   const [ownerName, setOwnerName] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [teamSize, setTeamSize] = useState("");
   const [toolsUsed, setToolsUsed] = useState<string[]>([]);
   const [painPoints, setPainPoints] = useState<string[]>([]);
-  const [dir, setDir] = useState<1 | -1>(1);
 
-  const TOTAL_STEPS = 4;
-  const progressPercent = (step / TOTAL_STEPS) * 100;
+  const canAdvance =
+    (step === 1 && companyName.trim() !== "" && ownerName.trim() !== "") ||
+    (step === 2 && businessType !== "") ||
+    (step === 3 && teamSize !== "") ||
+    (step === 4 && toolsUsed.length > 0);
 
   const goNext = () => {
+    if (!canAdvance) return;
     setDir(1);
-    if (step < TOTAL_STEPS) {
-      setStep(step + 1);
+    if (step < 4) {
+      setStep((s) => s + 1);
     } else {
       localStorage.setItem(
         "coretify_company",
         JSON.stringify({
-          name: companyName || "Coretify Workspace",
-          businessType: businessType || "Startup",
-          teamSize: teamSize || "1-10",
-          toolsUsed: toolsUsed.length > 0 ? toolsUsed : ["Gmail", "Drive"],
-          painPoints: painPoints.length > 0 ? painPoints : ["Knowledge loss"],
+          name: companyName,
+          businessType,
+          teamSize,
+          toolsUsed,
+          painPoints,
           createdAt: new Date().toISOString(),
         })
       );
@@ -42,360 +106,358 @@ export default function OnboardingPage() {
   };
 
   const goBack = () => {
-    setDir(-1);
-    if (step > 1) setStep(step - 1);
+    if (step > 1) {
+      setDir(-1);
+      setStep((s) => s - 1);
+    }
   };
 
-  const selectVertical = (v: string) => {
+  const pickVertical = (v: string) => {
     setBusinessType(v);
     setDir(1);
     setTimeout(() => setStep(3), 200);
   };
 
-  const selectScale = (s: string) => {
+  const pickScale = (s: string) => {
     setTeamSize(s);
     setDir(1);
     setTimeout(() => setStep(4), 200);
   };
 
   const toggleTool = (t: string) =>
-    setToolsUsed((prev) =>
-      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
-    );
-
+    setToolsUsed((p) => (p.includes(t) ? p.filter((x) => x !== t) : [...p, t]));
   const toggleGoal = (g: string) =>
-    setPainPoints((prev) =>
-      prev.includes(g) ? prev.filter((x) => x !== g) : [...prev, g]
-    );
+    setPainPoints((p) => (p.includes(g) ? p.filter((x) => x !== g) : [...p, g]));
 
-  const canAdvance =
-    (step === 1 && companyName.trim() !== "" && ownerName.trim() !== "") ||
-    (step === 2 && businessType !== "") ||
-    (step === 3 && teamSize !== "") ||
-    (step === 4 && toolsUsed.length > 0);
+  const current = STEPS[step - 1];
 
-  const verticals = [
-    { label: "Software House", value: "Software House", desc: "Workload, code logs & scope creep monitoring" },
-    { label: "Creative Agency", value: "Agency", desc: "Client retention, margins & revision tracking" },
-    { label: "Tech Startup", value: "Startup", desc: "Decision logs, product velocity & sprint analytics" },
-    { label: "Professional Services", value: "Consultant", desc: "Legal audit trails, deliverable timelines" },
-    { label: "Lainnya / Retail / Dagang", value: "Lainnya", desc: "Operational coordination & bookkeeping sync" },
-  ];
-
-  const scales = [
-    { label: "1 – 10 Orang", value: "1-10", desc: "Small studio, founder-led, or boutique team" },
-    { label: "10 – 50 Orang", value: "10-50", desc: "Growing mid-size organization" },
-    { label: "50+ Orang", value: "50+", desc: "Corporate or enterprise-scale deployment" },
-  ];
-
-  const toolsList = [
-    { label: "Gmail", value: "Gmail" },
-    { label: "Google Calendar", value: "Calendar" },
-    { label: "Google Drive", value: "Drive" },
-    { label: "WhatsApp Chat", value: "WhatsApp" },
-    { label: "CSV / Excel", value: "CSV" },
-  ];
-
-  const goalsList = [
-    { label: "Project sering terlambat", value: "Project terlambat" },
-    { label: "Knowledge hilang saat resign", value: "Knowledge loss" },
-    { label: "Kapasitas tim sulit dipantau", value: "Tim monitoring" },
-    { label: "Komunikasi client chaos", value: "Client chaos" },
-    { label: "Invoice & sales tidak terpantau", value: "Sales chaos" },
-  ];
-
-  const stepMeta = [
-    { tag: "Workspace", title: "Tell us about your workspace.", desc: "Enter your company name and your name to initialize the memory space." },
-    { tag: "Playbook", title: "Which vertical should we configure?", desc: "Coretify activates specialized risk detection rules and prompts based on your industry." },
-    { tag: "Team Size", title: "How large is your team?", desc: "This configures data allocation thresholds and memory capacity for your workspace." },
-    { tag: "Connect", title: "What do you want to achieve?", desc: "Choose the tools you'll connect and the top business challenges to resolve first." },
-  ];
-
-  const current = stepMeta[step - 1];
-
-  const variants = {
-    enter: (d: number) => ({ opacity: 0, x: d * 18, y: 4 }),
-    center: { opacity: 1, x: 0, y: 0 },
-    exit: (d: number) => ({ opacity: 0, x: d * -18, y: -4 }),
+  const slideVariants = {
+    enter: (d: number) => ({ opacity: 0, y: d * 12 }),
+    center: { opacity: 1, y: 0 },
+    exit: (d: number) => ({ opacity: 0, y: d * -12 }),
   };
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[#070708] text-zinc-100 font-sans antialiased relative flex flex-col">
+    <div className="h-screen w-screen overflow-hidden bg-[#070708] text-zinc-100 font-sans antialiased flex">
 
-      {/* ── Hero-style glows ─────────────────────────────── */}
-      {/* Top-left atmospheric glow */}
-      <div className="pointer-events-none absolute -top-[20%] -left-[10%] w-[60vw] h-[60vw] rounded-full bg-white/[0.028] blur-[140px] -z-10" />
-      {/* Bottom-right atmospheric glow */}
-      <div className="pointer-events-none absolute -bottom-[20%] -right-[10%] w-[55vw] h-[55vw] rounded-full bg-zinc-400/[0.025] blur-[130px] -z-10" />
-      {/* Center radial soft spotlight */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45vw] h-[45vw] rounded-full bg-white/[0.012] blur-[160px] -z-10" />
-
-      {/* Subtle grid-dot background */}
+      {/* ── Atmospheric glows ──────────────────────────── */}
+      <div className="pointer-events-none fixed -top-[30%] -left-[15%] w-[70vw] h-[70vw] rounded-full bg-white/[0.022] blur-[160px] z-0" />
+      <div className="pointer-events-none fixed -bottom-[30%] -right-[15%] w-[60vw] h-[60vw] rounded-full bg-zinc-300/[0.018] blur-[150px] z-0" />
       <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.018]"
+        className="pointer-events-none fixed inset-0 z-0 opacity-[0.015]"
         style={{
-          backgroundImage: "radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
+          backgroundImage: "radial-gradient(rgba(255,255,255,1) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
         }}
       />
 
-      {/* ── Navbar ──────────────────────────────────────── */}
-      <header className="shrink-0 border-b border-zinc-900/50 bg-[#070708]/80 backdrop-blur-md z-50 select-none">
-        <div className="max-w-[1360px] mx-auto px-8 flex h-[68px] items-center justify-between">
+      {/* ══ LEFT PANEL ═══════════════════════════════════ */}
+      <aside className="relative z-10 flex-shrink-0 w-[300px] xl:w-[340px] flex flex-col justify-between border-r border-zinc-900/50 bg-[#070708]/60 backdrop-blur-sm px-8 py-10 select-none">
+        
+        {/* Logo */}
+        <div>
           <button
             onClick={() => router.push("/")}
-            className="flex items-center gap-0 hover:opacity-80 transition-opacity"
+            className="flex items-center gap-0 hover:opacity-75 transition-opacity mb-14"
           >
             <img src="/coretify.png" alt="Coretify" className="h-8 w-auto object-contain" />
             <span className="text-[19px] font-semibold tracking-tight text-white">Coretify</span>
           </button>
 
-          {/* Step dots */}
+          {/* Step navigator */}
+          <nav className="space-y-1">
+            {STEPS.map((s) => {
+              const Icon = s.icon;
+              const isDone = step > s.id;
+              const isActive = step === s.id;
+              return (
+                <div
+                  key={s.id}
+                  className={`flex items-center gap-3.5 px-3 py-3 rounded-lg transition-all duration-200 ${
+                    isActive ? "bg-zinc-900/60" : ""
+                  }`}
+                >
+                  {/* Icon / check circle */}
+                  <div
+                    className={`shrink-0 h-7 w-7 rounded-md flex items-center justify-center transition-all duration-200 ${
+                      isDone
+                        ? "bg-white text-black"
+                        : isActive
+                        ? "bg-zinc-800 text-white"
+                        : "bg-transparent border border-zinc-800 text-zinc-700"
+                    }`}
+                  >
+                    {isDone ? (
+                      <Check className="h-3.5 w-3.5 stroke-[3px]" />
+                    ) : (
+                      <Icon className="h-3.5 w-3.5" />
+                    )}
+                  </div>
+                  {/* Label */}
+                  <span
+                    className={`text-[13px] font-medium transition-all duration-200 ${
+                      isDone
+                        ? "text-zinc-500 line-through decoration-zinc-700"
+                        : isActive
+                        ? "text-white"
+                        : "text-zinc-600"
+                    }`}
+                  >
+                    {s.label}
+                  </span>
+                </div>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Bottom context */}
+        <div className="space-y-3">
+          <div className="h-px bg-zinc-900/60" />
+          <p className="text-[11px] text-zinc-600 leading-relaxed">
+            Data Anda diproses secara lokal dan tidak pernah dikirim ke pihak ketiga tanpa izin eksplisit.
+          </p>
           <div className="flex items-center gap-1.5">
-            {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
-              <div
-                key={i}
-                className={`rounded-full transition-all duration-300 ${
-                  i + 1 === step
-                    ? "w-4 h-1.5 bg-white"
-                    : i + 1 < step
-                    ? "w-1.5 h-1.5 bg-zinc-500"
-                    : "w-1.5 h-1.5 bg-zinc-800"
-                }`}
-              />
-            ))}
+            <div className="h-1.5 w-1.5 rounded-full bg-zinc-600 animate-pulse" />
+            <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">Read-only · TLS 1.3</span>
           </div>
         </div>
+      </aside>
 
-        {/* Progress line */}
-        <div className="w-full h-[1px] bg-zinc-900/60">
-          <div
-            className="h-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)] transition-all duration-500 ease-out"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-      </header>
+      {/* ══ RIGHT PANEL ══════════════════════════════════ */}
+      <main className="relative z-10 flex-1 flex flex-col overflow-hidden">
 
-      {/* ── Main content ────────────────────────────────── */}
-      <main className="flex-1 overflow-hidden flex items-center justify-center px-6">
-        <div className="w-full max-w-[560px]">
+        {/* Content area */}
+        <div className="flex-1 flex items-center justify-center px-10 xl:px-20 overflow-hidden">
+          <div className="w-full max-w-[520px]">
 
-          {/* Tag + headline */}
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={`head-${step}`}
-              custom={dir}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="mb-8"
-            >
-              <span className="inline-block mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 font-mono border border-zinc-900 rounded px-2.5 py-1">
-                {current.tag}
-              </span>
-              <h1 className="text-[26px] sm:text-[30px] font-semibold tracking-tight text-white leading-[1.18] mb-3">
-                {current.title}
-              </h1>
-              <p className="text-zinc-400 text-[13px] leading-relaxed">
-                {current.desc}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+            {/* Heading */}
+            <AnimatePresence mode="wait" custom={dir}>
+              <motion.div
+                key={`h-${step}`}
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="mb-8"
+              >
+                <p className="text-[10px] font-bold font-mono uppercase tracking-[0.2em] text-zinc-500 mb-4">
+                  {String(step).padStart(2, "0")} / {String(STEPS.length).padStart(2, "0")}
+                </p>
+                <h1
+                  className="text-[28px] sm:text-[34px] font-semibold tracking-tight text-white leading-[1.15] mb-3"
+                  style={{ whiteSpace: "pre-line" }}
+                >
+                  {current.title}
+                </h1>
+                <p className="text-zinc-400 text-[13px] leading-relaxed max-w-sm">
+                  {current.desc}
+                </p>
+              </motion.div>
+            </AnimatePresence>
 
-          {/* Step content */}
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={`body-${step}`}
-              custom={dir}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              {/* Step 1 */}
-              {step === 1 && (
-                <div className="space-y-4">
-                  <div className="space-y-1.5">
-                    <label className="block text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500 font-mono">
-                      Nama Bisnis
-                    </label>
-                    <Input
-                      autoFocus
-                      type="text"
-                      placeholder="e.g. Acme Corporation"
-                      value={companyName}
-                      onChange={(e) => setCompanyName(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && ownerName.trim() && goNext()}
-                      className="bg-zinc-950/60 border-zinc-800/80 focus:border-zinc-600 text-white placeholder:text-zinc-600 text-sm rounded-lg py-5.5 px-4 transition-all"
-                    />
+            {/* Step body */}
+            <AnimatePresence mode="wait" custom={dir}>
+              <motion.div
+                key={`b-${step}`}
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                {/* ── Step 1: Identity ── */}
+                {step === 1 && (
+                  <div className="space-y-4">
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500">
+                        Nama Bisnis
+                      </label>
+                      <Input
+                        autoFocus
+                        type="text"
+                        placeholder="e.g. Acme Corporation"
+                        value={companyName}
+                        onChange={(e) => setCompanyName(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && ownerName.trim() && goNext()}
+                        className="h-12 bg-zinc-950/50 border-zinc-800/70 focus:border-zinc-600 text-white placeholder:text-zinc-700 text-[14px] rounded-xl px-4 transition-colors"
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500">
+                        Nama Anda
+                      </label>
+                      <Input
+                        type="text"
+                        placeholder="e.g. Alex Henderson"
+                        value={ownerName}
+                        onChange={(e) => setOwnerName(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && companyName.trim() && goNext()}
+                        className="h-12 bg-zinc-950/50 border-zinc-800/70 focus:border-zinc-600 text-white placeholder:text-zinc-700 text-[14px] rounded-xl px-4 transition-colors"
+                      />
+                    </div>
                   </div>
-                  <div className="space-y-1.5">
-                    <label className="block text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500 font-mono">
-                      Nama Anda
-                    </label>
-                    <Input
-                      type="text"
-                      placeholder="e.g. Alex Henderson"
-                      value={ownerName}
-                      onChange={(e) => setOwnerName(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && companyName.trim() && goNext()}
-                      className="bg-zinc-950/60 border-zinc-800/80 focus:border-zinc-600 text-white placeholder:text-zinc-600 text-sm rounded-lg py-5.5 px-4 transition-all"
-                    />
-                  </div>
-                </div>
-              )}
+                )}
 
-              {/* Step 2 */}
-              {step === 2 && (
-                <div className="space-y-2">
-                  {verticals.map((v) => {
-                    const sel = businessType === v.value;
-                    return (
-                      <button
-                        key={v.value}
-                        onClick={() => selectVertical(v.value)}
-                        className={`w-full flex items-center justify-between px-5 py-4 rounded-xl border text-left transition-all duration-150 ${
-                          sel
-                            ? "border-zinc-600 bg-zinc-900/60 text-white"
-                            : "border-zinc-900 bg-transparent hover:border-zinc-800 hover:bg-zinc-950/30 text-zinc-400 hover:text-zinc-200"
-                        }`}
-                      >
-                        <div>
-                          <p className="text-[13px] font-semibold">{v.label}</p>
-                          <p className={`text-[11px] mt-0.5 ${sel ? "text-zinc-400" : "text-zinc-600"}`}>{v.desc}</p>
-                        </div>
-                        <div className={`shrink-0 h-4 w-4 rounded-full border flex items-center justify-center ml-4 transition-all ${
-                          sel ? "border-white bg-white" : "border-zinc-700 bg-transparent"
-                        }`}>
-                          {sel && <div className="h-1.5 w-1.5 rounded-full bg-black" />}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Step 3 */}
-              {step === 3 && (
-                <div className="space-y-2">
-                  {scales.map((s) => {
-                    const sel = teamSize === s.value;
-                    return (
-                      <button
-                        key={s.value}
-                        onClick={() => selectScale(s.value)}
-                        className={`w-full flex items-center justify-between px-5 py-4 rounded-xl border text-left transition-all duration-150 ${
-                          sel
-                            ? "border-zinc-600 bg-zinc-900/60 text-white"
-                            : "border-zinc-900 bg-transparent hover:border-zinc-800 hover:bg-zinc-950/30 text-zinc-400 hover:text-zinc-200"
-                        }`}
-                      >
-                        <div>
-                          <p className="text-[13px] font-semibold">{s.label}</p>
-                          <p className={`text-[11px] mt-0.5 ${sel ? "text-zinc-400" : "text-zinc-600"}`}>{s.desc}</p>
-                        </div>
-                        <div className={`shrink-0 h-4 w-4 rounded-full border flex items-center justify-center ml-4 transition-all ${
-                          sel ? "border-white bg-white" : "border-zinc-700 bg-transparent"
-                        }`}>
-                          {sel && <div className="h-1.5 w-1.5 rounded-full bg-black" />}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Step 4 */}
-              {step === 4 && (
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500 font-mono mb-2">Data Source</p>
-                    {toolsList.map((t) => {
-                      const sel = toolsUsed.includes(t.value);
+                {/* ── Step 2: Vertical ── */}
+                {step === 2 && (
+                  <div className="space-y-2">
+                    {verticals.map((v) => {
+                      const sel = businessType === v.value;
                       return (
                         <button
-                          key={t.value}
-                          onClick={() => toggleTool(t.value)}
-                          className={`w-full flex items-center justify-between px-4 py-3 rounded-lg border text-[12px] font-medium text-left transition-all duration-150 ${
+                          key={v.value}
+                          onClick={() => pickVertical(v.value)}
+                          className={`group w-full flex items-center justify-between px-5 py-4 rounded-xl border text-left transition-all duration-150 ${
                             sel
-                              ? "border-zinc-600 bg-zinc-900/60 text-white"
-                              : "border-zinc-900 bg-transparent hover:border-zinc-800 text-zinc-400 hover:text-zinc-200"
+                              ? "border-zinc-600/80 bg-zinc-900/70 text-white"
+                              : "border-zinc-900 bg-transparent hover:border-zinc-800 hover:bg-zinc-950/40 text-zinc-400 hover:text-zinc-200"
                           }`}
                         >
-                          <span>{t.label}</span>
-                          <div className={`shrink-0 h-3.5 w-3.5 rounded border flex items-center justify-center transition-all ${
-                            sel ? "border-white bg-white" : "border-zinc-700 bg-transparent"
-                          }`}>
-                            {sel && <Check className="h-2.5 w-2.5 text-black stroke-[3px]" />}
+                          <div>
+                            <p className="text-[13px] font-semibold">{v.label}</p>
+                            <p className={`text-[11px] mt-0.5 ${sel ? "text-zinc-400" : "text-zinc-600"}`}>{v.desc}</p>
+                          </div>
+                          <div
+                            className={`shrink-0 ml-4 h-[18px] w-[18px] rounded-full border-[1.5px] flex items-center justify-center transition-all ${
+                              sel ? "border-white" : "border-zinc-700 group-hover:border-zinc-600"
+                            }`}
+                          >
+                            {sel && <div className="h-[7px] w-[7px] rounded-full bg-white" />}
                           </div>
                         </button>
                       );
                     })}
                   </div>
+                )}
 
-                  <div className="space-y-1.5">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500 font-mono mb-2">Target Outcome</p>
-                    {goalsList.map((g) => {
-                      const sel = painPoints.includes(g.value);
+                {/* ── Step 3: Scale ── */}
+                {step === 3 && (
+                  <div className="space-y-2">
+                    {scales.map((s) => {
+                      const sel = teamSize === s.value;
                       return (
                         <button
-                          key={g.value}
-                          onClick={() => toggleGoal(g.value)}
-                          className={`w-full flex items-center justify-between px-4 py-3 rounded-lg border text-[12px] font-medium text-left transition-all duration-150 ${
+                          key={s.value}
+                          onClick={() => pickScale(s.value)}
+                          className={`group w-full flex items-center justify-between px-5 py-4 rounded-xl border text-left transition-all duration-150 ${
                             sel
-                              ? "border-zinc-600 bg-zinc-900/60 text-white"
-                              : "border-zinc-900 bg-transparent hover:border-zinc-800 text-zinc-400 hover:text-zinc-200"
+                              ? "border-zinc-600/80 bg-zinc-900/70 text-white"
+                              : "border-zinc-900 bg-transparent hover:border-zinc-800 hover:bg-zinc-950/40 text-zinc-400 hover:text-zinc-200"
                           }`}
                         >
-                          <span>{g.label}</span>
-                          <div className={`shrink-0 h-3.5 w-3.5 rounded border flex items-center justify-center transition-all ${
-                            sel ? "border-white bg-white" : "border-zinc-700 bg-transparent"
-                          }`}>
-                            {sel && <Check className="h-2.5 w-2.5 text-black stroke-[3px]" />}
+                          <div>
+                            <p className="text-[13px] font-semibold">{s.label}</p>
+                            <p className={`text-[11px] mt-0.5 ${sel ? "text-zinc-400" : "text-zinc-600"}`}>{s.desc}</p>
+                          </div>
+                          <div
+                            className={`shrink-0 ml-4 h-[18px] w-[18px] rounded-full border-[1.5px] flex items-center justify-center transition-all ${
+                              sel ? "border-white" : "border-zinc-700 group-hover:border-zinc-600"
+                            }`}
+                          >
+                            {sel && <div className="h-[7px] w-[7px] rounded-full bg-white" />}
                           </div>
                         </button>
                       );
                     })}
                   </div>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+                )}
 
-          {/* Footer nav */}
-          <div className="mt-8 flex items-center justify-between">
-            <button
-              onClick={goBack}
-              disabled={step === 1}
-              className="flex items-center gap-1.5 text-[12px] text-zinc-500 hover:text-zinc-300 font-medium transition-all disabled:opacity-25 disabled:pointer-events-none"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              Back
-            </button>
+                {/* ── Step 4: Connect ── */}
+                {step === 4 && (
+                  <div className="grid grid-cols-2 gap-5">
+                    {/* Tools */}
+                    <div>
+                      <p className="text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500 mb-3">Data Source</p>
+                      <div className="space-y-1.5">
+                        {toolsList.map((t) => {
+                          const sel = toolsUsed.includes(t.value);
+                          return (
+                            <button
+                              key={t.value}
+                              onClick={() => toggleTool(t.value)}
+                              className={`group w-full flex items-center justify-between px-4 py-[11px] rounded-lg border text-[12px] font-medium transition-all duration-150 ${
+                                sel
+                                  ? "border-zinc-600/80 bg-zinc-900/70 text-white"
+                                  : "border-zinc-900 bg-transparent hover:border-zinc-800 hover:bg-zinc-950/40 text-zinc-500 hover:text-zinc-300"
+                              }`}
+                            >
+                              <span>{t.label}</span>
+                              <div
+                                className={`shrink-0 h-[14px] w-[14px] rounded-[3px] border flex items-center justify-center transition-all ${
+                                  sel ? "border-white bg-white" : "border-zinc-700 group-hover:border-zinc-600"
+                                }`}
+                              >
+                                {sel && <Check className="h-[9px] w-[9px] text-black stroke-[3.5px]" />}
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
 
-            <Button
-              onClick={goNext}
-              disabled={!canAdvance}
-              className="bg-white hover:bg-zinc-100 text-black font-bold rounded-lg text-[12px] px-6 py-2.5 border-0 shadow-[0_0_20px_rgba(255,255,255,0.08)] transition-all disabled:opacity-30 disabled:pointer-events-none"
-            >
-              {step === TOTAL_STEPS ? "Finish Setup" : "Continue"}
-              <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
-            </Button>
+                    {/* Goals */}
+                    <div>
+                      <p className="text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500 mb-3">Target Outcome</p>
+                      <div className="space-y-1.5">
+                        {goalsList.map((g) => {
+                          const sel = painPoints.includes(g.value);
+                          return (
+                            <button
+                              key={g.value}
+                              onClick={() => toggleGoal(g.value)}
+                              className={`group w-full flex items-center justify-between px-4 py-[11px] rounded-lg border text-[12px] font-medium transition-all duration-150 ${
+                                sel
+                                  ? "border-zinc-600/80 bg-zinc-900/70 text-white"
+                                  : "border-zinc-900 bg-transparent hover:border-zinc-800 hover:bg-zinc-950/40 text-zinc-500 hover:text-zinc-300"
+                              }`}
+                            >
+                              <span>{g.label}</span>
+                              <div
+                                className={`shrink-0 h-[14px] w-[14px] rounded-[3px] border flex items-center justify-center transition-all ${
+                                  sel ? "border-white bg-white" : "border-zinc-700 group-hover:border-zinc-600"
+                                }`}
+                              >
+                                {sel && <Check className="h-[9px] w-[9px] text-black stroke-[3.5px]" />}
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+              </motion.div>
+            </AnimatePresence>
+
           </div>
-
         </div>
+
+        {/* ── Bottom nav bar ──────────────────────────── */}
+        <div className="shrink-0 border-t border-zinc-900/50 px-10 xl:px-20 h-16 flex items-center justify-between">
+          <button
+            onClick={goBack}
+            disabled={step === 1}
+            className="text-[12px] font-medium text-zinc-500 hover:text-zinc-300 transition-colors disabled:opacity-20 disabled:pointer-events-none"
+          >
+            ← Kembali
+          </button>
+
+          <button
+            onClick={goNext}
+            disabled={!canAdvance}
+            className="flex items-center gap-2 bg-white hover:bg-zinc-100 text-black font-semibold text-[13px] px-5 py-2.5 rounded-lg transition-all shadow-[0_0_24px_rgba(255,255,255,0.07)] disabled:opacity-25 disabled:pointer-events-none"
+          >
+            {step === 4 ? "Selesai & Lanjut" : "Lanjutkan"}
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+
       </main>
-
-      {/* ── Bottom step counter ──────────────────────────── */}
-      <div className="shrink-0 h-12 flex items-center justify-center border-t border-zinc-900/40 select-none">
-        <span className="text-[10px] font-mono text-zinc-600 tracking-widest uppercase">
-          Step {step} of {TOTAL_STEPS}
-        </span>
-      </div>
-
     </div>
   );
 }
