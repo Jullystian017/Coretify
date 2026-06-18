@@ -2,531 +2,504 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Sparkles,
   ArrowRight,
-  ShieldCheck,
   Globe,
   MessageSquare,
   FileSpreadsheet,
   Check,
-  AlertTriangle,
+  ShieldCheck,
   UploadCloud,
   ChevronDown,
-  ChevronUp,
   FolderLock,
-  Lock
+  Lock,
 } from "lucide-react";
 
+/* ─── Types ──────────────────────────────────────────────────── */
+type Scope = "gmail" | "calendar" | "drive" | "sheets";
+
+interface Folder {
+  id: number;
+  name: string;
+  path: string;
+  selected: boolean;
+  autoExclude: boolean;
+}
+
+/* ─── Integration card data ──────────────────────────────────── */
+const INTEGRATIONS = [
+  {
+    key: "google",
+    icon: Globe,
+    label: "Google Workspace",
+    badge: "Recommended",
+    desc: "Sinkronisasi Gmail, Google Calendar, dan Drive/Sheets secara terpadu.",
+    bullets: [
+      "Membaca email historis untuk memetakan korespondensi klien.",
+      "Memetakan timeline meeting & keputusan dari kalender.",
+    ],
+    warning: "Read-only — tidak bisa mengirim email atau mengedit file.",
+  },
+  {
+    key: "whatsapp",
+    icon: MessageSquare,
+    label: "WhatsApp Lite",
+    badge: "No API Needed",
+    desc: "Unggah hasil ekspor obrolan .txt untuk ekstraksi keputusan & task.",
+    bullets: [
+      "Ekstraksi komitmen tindakan dan kesepakatan klien secara instan.",
+      "Data hanya dibaca sekali untuk di-indeks, tidak disimpan permanen.",
+    ],
+    warning: null,
+  },
+  {
+    key: "csv",
+    icon: FileSpreadsheet,
+    label: "CSV / Excel",
+    badge: "Generic Data",
+    desc: "Memetakan invoice, cashflow, atau log transaksi sebagai context pendukung.",
+    bullets: [
+      "Membaca log data piutang/revenue untuk korelasi profitabilitas klien.",
+      "Kompatibel dengan Accurate, Jurnal, atau manual spreadsheet.",
+    ],
+    warning: null,
+  },
+];
+
+const SCOPES: { key: Scope; label: string; desc: string }[] = [
+  { key: "gmail",    label: "Read-only Gmail",          desc: "Memindai isi email untuk mendeteksi diskusi projek dan klien. Coretify tidak bisa mengirim email." },
+  { key: "calendar", label: "Read-only Google Calendar", desc: "Memindai riwayat meeting untuk mendeteksi timelines projek dan janji temu." },
+  { key: "drive",    label: "Read-only Google Drive",    desc: "Membaca dokumen dan file pendukung. Folder HR & Finance ter-exclude secara otomatis." },
+  { key: "sheets",   label: "Read-only Google Sheets",   desc: "Membaca spreadsheet kustom yang berisi invoice atau backlog kerja." },
+];
+
+const DEFAULT_FOLDERS: Folder[] = [
+  { id: 1, name: "General & Projects",     path: "/Projects",  selected: true,  autoExclude: false },
+  { id: 2, name: "Client Presentations",   path: "/Clients",   selected: true,  autoExclude: false },
+  { id: 3, name: "HR & Payroll",           path: "/HR",        selected: false, autoExclude: true  },
+  { id: 4, name: "Finance & Invoice 2026", path: "/Finance",   selected: false, autoExclude: true  },
+  { id: 5, name: "Marketing Assets",       path: "/Marketing", selected: true,  autoExclude: false },
+];
+
+/* ─── Page ───────────────────────────────────────────────────── */
 export default function ConnectPage() {
   const router = useRouter();
   const [companyName, setCompanyName] = useState("Perusahaan");
-  const [googleConnected, setGoogleConnected] = useState(false);
+  const [googleConnected,   setGoogleConnected]   = useState(false);
   const [whatsappConnected, setWhatsappConnected] = useState(false);
-  const [csvConnected, setCsvConnected] = useState(false);
+  const [csvConnected,      setCsvConnected]      = useState(false);
 
-  // File states
-  const [waFile, setWaFile] = useState<string | null>(null);
-  const [csvFile, setCsvFile] = useState<string | null>(null);
-  const [isParsingWA, setIsParsingWA] = useState(false);
+  const [waFile,       setWaFile]       = useState<string | null>(null);
+  const [csvFile,      setCsvFile]      = useState<string | null>(null);
+  const [isParsingWA,  setIsParsingWA]  = useState(false);
   const [isParsingCSV, setIsParsingCSV] = useState(false);
 
-  // Folder exclusion states
-  const [showDriveFolders, setShowDriveFolders] = useState(false);
-  const [folders, setFolders] = useState([
-    { id: 1, name: "📁 General & Projects", path: "/Projects", selected: true, autoExclude: false },
-    { id: 2, name: "📁 Client Presentations", path: "/Clients", selected: true, autoExclude: false },
-    { id: 3, name: "📁 HR & Payroll", path: "/HR", selected: false, autoExclude: true },
-    { id: 4, name: "📁 Finance & Invoice 2026", path: "/Finance", selected: false, autoExclude: true },
-    { id: 5, name: "📁 Marketing Assets", path: "/Marketing", selected: true, autoExclude: false },
-  ]);
-
-  // Google OAuth modal
-  const [showOAuthModal, setShowOAuthModal] = useState(false);
-  const [selectedScopes, setSelectedScopes] = useState({
-    gmail: true,
-    calendar: true,
-    drive: true,
-    sheets: true
+  const [showFolders,  setShowFolders]  = useState(false);
+  const [folders,      setFolders]      = useState<Folder[]>(DEFAULT_FOLDERS);
+  const [showModal,    setShowModal]    = useState(false);
+  const [scopes, setScopes] = useState<Record<Scope, boolean>>({
+    gmail: true, calendar: true, drive: true, sheets: true,
   });
+
+  const canProceed = googleConnected || whatsappConnected || csvConnected;
 
   useEffect(() => {
     const data = localStorage.getItem("coretify_company");
     if (data) {
-      const parsed = JSON.parse(data);
-      if (parsed.name) {
-        setCompanyName(parsed.name);
-      }
+      const p = JSON.parse(data);
+      if (p.name) setCompanyName(p.name);
     }
   }, []);
 
-  const handleScopeToggle = (scope: "gmail" | "calendar" | "drive" | "sheets") => {
-    setSelectedScopes((prev) => ({
-      ...prev,
-      [scope]: !prev[scope]
-    }));
-  };
-
-  const handleOAuthApprove = () => {
+  const approveOAuth = () => {
     setGoogleConnected(true);
-    setShowOAuthModal(false);
-    
-    // Save to localStorage
+    setShowModal(false);
     const saved = localStorage.getItem("coretify_company");
     if (saved) {
-      const parsed = JSON.parse(saved);
-      parsed.googleConnected = true;
-      parsed.excludedFolders = folders.filter(f => !f.selected).map(f => f.path);
-      localStorage.setItem("coretify_company", JSON.stringify(parsed));
+      const p = JSON.parse(saved);
+      p.googleConnected = true;
+      p.excludedFolders = folders.filter((f) => !f.selected).map((f) => f.path);
+      localStorage.setItem("coretify_company", JSON.stringify(p));
     }
-  };
-
-  const handleFolderToggle = (id: number) => {
-    setFolders(folders.map(f => f.id === id ? { ...f, selected: !f.selected } : f));
   };
 
   const handleWaUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setIsParsingWA(true);
-      setTimeout(() => {
-        setWaFile(file.name);
-        setWhatsappConnected(true);
-        setIsParsingWA(false);
-
-        const saved = localStorage.getItem("coretify_company");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          parsed.whatsappConnected = true;
-          localStorage.setItem("coretify_company", JSON.stringify(parsed));
-        }
-      }, 1500);
-    }
+    if (!file) return;
+    setIsParsingWA(true);
+    setTimeout(() => {
+      setWaFile(file.name); setWhatsappConnected(true); setIsParsingWA(false);
+    }, 1400);
   };
 
   const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setIsParsingCSV(true);
-      setTimeout(() => {
-        setCsvFile(file.name);
-        setCsvConnected(true);
-        setIsParsingCSV(false);
-
-        const saved = localStorage.getItem("coretify_company");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          parsed.csvConnected = true;
-          localStorage.setItem("coretify_company", JSON.stringify(parsed));
-        }
-      }, 1500);
-    }
-  };
-
-  const canProceed = googleConnected || whatsappConnected || csvConnected;
-
-  const handleBuildMemory = () => {
-    router.push("/sync");
+    if (!file) return;
+    setIsParsingCSV(true);
+    setTimeout(() => {
+      setCsvFile(file.name); setCsvConnected(true); setIsParsingCSV(false);
+    }, 1400);
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#070708] text-slate-100 selection:bg-purple-500/30">
-      
-      {/* Top Background radial gradient */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1360px] rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/40 via-transparent to-transparent blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-[#070708] text-zinc-100 font-sans antialiased relative">
 
-      {/* Header */}
-      <header className="border-b border-slate-900 bg-[#070708]/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-8 h-20 flex items-center justify-between">
-          <span className="font-bold text-[15px] tracking-tight text-white">
-            Coretify Connect
-          </span>
-          <div className="flex items-center gap-1.5 text-slate-400 text-[11px] bg-[#0c0c0e] border border-slate-900 px-3.5 py-1.5 rounded-xl">
-            <ShieldCheck className="h-4 w-4 text-emerald-500" />
-            <span>Read-Only Integration Garansi 100%</span>
+      {/* ── Glows ──────────────────────────────────────────────── */}
+      <div className="pointer-events-none fixed top-0 left-0 w-[55vw] h-[55vw] rounded-full opacity-[0.55]"
+        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.045) 0%, transparent 65%)", filter: "blur(80px)", transform: "translate(-25%, -30%)" }} />
+      <div className="pointer-events-none fixed bottom-0 right-0 w-[45vw] h-[45vw] rounded-full opacity-[0.4]"
+        style={{ background: "radial-gradient(circle, rgba(200,200,220,0.04) 0%, transparent 65%)", filter: "blur(90px)", transform: "translate(25%, 30%)" }} />
+
+      {/* ── Navbar ─────────────────────────────────────────────── */}
+      <header className="sticky top-0 z-40 border-b border-zinc-900/50 bg-[#070708]/80 backdrop-blur-md">
+        <div className="max-w-5xl mx-auto px-8 h-16 flex items-center justify-between">
+          <button onClick={() => router.push("/")} className="flex items-center gap-0.5 hover:opacity-75 transition-opacity">
+            <img src="/coretify.png" alt="Coretify" className="h-7 w-auto object-contain" />
+            <span className="text-[17px] font-semibold tracking-tight text-white">Coretify</span>
+          </button>
+          <div className="flex items-center gap-1.5 text-zinc-500 text-[11px] font-mono">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            <span>Read-Only · TLS 1.3</span>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-8 py-12">
-        <div className="mb-10 text-center md:text-left">
-          <h1 className="text-3xl font-bold tracking-tight text-white mb-2">
-            Hubungkan Memori Bisnis {companyName}
+      {/* ── Main ───────────────────────────────────────────────── */}
+      <main className="max-w-5xl mx-auto px-8 py-14">
+
+        {/* Page heading */}
+        <div className="mb-10">
+          <p className="text-[10px] font-bold font-mono uppercase tracking-[0.2em] text-zinc-600 mb-3">
+            03 / 04 — Data Source
+          </p>
+          <h1 className="text-[32px] font-semibold tracking-tight text-white leading-tight mb-2">
+            Hubungkan memori<br />bisnis {companyName}.
           </h1>
-          <p className="text-slate-400 text-xs max-w-xl">
-            Coretify bekerja dengan membaca data historis untuk memetakan entitas klien, projek, dan keputusan penting. Hubungkan minimal satu sumber untuk melanjutkan.
+          <p className="text-zinc-400 text-[13.5px] max-w-lg leading-relaxed">
+            Coretify membaca data historis untuk memetakan klien, proyek, dan keputusan penting.
+            Hubungkan minimal satu sumber untuk melanjutkan.
           </p>
         </div>
 
-        {/* Integration Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          
-          {/* Card 1: Google Workspace */}
-          <Card className={`bg-[#0c0c0e] border-slate-900 overflow-hidden relative flex flex-col justify-between ${googleConnected ? "ring-1 ring-slate-800" : ""}`}>
+        {/* ── Integration cards ─────────────────────────────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+
+          {/* ─── Google Workspace ─── */}
+          <IntegrationCard
+            connected={googleConnected}
+            label="Google Workspace"
+            badge="Recommended"
+            icon={<Globe className="h-5 w-5" />}
+            desc="Gmail, Calendar, Drive & Sheets — satu koneksi, empat data stream."
+            bullets={[
+              "Korespondensi klien dari Gmail",
+              "Timeline meeting dari Calendar",
+              "Dokumen & spreadsheet dari Drive",
+            ]}
+          >
+            {/* Post-connect: folder selector */}
             {googleConnected && (
-              <div className="absolute top-0 right-0 bg-[#18181b] border-l border-b border-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1">
-                <Check className="h-3 w-3 text-emerald-400" /> Connected
-              </div>
-            )}
-            <CardHeader className="pb-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-white mb-3">
-                <Globe className="h-5 w-5 text-blue-400" />
-              </div>
-              <CardTitle className="text-sm font-bold text-white flex items-center gap-2">
-                Google Workspace
-                <Badge variant="outline" className="text-[9px] text-slate-400 border-slate-900 bg-slate-950">Recommended</Badge>
-              </CardTitle>
-              <CardDescription className="text-slate-450 text-[11px]">
-                Sinkronisasi Gmail, Google Calendar, dan Drive/Sheets secara terpadu.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 flex-1">
-              <div className="space-y-2.5 text-[11px]">
-                <div className="flex items-start gap-2 text-slate-350">
-                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Membaca email historis untuk memetakan korespondensi klien.</span>
-                </div>
-                <div className="flex items-start gap-2 text-slate-350">
-                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Memetakan timeline meeting & keputusan dari kalender.</span>
-                </div>
-                <div className="flex items-start gap-2 text-slate-400">
-                  <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
-                  <span className="text-slate-450">Tidak ada hak akses menulis (read-only). Tidak bisa mengirim email/mengedit file.</span>
-                </div>
-              </div>
-
-              {/* Collapsible Folder Select */}
-              {googleConnected && (
-                <div className="border border-slate-900 rounded-xl bg-[#08080a] p-3.5 mt-3 animate-in slide-in-from-top-2 duration-300">
-                  <button
-                    onClick={() => setShowDriveFolders(!showDriveFolders)}
-                    className="w-full flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors"
-                  >
-                    <span className="flex items-center gap-2">
-                      <FolderLock className="h-4 w-4 text-slate-400" />
-                      Atur Folder Drive Ter-exclude
-                    </span>
-                    {showDriveFolders ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
-                  </button>
-
-                  {showDriveFolders && (
-                    <div className="mt-3.5 space-y-2 border-t border-slate-900 pt-3 animate-in fade-in duration-300">
-                      <p className="text-[10px] text-slate-500 mb-2 leading-relaxed">
-                        Kami secara otomatis mengecualikan folder bernada HR/Payroll/Finance demi keamanan data sensitif. Centang folder yang ingin dipindai:
-                      </p>
-                      {folders.map((folder) => (
-                        <div key={folder.id} className="flex items-center justify-between p-1.5 hover:bg-slate-900/40 rounded transition-colors">
-                          <label className="text-[11px] font-medium text-slate-300 flex items-center gap-1.5 cursor-pointer">
-                            <input
-                              type="checkbox"
-                              checked={folder.selected}
-                              onChange={() => handleFolderToggle(folder.id)}
-                              className="rounded border-slate-800 bg-slate-900 text-purple-600 focus:ring-0 cursor-pointer"
-                            />
-                            {folder.name}
+              <div className="mt-4 rounded-xl border border-zinc-800/60 bg-zinc-950/60 overflow-hidden">
+                <button
+                  onClick={() => setShowFolders(!showFolders)}
+                  className="w-full flex items-center justify-between px-4 py-3 text-[12px] font-medium text-zinc-300 hover:text-white transition-colors"
+                >
+                  <span className="flex items-center gap-2">
+                    <FolderLock className="h-3.5 w-3.5 text-zinc-500" />
+                    Atur folder yang di-exclude
+                  </span>
+                  <ChevronDown className={`h-3.5 w-3.5 text-zinc-500 transition-transform ${showFolders ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {showFolders && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-4 pb-4 pt-1 border-t border-zinc-800/50 space-y-1.5">
+                        <p className="text-[10px] text-zinc-600 mb-3 leading-relaxed">
+                          HR & Finance folder otomatis ter-exclude demi keamanan data sensitif.
+                        </p>
+                        {folders.map((f) => (
+                          <label key={f.id} className="flex items-center justify-between cursor-pointer group">
+                            <span className="flex items-center gap-2 text-[12px] text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                              <div className={`h-[14px] w-[14px] rounded-[3px] border flex items-center justify-center transition-all ${
+                                f.selected ? "border-white bg-white" : "border-zinc-700"
+                              }`}>
+                                {f.selected && <Check className="h-[9px] w-[9px] text-black stroke-[3.5px]" />}
+                              </div>
+                              {f.name}
+                            </span>
+                            {f.autoExclude && (
+                              <span className="flex items-center gap-1 text-[9px] font-mono text-zinc-600 border border-zinc-800 rounded px-1.5 py-0.5">
+                                <Lock className="h-2 w-2" /> Auto-excluded
+                              </span>
+                            )}
+                            <input type="checkbox" className="sr-only" checked={f.selected}
+                              onChange={() => setFolders(folders.map((x) => x.id === f.id ? { ...x, selected: !x.selected } : x))} />
                           </label>
-                          {folder.autoExclude && (
-                            <Badge variant="outline" className="text-[9px] px-1.5 py-0 bg-amber-500/10 text-amber-400 border-amber-500/20 flex items-center gap-1">
-                              <Lock className="h-2 w-2" /> Auto-Excluded
-                            </Badge>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    </motion.div>
                   )}
+                </AnimatePresence>
+              </div>
+            )}
+
+            {/* CTA */}
+            <button
+              onClick={() => setShowModal(true)}
+              className={`mt-4 w-full h-10 flex items-center justify-center gap-2 rounded-xl text-[12px] font-semibold transition-all ${
+                googleConnected
+                  ? "bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800"
+                  : "bg-white hover:bg-zinc-100 text-black shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+              }`}
+            >
+              {googleConnected ? "Hubungkan Ulang" : "Connect Google Workspace"}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </IntegrationCard>
+
+          {/* ─── WhatsApp ─── */}
+          <IntegrationCard
+            connected={whatsappConnected}
+            label="WhatsApp Lite"
+            badge="No API Needed"
+            icon={<MessageSquare className="h-5 w-5" />}
+            desc="Upload ekspor chat .txt untuk ekstraksi keputusan & task secara instan."
+            bullets={[
+              "Ekstraksi komitmen tindakan & kesepakatan klien",
+              "Data dibaca sekali — tidak disimpan permanen",
+            ]}
+          >
+            {/* File drop zone */}
+            <div className={`relative mt-4 border border-dashed rounded-xl flex flex-col items-center justify-center min-h-[100px] text-center transition-all ${
+              whatsappConnected ? "border-zinc-700 bg-zinc-900/40" : "border-zinc-800/60 bg-zinc-950/60 hover:border-zinc-700"
+            }`}>
+              <input type="file" accept=".txt" onChange={handleWaUpload} disabled={isParsingWA}
+                className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
+              {isParsingWA ? (
+                <div className="space-y-2">
+                  <div className="h-5 w-5 border-2 border-zinc-600 border-t-zinc-200 rounded-full animate-spin mx-auto" />
+                  <p className="text-[11px] text-zinc-500">Menganalisis chat...</p>
                 </div>
+              ) : waFile ? (
+                <div className="space-y-1 px-4">
+                  <Check className="h-5 w-5 text-white mx-auto" />
+                  <p className="text-[12px] text-white font-semibold truncate">{waFile}</p>
+                  <p className="text-[10px] text-zinc-500">45 lines · 3 task ditemukan</p>
+                </div>
+              ) : (
+                <>
+                  <UploadCloud className="h-5 w-5 text-zinc-600 mb-2" />
+                  <p className="text-[12px] text-zinc-400 font-medium">Drop file .txt di sini</p>
+                  <p className="text-[10px] text-zinc-600 mt-0.5">Export Chat → WhatsApp → Tanpa Media</p>
+                </>
               )}
-            </CardContent>
-            <CardFooter className="pt-2 border-t border-slate-900 bg-[#08080a]/40 px-6 py-4">
-              <Button
-                onClick={() => setShowOAuthModal(true)}
-                className={`w-full font-semibold rounded-xl text-xs py-4.5 ${googleConnected ? "bg-[#18181b] hover:bg-[#27272a] text-slate-300 border border-[#2e2e33]" : "bg-white hover:bg-slate-100 text-black"}`}
-              >
-                {googleConnected ? "Hubungkan Ulang Google" : "Connect Google Workspace"}
-              </Button>
-            </CardFooter>
-          </Card>
+            </div>
+          </IntegrationCard>
 
-          {/* Card 2: WhatsApp Lite */}
-          <Card className={`bg-[#0c0c0e] border-slate-900 flex flex-col justify-between overflow-hidden relative ${whatsappConnected ? "ring-1 ring-slate-800" : ""}`}>
-            {whatsappConnected && (
-              <div className="absolute top-0 right-0 bg-[#18181b] border-l border-b border-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1">
-                <Check className="h-3 w-3 text-emerald-400" /> Connected
-              </div>
-            )}
-            <CardHeader className="pb-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-white mb-3">
-                <MessageSquare className="h-5 w-5 text-emerald-500" />
-              </div>
-              <CardTitle className="text-sm font-bold text-white flex items-center gap-2">
-                WhatsApp Lite
-                <Badge variant="outline" className="text-[9px] text-slate-400 border-slate-900 bg-slate-950">No API Needed</Badge>
-              </CardTitle>
-              <CardDescription className="text-slate-450 text-[11px]">
-                Unggah hasil ekspor obrolan `.txt` untuk ekstraksi keputusan & task.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 flex-1">
-              <div className="space-y-2 text-[11px]">
-                <div className="flex items-start gap-2 text-slate-350">
-                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Ekstraksi komitmen tindakan dan kesepakatan klien secara instan.</span>
+          {/* ─── CSV ─── */}
+          <IntegrationCard
+            connected={csvConnected}
+            label="CSV / Excel"
+            badge="Generic Data"
+            icon={<FileSpreadsheet className="h-5 w-5" />}
+            desc="Memetakan invoice, cashflow, atau log transaksi sebagai pendukung memory."
+            bullets={[
+              "Korelasi profitabilitas klien dari data piutang",
+              "Kompatibel dengan Accurate, Jurnal, atau spreadsheet manual",
+            ]}
+          >
+            {/* File drop zone */}
+            <div className={`relative mt-4 border border-dashed rounded-xl flex flex-col items-center justify-center min-h-[100px] text-center transition-all ${
+              csvConnected ? "border-zinc-700 bg-zinc-900/40" : "border-zinc-800/60 bg-zinc-950/60 hover:border-zinc-700"
+            }`}>
+              <input type="file" accept=".csv,.xlsx" onChange={handleCsvUpload} disabled={isParsingCSV}
+                className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
+              {isParsingCSV ? (
+                <div className="space-y-2">
+                  <div className="h-5 w-5 border-2 border-zinc-600 border-t-zinc-200 rounded-full animate-spin mx-auto" />
+                  <p className="text-[11px] text-zinc-500">Menganalisis tabel...</p>
                 </div>
-                <div className="flex items-start gap-2 text-slate-350">
-                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Keamanan penuh: Data hanya dibaca sekali untuk di-indeks.</span>
+              ) : csvFile ? (
+                <div className="space-y-1 px-4">
+                  <Check className="h-5 w-5 text-white mx-auto" />
+                  <p className="text-[12px] text-white font-semibold truncate">{csvFile}</p>
+                  <p className="text-[10px] text-zinc-500">14 invoice log terdeteksi</p>
                 </div>
-              </div>
-
-              {/* Drag and Drop Uploader */}
-              <div className="relative border-2 border-dashed border-slate-900 rounded-xl p-4 bg-[#08080a] hover:border-slate-800 transition-all text-center flex flex-col items-center justify-center min-h-[120px]">
-                <input
-                  type="file"
-                  accept=".txt"
-                  onChange={handleWaUpload}
-                  disabled={isParsingWA}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
-                {isParsingWA ? (
-                  <div className="space-y-2">
-                    <div className="h-5 w-5 border-2 border-slate-500 border-t-transparent rounded-full animate-spin mx-auto" />
-                    <p className="text-[10px] text-slate-400 font-medium">Menganalisis chat WhatsApp...</p>
-                  </div>
-                ) : waFile ? (
-                  <div className="space-y-1">
-                    <Check className="h-7 w-7 text-emerald-500 mx-auto" />
-                    <p className="text-[11px] text-white font-semibold">{waFile}</p>
-                    <p className="text-[9px] text-emerald-500">Berhasil diekstrak (45 chat lines, 3 task ditemukan)</p>
-                  </div>
-                ) : (
-                  <>
-                    <UploadCloud className="h-6 w-6 text-slate-600 mb-2" />
-                    <p className="text-xs text-slate-300 font-semibold">Tarik & Lepas File .txt</p>
-                    <p className="text-[10px] text-slate-550 mt-1">Gunakan fitur 'Export Chat' dari WA HP Anda</p>
-                  </>
-                )}
-              </div>
-            </CardContent>
-            <CardFooter className="pt-2 border-t border-slate-900 bg-[#08080a]/40 px-6 py-4">
-              <div className="text-[10px] text-slate-500 text-center w-full">
-                Sangat aman & cocok untuk mendeteksi diskusi klien yang sering terlewat.
-              </div>
-            </CardFooter>
-          </Card>
-
-          {/* Card 3: CSV/Excel Upload */}
-          <Card className={`bg-[#0c0c0e] border-slate-900 flex flex-col justify-between overflow-hidden relative md:col-span-2 ${csvConnected ? "ring-1 ring-slate-800" : ""}`}>
-            {csvConnected && (
-              <div className="absolute top-0 right-0 bg-[#18181b] border-l border-b border-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1">
-                <Check className="h-3 w-3 text-emerald-400" /> Connected
-              </div>
-            )}
-            <CardHeader className="pb-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-white mb-3">
-                <FileSpreadsheet className="h-5 w-5 text-amber-500" />
-              </div>
-              <CardTitle className="text-sm font-bold text-white flex items-center gap-2">
-                Unggah CSV/Excel (Data Keuangan/Log)
-                <Badge variant="outline" className="text-[9px] text-slate-400 border-slate-900 bg-slate-950">Generic Data</Badge>
-              </CardTitle>
-              <CardDescription className="text-slate-450 text-[11px]">
-                Membantu memetakan tagihan invoice, cashflow, atau log transaksi sebagai context pendukung Company Memory.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-              <div className="space-y-2 text-[11px]">
-                <div className="flex items-start gap-2 text-slate-350">
-                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Membaca log data piutang/revenue untuk korelasi profitabilitas klien.</span>
-                </div>
-                <div className="flex items-start gap-2 text-slate-350">
-                  <Check className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>Kompatibel dengan ekspor spreadsheet Accurate, Jurnal, atau manual log.</span>
-                </div>
-              </div>
-
-              {/* Drag and Drop Uploader */}
-              <div className="relative border-2 border-dashed border-slate-900 rounded-xl p-4 bg-[#08080a] hover:border-slate-800 transition-all text-center flex flex-col items-center justify-center min-h-[110px]">
-                <input
-                  type="file"
-                  accept=".csv,.xlsx"
-                  onChange={handleCsvUpload}
-                  disabled={isParsingCSV}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
-                {isParsingCSV ? (
-                  <div className="space-y-2">
-                    <div className="h-5 w-5 border-2 border-slate-500 border-t-transparent rounded-full animate-spin mx-auto" />
-                    <p className="text-[10px] text-slate-400 font-medium">Menganalisis tabel file...</p>
-                  </div>
-                ) : csvFile ? (
-                  <div className="space-y-1">
-                    <Check className="h-7 w-7 text-emerald-500 mx-auto" />
-                    <p className="text-[11px] text-white font-semibold">{csvFile}</p>
-                    <p className="text-[9px] text-emerald-550">Berhasil dipetakan (14 invoice log transaksi terdeteksi)</p>
-                  </div>
-                ) : (
-                  <>
-                    <UploadCloud className="h-6 w-6 text-slate-600 mb-2" />
-                    <p className="text-xs text-slate-300 font-semibold">Tarik & Lepas File .csv / .xlsx</p>
-                    <p className="text-[10px] text-slate-550 mt-1">Format laporan penjualan/invoice bebas</p>
-                  </>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
+              ) : (
+                <>
+                  <UploadCloud className="h-5 w-5 text-zinc-600 mb-2" />
+                  <p className="text-[12px] text-zinc-400 font-medium">Drop file .csv / .xlsx</p>
+                  <p className="text-[10px] text-zinc-600 mt-0.5">Format laporan bebas</p>
+                </>
+              )}
+            </div>
+          </IntegrationCard>
         </div>
 
-        {/* Footer Build CTA */}
-        <div className="border-t border-slate-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-slate-500 text-center sm:text-left">
-            Kamu bisa menambah, menghapus, atau membatalkan izin data source ini kapan saja di menu Settings.
-          </div>
-          <Button
-            onClick={handleBuildMemory}
+        {/* ── Bottom CTA ────────────────────────────────────────── */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pt-6 border-t border-zinc-900/50">
+          <p className="text-[12px] text-zinc-600 max-w-sm leading-relaxed">
+            Kamu bisa menambah atau mencabut akses data source ini kapan saja di menu <span className="text-zinc-400">Settings → Integrations</span>.
+          </p>
+          <button
+            onClick={() => router.push("/sync")}
             disabled={!canProceed}
-            className={`px-8 py-6 rounded-full font-bold transition-all ${canProceed ? "bg-white hover:bg-slate-100 text-black shadow-md scale-[1.01]" : "bg-[#0c0c0e] border border-slate-900 text-slate-550 cursor-not-allowed"}`}
+            className="flex items-center gap-2 bg-white hover:bg-zinc-100 text-black font-semibold text-sm px-6 h-11 rounded-xl transition-all shadow-[0_0_28px_rgba(255,255,255,0.1)] disabled:opacity-20 disabled:pointer-events-none whitespace-nowrap"
           >
             Bangun Company Memory
-            <ArrowRight className="h-4.5 w-4.5 ml-2" />
-          </Button>
+            <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
       </main>
 
-      {/* Google Workspace OAuth Simulation Modal */}
-      {showOAuthModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <Card className="w-full max-w-lg bg-[#0c0c0e] border-slate-900 shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-6">
-              {/* Google Brand Header */}
-              <div className="flex items-center gap-2 mb-6">
-                <svg className="h-6 w-6 shrink-0" viewBox="0 0 24 24">
-                  <path
-                    fill="#4285F4"
-                    d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v3.927h6.6c-.29 1.5-1.14 2.77-2.4 3.61v3h3.86c2.26-2.09 3.56-5.17 3.56-8.47z"
-                  />
-                  <path
-                    fill="#34A853"
-                    d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.27 21.27 7.37 24 12 24z"
-                  />
-                  <path
-                    fill="#FBBC05"
-                    d="M5.27 14.29a7.18 7.18 0 0 1 0-4.58V6.62H1.29a11.94 11.94 0 0 0 0 10.76l3.98-3.09z"
-                  />
-                  <path
-                    fill="#EA4335"
-                    d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.37 0 3.27 2.73 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"
-                  />
-                </svg>
-                <span className="font-semibold text-slate-350 text-xs font-mono">Sign in with Google</span>
-              </div>
-
-              <h2 className="text-lg font-bold text-white mb-2">Coretify meminta izin akses data</h2>
-              <p className="text-slate-400 text-xs leading-relaxed mb-6">
-                Coretify Labs memerlukan otorisasi read-only pada data-data Workspace berikut untuk diekstrak menjadi satu Company Memory terpusat.
-              </p>
-
-              {/* Scopes checklist */}
-              <div className="space-y-3 mb-6 text-xs">
-                <div
-                  onClick={() => handleScopeToggle("gmail")}
-                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.gmail ? "bg-slate-950/40 border-slate-800" : "bg-transparent border-slate-900 opacity-60"}`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedScopes.gmail}
-                    readOnly
-                    className="mt-0.5 rounded border-slate-800 text-purple-600 focus:ring-0 cursor-pointer"
-                  />
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-200">Read-only akses Gmail</h4>
-                    <p className="text-[10px] text-slate-500 mt-0.5">Memindai isi email untuk mendeteksi diskusi projek dan klien. Coretify TIDAK BISA mengirim email.</p>
-                  </div>
+      {/* ── OAuth Modal ───────────────────────────────────────── */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ duration: 0.2 }}
+              className="w-full max-w-md bg-[#0c0c0e] border border-zinc-800/60 rounded-2xl shadow-2xl overflow-hidden"
+            >
+              <div className="p-6">
+                {/* Google brand */}
+                <div className="flex items-center gap-2 mb-5">
+                  <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v3.927h6.6c-.29 1.5-1.14 2.77-2.4 3.61v3h3.86c2.26-2.09 3.56-5.17 3.56-8.47z" />
+                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.27 21.27 7.37 24 12 24z" />
+                    <path fill="#FBBC05" d="M5.27 14.29a7.18 7.18 0 0 1 0-4.58V6.62H1.29a11.94 11.94 0 0 0 0 10.76l3.98-3.09z" />
+                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.37 0 3.27 2.73 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z" />
+                  </svg>
+                  <span className="text-[11px] font-mono text-zinc-500">accounts.google.com</span>
                 </div>
 
-                <div
-                  onClick={() => handleScopeToggle("calendar")}
-                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.calendar ? "bg-slate-950/40 border-slate-800" : "bg-transparent border-slate-900 opacity-60"}`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedScopes.calendar}
-                    readOnly
-                    className="mt-0.5 rounded border-slate-800 text-purple-600 focus:ring-0 cursor-pointer"
-                  />
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-200">Read-only akses Google Calendar</h4>
-                    <p className="text-[10px] text-slate-500 mt-0.5">Memindai riwayat meeting untuk mendeteksi timelines projek dan janji temu.</p>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => handleScopeToggle("drive")}
-                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.drive ? "bg-slate-950/40 border-slate-800" : "bg-transparent border-slate-900 opacity-60"}`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedScopes.drive}
-                    readOnly
-                    className="mt-0.5 rounded border-slate-800 text-purple-600 focus:ring-0 cursor-pointer"
-                  />
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-200">Read-only akses Google Drive</h4>
-                    <p className="text-[10px] text-slate-500 mt-0.5">Membaca dokumen dan file pendukung. Folder bernada HR & Finance akan ter-exclude secara otomatis.</p>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => handleScopeToggle("sheets")}
-                  className={`flex items-start gap-3 p-3.5 rounded-xl border transition-all cursor-pointer ${selectedScopes.sheets ? "bg-slate-950/40 border-slate-800" : "bg-transparent border-slate-900 opacity-60"}`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedScopes.sheets}
-                    readOnly
-                    className="mt-0.5 rounded border-slate-800 text-purple-600 focus:ring-0 cursor-pointer"
-                  />
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-200">Read-only akses Google Sheets</h4>
-                    <p className="text-[10px] text-slate-500 mt-0.5">Membaca data spreadsheet kustom yang berisi invoice operasional atau backlog kerja.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Safety warning */}
-              <div className="flex gap-2.5 p-3 rounded-xl bg-[#08080a] border border-slate-900 mb-6">
-                <Lock className="h-4.5 w-4.5 text-emerald-500 shrink-0 mt-0.5" />
-                <p className="text-[10px] text-slate-450 leading-normal">
-                  Coretify mematuhi Kebijakan Data Pengguna Layanan API Google, termasuk ketentuan Penggunaan Terbatas. Token Anda dienkripsi AES-256 tingkat perbankan.
+                <h2 className="text-[17px] font-semibold text-white mb-1.5">Coretify meminta izin akses</h2>
+                <p className="text-zinc-500 text-[12px] leading-relaxed mb-5">
+                  Otorisasi read-only pada Workspace Anda untuk diekstrak menjadi Company Memory terpusat.
                 </p>
-              </div>
 
-              {/* Buttons */}
-              <div className="flex items-center justify-end gap-3">
-                <Button
-                  variant="ghost"
-                  onClick={() => setShowOAuthModal(false)}
-                  className="text-xs text-slate-500 hover:text-white"
-                >
-                  Batal
-                </Button>
-                <Button
-                  onClick={handleOAuthApprove}
-                  className="bg-white hover:bg-slate-100 text-black font-semibold text-xs px-5 py-3 rounded-full"
-                >
-                  Setujui & Lanjutkan
-                </Button>
+                {/* Scopes */}
+                <div className="space-y-2 mb-5">
+                  {SCOPES.map((s) => (
+                    <div
+                      key={s.key}
+                      onClick={() => setScopes((p) => ({ ...p, [s.key]: !p[s.key] }))}
+                      className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-150 ${
+                        scopes[s.key]
+                          ? "border-zinc-700/80 bg-zinc-900/50"
+                          : "border-zinc-800/40 bg-transparent opacity-50"
+                      }`}
+                    >
+                      <div className={`shrink-0 mt-0.5 h-[14px] w-[14px] rounded-[3px] border flex items-center justify-center transition-all ${
+                        scopes[s.key] ? "border-white bg-white" : "border-zinc-700"
+                      }`}>
+                        {scopes[s.key] && <Check className="h-[9px] w-[9px] text-black stroke-[3.5px]" />}
+                      </div>
+                      <div>
+                        <p className="text-[12px] font-semibold text-zinc-200">{s.label}</p>
+                        <p className="text-[10px] text-zinc-500 mt-0.5 leading-relaxed">{s.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Security note */}
+                <div className="flex gap-2.5 p-3 rounded-xl bg-zinc-950/80 border border-zinc-800/40 mb-5">
+                  <ShieldCheck className="h-4 w-4 text-zinc-400 shrink-0 mt-0.5" />
+                  <p className="text-[10px] text-zinc-500 leading-relaxed">
+                    Coretify mematuhi Kebijakan Data API Google. Token dienkripsi AES-256. Tidak ada data yang ditulis ke Workspace Anda.
+                  </p>
+                </div>
+
+                {/* Buttons */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="flex-1 h-10 rounded-xl border border-zinc-800/60 text-zinc-500 hover:text-zinc-300 hover:border-zinc-700 text-[12px] font-medium transition-all"
+                  >
+                    Batal
+                  </button>
+                  <button
+                    onClick={approveOAuth}
+                    className="flex-1 h-10 rounded-xl bg-white hover:bg-zinc-100 text-black text-[12px] font-semibold transition-all"
+                  >
+                    Setujui & Lanjutkan
+                  </button>
+                </div>
               </div>
-            </div>
-          </Card>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ─── IntegrationCard component ────────────────────────────── */
+function IntegrationCard({
+  connected, label, badge, icon, desc, bullets, children,
+}: {
+  connected: boolean;
+  label: string;
+  badge: string;
+  icon: React.ReactNode;
+  desc: string;
+  bullets: string[];
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className={`relative flex flex-col rounded-2xl border bg-[#0c0c0e] p-5 transition-all duration-300 ${
+      connected ? "border-zinc-700/70 shadow-[0_0_30px_rgba(255,255,255,0.03)]" : "border-zinc-800/50"
+    }`}>
+      {/* Connected badge */}
+      {connected && (
+        <div className="absolute top-3.5 right-3.5 flex items-center gap-1 text-[10px] font-semibold text-zinc-300 bg-zinc-900 border border-zinc-700 px-2 py-0.5 rounded-full">
+          <Check className="h-3 w-3" /> Connected
         </div>
       )}
+
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="h-9 w-9 rounded-xl bg-zinc-900 border border-zinc-800/60 flex items-center justify-center text-zinc-300 shrink-0">
+          {icon}
+        </div>
+        <div>
+          <p className="text-[13px] font-semibold text-white leading-none">{label}</p>
+          <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-wider">{badge}</span>
+        </div>
+      </div>
+
+      {/* Desc */}
+      <p className="text-[12px] text-zinc-500 leading-relaxed mb-4">{desc}</p>
+
+      {/* Bullets */}
+      <div className="space-y-2 mb-2">
+        {bullets.map((b, i) => (
+          <div key={i} className="flex items-start gap-2 text-[11px] text-zinc-500">
+            <div className="shrink-0 h-[14px] w-[14px] rounded-[3px] border border-zinc-700 bg-zinc-900 flex items-center justify-center mt-0.5">
+              <Check className="h-[9px] w-[9px] text-zinc-400 stroke-[3px]" />
+            </div>
+            {b}
+          </div>
+        ))}
+      </div>
+
+      {/* Slot for actions */}
+      <div className="mt-auto">{children}</div>
     </div>
   );
 }
