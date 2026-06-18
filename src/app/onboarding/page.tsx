@@ -1,213 +1,132 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Sparkles,
   ArrowRight,
-  Bot,
-  User,
+  ArrowLeft,
   Check
 } from "lucide-react";
 
-interface Message {
-  id: string;
-  sender: "bot" | "user";
-  text: string;
-  timestamp: Date;
-  options?: string[] | { label: string; value: string }[];
-  multipleSelect?: boolean;
-}
-
 export default function OnboardingPage() {
   const router = useRouter();
-  const [messages, setMessages] = useState<Message[]>([]);
   const [step, setStep] = useState(1);
-  const [inputText, setInputText] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   
   // Accumulated data
   const [companyName, setCompanyName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [teamSize, setTeamSize] = useState("");
   const [toolsUsed, setToolsUsed] = useState<string[]>([]);
   const [painPoints, setPainPoints] = useState<string[]>([]);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const progressPercent = (step / 4) * 100;
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, isTyping]);
-
-  // Initial bot message
-  useEffect(() => {
-    setIsTyping(true);
-    const timer = setTimeout(() => {
-      setMessages([
-        {
-          id: "1",
-          sender: "bot",
-          text: "Halo! Selamat datang di Coretify. Saya adalah AI Memory Manager yang akan membantu menyatukan seluruh memori bisnismu.\n\nMari kita mulai dengan perkenalan singkat. Siapa nama Anda dan apa nama perusahaan/bisnis Anda?",
-          timestamp: new Date(),
-        },
-      ]);
-      setIsTyping(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleSend = (textToSend?: string) => {
-    const text = textToSend || inputText;
-    if (!text.trim() && selectedOptions.length === 0) return;
-
-    let finalUserText = text;
-    if (selectedOptions.length > 0) {
-      finalUserText = selectedOptions.join(", ");
-    }
-
-    // Add user message
-    const userMsgId = Date.now().toString();
-    const newMessages = [
-      ...messages,
-      {
-        id: userMsgId,
-        sender: "user",
-        text: finalUserText,
-        timestamp: new Date(),
-      } as Message,
-    ];
-    setMessages(newMessages);
-    setInputText("");
-    setSelectedOptions([]);
-    setIsTyping(true);
-
-    // AI logic response based on current step
-    setTimeout(() => {
-      let responseText = "";
-      let nextOptions: any = undefined;
-      let nextStep = step + 1;
-
-      if (step === 1) {
-        setCompanyName(text);
-        responseText = `Senang bertemu dengan Anda! ${text} terdengar seperti bisnis yang menarik.\n\nSelanjutnya, apa jenis/vertical bisnis Anda? Ini akan menentukan **Vertical Playbook** yang kami gunakan untuk menganalisis data Anda secara spesifik.`;
-        nextOptions = [
-          { label: "🏢 Software House (Tech/Dev)", value: "Software House" },
-          { label: "🎨 Creative Agency (Design/Marketing)", value: "Agency" },
-          { label: "🚀 Startup (Tech Product)", value: "Startup" },
-          { label: "💼 Professional Consultant / Legal / HR", value: "Consultant" },
-          { label: "📦 Lainnya / Retail / Dagang", value: "Lainnya" }
-        ];
-      } else if (step === 2) {
-        const selectedVal = text;
-        setBusinessType(selectedVal);
-        responseText = `Pilihan bagus. Playbook **${selectedVal}** akan diaktifkan untuk menyesuaikan deteksi risiko dan insight operasional.\n\nBerapa jumlah anggota tim di perusahaan Anda?`;
-        nextOptions = [
-          { label: "👥 1 - 10 orang (Tim Kecil/Butik)", value: "1-10" },
-          { label: "🏢 10 - 50 orang (Berkembang)", value: "10-50" },
-          { label: "🏛️ 50+ orang (Skala Menengah/Besar)", value: "50+" }
-        ];
-      } else if (step === 3) {
-        setTeamSize(text);
-        responseText = "Paham. Mari kita petakan data source Anda. Tools apa saja yang digunakan tim Anda sehari-hari? (Bisa pilih lebih dari satu, lalu klik Kirim)";
-        nextOptions = [
-          { label: "📧 Gmail (Email Komunikasi)", value: "Gmail" },
-          { label: "📅 Google Calendar (Jadwal Meeting)", value: "Calendar" },
-          { label: "💾 Google Drive / Sheets (Dokumen)", value: "Drive" },
-          { label: "💬 WhatsApp Chat (Komunikasi Internal/Client)", value: "WhatsApp" },
-          { label: "📊 CSV/Excel (Bookkeeping/Keuangan)", value: "CSV" }
-        ];
-      } else if (step === 4) {
-        const tools = selectedOptions.length > 0 ? selectedOptions : [text];
-        setToolsUsed(tools);
-        responseText = "Luar biasa. Tools ini akan terhubung sebagai memory source. Pertanyaan terakhir:\n\nApa pain point atau tantangan terbesar bisnis yang ingin Anda selesaikan lewat Company Memory ini? (Bisa pilih lebih dari satu)";
-        nextOptions = [
-          { label: "⚠️ Project sering terlambat / Missed deadline", value: "Project terlambat" },
-          { label: "🧠 Knowledge hilang saat tim resign / Tersebar", value: "Knowledge loss" },
-          { label: "📊 Sulit memantau performa & kapasitas tim", value: "Tim monitoring" },
-          { label: "💬 Komunikasi client chaos / Revisi berlebihan", value: "Client chaos" },
-          { label: "💵 Invoice & sales follow-up tidak terpantau", value: "Sales chaos" }
-        ];
-      } else if (step === 5) {
-        const pains = selectedOptions.length > 0 ? selectedOptions : [text];
-        setPainPoints(pains);
-        
-        // Save to localStorage
-        const companyData = {
-          name: companyName,
-          businessType: businessType,
-          teamSize: teamSize,
-          toolsUsed: toolsUsed,
-          painPoints: pains,
-          createdAt: new Date().toISOString()
-        };
-        localStorage.setItem("coretify_company", JSON.stringify(companyData));
-
-        responseText = `Konfigurasi selesai! 🎉\n\ Kami telah menyiapkan playbook kustom untuk **${companyName}** (${businessType}) dengan fokus pada penyelesaian *${pains.join(", ")}*.\n\nSekarang, mari hubungkan data source Anda agar otak Coretify mulai memindai dan membangun Company Memory pertama Anda.`;
-      }
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: Date.now().toString(),
-          sender: "bot",
-          text: responseText,
-          timestamp: new Date(),
-          options: nextOptions,
-          multipleSelect: nextStep === 4 || nextStep === 5
-        },
-      ]);
-      setStep(nextStep);
-      setIsTyping(false);
-    }, 1200);
-  };
-
-  const handleOptionClick = (optionValue: string, isMultiple: boolean) => {
-    if (isMultiple) {
-      if (selectedOptions.includes(optionValue)) {
-        setSelectedOptions(selectedOptions.filter((o) => o !== optionValue));
-      } else {
-        setSelectedOptions([...selectedOptions, optionValue]);
-      }
+  const handleNext = () => {
+    if (step < 4) {
+      setStep(step + 1);
     } else {
-      handleSend(optionValue);
+      const companyData = {
+        name: companyName || "Coretify Workspace",
+        businessType: businessType || "Startup",
+        teamSize: teamSize || "1-10",
+        toolsUsed: toolsUsed.length > 0 ? toolsUsed : ["Gmail", "Drive"],
+        painPoints: painPoints.length > 0 ? painPoints : ["Knowledge loss"],
+        createdAt: new Date().toISOString()
+      };
+      localStorage.setItem("coretify_company", JSON.stringify(companyData));
+      router.push("/connect");
     }
   };
 
-  const proceedToConnect = () => {
-    router.push("/connect");
+  const handleBack = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
   };
 
-  const progressPercent = Math.min((step / 6) * 100, 100);
+  const handleVerticalSelect = (value: string) => {
+    setBusinessType(value);
+    setTimeout(() => {
+      setStep(3);
+    }, 220);
+  };
+
+  const handleScaleSelect = (value: string) => {
+    setTeamSize(value);
+    setTimeout(() => {
+      setStep(4);
+    }, 220);
+  };
+
+  const toggleTool = (tool: string) => {
+    if (toolsUsed.includes(tool)) {
+      setToolsUsed(toolsUsed.filter((t) => t !== tool));
+    } else {
+      setToolsUsed([...toolsUsed, tool]);
+    }
+  };
+
+  const toggleGoal = (goal: string) => {
+    if (painPoints.includes(goal)) {
+      setPainPoints(painPoints.filter((g) => g !== goal));
+    } else {
+      setPainPoints([...painPoints, goal]);
+    }
+  };
+
+  const verticals = [
+    { label: "🏢 Software House", value: "Software House", desc: "Playbook kustom untuk workload, code logs, & scope creep." },
+    { label: "🎨 Creative Agency", value: "Agency", desc: "Mengoptimalkan margins, kolaborasi client, & retensi akun." },
+    { label: "🚀 Tech Startup", value: "Startup", desc: "Fokus akselerasi produk & data decision logs secara otomatis." },
+    { label: "💼 Professional Services", value: "Consultant", desc: "Akurasi data audit legal, konsultasi, dan timeline deliverables." },
+    { label: "📦 Lainnya / Retail", value: "Lainnya", desc: "Koordinasi operasional internal & monitoring bookkeeping." }
+  ];
+
+  const scales = [
+    { label: "👥 1 - 10 Orang", value: "1-10", desc: "Tim Butik / Small studio / Small business" },
+    { label: "🏢 10 - 50 Orang", value: "10-50", desc: "Tim Berkembang / Mid-size organization" },
+    { label: "🏛️ 50+ Orang", value: "50+", desc: "Skala Korporat / Enterprise solution" }
+  ];
+
+  const toolsList = [
+    { label: "📧 Gmail", value: "Gmail" },
+    { label: "📅 Google Calendar", value: "Calendar" },
+    { label: "💾 Google Drive", value: "Drive" },
+    { label: "💬 WhatsApp Chat", value: "WhatsApp" },
+    { label: "📊 CSV/Excel", value: "CSV" }
+  ];
+
+  const goalsList = [
+    { label: "⚠️ Project Delay", value: "Project terlambat" },
+    { label: "🧠 Knowledge Loss", value: "Knowledge loss" },
+    { label: "📊 Overcapacity", value: "Tim monitoring" },
+    { label: "💬 Client Revision", value: "Client chaos" },
+    { label: "💵 Sales Chaos", value: "Sales chaos" }
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-[#070708] text-zinc-100 selection:bg-white/10 selection:text-white relative overflow-hidden font-sans antialiased">
       
       {/* Background concentric rings visual decoration */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 opacity-[0.22]">
-        <div className="w-[85vw] h-[85vw] rounded-full border border-zinc-900/30 border-dashed animate-[spin_120s_linear_infinite]" />
-        <div className="w-[55vw] h-[55vw] rounded-full border border-zinc-900/40 border-dashed animate-[spin_80s_linear_infinite_reverse]" />
-        <div className="w-[25vw] h-[25vw] rounded-full border border-zinc-900/60" />
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 opacity-[0.12]">
+        <div className="w-[85vw] h-[85vw] rounded-full border border-zinc-950 border-dashed animate-[spin_120s_linear_infinite]" />
+        <div className="w-[55vw] h-[55vw] rounded-full border border-zinc-950 border-dashed animate-[spin_80s_linear_infinite_reverse]" />
       </div>
 
       {/* Atmospheric radial flows */}
-      <div className="absolute top-[-15%] left-[-10%] w-[50%] aspect-square rounded-full bg-white/[0.015] blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute bottom-[-15%] right-[-10%] w-[50%] aspect-square rounded-full bg-zinc-500/[0.02] blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute top-[-15%] left-[-10%] w-[50%] aspect-square rounded-full bg-white/[0.01] blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute bottom-[-15%] right-[-10%] w-[50%] aspect-square rounded-full bg-zinc-500/[0.015] blur-[120px] pointer-events-none -z-10" />
 
       {/* Center Layout Container with Dashed Side Borders */}
-      <div className="mx-auto max-w-[1360px] w-full min-h-screen border-l border-r border-zinc-800/20 border-dashed flex flex-col justify-between relative z-10">
+      <div className="mx-auto max-w-[1360px] w-full min-h-screen border-l border-r border-zinc-800/10 border-dashed flex flex-col justify-between relative z-10">
         
-        {/* Header bar matching main navbar style */}
-        <header className="border-b border-zinc-900/60 bg-[#070708]/85 backdrop-blur-md sticky top-0 z-50 w-full select-none">
+        {/* Header bar */}
+        <header className="border-b border-zinc-900/40 bg-[#070708]/85 backdrop-blur-md sticky top-0 z-50 w-full select-none">
           <div className="px-8 flex h-20 items-center justify-between">
-            {/* Logo */}
             <div className="flex items-center gap-0 cursor-pointer" onClick={() => router.push("/")}>
               <img src="/coretify.png" alt="Coretify Logo" className="h-8 w-auto object-contain" />
               <span className="text-[19px] font-semibold tracking-tight text-white">
@@ -217,207 +136,278 @@ export default function OnboardingPage() {
             
             <div className="flex items-center gap-2">
               <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider font-mono">
-                Setup · Step {Math.min(step, 5)} / 5
+                SECURE CONNECTOR · TLS 1.3
               </span>
             </div>
           </div>
+        </header>
 
-          {/* Animated progress bar indicator */}
-          <div className="w-full h-[1px] bg-zinc-900/60 relative overflow-hidden">
+        {/* Setup wizard workspace (Flat & Borderless) */}
+        <main className="flex-1 max-w-2xl w-full mx-auto px-6 py-16 md:py-24 flex flex-col justify-center">
+          
+          {/* Step Metadata bar */}
+          <div className="flex items-center justify-between border-b border-zinc-900/40 pb-3 mb-8 select-none">
+            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest font-mono flex items-center gap-1.5">
+              <span className="text-zinc-500">★</span> STEP {step} OF 4
+            </span>
+            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest font-mono">
+              {Math.round(progressPercent)}% Completed
+            </span>
+          </div>
+
+          {/* Progress bar indicator */}
+          <div className="w-full h-[2px] bg-zinc-900/60 relative overflow-hidden rounded-full mb-8">
             <div
-              className="h-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.35)] transition-all duration-500 ease-out"
+              className="h-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.4)] transition-all duration-300 ease-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
-        </header>
 
-        {/* Conversation flow viewport */}
-        <main className="flex-1 max-w-3xl w-full mx-auto px-6 py-10 flex flex-col justify-between">
-          
-          {/* Message Stack list container */}
-          <div className="flex-1 space-y-6 mb-6">
-            <AnimatePresence initial={false}>
-              {messages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`flex items-start gap-4 ${
-                    msg.sender === "user" ? "justify-end" : "justify-start"
-                  }`}
-                >
-                  {/* Bot Avatar */}
-                  {msg.sender === "bot" && (
-                    <div className="h-8.5 w-8.5 rounded-lg bg-[#0c0c0e]/90 border border-zinc-900/80 flex items-center justify-center text-zinc-400 shrink-0 shadow-lg relative select-none">
-                      <div className="absolute inset-0 rounded-lg border border-white/10 animate-ping pointer-events-none" />
-                      <Bot className="h-4.5 w-4.5 text-zinc-400" />
-                    </div>
-                  )}
-
-                  {/* Bubble content */}
-                  <div className="flex flex-col gap-3 max-w-[82%]">
-                    <motion.div
-                      initial={{ opacity: 0, y: 12, scale: 0.97 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.32, ease: "easeOut" }}
-                      className={`rounded-2xl px-4 py-3 text-[13px] leading-relaxed border shadow-md relative overflow-hidden ${
-                        msg.sender === "user"
-                          ? "bg-[#161619] border-zinc-800/60 text-white rounded-tr-none self-end"
-                          : "bg-[#0c0c0e]/80 border-zinc-900/80 text-zinc-300 rounded-tl-none backdrop-blur-md"
-                      }`}
-                    >
-                      {msg.sender === "bot" && (
-                        <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-transparent pointer-events-none" />
-                      )}
-                      <p className="whitespace-pre-wrap font-sans font-normal relative z-10">{msg.text}</p>
-                    </motion.div>
-
-                    {/* Interactive inputs selection pills */}
-                    {msg.sender === "bot" && msg.options && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.28, delay: 0.1 }}
-                        className="mt-0.5 flex flex-wrap gap-2 select-none"
-                      >
-                        {msg.options.map((opt: any) => {
-                          const value = typeof opt === "object" ? opt.value : opt;
-                          const label = typeof opt === "object" ? opt.label : opt;
-                          const isSelected = selectedOptions.includes(value);
-                          const isMultiple = !!msg.multipleSelect;
-
-                          return (
-                            <button
-                              key={value}
-                              onClick={() => handleOptionClick(value, isMultiple)}
-                              className={`text-[12px] px-4 py-2.5 rounded-md font-semibold border transition-all duration-200 focus:outline-none ${
-                                isSelected
-                                  ? "bg-white border-transparent text-black shadow-[0_0_15px_rgba(255,255,255,0.08)] scale-[1.01]"
-                                  : "bg-[#0b0b0d]/90 border-zinc-900 text-zinc-400 hover:border-zinc-800 hover:bg-[#121215] hover:text-white"
-                              }`}
-                            >
-                              <span className="flex items-center gap-2">
-                                {isMultiple && (
-                                  <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-all ${
-                                    isSelected ? "border-black bg-black text-white" : "border-zinc-700 bg-transparent"
-                                  }`}>
-                                    {isSelected && <Check className="h-2.5 w-2.5 stroke-[3px]" />}
-                                  </span>
-                                )}
-                                {label}
-                              </span>
-                            </button>
-                          );
-                        })}
-
-                        {/* Submit Button for Multiple choice */}
-                        {msg.multipleSelect && (
-                          <Button
-                            size="sm"
-                            onClick={() => handleSend()}
-                            disabled={selectedOptions.length === 0}
-                            className="bg-white hover:bg-zinc-100 text-black rounded-md font-bold text-xs px-5.5 py-2.5 shadow border-0 duration-200"
-                          >
-                            Kirim
-                            <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
-                          </Button>
-                        )}
-                      </motion.div>
-                    )}
-                  </div>
-
-                  {/* User Avatar */}
-                  {msg.sender === "user" && (
-                    <div className="h-8.5 w-8.5 rounded-lg bg-[#161619] border border-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 shadow-md select-none">
-                      <User className="h-4.5 w-4.5 text-zinc-400" />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </AnimatePresence>
-
-            {/* Ingestion progress feedback loader */}
-            {isTyping && (
-              <div className="flex items-start gap-4">
-                <div className="h-8.5 w-8.5 rounded-lg bg-[#0c0c0e]/90 border border-zinc-900/80 flex items-center justify-center text-zinc-400 shrink-0 shadow">
-                  <Bot className="h-4.5 w-4.5 text-zinc-400" />
-                </div>
-                <div className="bg-[#0c0c0e]/80 border border-zinc-900/80 rounded-2xl rounded-tl-none px-4 py-3 backdrop-blur-md flex items-center gap-1.5 shadow">
-                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-500 animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-500 animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-500 animate-bounce" style={{ animationDelay: "300ms" }} />
-                </div>
-              </div>
-            )}
-
-            {/* Complete Final Step Action success card */}
-            {step > 5 && !isTyping && (
-              <div className="flex justify-center pt-8 w-full">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="w-full max-w-md"
-                >
-                  <Card className="bg-[#0c0c0e]/90 border border-zinc-900/80 p-7 text-center backdrop-blur-md relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] rounded-xl select-none">
-                    {/* Inner glowing backlight */}
-                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-40 h-40 bg-gradient-to-b from-white/[0.04] to-transparent blur-xl rounded-full pointer-events-none" />
-                    
-                    <div className="h-11 w-11 rounded-xl bg-zinc-900 border border-zinc-800 mx-auto flex items-center justify-center text-zinc-400 mb-4 shadow-lg relative">
-                      <div className="absolute inset-0 rounded-xl border border-white/10 animate-pulse" />
-                      <Sparkles className="h-5.5 w-5.5 text-zinc-200" />
-                    </div>
-                    
-                    <h3 className="text-sm font-bold text-white mb-2 tracking-tight">Company Memory Siap Dibangun</h3>
-                    
-                    {/* Monospace Parameter Badge */}
-                    <div className="inline-block px-3 py-1 bg-white/[0.03] border border-white/[0.04] rounded-md font-mono text-[10px] text-zinc-500 mb-4">
-                      PLAYBOOK: {businessType.toUpperCase()}
-                    </div>
-
-                    <p className="text-zinc-400 text-xs leading-relaxed mb-6">
-                      Playbook kustom telah dikonfigurasi berdasarkan vertical industri Anda. Langkah berikutnya adalah menyambungkan data source bisnis Anda.
-                    </p>
-                    
-                    <Button
-                      onClick={proceedToConnect}
-                      className="w-full bg-white hover:bg-zinc-100 text-black font-bold text-xs py-4 rounded-md shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all hover:scale-[1.01] duration-200"
-                    >
-                      Hubungkan Data Source
-                      <ArrowRight className="h-3.5 w-3.5 ml-2" />
-                    </Button>
-                  </Card>
-                </motion.div>
-              </div>
-            )}
-
-            <div ref={messagesEndRef} />
+          {/* Monospace Step Badge Category Tag */}
+          <div className="self-start inline-block px-3 py-1 rounded-md border border-zinc-850 bg-zinc-950/20 text-[9px] font-extrabold uppercase tracking-[0.2em] text-zinc-400 font-mono mb-6">
+            {step === 1 && "WORKSPACE IDENTITY"}
+            {step === 2 && "VERTICAL PLAYBOOK"}
+            {step === 3 && "TEAM SCALE"}
+            {step === 4 && "DATA & OUTCOMES"}
           </div>
 
-          {/* Input Box Area (Only shown for active text inputs, i.e., step 1 or fallbacks) */}
-          {step === 1 && !isTyping && (
-            <div className="border-t border-zinc-900/40 pt-5 bg-[#070708]/85 backdrop-blur-sm sticky bottom-0 z-40 pb-6">
-              <div className="relative flex items-center bg-[#0c0c0e]/90 border border-zinc-900 rounded-xl focus-within:border-zinc-800 transition-all p-1.5 shadow-2xl">
-                <input
-                  type="text"
-                  placeholder="Ketik nama Anda & nama bisnis..."
-                  value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSend();
-                  }}
-                  className="flex-1 bg-transparent px-3.5 py-2.5 text-xs border-0 focus:outline-none focus:ring-0 text-white placeholder-zinc-500"
-                />
-                <Button
-                  size="sm"
-                  onClick={() => handleSend()}
-                  disabled={!inputText.trim()}
-                  className="bg-white hover:bg-zinc-100 text-black font-bold rounded-md shadow px-5 py-2.5 duration-200 text-xs"
+          {/* Big Typography Question Headline */}
+          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white mb-3 leading-tight">
+            {step === 1 && "Tell us about your workspace."}
+            {step === 2 && "Which vertical playbook should we deploy?"}
+            {step === 3 && "How many members are in your team?"}
+            {step === 4 && "Select data sources and target outcomes."}
+          </h1>
+
+          <p className="text-zinc-400 text-xs sm:text-[13px] leading-relaxed mb-10 select-none">
+            {step === 1 && "Enter your company name and owner details to initialize the company memory."}
+            {step === 2 && "Coretify will automatically customize risk detection rules and daily brief templates."}
+            {step === 3 && "This sets the data allocation and capacity thresholds for your memory stream."}
+            {step === 4 && "Choose the platforms you plan to connect and the key challenges you want to solve first."}
+          </p>
+
+          {/* Steps Switcher Content Container */}
+          <div className="min-h-[200px]">
+            <AnimatePresence mode="wait">
+              {step === 1 && (
+                <motion.div
+                  key="step-1"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18 }}
+                  className="space-y-5"
                 >
-                  Kirim
-                </Button>
-              </div>
-            </div>
-          )}
+                  <div className="space-y-2">
+                    <label className="text-[9px] font-bold uppercase tracking-[0.18em] text-zinc-500 font-mono block">Nama Bisnis / Perusahaan</label>
+                    <Input
+                      type="text"
+                      placeholder="e.g. Acme Corporation"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      className="bg-transparent border-zinc-900 focus:border-zinc-700 transition-all text-sm rounded-md py-6 px-4 text-white placeholder-zinc-650"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[9px] font-bold uppercase tracking-[0.18em] text-zinc-500 font-mono block">Nama Anda (Owner / Admin)</label>
+                    <Input
+                      type="text"
+                      placeholder="e.g. Alex Henderson"
+                      value={ownerName}
+                      onChange={(e) => setOwnerName(e.target.value)}
+                      className="bg-transparent border-zinc-900 focus:border-zinc-700 transition-all text-sm rounded-md py-6 px-4 text-white placeholder-zinc-650"
+                    />
+                  </div>
+                </motion.div>
+              )}
+
+              {step === 2 && (
+                <motion.div
+                  key="step-2"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18 }}
+                  className="space-y-3"
+                >
+                  {verticals.map((v) => {
+                    const isSelected = businessType === v.value;
+                    return (
+                      <button
+                        key={v.value}
+                        onClick={() => handleVerticalSelect(v.value)}
+                        className={`w-full flex items-center justify-between p-5 rounded-xl border text-left transition-all duration-200 select-none ${
+                          isSelected
+                            ? "bg-zinc-950/40 border-zinc-500 text-white shadow-[0_0_20px_rgba(255,255,255,0.02)]"
+                            : "bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-400 hover:text-white"
+                        }`}
+                      >
+                        <div>
+                          <div className="text-xs font-semibold">{v.label}</div>
+                          <div className="text-[11px] text-zinc-500 mt-1 font-normal leading-relaxed">{v.desc}</div>
+                        </div>
+                        <div className={`h-4.5 w-4.5 rounded-full border flex items-center justify-center shrink-0 transition-all ${
+                          isSelected ? "border-white bg-white" : "border-zinc-800 bg-transparent"
+                        }`}>
+                          {isSelected && <div className="h-1.5 w-1.5 rounded-full bg-black" />}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </motion.div>
+              )}
+
+              {step === 3 && (
+                <motion.div
+                  key="step-3"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18 }}
+                  className="space-y-3"
+                >
+                  {scales.map((s) => {
+                    const isSelected = teamSize === s.value;
+                    return (
+                      <button
+                        key={s.value}
+                        onClick={() => handleScaleSelect(s.value)}
+                        className={`w-full flex items-center justify-between p-5 rounded-xl border text-left transition-all duration-200 select-none ${
+                          isSelected
+                            ? "bg-zinc-950/40 border-zinc-500 text-white shadow-[0_0_20px_rgba(255,255,255,0.02)]"
+                            : "bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-450 hover:text-white"
+                        }`}
+                      >
+                        <div>
+                          <div className="text-xs font-semibold">{s.label}</div>
+                          <div className="text-[11px] text-zinc-500 mt-1 font-normal">{s.desc}</div>
+                        </div>
+                        <div className={`h-4.5 w-4.5 rounded-full border flex items-center justify-center shrink-0 transition-all ${
+                          isSelected ? "border-white bg-white" : "border-zinc-800 bg-transparent"
+                        }`}>
+                          {isSelected && <div className="h-1.5 w-1.5 rounded-full bg-black" />}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </motion.div>
+              )}
+
+              {step === 4 && (
+                <motion.div
+                  key="step-4"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18 }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                >
+                  {/* Left: Tools selection */}
+                  <div className="space-y-3">
+                    <label className="text-[9px] font-bold uppercase tracking-[0.18em] text-zinc-550 font-mono block">
+                      Rencana Data Source
+                    </label>
+                    <div className="space-y-2">
+                      {toolsList.map((t) => {
+                        const isSelected = toolsUsed.includes(t.value);
+                        return (
+                          <button
+                            key={t.value}
+                            onClick={() => toggleTool(t.value)}
+                            className={`w-full flex items-center justify-between p-4 rounded-xl border text-xs font-semibold text-left transition-all duration-200 ${
+                              isSelected
+                                ? "bg-zinc-950/40 border-zinc-500 text-white"
+                                : "bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-400 hover:text-white"
+                            }`}
+                          >
+                            <span>{t.label}</span>
+                            <div className={`h-4.5 w-4.5 rounded border flex items-center justify-center transition-all ${
+                              isSelected ? "border-white bg-white text-black" : "border-zinc-800 bg-transparent"
+                            }`}>
+                              {isSelected && <Check className="h-3 w-3 stroke-[3px]" />}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Right: Goals selection */}
+                  <div className="space-y-3">
+                    <label className="text-[9px] font-bold uppercase tracking-[0.18em] text-zinc-550 font-mono block">
+                      Target Outcomes Utama
+                    </label>
+                    <div className="space-y-2">
+                      {goalsList.map((g) => {
+                        const isSelected = painPoints.includes(g.value);
+                        return (
+                          <button
+                            key={g.value}
+                            onClick={() => toggleGoal(g.value)}
+                            className={`w-full flex items-center justify-between p-4 rounded-xl border text-xs font-semibold text-left transition-all duration-200 ${
+                              isSelected
+                                ? "bg-zinc-950/40 border-zinc-500 text-white"
+                                : "bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-400 hover:text-white"
+                            }`}
+                          >
+                            <span>{g.label}</span>
+                            <div className={`h-4.5 w-4.5 rounded border flex items-center justify-center transition-all ${
+                              isSelected ? "border-white bg-white text-black" : "border-zinc-800 bg-transparent"
+                            }`}>
+                              {isSelected && <Check className="h-3 w-3 stroke-[3px]" />}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Stepper Footer actions */}
+          <div className="border-t border-zinc-900/40 mt-12 pt-6 flex items-center justify-between">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleBack}
+              disabled={step === 1}
+              className="bg-transparent border-zinc-900 hover:border-zinc-800 text-zinc-450 hover:text-white rounded-md text-xs py-2.5 px-4 font-semibold transition-all disabled:opacity-30 disabled:pointer-events-none"
+            >
+              <ArrowLeft className="h-3.5 w-3.5 mr-2" />
+              Kembali
+            </Button>
+
+            <Button
+              size="sm"
+              onClick={handleNext}
+              disabled={
+                (step === 1 && (!companyName.trim() || !ownerName.trim())) ||
+                (step === 2 && !businessType) ||
+                (step === 3 && !teamSize) ||
+                (step === 4 && toolsUsed.length === 0)
+              }
+              className="bg-white hover:bg-zinc-100 text-black font-bold rounded-md text-xs py-2.5 px-6 shadow border-0 duration-200 transition-all disabled:opacity-30 disabled:pointer-events-none"
+            >
+              {step === 4 ? "Selesaikan Setup" : "Lanjut"}
+              <ArrowRight className="h-3.5 w-3.5 ml-2" />
+            </Button>
+          </div>
+
         </main>
+
+        {/* Footer */}
+        <footer className="border-t border-zinc-900/40 py-6 px-8 flex items-center justify-between select-none">
+          <p className="text-[10px] text-zinc-550 font-mono">
+            &copy; 2026 Coretify Inc. All rights reserved.
+          </p>
+          <p className="text-[10px] text-zinc-550 font-mono">
+            Secure Read-Only Access
+          </p>
+        </footer>
+
       </div>
     </div>
   );
