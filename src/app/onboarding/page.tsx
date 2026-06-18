@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
   ArrowRight,
@@ -149,7 +150,7 @@ export default function OnboardingPage() {
         };
         localStorage.setItem("coretify_company", JSON.stringify(companyData));
 
-        responseText = `Konfigurasi selesai! 🎉\n\nKami telah menyiapkan playbook kustom untuk **${companyName}** (${businessType}) dengan fokus pada penyelesaian *${pains.join(", ")}*.\n\nSekarang, mari hubungkan data source Anda agar otak Coretify mulai memindai dan membangun Company Memory pertama Anda.`;
+        responseText = `Konfigurasi selesai! 🎉\n\ Kami telah menyiapkan playbook kustom untuk **${companyName}** (${businessType}) dengan fokus pada penyelesaian *${pains.join(", ")}*.\n\nSekarang, mari hubungkan data source Anda agar otak Coretify mulai memindai dan membangun Company Memory pertama Anda.`;
       }
 
       setMessages((prev) => [
@@ -187,181 +188,237 @@ export default function OnboardingPage() {
   const progressPercent = Math.min((step / 6) * 100, 100);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#070708] text-slate-100 selection:bg-purple-500/30">
+    <div className="flex flex-col min-h-screen bg-[#070708] text-zinc-100 selection:bg-white/10 selection:text-white relative overflow-hidden font-sans antialiased">
       
-      {/* Top Background radial gradient */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[500px] w-full max-w-[1360px] rounded-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900/40 via-transparent to-transparent blur-3xl pointer-events-none" />
+      {/* Background concentric rings visual decoration */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 opacity-[0.22]">
+        <div className="w-[85vw] h-[85vw] rounded-full border border-zinc-900/30 border-dashed animate-[spin_120s_linear_infinite]" />
+        <div className="w-[55vw] h-[55vw] rounded-full border border-zinc-900/40 border-dashed animate-[spin_80s_linear_infinite_reverse]" />
+        <div className="w-[25vw] h-[25vw] rounded-full border border-zinc-900/60" />
+      </div>
 
-      <header className="border-b border-slate-900 bg-[#070708]/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-0">
-            <img src="/coretify.png" alt="Coretify Logo" className="h-7.5 w-auto object-contain" />
-            <span className="font-semibold text-[19px] tracking-tight text-white">
-              Coretify Setup
-            </span>
-          </div>
-          <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-            Step {Math.min(step, 5)} of 5
-          </div>
-        </div>
+      {/* Atmospheric radial flows */}
+      <div className="absolute top-[-15%] left-[-10%] w-[50%] aspect-square rounded-full bg-white/[0.015] blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute bottom-[-15%] right-[-10%] w-[50%] aspect-square rounded-full bg-zinc-500/[0.02] blur-[120px] pointer-events-none -z-10" />
 
-        {/* Progress Bar (Subtle white line progress) */}
-        <div className="w-full h-[2px] bg-slate-900">
-          <div
-            className="h-full bg-white transition-all duration-500"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-      </header>
-
-      {/* Main Conversation Container */}
-      <main className="flex-1 max-w-3xl w-full mx-auto px-6 py-10 flex flex-col justify-between">
+      {/* Center Layout Container with Dashed Side Borders */}
+      <div className="mx-auto max-w-[1360px] w-full min-h-screen border-l border-r border-zinc-800/20 border-dashed flex flex-col justify-between relative z-10">
         
-        {/* Messages List */}
-        <div className="flex-1 space-y-6 mb-6">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex items-start gap-4 animate-in fade-in slide-in-from-bottom-2 duration-300 ${
-                msg.sender === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
-              {/* Bot Avatar */}
-              {msg.sender === "bot" && (
-                <div className="h-8.5 w-8.5 rounded-lg bg-[#0c0c0e] border border-slate-900 flex items-center justify-center text-slate-450 shrink-0">
-                  <Bot className="h-4.5 w-4.5" />
-                </div>
-              )}
+        {/* Header bar matching main navbar style */}
+        <header className="border-b border-zinc-900/60 bg-[#070708]/85 backdrop-blur-md sticky top-0 z-50 w-full select-none">
+          <div className="px-8 flex h-20 items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center gap-0 cursor-pointer" onClick={() => router.push("/")}>
+              <img src="/coretify.png" alt="Coretify Logo" className="h-8 w-auto object-contain" />
+              <span className="text-[19px] font-semibold tracking-tight text-white">
+                Coretify
+              </span>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider font-mono">
+                Setup · Step {Math.min(step, 5)} / 5
+              </span>
+            </div>
+          </div>
 
-              {/* Message Bubble */}
-              <div className="flex flex-col gap-2.5 max-w-[85%]">
+          {/* Animated progress bar indicator */}
+          <div className="w-full h-[1px] bg-zinc-900/60 relative overflow-hidden">
+            <div
+              className="h-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.35)] transition-all duration-500 ease-out"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+        </header>
+
+        {/* Conversation flow viewport */}
+        <main className="flex-1 max-w-3xl w-full mx-auto px-6 py-10 flex flex-col justify-between">
+          
+          {/* Message Stack list container */}
+          <div className="flex-1 space-y-6 mb-6">
+            <AnimatePresence initial={false}>
+              {messages.map((msg) => (
                 <div
-                  className={`rounded-2xl px-4 py-3 text-[13px] leading-relaxed border ${
-                    msg.sender === "user"
-                      ? "bg-[#18181b] border-slate-850 text-white rounded-tr-none self-end"
-                      : "bg-[#0c0c0e]/80 border-slate-900 text-slate-300 rounded-tl-none backdrop-blur-md"
+                  key={msg.id}
+                  className={`flex items-start gap-4 ${
+                    msg.sender === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
-                  <p className="whitespace-pre-wrap">{msg.text}</p>
-                </div>
+                  {/* Bot Avatar */}
+                  {msg.sender === "bot" && (
+                    <div className="h-8.5 w-8.5 rounded-lg bg-[#0c0c0e]/90 border border-zinc-900/80 flex items-center justify-center text-zinc-400 shrink-0 shadow-lg relative select-none">
+                      <div className="absolute inset-0 rounded-lg border border-white/10 animate-ping pointer-events-none" />
+                      <Bot className="h-4.5 w-4.5 text-zinc-400" />
+                    </div>
+                  )}
 
-                {/* Render Interactive Options */}
-                {msg.sender === "bot" && msg.options && (
-                  <div className="mt-1 flex flex-wrap gap-2 animate-in fade-in duration-300 delay-75">
-                    {msg.options.map((opt: any) => {
-                      const value = typeof opt === "object" ? opt.value : opt;
-                      const label = typeof opt === "object" ? opt.label : opt;
-                      const isSelected = selectedOptions.includes(value);
-                      const isMultiple = !!msg.multipleSelect;
+                  {/* Bubble content */}
+                  <div className="flex flex-col gap-3 max-w-[82%]">
+                    <motion.div
+                      initial={{ opacity: 0, y: 12, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.32, ease: "easeOut" }}
+                      className={`rounded-2xl px-4 py-3 text-[13px] leading-relaxed border shadow-md relative overflow-hidden ${
+                        msg.sender === "user"
+                          ? "bg-[#161619] border-zinc-800/60 text-white rounded-tr-none self-end"
+                          : "bg-[#0c0c0e]/80 border-zinc-900/80 text-zinc-300 rounded-tl-none backdrop-blur-md"
+                      }`}
+                    >
+                      {msg.sender === "bot" && (
+                        <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] via-transparent to-transparent pointer-events-none" />
+                      )}
+                      <p className="whitespace-pre-wrap font-sans font-normal relative z-10">{msg.text}</p>
+                    </motion.div>
 
-                      return (
-                        <button
-                          key={value}
-                          onClick={() => handleOptionClick(value, isMultiple)}
-                          className={`text-xs px-3.5 py-2.5 rounded-xl border font-semibold transition-all ${
-                            isSelected
-                              ? "bg-white border-transparent text-black shadow-md scale-[1.01]"
-                              : "bg-[#0c0c0e] border-slate-900 text-slate-300 hover:border-slate-800 hover:bg-[#121215] hover:text-white"
-                          }`}
-                        >
-                          <span className="flex items-center gap-1.5">
-                            {isMultiple && isSelected && <Check className="h-3.5 w-3.5" />}
-                            {label}
-                          </span>
-                        </button>
-                      );
-                    })}
-
-                    {/* Show Kirim button for multiple selection */}
-                    {msg.multipleSelect && (
-                      <Button
-                        size="sm"
-                        onClick={() => handleSend()}
-                        disabled={selectedOptions.length === 0}
-                        className="bg-white hover:bg-slate-100 text-black rounded-xl font-semibold shadow border-0"
+                    {/* Interactive inputs selection pills */}
+                    {msg.sender === "bot" && msg.options && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.28, delay: 0.1 }}
+                        className="mt-0.5 flex flex-wrap gap-2 select-none"
                       >
-                        Kirim
-                        <ArrowRight className="h-3.5 w-3.5 ml-1" />
-                      </Button>
+                        {msg.options.map((opt: any) => {
+                          const value = typeof opt === "object" ? opt.value : opt;
+                          const label = typeof opt === "object" ? opt.label : opt;
+                          const isSelected = selectedOptions.includes(value);
+                          const isMultiple = !!msg.multipleSelect;
+
+                          return (
+                            <button
+                              key={value}
+                              onClick={() => handleOptionClick(value, isMultiple)}
+                              className={`text-[12px] px-4 py-2.5 rounded-md font-semibold border transition-all duration-200 focus:outline-none ${
+                                isSelected
+                                  ? "bg-white border-transparent text-black shadow-[0_0_15px_rgba(255,255,255,0.08)] scale-[1.01]"
+                                  : "bg-[#0b0b0d]/90 border-zinc-900 text-zinc-400 hover:border-zinc-800 hover:bg-[#121215] hover:text-white"
+                              }`}
+                            >
+                              <span className="flex items-center gap-2">
+                                {isMultiple && (
+                                  <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-all ${
+                                    isSelected ? "border-black bg-black text-white" : "border-zinc-700 bg-transparent"
+                                  }`}>
+                                    {isSelected && <Check className="h-2.5 w-2.5 stroke-[3px]" />}
+                                  </span>
+                                )}
+                                {label}
+                              </span>
+                            </button>
+                          );
+                        })}
+
+                        {/* Submit Button for Multiple choice */}
+                        {msg.multipleSelect && (
+                          <Button
+                            size="sm"
+                            onClick={() => handleSend()}
+                            disabled={selectedOptions.length === 0}
+                            className="bg-white hover:bg-zinc-100 text-black rounded-md font-bold text-xs px-5.5 py-2.5 shadow border-0 duration-200"
+                          >
+                            Kirim
+                            <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
+                          </Button>
+                        )}
+                      </motion.div>
                     )}
                   </div>
-                )}
-              </div>
 
-              {/* User Avatar */}
-              {msg.sender === "user" && (
-                <div className="h-8.5 w-8.5 rounded-lg bg-[#18181b] border border-slate-850 flex items-center justify-center text-slate-300 shrink-0">
-                  <User className="h-4.5 w-4.5" />
+                  {/* User Avatar */}
+                  {msg.sender === "user" && (
+                    <div className="h-8.5 w-8.5 rounded-lg bg-[#161619] border border-zinc-800 flex items-center justify-center text-zinc-400 shrink-0 shadow-md select-none">
+                      <User className="h-4.5 w-4.5 text-zinc-400" />
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+              ))}
+            </AnimatePresence>
 
-          {/* Typing Indicator */}
-          {isTyping && (
-            <div className="flex items-start gap-4">
-              <div className="h-8.5 w-8.5 rounded-lg bg-[#0c0c0e] border border-slate-900 flex items-center justify-center text-slate-450 shrink-0">
-                <Bot className="h-4.5 w-4.5" />
-              </div>
-              <div className="bg-[#0c0c0e]/80 border border-slate-900 rounded-2xl rounded-tl-none px-4 py-3 backdrop-blur-md flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: "0ms" }} />
-                <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: "150ms" }} />
-                <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: "300ms" }} />
-              </div>
-            </div>
-          )}
-
-          {/* Complete Final Step Action */}
-          {step > 5 && !isTyping && (
-            <div className="flex justify-center pt-8 animate-in zoom-in-95 duration-500">
-              <Card className="bg-[#0c0c0e] border border-slate-900 max-w-md w-full p-6 text-center backdrop-blur-md relative overflow-hidden shadow-xl">
-                <div className="h-10 w-10 rounded-xl bg-slate-900 border border-slate-800 mx-auto flex items-center justify-center text-slate-300 mb-4">
-                  <Sparkles className="h-5 w-5" />
+            {/* Ingestion progress feedback loader */}
+            {isTyping && (
+              <div className="flex items-start gap-4">
+                <div className="h-8.5 w-8.5 rounded-lg bg-[#0c0c0e]/90 border border-zinc-900/80 flex items-center justify-center text-zinc-400 shrink-0 shadow">
+                  <Bot className="h-4.5 w-4.5 text-zinc-400" />
                 </div>
-                <h3 className="text-sm font-bold text-white mb-2">Company Memory Siap Dibangun</h3>
-                <p className="text-slate-400 text-xs leading-relaxed mb-6">
-                  Playbook kustom telah dikonfigurasi berdasarkan vertical industri Anda. Langkah berikutnya adalah menyambungkan data source bisnis Anda.
-                </p>
-                <Button
-                  onClick={proceedToConnect}
-                  className="w-full bg-white hover:bg-slate-100 text-black font-semibold text-xs py-4.5 rounded-full shadow transition-all hover:scale-[1.01]"
+                <div className="bg-[#0c0c0e]/80 border border-zinc-900/80 rounded-2xl rounded-tl-none px-4 py-3 backdrop-blur-md flex items-center gap-1.5 shadow">
+                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-500 animate-bounce" style={{ animationDelay: "300ms" }} />
+                </div>
+              </div>
+            )}
+
+            {/* Complete Final Step Action success card */}
+            {step > 5 && !isTyping && (
+              <div className="flex justify-center pt-8 w-full">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="w-full max-w-md"
                 >
-                  Hubungkan Data Source
-                  <ArrowRight className="h-3.5 w-3.5 ml-2" />
+                  <Card className="bg-[#0c0c0e]/90 border border-zinc-900/80 p-7 text-center backdrop-blur-md relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] rounded-xl select-none">
+                    {/* Inner glowing backlight */}
+                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-40 h-40 bg-gradient-to-b from-white/[0.04] to-transparent blur-xl rounded-full pointer-events-none" />
+                    
+                    <div className="h-11 w-11 rounded-xl bg-zinc-900 border border-zinc-800 mx-auto flex items-center justify-center text-zinc-400 mb-4 shadow-lg relative">
+                      <div className="absolute inset-0 rounded-xl border border-white/10 animate-pulse" />
+                      <Sparkles className="h-5.5 w-5.5 text-zinc-200" />
+                    </div>
+                    
+                    <h3 className="text-sm font-bold text-white mb-2 tracking-tight">Company Memory Siap Dibangun</h3>
+                    
+                    {/* Monospace Parameter Badge */}
+                    <div className="inline-block px-3 py-1 bg-white/[0.03] border border-white/[0.04] rounded-md font-mono text-[10px] text-zinc-500 mb-4">
+                      PLAYBOOK: {businessType.toUpperCase()}
+                    </div>
+
+                    <p className="text-zinc-400 text-xs leading-relaxed mb-6">
+                      Playbook kustom telah dikonfigurasi berdasarkan vertical industri Anda. Langkah berikutnya adalah menyambungkan data source bisnis Anda.
+                    </p>
+                    
+                    <Button
+                      onClick={proceedToConnect}
+                      className="w-full bg-white hover:bg-zinc-100 text-black font-bold text-xs py-4 rounded-md shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all hover:scale-[1.01] duration-200"
+                    >
+                      Hubungkan Data Source
+                      <ArrowRight className="h-3.5 w-3.5 ml-2" />
+                    </Button>
+                  </Card>
+                </motion.div>
+              </div>
+            )}
+
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input Box Area (Only shown for active text inputs, i.e., step 1 or fallbacks) */}
+          {step === 1 && !isTyping && (
+            <div className="border-t border-zinc-900/40 pt-5 bg-[#070708]/85 backdrop-blur-sm sticky bottom-0 z-40 pb-6">
+              <div className="relative flex items-center bg-[#0c0c0e]/90 border border-zinc-900 rounded-xl focus-within:border-zinc-800 transition-all p-1.5 shadow-2xl">
+                <input
+                  type="text"
+                  placeholder="Ketik nama Anda & nama bisnis..."
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSend();
+                  }}
+                  className="flex-1 bg-transparent px-3.5 py-2.5 text-xs border-0 focus:outline-none focus:ring-0 text-white placeholder-zinc-500"
+                />
+                <Button
+                  size="sm"
+                  onClick={() => handleSend()}
+                  disabled={!inputText.trim()}
+                  className="bg-white hover:bg-zinc-100 text-black font-bold rounded-md shadow px-5 py-2.5 duration-200 text-xs"
+                >
+                  Kirim
                 </Button>
-              </Card>
+              </div>
             </div>
           )}
-
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Input Box Area (Only shown for active text inputs, i.e., step 1 or fallbacks) */}
-        {step === 1 && !isTyping && (
-          <div className="border-t border-slate-900 pt-4 bg-[#070708]/80 backdrop-blur-md sticky bottom-0">
-            <div className="relative flex items-center bg-[#0c0c0e] border border-slate-900 rounded-xl focus-within:border-slate-800 transition-all p-1.5">
-              <input
-                type="text"
-                placeholder="Ketik nama Anda & nama bisnis..."
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSend();
-                }}
-                className="flex-1 bg-transparent px-3 py-2 text-xs border-0 focus:outline-none focus:ring-0 text-white"
-              />
-              <Button
-                size="sm"
-                onClick={() => handleSend()}
-                disabled={!inputText.trim()}
-                className="bg-white hover:bg-slate-100 text-black font-semibold rounded-lg shadow px-4 py-2"
-              >
-                Kirim
-              </Button>
-            </div>
-          </div>
-        )}
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

@@ -764,7 +764,7 @@ export default function Home() {
 
       {/* STANDALONE HORIZONTAL STRIPED SPACER SECTION */}
       <section className="w-full bg-[#070708]/40 relative z-20">
-        <div 
+        <div
           className="mx-auto max-w-[1360px] border-b border-l border-r border-b-slate-850/80 border-l-slate-850/30 border-r-slate-850/30 h-8 w-full relative overflow-hidden bg-transparent"
           style={{
             backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.08) 0px, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px, transparent 7px)'
@@ -2505,9 +2505,9 @@ export default function Home() {
             <div className="absolute -top-1/4 -right-1/4 w-[60%] h-[130%] bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-zinc-400/60 via-slate-650/15 to-transparent blur-[70px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-slate-500/35 to-transparent blur-[40px] pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[500px] bg-slate-500/18 rounded-full blur-[100px] pointer-events-none" />
-            
+
             {/* Organic Noise/Grain Overlay */}
-            <div 
+            <div
               className="absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-overlay"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
@@ -2639,11 +2639,11 @@ export default function Home() {
           <div className="w-full relative select-none pointer-events-none mt-8 -mb-4 overflow-hidden flex items-center justify-center">
             {/* Background glowing gradient mask under the wordmark */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[120px] bg-gradient-to-t from-slate-500/10 via-zinc-500/3 to-transparent blur-[60px]" />
-            
+
             <div className="flex items-center justify-center gap-0">
-              <img 
-                src="/coretify.png" 
-                alt="Coretify Logo Image" 
+              <img
+                src="/coretify.png"
+                alt="Coretify Logo Image"
                 className="h-[11vw] sm:h-[10vw] w-auto object-contain opacity-85 translate-y-[0.7vw] mr-[-1vw]"
                 style={{
                   WebkitMaskImage: 'linear-gradient(to bottom, white 10%, rgba(255, 255, 255, 0.25) 50%, transparent 85%)',
