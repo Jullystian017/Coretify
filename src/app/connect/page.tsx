@@ -152,16 +152,12 @@ export default function ConnectPage() {
         style={{ background: "radial-gradient(circle, rgba(200,200,220,0.04) 0%, transparent 65%)", filter: "blur(90px)", transform: "translate(25%, 30%)" }} />
 
       {/* ── Navbar ─────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-40 border-b border-zinc-900/50 bg-[#070708]/80 backdrop-blur-md">
-        <div className="max-w-5xl mx-auto px-8 h-16 flex items-center justify-between">
+      <header className="sticky top-0 z-40 bg-[#070708]/80 backdrop-blur-md">
+        <div className="max-w-5xl mx-auto px-8 h-[68px] flex items-center">
           <button onClick={() => router.push("/")} className="flex items-center gap-0.5 hover:opacity-75 transition-opacity">
-            <img src="/coretify.png" alt="Coretify" className="h-7 w-auto object-contain" />
-            <span className="text-[17px] font-semibold tracking-tight text-white">Coretify</span>
+            <img src="/coretify.png" alt="Coretify" className="h-8 w-auto object-contain" />
+            <span className="text-[19px] font-semibold tracking-tight text-white">Coretify</span>
           </button>
-          <div className="flex items-center gap-1.5 text-zinc-500 text-[11px] font-mono">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            <span>Read-Only · TLS 1.3</span>
-          </div>
         </div>
       </header>
 
@@ -170,9 +166,6 @@ export default function ConnectPage() {
 
         {/* Page heading */}
         <div className="mb-10">
-          <p className="text-[10px] font-bold font-mono uppercase tracking-[0.2em] text-zinc-600 mb-3">
-            03 / 04 — Data Source
-          </p>
           <h1 className="text-[32px] font-semibold tracking-tight text-white leading-tight mb-2">
             Hubungkan memori<br />bisnis {companyName}.
           </h1>
@@ -344,7 +337,7 @@ export default function ConnectPage() {
         </div>
 
         {/* ── Bottom CTA ────────────────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pt-6 border-t border-zinc-900/50">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pt-6">
           <p className="text-[12px] text-zinc-600 max-w-sm leading-relaxed">
             Kamu bisa menambah atau mencabut akses data source ini kapan saja di menu <span className="text-zinc-400">Settings → Integrations</span>.
           </p>
