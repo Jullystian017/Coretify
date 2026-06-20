@@ -15,7 +15,9 @@ import {
   HardDrive,
   Cpu,
   TrendingUp,
-  AlertCircle
+  AlertCircle,
+  MessageSquare,
+  FileSpreadsheet
 } from "lucide-react";
 
 interface SyncStep {
@@ -32,85 +34,161 @@ export default function SyncPage() {
   const [syncPercentage, setSyncPercentage] = useState(0);
   const [emailsProcessed, setEmailProcessed] = useState(0);
   const [filesProcessed, setFilesProcessed] = useState(0);
+  const [whatsappProcessed, setWhatsappProcessed] = useState(0);
+  const [csvProcessed, setCsvProcessed] = useState(0);
   const [showEarlyInsights, setShowEarlyInsights] = useState(false);
   const [playbook, setPlaybook] = useState("Software House");
   const [companyName, setCompanyName] = useState("Perusahaan");
 
-  const [steps, setSteps] = useState<SyncStep[]>([
-    { id: "auth", label: "Otorisasi API Handshake", status: "running", subtext: "Menghubungkan token otentikasi aman...", icon: Cpu },
-    { id: "gmail", label: "Sinkronisasi Gmail", status: "idle", subtext: "Memindai email historis 6 bulan terakhir...", icon: Mail },
-    { id: "calendar", label: "Sinkronisasi Google Calendar", status: "idle", subtext: "Memetakan riwayat janji temu klien...", icon: Calendar },
-    { id: "drive", label: "Sinkronisasi Drive & Sheets", status: "idle", subtext: "Membaca dokumen projek & spreadsheet...", icon: HardDrive },
-    { id: "ai", label: "Embedding Generation (pgvector)", status: "idle", subtext: "Melakukan enkripsi & pembuatan vektor AI...", icon: Sparkles }
-  ]);
+  const [hasGmail, setHasGmail] = useState(false);
+  const [hasDrive, setHasDrive] = useState(false);
+  const [hasWhatsapp, setHasWhatsapp] = useState(false);
+  const [hasCsv, setHasCsv] = useState(false);
+
+  const [steps, setSteps] = useState<SyncStep[]>([]);
 
   useEffect(() => {
     const data = localStorage.getItem("coretify_company");
+    let activeSteps: SyncStep[] = [
+      { id: "auth", label: "Otorisasi API Handshake", status: "running", subtext: "Menghubungkan token otentikasi aman...", icon: Cpu }
+    ];
+    let googleConnected = false;
+    let whatsappConnected = false;
+    let csvConnected = false;
+    let scopes: Record<string, boolean> = { gmail: true, calendar: true, drive: true, sheets: true };
+    
     if (data) {
       const parsed = JSON.parse(data);
       if (parsed.businessType) setPlaybook(parsed.businessType);
       if (parsed.name) setCompanyName(parsed.name);
+      
+      googleConnected = !!parsed.googleConnected;
+      whatsappConnected = !!parsed.whatsappConnected;
+      csvConnected = !!parsed.csvConnected;
+      if (parsed.googleScopes) {
+        scopes = parsed.googleScopes;
+      }
+    } else {
+      googleConnected = true; // fallback
     }
-  }, []);
 
-  useEffect(() => {
-    // Stage 1: Auth handshake (1s)
-    const t1 = setTimeout(() => {
-      updateStep(0, "completed");
-      updateStep(1, "running");
-      setCurrentStepIndex(1);
-    }, 1000);
+    const hasGmailSelected = googleConnected && scopes.gmail;
+    const hasCalendarSelected = googleConnected && scopes.calendar;
+    const hasDriveSelected = googleConnected && (scopes.drive || scopes.sheets);
 
-    // Stage 2: Gmail sync (simulate fast count update) (2s)
-    const gmailInterval = setInterval(() => {
-      setEmailProcessed(prev => {
-        if (prev >= 128) {
-          clearInterval(gmailInterval);
-          return 128;
+    setHasGmail(hasGmailSelected);
+    setHasDrive(hasDriveSelected);
+    setHasWhatsapp(whatsappConnected);
+    setHasCsv(csvConnected);
+
+    if (hasGmailSelected) {
+      activeSteps.push({ id: "gmail", label: "Sinkronisasi Gmail", status: "idle", subtext: "Memindai email historis 6 bulan terakhir...", icon: Mail });
+    }
+    if (hasCalendarSelected) {
+      activeSteps.push({ id: "calendar", label: "Sinkronisasi Google Calendar", status: "idle", subtext: "Memetakan riwayat janji temu klien...", icon: Calendar });
+    }
+    if (hasDriveSelected) {
+      activeSteps.push({ id: "drive", label: "Sinkronisasi Drive & Sheets", status: "idle", subtext: "Membaca dokumen projek & spreadsheet...", icon: HardDrive });
+    }
+    if (whatsappConnected) {
+      activeSteps.push({ id: "whatsapp", label: "Sinkronisasi WhatsApp Chat", status: "idle", subtext: "Membaca komitmen & keputusan dari chat export...", icon: MessageSquare });
+    }
+    if (csvConnected) {
+      activeSteps.push({ id: "csv", label: "Sinkronisasi CSV & Excel", status: "idle", subtext: "Menganalisis log transaksi & data keuangan...", icon: FileSpreadsheet });
+    }
+    
+    activeSteps.push({ id: "ai", label: "Embedding Generation (pgvector)", status: "idle", subtext: "Melakukan enkripsi & pembuatan vektor AI...", icon: Sparkles });
+
+    setSteps(activeSteps);
+
+    // Dynamic timer sequence execution
+    let timers: any[] = [];
+    let intervals: any[] = [];
+
+    const runStepSequence = (index: number) => {
+      if (index >= activeSteps.length) {
+        setCurrentStepIndex(activeSteps.length);
+        const redirectTimer = setTimeout(() => {
+          router.push("/dashboard");
+        }, 2000);
+        timers.push(redirectTimer);
+        return;
+      }
+
+      setCurrentStepIndex(index);
+      setSteps(prev => prev.map((step, i) => {
+        if (i === index) return { ...step, status: "running" };
+        if (i < index) return { ...step, status: "completed" };
+        return step;
+      }));
+
+      const currentStep = activeSteps[index];
+
+      // Duration for this step
+      let duration = 1200;
+      if (currentStep.id === "auth") duration = 1000;
+      else if (currentStep.id === "gmail") duration = 1500;
+      else if (currentStep.id === "drive") duration = 1200;
+      else if (currentStep.id === "whatsapp") duration = 1500;
+      else if (currentStep.id === "csv") duration = 1200;
+
+      // Handle step specific simulations
+      if (currentStep.id === "gmail") {
+        const gmailInterval = setInterval(() => {
+          setEmailProcessed(prev => Math.min(128, prev + 16));
+        }, 150);
+        intervals.push(gmailInterval);
+      } else if (currentStep.id === "drive") {
+        const driveInterval = setInterval(() => {
+          setFilesProcessed(prev => Math.min(42, prev + 6));
+        }, 150);
+        intervals.push(driveInterval);
+      } else if (currentStep.id === "whatsapp") {
+        const waInterval = setInterval(() => {
+          setWhatsappProcessed(prev => Math.min(45, prev + 5));
+        }, 150);
+        intervals.push(waInterval);
+      } else if (currentStep.id === "csv") {
+        const csvInterval = setInterval(() => {
+          setCsvProcessed(prev => Math.min(14, prev + 2));
+        }, 150);
+        intervals.push(csvInterval);
+      }
+
+      const t = setTimeout(() => {
+        // First source finishes (could be gmail, whatsapp, csv) -> show early insights
+        if (currentStep.id === "gmail" || currentStep.id === "whatsapp" || currentStep.id === "csv") {
+          setShowEarlyInsights(true);
         }
-        return prev + 16;
-      });
-    }, 200);
+        
+        // Clean up intervals for this step
+        if (currentStep.id === "gmail") setEmailProcessed(128);
+        if (currentStep.id === "drive") setFilesProcessed(42);
+        if (currentStep.id === "whatsapp") setWhatsappProcessed(45);
+        if (currentStep.id === "csv") setCsvProcessed(14);
 
-    const t2 = setTimeout(() => {
-      updateStep(1, "completed");
-      updateStep(2, "running");
-      setCurrentStepIndex(2);
-      // Reveal Gmail partial insights (Wow Moment)
-      setShowEarlyInsights(true);
-    }, 2500);
+        setSteps(prev => prev.map((step, i) => i === index ? { ...step, status: "completed" } : step));
+        runStepSequence(index + 1);
+      }, duration);
+      timers.push(t);
+    };
 
-    // Stage 3: Calendar sync (1s)
-    const t3 = setTimeout(() => {
-      updateStep(2, "completed");
-      updateStep(3, "running");
-      setCurrentStepIndex(3);
-    }, 3800);
+    // Run the sequence starting from auth handshake
+    runStepSequence(0);
 
-    // Stage 4: Drive sync
-    const driveInterval = setInterval(() => {
-      setFilesProcessed(prev => {
-        if (prev >= 42) {
-          clearInterval(driveInterval);
-          return 42;
-        }
-        return prev + 6;
-      });
-    }, 150);
+    // Smooth progress bar calculation based on active steps total duration
+    const stepDurations = activeSteps.map(s => {
+      if (s.id === "auth") return 1000;
+      if (s.id === "gmail") return 1500;
+      if (s.id === "calendar") return 1200;
+      if (s.id === "drive") return 1200;
+      if (s.id === "whatsapp") return 1500;
+      if (s.id === "csv") return 1200;
+      return 1500; // ai
+    });
+    const totalDuration = stepDurations.reduce((a, b) => a + b, 0);
+    const intervalTick = totalDuration / 50;
 
-    const t4 = setTimeout(() => {
-      updateStep(3, "completed");
-      updateStep(4, "running");
-      setCurrentStepIndex(4);
-    }, 5000);
-
-    // Stage 5: Ingestion / vector embedding (1s)
-    const t5 = setTimeout(() => {
-      updateStep(4, "completed");
-      setCurrentStepIndex(5);
-    }, 6500);
-
-    // Global percentage simulation
     const pctInterval = setInterval(() => {
       setSyncPercentage(prev => {
         if (prev >= 100) {
@@ -119,29 +197,14 @@ export default function SyncPage() {
         }
         return prev + 2;
       });
-    }, 120);
-
-    // Redirect to dashboard after completed
-    const redirectTimer = setTimeout(() => {
-      router.push("/dashboard");
-    }, 8500);
+    }, intervalTick);
+    intervals.push(pctInterval);
 
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
-      clearTimeout(t5);
-      clearInterval(gmailInterval);
-      clearInterval(driveInterval);
-      clearInterval(pctInterval);
-      clearTimeout(redirectTimer);
+      timers.forEach(clearTimeout);
+      intervals.forEach(clearInterval);
     };
   }, []);
-
-  const updateStep = (index: number, status: "idle" | "running" | "completed") => {
-    setSteps(prev => prev.map((step, i) => i === index ? { ...step, status } : step));
-  };
 
   const getStepStatusBadge = (status: "idle" | "running" | "completed") => {
     switch (status) {
@@ -155,6 +218,13 @@ export default function SyncPage() {
   };
 
   const renderEarlyPlaybookInsight = () => {
+    const entitasLabel = hasGmail ? "Gmail" : hasWhatsapp ? "WhatsApp" : "CSV";
+    const detailText = hasGmail 
+      ? `Terdeteksi 12 email revisi dari klien *Nexa Corp* di Gmail. Playbook ${playbook} mengindikasikan 63% risiko keterlambatan berasal dari revisi pasca-development dimulai.`
+      : hasWhatsapp
+      ? `Terdeteksi 4 obrolan revisi dari klien *Nexa Corp* di WhatsApp. Playbook ${playbook} mengindikasikan 63% risiko keterlambatan berasal dari revisi pasca-development dimulai.`
+      : `Membaca invoice dan log keuangan dari file CSV. Playbook ${playbook} mendeteksi anomali tagihan pada *Nexa Corp*.`;
+
     if (playbook === "Software House") {
       return (
         <div className="space-y-3.5">
@@ -163,14 +233,14 @@ export default function SyncPage() {
             <div>
               <h4 className="text-xs font-bold text-amber-400">Peringatan Risiko Project</h4>
               <p className="text-[11px] text-slate-300 mt-0.5 leading-relaxed">
-                Terdeteksi 12 email revisi dari klien *Nexa Corp* di Gmail. Playbook Software House mengindikasikan 63% risiko keterlambatan berasal dari revisi pasca-development dimulai.
+                {detailText}
               </p>
             </div>
           </div>
           <div className="flex items-start gap-3 p-3.5 bg-[#08080a] border border-slate-900 rounded-xl">
             <Sparkles className="h-5 w-5 text-slate-400 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-xs font-bold text-white">Entitas Terpetakan (Gmail)</h4>
+              <h4 className="text-xs font-bold text-white">Entitas Terpetakan ({entitasLabel})</h4>
               <div className="grid grid-cols-2 gap-2 mt-2 text-[10px] text-slate-500 font-mono">
                 <div>👥 12 Clients</div>
                 <div>📁 3 Active Projects</div>
@@ -182,6 +252,11 @@ export default function SyncPage() {
         </div>
       );
     } else if (playbook === "Agency") {
+      const detailTextAgency = hasGmail 
+        ? "Ditemukan korelasi percakapan padat: Klien *Aero Design* memakan 34% volume diskusi tim namun hanya berkontribusi kecil pada log milestone. Risiko efisiensi laba terdeteksi."
+        : hasWhatsapp
+        ? "Ditemukan korelasi percakapan padat: Klien *Aero Design* memakan 34% volume chat WhatsApp namun hanya berkontribusi kecil pada log milestone. Risiko efisiensi laba terdeteksi."
+        : "Menganalisis data invoice CSV: Klien *Aero Design* menyumbang 12% revenue namun memiliki frekuensi tagihan revisi paling tinggi.";
       return (
         <div className="space-y-3.5">
           <div className="flex items-start gap-3 p-3.5 bg-[#08080a] border border-slate-900 rounded-xl">
@@ -189,14 +264,14 @@ export default function SyncPage() {
             <div>
               <h4 className="text-xs font-bold text-amber-400">Peringatan Efisiensi Kapasitas</h4>
               <p className="text-[11px] text-slate-300 mt-0.5 leading-relaxed">
-                Ditemukan korelasi percakapan padat: Klien *Aero Design* memakan 34% volume diskusi tim namun hanya berkontribusi kecil pada log milestone. Risiko efisiensi laba terdeteksi.
+                {detailTextAgency}
               </p>
             </div>
           </div>
           <div className="flex items-start gap-3 p-3.5 bg-[#08080a] border border-slate-900 rounded-xl">
             <Sparkles className="h-5 w-5 text-slate-400 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-xs font-bold text-white">Entitas Terpetakan (Gmail)</h4>
+              <h4 className="text-xs font-bold text-white">Entitas Terpetakan ({entitasLabel})</h4>
               <div className="grid grid-cols-2 gap-2 mt-2 text-[10px] text-slate-500 font-mono">
                 <div>👥 18 Creative Clients</div>
                 <div>📁 8 Campaign Jobs</div>
@@ -209,6 +284,11 @@ export default function SyncPage() {
       );
     } else {
       // Startup or Consultant / Fallback
+      const detailTextStartup = hasGmail
+        ? "Menganalisis meeting calendar: 78% agenda diskusi tim internal minggu lalu tidak memiliki ringkasan tindak lanjut aksi (Action Items) yang terdeteksi di dokumen."
+        : hasWhatsapp
+        ? "Menganalisis chat WhatsApp: 78% diskusi tim internal di grup koordinasi tidak memiliki ringkasan tindak lanjut aksi (Action Items) yang jelas."
+        : "Membaca cashflow dari file CSV: runway keuangan startup tersisa 6.5 bulan berdasarkan pengeluaran cloud server scaling dan gaji developer.";
       return (
         <div className="space-y-3.5">
           <div className="flex items-start gap-3 p-3.5 bg-[#08080a] border border-slate-900 rounded-xl">
@@ -216,14 +296,14 @@ export default function SyncPage() {
             <div>
               <h4 className="text-xs font-bold text-amber-400">Peringatan Meeting Efisiensi</h4>
               <p className="text-[11px] text-slate-300 mt-0.5 leading-relaxed">
-                Menganalisis meeting calendar: 78% agenda diskusi tim internal minggu lalu tidak memiliki ringkasan tindak lanjut aksi (Action Items) yang terdeteksi di dokumen.
+                {detailTextStartup}
               </p>
             </div>
           </div>
           <div className="flex items-start gap-3 p-3.5 bg-[#08080a] border border-slate-900 rounded-xl">
             <Sparkles className="h-5 w-5 text-slate-400 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-xs font-bold text-white">Entitas Terpetakan (Gmail)</h4>
+              <h4 className="text-xs font-bold text-white">Entitas Terpetakan ({entitasLabel})</h4>
               <div className="grid grid-cols-2 gap-2 mt-2 text-[10px] text-slate-500 font-mono">
                 <div>👥 5 Investors/Partners</div>
                 <div>📁 4 Product Epics</div>
@@ -271,8 +351,10 @@ export default function SyncPage() {
                 />
               </div>
               <div className="flex items-center justify-between mt-3 text-[10px] text-slate-550 font-mono">
-                <span>📧 Gmail: {emailsProcessed}/128</span>
-                <span>📂 Drive: {filesProcessed}/42 files</span>
+                {hasGmail && <span>📧 Gmail: {emailsProcessed}/128</span>}
+                {hasDrive && <span>📂 Drive: {filesProcessed}/42 files</span>}
+                {hasWhatsapp && <span>💬 WhatsApp: {whatsappProcessed}/45 lines</span>}
+                {hasCsv && <span>📊 CSV: {csvProcessed}/14 rows</span>}
               </div>
             </div>
 
@@ -325,7 +407,7 @@ export default function SyncPage() {
                     <div>
                       <CardTitle className="text-xs font-bold text-white">Wow Moment: Early Insight</CardTitle>
                       <CardDescription className="text-[10px] text-slate-555">
-                        Indeksasi Gmail selesai. Menyusun hipotesis awal...
+                        Indeksasi {hasGmail ? "Gmail" : hasWhatsapp ? "WhatsApp" : "CSV"} selesai. Menyusun hipotesis awal...
                       </CardDescription>
                     </div>
                   </div>
@@ -333,14 +415,14 @@ export default function SyncPage() {
 
                 <CardContent className="py-4 space-y-4 flex-1">
                   <p className="text-[11px] text-slate-400 leading-normal">
-                    Berdasarkan 128 email di Gmail yang baru saja dipindai (dokumen Drive masih diproses), AI mendeteksi kecocokan dengan playbook **{playbook}**:
+                    Berdasarkan {hasGmail ? `${emailsProcessed} email di Gmail` : hasWhatsapp ? `${whatsappProcessed} baris chat WhatsApp` : `${csvProcessed} baris log CSV`} yang baru saja dipindai, AI mendeteksi kecocokan dengan playbook **{playbook}**:
                   </p>
                   
                   {renderEarlyPlaybookInsight()}
                 </CardContent>
 
                 <div className="p-4 border-t border-slate-900 bg-[#08080a]/40 text-center flex flex-col gap-2">
-                  {currentStepIndex === 5 ? (
+                  {currentStepIndex === steps.length ? (
                     <Button
                       onClick={() => router.push("/dashboard")}
                       className="w-full bg-white hover:bg-slate-100 text-black font-bold text-xs py-3.5 rounded-md shadow"
@@ -363,7 +445,7 @@ export default function SyncPage() {
                 </div>
                 <h4 className="text-xs font-bold text-slate-500">Menganalisis Source Tercepat</h4>
                 <p className="text-[10px] text-slate-600 mt-1 max-w-[180px] leading-relaxed">
-                  Insight pertama dari Gmail akan muncul secara progresif dalam beberapa detik.
+                  Insight pertama dari {hasGmail ? "Gmail" : hasWhatsapp ? "WhatsApp" : "CSV"} akan muncul secara progresif dalam beberapa detik.
                 </p>
               </Card>
             )}

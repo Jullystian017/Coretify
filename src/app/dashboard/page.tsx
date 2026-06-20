@@ -103,6 +103,9 @@ export default function DashboardPage() {
           setActivePlaybook("Software House");
         }
       }
+      if (parsed.googleConnected !== undefined) {
+        setGoogleConnected(parsed.googleConnected);
+      }
     }
     
     // Add default initial welcome chat message

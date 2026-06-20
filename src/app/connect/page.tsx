@@ -86,6 +86,7 @@ const DEFAULT_FOLDERS: Folder[] = [
 export default function ConnectPage() {
   const router = useRouter();
   const [companyName, setCompanyName] = useState("Perusahaan");
+  const [toolsUsed, setToolsUsed] = useState<string[]>([]);
   const [googleConnected,   setGoogleConnected]   = useState(false);
   const [whatsappConnected, setWhatsappConnected] = useState(false);
   const [csvConnected,      setCsvConnected]      = useState(false);
@@ -109,6 +110,34 @@ export default function ConnectPage() {
     if (data) {
       const p = JSON.parse(data);
       if (p.name) setCompanyName(p.name);
+      if (p.toolsUsed && Array.isArray(p.toolsUsed)) {
+        setToolsUsed(p.toolsUsed);
+        
+        // Match scopes to onboarding selection. Default to all if not found.
+        const hasGmail = p.toolsUsed.includes("Gmail");
+        const hasCalendar = p.toolsUsed.includes("Calendar");
+        const hasDrive = p.toolsUsed.includes("Drive");
+        const hasCSV = p.toolsUsed.includes("CSV");
+        
+        // If there are tool selections, set scopes. Otherwise keep defaults.
+        if (hasGmail || hasCalendar || hasDrive || hasCSV) {
+          setScopes({
+            gmail: hasGmail,
+            calendar: hasCalendar,
+            drive: hasDrive,
+            sheets: hasCSV || hasDrive,
+          });
+        }
+      }
+      if (p.googleConnected) setGoogleConnected(true);
+      if (p.whatsappConnected) {
+        setWhatsappConnected(true);
+        if (p.whatsappFile) setWaFile(p.whatsappFile);
+      }
+      if (p.csvConnected) {
+        setCsvConnected(true);
+        if (p.csvFile) setCsvFile(p.csvFile);
+      }
     }
   }, []);
 
@@ -119,6 +148,7 @@ export default function ConnectPage() {
     if (saved) {
       const p = JSON.parse(saved);
       p.googleConnected = true;
+      p.googleScopes = scopes;
       p.excludedFolders = folders.filter((f) => !f.selected).map((f) => f.path);
       localStorage.setItem("coretify_company", JSON.stringify(p));
     }
@@ -129,7 +159,17 @@ export default function ConnectPage() {
     if (!file) return;
     setIsParsingWA(true);
     setTimeout(() => {
-      setWaFile(file.name); setWhatsappConnected(true); setIsParsingWA(false);
+      setWaFile(file.name); 
+      setWhatsappConnected(true); 
+      setIsParsingWA(false);
+      
+      const saved = localStorage.getItem("coretify_company");
+      if (saved) {
+        const p = JSON.parse(saved);
+        p.whatsappConnected = true;
+        p.whatsappFile = file.name;
+        localStorage.setItem("coretify_company", JSON.stringify(p));
+      }
     }, 1400);
   };
 
@@ -138,7 +178,17 @@ export default function ConnectPage() {
     if (!file) return;
     setIsParsingCSV(true);
     setTimeout(() => {
-      setCsvFile(file.name); setCsvConnected(true); setIsParsingCSV(false);
+      setCsvFile(file.name); 
+      setCsvConnected(true); 
+      setIsParsingCSV(false);
+      
+      const saved = localStorage.getItem("coretify_company");
+      if (saved) {
+        const p = JSON.parse(saved);
+        p.csvConnected = true;
+        p.csvFile = file.name;
+        localStorage.setItem("coretify_company", JSON.stringify(p));
+      }
     }, 1400);
   };
 
@@ -181,6 +231,7 @@ export default function ConnectPage() {
           {/* ─── Google Workspace ─── */}
           <IntegrationCard
             connected={googleConnected}
+            selectedInOnboarding={toolsUsed.includes("Gmail") || toolsUsed.includes("Calendar") || toolsUsed.includes("Drive")}
             label="Google Workspace"
             badge="Recommended"
             icon={<Globe className="h-5 w-5" />}
@@ -260,6 +311,7 @@ export default function ConnectPage() {
           {/* ─── WhatsApp ─── */}
           <IntegrationCard
             connected={whatsappConnected}
+            selectedInOnboarding={toolsUsed.includes("WhatsApp")}
             label="WhatsApp Lite"
             badge="No API Needed"
             icon={<MessageSquare className="h-5 w-5" />}
@@ -299,6 +351,7 @@ export default function ConnectPage() {
           {/* ─── CSV ─── */}
           <IntegrationCard
             connected={csvConnected}
+            selectedInOnboarding={toolsUsed.includes("CSV")}
             label="CSV / Excel"
             badge="Generic Data"
             icon={<FileSpreadsheet className="h-5 w-5" />}
@@ -414,7 +467,7 @@ export default function ConnectPage() {
                 <div className="flex gap-2.5 p-3 rounded-xl bg-zinc-950/80 border border-zinc-800/40 mb-5">
                   <ShieldCheck className="h-4 w-4 text-zinc-400 shrink-0 mt-0.5" />
                   <p className="text-[10px] text-zinc-500 leading-relaxed">
-                    Coretify mematuhi Kebijakan Data API Google. Token dienkripsi AES-256. Tidak ada data yang ditulis ke Workspace Anda.
+                    Coretify mematuhi Kebijakan Data API Google. Token dienkripsi AES-256. Tidak ada data yang ditulis to Workspace Anda.
                   </p>
                 </div>
 
@@ -444,7 +497,7 @@ export default function ConnectPage() {
 
 /* ─── IntegrationCard component ────────────────────────────── */
 function IntegrationCard({
-  connected, label, badge, icon, desc, bullets, children,
+  connected, label, badge, icon, desc, bullets, children, selectedInOnboarding,
 }: {
   connected: boolean;
   label: string;
@@ -453,17 +506,26 @@ function IntegrationCard({
   desc: string;
   bullets: string[];
   children?: React.ReactNode;
+  selectedInOnboarding?: boolean;
 }) {
   return (
     <div className={`relative flex flex-col rounded-2xl border bg-[#0c0c0e] p-5 transition-all duration-300 ${
-      connected ? "border-zinc-700/70 shadow-[0_0_30px_rgba(255,255,255,0.03)]" : "border-zinc-800/50"
+      connected 
+        ? "border-zinc-700/70 shadow-[0_0_30px_rgba(255,255,255,0.03)]" 
+        : selectedInOnboarding
+        ? "border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.03)] bg-[#0e0d0b]/40"
+        : "border-zinc-800/50"
     }`}>
-      {/* Connected badge */}
-      {connected && (
+      {/* Connected / Onboarding Badge */}
+      {connected ? (
         <div className="absolute top-3.5 right-3.5 flex items-center gap-1 text-[10px] font-semibold text-zinc-300 bg-zinc-900 border border-zinc-700 px-2 py-0.5 rounded-full">
           <Check className="h-3 w-3" /> Connected
         </div>
-      )}
+      ) : selectedInOnboarding ? (
+        <div className="absolute top-3.5 right-3.5 flex items-center gap-1 text-[10px] font-semibold text-amber-400 bg-amber-950/40 border border-amber-550/30 px-2 py-0.5 rounded-full">
+          Terpilih di Onboarding
+        </div>
+      ) : null}
 
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
