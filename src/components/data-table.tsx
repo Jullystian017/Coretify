@@ -286,13 +286,12 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
           render={
             <Button
               variant="ghost"
-              className="flex size-8 text-muted-foreground data-open:bg-muted"
+              className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
               size="icon"
             />
           }
         >
-          <EllipsisVerticalIcon
-          />
+          <EllipsisVerticalIcon />
           <span className="sr-only">Open menu</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
@@ -439,9 +438,9 @@ export function DataTable({
             <DropdownMenuTrigger
               render={<Button variant="outline" size="sm" />}
             >
-              <Columns3Icon data-icon="inline-start" />
+              <Columns3Icon className="mr-1" />
               Columns
-              <ChevronDownIcon data-icon="inline-end" />
+              <ChevronDownIcon className="ml-1" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-32">
               {table
@@ -681,7 +680,11 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
   const isMobile = useIsMobile()
   return (
     <Drawer direction={isMobile ? "bottom" : "right"}>
-      <DrawerTrigger render={<Button variant="link" className="w-fit px-0 text-left text-foreground" />}>{item.header}</DrawerTrigger>
+      <DrawerTrigger asChild>
+        <Button variant="link" className="w-fit px-0 text-left text-foreground">
+          {item.header}
+        </Button>
+      </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="gap-1">
           <DrawerTitle>{item.header}</DrawerTitle>
@@ -857,7 +860,9 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
         </div>
         <DrawerFooter>
           <Button>Submit</Button>
-          <DrawerClose render={<Button variant="outline" />}></DrawerClose>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
