@@ -71,11 +71,9 @@ export function AuthPage() {
 					<div className="bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.015)_0,transparent_80%)] absolute top-0 right-0 h-[320px] w-[60px] [translate:5%_-50%] rounded-full" />
 					<div className="bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.015)_0,transparent_80%)] absolute top-0 right-0 h-[320px] w-[60px] -translate-y-87.5 rounded-full" />
 				</div>
-				<Button variant="ghost" className="absolute top-7 left-5 hover:bg-white/[0.05] hover:text-white transition-colors" asChild>
-					<Link href="/">
-						<ChevronLeftIcon className='size-4 me-2' />
-						Home
-					</Link>
+				<Button variant="ghost" className="absolute top-7 left-5 hover:bg-white/[0.05] hover:text-white transition-colors" render={<Link href="/" />}>
+					<ChevronLeftIcon className='size-4 me-2' />
+					Home
 				</Button>
 				<div className="mx-auto space-y-4 w-full sm:w-[360px]">
 					<div className="flex items-center gap-1 lg:hidden">
