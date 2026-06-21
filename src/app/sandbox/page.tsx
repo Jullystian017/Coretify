@@ -15,6 +15,7 @@ import {
   User,
   ShieldCheck,
   Send,
+  ExternalLink,
 } from "lucide-react";
 
 interface Entity {
@@ -31,8 +32,13 @@ export default function SandboxPage() {
   
   // Chat state
   const [chatInput, setChatInput] = useState("");
-  const [chatMessages, setChatMessages] = useState<{ sender: "user" | "ai"; text: string }[]>([]);
+  const [chatMessages, setChatMessages] = useState<{ sender: "user" | "ai"; text: string; time: string }[]>([]);
   const [isChatTyping, setIsChatTyping] = useState(false);
+
+  const formatTime = () => {
+    const d = new Date();
+    return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  };
 
   // Default sample content
   const loadSampleData = () => {
@@ -62,6 +68,7 @@ export default function SandboxPage() {
         {
           sender: "ai",
           text: "Otak Kedua Sandbox Anda sudah terbentuk dari data yang ditempel! Silakan ajukan pertanyaan di chat box bawah tentang detail percakapan tersebut.",
+          time: formatTime(),
         },
       ]);
     }, 2000);
@@ -71,7 +78,7 @@ export default function SandboxPage() {
     const text = textToSend || chatInput;
     if (!text.trim()) return;
 
-    setChatMessages((prev) => [...prev, { sender: "user", text }]);
+    setChatMessages((prev) => [...prev, { sender: "user", text, time: formatTime() }]);
     setChatInput("");
     setIsChatTyping(true);
 
@@ -90,7 +97,7 @@ export default function SandboxPage() {
         answer = "Maaf, dari data Sandbox yang Anda tempel, saya tidak menemukan jawaban spesifik untuk pertanyaan itu. Coba tanyakan tentang 'deadline Coretify', 'tugas Alex', atau 'siapa kliennya'.";
       }
 
-      setChatMessages((prev) => [...prev, { sender: "ai", text: answer }]);
+      setChatMessages((prev) => [...prev, { sender: "ai", text: answer, time: formatTime() }]);
     }, 1000);
   };
 
@@ -128,7 +135,7 @@ export default function SandboxPage() {
             <h1 className="text-3xl font-semibold tracking-tight text-white leading-tight">
               Rasakan Otak Kedua Bisnis Anda.
             </h1>
-            <p className="text-zinc-400 text-[13.5px] max-w-md mx-auto leading-relaxed">
+            <p className="text-zinc-400 text-[13px] max-w-md mx-auto leading-relaxed">
               Tempel chat koordinasi tim Anda di bawah ini. AI kami akan mengekstrak entitas penting dan membangun memori instan untuk ditanya.
             </p>
           </div>
@@ -148,7 +155,7 @@ export default function SandboxPage() {
             </div>
 
             <textarea
-              className="w-full min-h-[140px] p-4 bg-[#070708] border border-zinc-850 focus:border-zinc-750 focus:outline-none rounded-xl text-[12.5px] font-mono leading-relaxed placeholder:text-zinc-700 text-zinc-300 transition-all resize-none"
+              className="w-full min-h-[140px] p-4 bg-[#070708] border border-zinc-850 focus:border-zinc-750 focus:outline-none rounded-xl text-[12px] font-mono leading-relaxed placeholder:text-zinc-750 text-zinc-300 transition-all resize-none"
               placeholder="Tempel transkrip obrolan, email, atau catatan rapat di sini..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
@@ -158,7 +165,7 @@ export default function SandboxPage() {
               <button
                 onClick={handleProcess}
                 disabled={isProcessing || !inputText.trim()}
-                className="h-10 px-5 flex items-center gap-2 bg-white hover:bg-zinc-200 text-black font-semibold text-xs rounded-xl disabled:opacity-20 transition-all shadow-[0_0_20px_rgba(255,255,255,0.05)]"
+                className="h-10 px-5 flex items-center gap-2 bg-white hover:bg-zinc-200 text-black font-semibold text-xs rounded-xl disabled:opacity-20 transition-all shadow-[0_0_20px_rgba(255,255,255,0.05)] cursor-pointer"
               >
                 {isProcessing ? (
                   <>
@@ -214,51 +221,81 @@ export default function SandboxPage() {
                   </div>
                 </div>
 
-                {/* Ask Sandbox Chatbox */}
+                {/* Ask Sandbox Chatbox (Unified feed design) */}
                 <div className="space-y-3">
                   <h3 className="text-xs font-bold font-mono uppercase tracking-wider text-zinc-500">
                     2. Coba Tanya Memory (RAG Search)
                   </h3>
-                  <div className="border border-zinc-850 rounded-2xl bg-[#0c0c0e] overflow-hidden flex flex-col min-h-[260px] justify-between">
+                  <div className="border border-zinc-850 rounded-2xl bg-[#0c0c0e] overflow-hidden flex flex-col min-h-[300px] justify-between shadow-lg">
                     {/* Presets */}
                     <div className="p-3 bg-zinc-950/80 border-b border-zinc-850/60 flex flex-wrap gap-1.5">
                       <button
                         onClick={() => handleSendChat("Siapa yang memutuskan mengundur deadline Coretify?")}
-                        className="text-[10px] text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-850 px-2.5 py-1.5 rounded-lg transition-colors"
+                        className="text-[10px] text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-850 px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer"
                       >
                         ⏱️ Siapa pembuat keputusan deadline?
                       </button>
                       <button
                         onClick={() => handleSendChat("Apa tugas Alex besok pagi?")}
-                        className="text-[10px] text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-850 px-2.5 py-1.5 rounded-lg transition-colors"
+                        className="text-[10px] text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-850 px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer"
                       >
                         📝 Apa tugas Alex besok?
                       </button>
                       <button
                         onClick={() => handleSendChat("Siapa klien Nexa Corp?")}
-                        className="text-[10px] text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-850 px-2.5 py-1.5 rounded-lg transition-colors"
+                        className="text-[10px] text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-850 px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer"
                       >
                         👥 Detail klien Nexa Corp
                       </button>
                     </div>
 
-                    {/* Messages list */}
-                    <div className="p-4 flex-1 space-y-4 text-[12.5px] leading-relaxed max-h-[220px] overflow-y-auto">
+                    {/* Messages list (Slack/Thread Feed Style) */}
+                    <div className="p-4 flex-1 space-y-5 text-[12.5px] leading-relaxed max-h-[250px] overflow-y-auto">
                       {chatMessages.map((msg, i) => (
-                        <div key={i} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
-                          <div className={`p-3 rounded-xl max-w-[85%] whitespace-pre-line ${
-                            msg.sender === "user" ? "bg-zinc-800 text-white rounded-tr-none" : "bg-zinc-950 border border-zinc-850 text-zinc-300 rounded-tl-none"
+                        <div key={i} className="flex items-start gap-3 border-b border-zinc-900/30 pb-4 last:border-b-0 last:pb-0">
+                          <div className={`h-8 w-8 rounded-lg border flex items-center justify-center shrink-0 text-xs font-bold ${
+                            msg.sender === "user"
+                              ? "bg-zinc-900 border-zinc-850 text-zinc-400"
+                              : "bg-purple-950/40 border-purple-900/30 text-purple-400"
                           }`}>
-                            {msg.text}
+                            {msg.sender === "user" ? <User className="h-3.5 w-3.5 text-zinc-550" /> : <Sparkles className="h-3.5 w-3.5" />}
+                          </div>
+                          
+                          <div className="flex-1 space-y-1">
+                            <div className="flex items-center gap-2">
+                              <span className="text-[12px] font-bold text-white">
+                                {msg.sender === "user" ? "Anda" : "Coretify Sandbox AI"}
+                              </span>
+                              <span className="text-[9.5px] text-zinc-650 font-mono tracking-wider">
+                                {msg.time}
+                              </span>
+                            </div>
+                            <div className={`p-3 rounded-lg border text-[12px] leading-relaxed text-zinc-350 whitespace-pre-line ${
+                              msg.sender === "user"
+                                ? "bg-zinc-950/10 border-zinc-900"
+                                : "bg-zinc-900/40 border-zinc-850"
+                            }`}>
+                              {msg.text}
+                            </div>
                           </div>
                         </div>
                       ))}
+                      
                       {isChatTyping && (
-                        <div className="flex justify-start">
-                          <div className="bg-zinc-950 border border-zinc-850 text-zinc-450 rounded-xl rounded-tl-none p-3 flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                            <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                            <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce" />
+                        <div className="flex items-start gap-3">
+                          <div className="h-8 w-8 rounded-lg border border-purple-900/30 bg-purple-950/40 flex items-center justify-center shrink-0 text-purple-400">
+                            <Sparkles className="h-3.5 w-3.5 animate-pulse" />
+                          </div>
+                          <div className="space-y-1 flex-1">
+                            <div className="flex items-center gap-2">
+                              <span className="text-[12px] font-bold text-white">Coretify Sandbox AI</span>
+                              <span className="text-[9.5px] text-zinc-650 font-mono">Proses...</span>
+                            </div>
+                            <div className="bg-zinc-900/40 border border-zinc-850 px-3 py-2 rounded-lg flex items-center gap-1.5 w-14">
+                              <span className="h-1 w-1 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                              <span className="h-1 w-1 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                              <span className="h-1 w-1 bg-zinc-500 rounded-full animate-bounce" />
+                            </div>
                           </div>
                         </div>
                       )}
@@ -276,7 +313,7 @@ export default function SandboxPage() {
                       />
                       <button
                         onClick={() => handleSendChat()}
-                        className="h-8 w-8 rounded-lg bg-white hover:bg-zinc-200 text-black flex items-center justify-center transition-all shrink-0"
+                        className="h-8 w-8 rounded-lg bg-white hover:bg-zinc-200 text-black flex items-center justify-center transition-all shrink-0 cursor-pointer"
                       >
                         <Send className="h-3.5 w-3.5" />
                       </button>
@@ -297,7 +334,7 @@ export default function SandboxPage() {
                   </div>
                   <button
                     onClick={() => router.push("/connect")}
-                    className="h-10 px-5 flex items-center gap-2 bg-white hover:bg-zinc-100 text-black font-semibold text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.08)] whitespace-nowrap"
+                    className="h-10 px-5 flex items-center gap-2 bg-white hover:bg-zinc-100 text-black font-semibold text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.08)] whitespace-nowrap cursor-pointer"
                   >
                     Hubungkan Data Source <ArrowRight className="h-4 w-4" />
                   </button>

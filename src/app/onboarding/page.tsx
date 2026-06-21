@@ -1,19 +1,18 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Check, Database, Building2, Users, Cpu, ArrowLeft, Send, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Database, Building2, Users, Cpu, ArrowLeft } from "lucide-react";
 
-/* ─── Types & Options ───────────────────────────────────────── */
-interface Message {
-  id: string;
-  sender: "ai" | "user";
-  text: string;
-  options?: { value: string; label: string; desc?: string }[];
-  isMultiSelect?: boolean;
-}
+/* ─── Steps ─────────────────────────────────────────────────── */
+const STEPS = [
+  { id: 1, icon: Building2, label: "Workspace",  title: "Beri nama\nworkspace Anda.",       desc: "Inisialisasi company memory dengan identitas bisnis Anda." },
+  { id: 2, icon: Cpu,       label: "Playbook",   title: "Pilih vertical\nbisnis Anda.",      desc: "Coretify mengaktifkan playbook deteksi risiko yang spesifik untuk industri Anda." },
+  { id: 3, icon: Users,     label: "Tim",        title: "Berapa anggota\ntim Anda?",         desc: "Menentukan alokasi memori dan kapasitas data stream workspace." },
+  { id: 4, icon: Database,  label: "Koneksi",    title: "Apa yang ingin\nAnda capai?",       desc: "Pilih tools yang akan terhubung dan tantangan bisnis utama yang ingin diselesaikan." },
+];
 
 const verticals = [
   { value: "Software House", label: "Software House",      desc: "Workload, code logs & scope creep" },
@@ -49,6 +48,7 @@ const goalsList = [
 function AuroraBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* Blob 1 – top-center, primary glow */}
       <motion.div
         className="absolute -top-[10%] left-[10%] w-[85%] aspect-square rounded-full"
         style={{
@@ -58,6 +58,7 @@ function AuroraBackground() {
         animate={{ scale: [1, 1.1, 1], x: [0, 14, 0], y: [0, -10, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
+      {/* Blob 2 – bottom left */}
       <motion.div
         className="absolute -bottom-[10%] -left-[10%] w-[65%] aspect-square rounded-full"
         style={{
@@ -67,6 +68,7 @@ function AuroraBackground() {
         animate={{ scale: [1, 1.08, 1], x: [0, -10, 0], y: [0, 8, 0] }}
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 4 }}
       />
+      {/* Blob 3 – center breathing core */}
       <motion.div
         className="absolute top-[25%] left-[15%] w-[65%] aspect-square rounded-full"
         style={{
@@ -76,6 +78,7 @@ function AuroraBackground() {
         animate={{ scale: [1, 1.07, 0.97, 1], opacity: [0.7, 1, 0.75, 0.7] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
+      {/* Edge vignette – keeps glow contained */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_75%_at_50%_35%,transparent_25%,rgba(7,7,8,0.75)_100%)]" />
     </div>
   );
@@ -84,212 +87,70 @@ function AuroraBackground() {
 /* ─── Page ──────────────────────────────────────────────────── */
 export default function OnboardingPage() {
   const router = useRouter();
-  const chatEndRef = useRef<HTMLDivElement>(null);
-
-  // Profile states
-  const [ownerName, setOwnerName] = useState("");
+  const [step, setStep] = useState(1);
+  const [dir, setDir] = useState<1 | -1>(1);
   const [companyName, setCompanyName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
   const [businessType, setBusinessType] = useState("");
   const [teamSize, setTeamSize] = useState("");
   const [toolsUsed, setToolsUsed] = useState<string[]>([]);
   const [painPoints, setPainPoints] = useState<string[]>([]);
 
-  // Conversational flow states
-  const [currentStep, setCurrentStep] = useState(1);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "welcome",
-      sender: "ai",
-      text: "Halo! Selamat datang di Coretify. Saya Coretify AI, asisten virtual yang akan membantu merancang Otak Kedua bisnis Anda.\n\nMari mulai dengan nama Anda dan nama bisnis/workspace Anda.",
-    },
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
+  const canAdvance =
+    (step === 1 && companyName.trim() !== "" && ownerName.trim() !== "") ||
+    (step === 2 && businessType !== "") ||
+    (step === 3 && teamSize !== "") ||
+    (step === 4 && toolsUsed.length > 0);
 
-  // Multi-select current state
-  const [tempMultiSelect, setTempMultiSelect] = useState<string[]>([]);
-
-  // Input fields for step 1
-  const [inputOwner, setInputOwner] = useState("");
-  const [inputCompany, setInputCompany] = useState("");
-
-  const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, isTyping]);
-
-  const simulateAiTyping = (text: string, nextOptions?: any[], isMulti?: boolean, delay = 1000) => {
-    setIsTyping(true);
-    setTimeout(() => {
-      setIsTyping(false);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: Math.random().toString(),
-          sender: "ai",
-          text,
-          options: nextOptions,
-          isMultiSelect: isMulti,
-        },
-      ]);
-    }, delay);
-  };
-
-  // Step 1: Submit Name & Workspace
-  const handleStep1Submit = () => {
-    if (!inputOwner.trim() || !inputCompany.trim()) return;
-    setOwnerName(inputOwner);
-    setCompanyName(inputCompany);
-
-    // Add user response to chat
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: "step1-user",
-        sender: "user",
-        text: `Saya ${inputOwner}, nama bisnis saya ${inputCompany}.`,
-      },
-    ]);
-
-    setCurrentStep(2);
-    simulateAiTyping(
-      `Salam kenal, ${inputOwner}! Senang bisa membantu ${inputCompany}.\n\nBisnis ${inputCompany} bergerak di bidang apa ya? Playbook AI Coretify akan disesuaikan khusus untuk bidang ini.`,
-      verticals
-    );
-  };
-
-  // Step 2: Choose Vertical
-  const handleSelectVertical = (value: string, label: string) => {
-    setBusinessType(value);
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: "step2-user",
-        sender: "user",
-        text: `Kami adalah ${label}.`,
-      },
-    ]);
-
-    setCurrentStep(3);
-    simulateAiTyping(
-      `Keren! Bidang ${label} memiliki kompleksitas data tersendiri.\n\nBerapa banyak orang yang aktif bekerja di tim ${companyName} saat ini?`,
-      scales
-    );
-  };
-
-  // Step 3: Choose Team Size
-  const handleSelectScale = (value: string, label: string) => {
-    setTeamSize(value);
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: "step3-user",
-        sender: "user",
-        text: `Tim kami berukuran sekitar ${label}.`,
-      },
-    ]);
-
-    setCurrentStep(4);
-    simulateAiTyping(
-      `Sip, kami akan menyesuaikan kapasitas pemrosesan memory index untuk ukuran tim Anda.\n\nSekarang, pilih tools yang saat ini aktif digunakan oleh tim Anda sehari-hari untuk berkomunikasi atau menyimpan data. (Pilih semua yang sesuai)`,
-      toolsList,
-      true
-    );
-  };
-
-  // Step 4: Multi-select Tools
-  const handleToggleTool = (value: string) => {
-    setTempMultiSelect((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-    );
-  };
-
-  const handleConfirmTools = () => {
-    if (tempMultiSelect.length === 0) return;
-    setToolsUsed(tempMultiSelect);
-    const selectedLabels = tempMultiSelect.map(
-      (v) => toolsList.find((t) => t.value === v)?.label || v
-    );
-
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: "step4-user",
-        sender: "user",
-        text: `Kami menggunakan: ${selectedLabels.join(", ")}.`,
-      },
-    ]);
-
-    setTempMultiSelect([]);
-    setCurrentStep(5);
-    simulateAiTyping(
-      `Sangat lengkap! Kami akan menyiapkan pipeline sinkronisasi untuk data stream tersebut.\n\nTerakhir, apa tantangan bisnis terbesar saat ini yang ingin Anda selesaikan menggunakan Coretify?`,
-      goalsList,
-      true
-    );
-  };
-
-  // Step 5: Multi-select Goals & Finish
-  const handleToggleGoal = (value: string) => {
-    setTempMultiSelect((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-    );
-  };
-
-  const handleConfirmGoals = () => {
-    if (tempMultiSelect.length === 0) return;
-    setPainPoints(tempMultiSelect);
-    const selectedLabels = tempMultiSelect.map(
-      (v) => goalsList.find((g) => g.value === v)?.label || v
-    );
-
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: "step5-user",
-        sender: "user",
-        text: `Tantangan kami: ${selectedLabels.join(", ")}.`,
-      },
-    ]);
-
-    // Save final state
-    const configData = {
-      name: companyName,
-      ownerName: ownerName,
-      businessType: businessType,
-      teamSize: teamSize,
-      toolsUsed: toolsUsed,
-      painPoints: tempMultiSelect,
-      createdAt: new Date().toISOString(),
-    };
-    localStorage.setItem("coretify_company", JSON.stringify(configData));
-
-    setTempMultiSelect([]);
-    setCurrentStep(6);
-    simulateAiTyping(
-      `Analisis profil bisnis Anda telah selesai! Playbook *${businessType}* telah terkonfigurasi untuk mendeteksi risiko projek & komunikasi.\n\nSekarang Anda siap mencoba Sandbox demo selama 3 menit untuk melihat cara Coretify bekerja, atau langsung menghubungkan data source real Anda!`,
-      [
-        { value: "sandbox", label: "Coba Sandbox Demo (3 Menit)" },
-        { value: "connect", label: "Hubungkan Data Source Anda" },
-      ]
-    );
-  };
-
-  // Step 6: Redirect Choices
-  const handleFinishRedirect = (value: string) => {
-    if (value === "sandbox") {
-      router.push("/sandbox");
+  const goNext = () => {
+    if (!canAdvance) return;
+    setDir(1);
+    if (step < 4) {
+      setStep((s) => s + 1);
     } else {
-      router.push("/connect");
+      localStorage.setItem("coretify_company", JSON.stringify({
+        name: companyName,
+        ownerName: ownerName,
+        businessType: businessType,
+        teamSize: teamSize,
+        toolsUsed: toolsUsed,
+        painPoints: painPoints,
+        createdAt: new Date().toISOString(),
+      }));
+      router.push("/sandbox"); // Go to Sandbox Tryout first as specified in PRD v2.0
     }
   };
 
+  const goBack      = () => { if (step > 1) { setDir(-1); setStep((s) => s - 1); } };
+  const pickVertical = (v: string) => { setBusinessType(v); };
+  const pickScale   = (s: string) => { setTeamSize(s); };
+  const toggleTool  = (t: string) => setToolsUsed((p) => p.includes(t) ? p.filter((x) => x !== t) : [...p, t]);
+  const toggleGoal  = (g: string) => setPainPoints((p) => p.includes(g) ? p.filter((x) => x !== g) : [...p, g]);
+
+  const current = STEPS[step - 1];
+
+  const slide = {
+    enter: (d: number) => ({ opacity: 0, y: d * 12 }),
+    center: { opacity: 1, y: 0 },
+    exit:  (d: number) => ({ opacity: 0, y: d * -12 }),
+  };
+  const ease: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+
+  /* shared option card classes */
+  const optBase  = "group w-full flex items-center justify-between text-left transition-all duration-150 border rounded-xl";
+  const optOn    = "border-zinc-650 bg-zinc-900/60 text-white shadow-[0_0_15px_rgba(255,255,255,0.02)]";
+  const optOff   = "border-zinc-850 bg-[#0c0c0e] hover:border-zinc-750 hover:bg-zinc-900/20 text-zinc-400 hover:text-zinc-200";
+  const radioOn  = "border-white";
+  const radioOff = "border-zinc-800 group-hover:border-zinc-600";
+  const checkOn  = "border-white bg-white";
+  const checkOff = "border-zinc-800 group-hover:border-zinc-600";
+
   return (
     <main className="h-screen w-screen overflow-hidden bg-[#070708] text-slate-100 grid lg:grid-cols-[380px_1fr] font-sans antialiased">
-      {/* ── LEFT PANEL ────────────────────────────────────────── */}
+
+      {/* ══ LEFT PANEL – Aurora ══════════════════════════════════ */}
       <aside className="hidden lg:flex relative flex-col border-r border-white/[0.04] p-10 overflow-hidden">
+        {/* Aurora animated background */}
         <AuroraBackground />
 
         {/* Logo */}
@@ -301,300 +162,238 @@ export default function OnboardingPage() {
           <span className="text-[19px] font-semibold tracking-tight text-white">Coretify</span>
         </button>
 
-        {/* Dynamic Checklist / Pipeline Indicator */}
-        <div className="relative z-10 mt-16 space-y-6">
-          <p className="text-[10px] font-bold font-mono uppercase tracking-[0.2em] text-zinc-500">
-            Workspace Configuration
-          </p>
-          
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className={`h-6 w-6 rounded-md flex items-center justify-center border text-[11px] ${ownerName ? "bg-white border-white text-black font-bold" : "border-zinc-800 text-zinc-600 bg-transparent"}`}>
-                {ownerName ? <Check className="h-3.5 w-3.5 stroke-[3px]" /> : "1"}
-              </div>
-              <span className={`text-[12px] font-medium ${ownerName ? "text-zinc-300" : "text-zinc-650"}`}>
-                {ownerName ? companyName : "workspace info"}
-              </span>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <div className={`h-6 w-6 rounded-md flex items-center justify-center border text-[11px] ${businessType ? "bg-white border-white text-black font-bold" : "border-zinc-800 text-zinc-600 bg-transparent"}`}>
-                {businessType ? <Check className="h-3.5 w-3.5 stroke-[3px]" /> : "2"}
-              </div>
-              <span className={`text-[12px] font-medium ${businessType ? "text-zinc-300" : "text-zinc-650"}`}>
-                {businessType ? businessType : "business vertical"}
-              </span>
-            </div>
+        {/* Step navigator */}
+        <nav className="relative z-10 mt-10">
+          {/* Single continuous track spanning badge-center to badge-center */}
+          <div
+            className="absolute w-px bg-zinc-850/50"
+            style={{ left: "calc(0.5rem + 18px)", top: "30px", height: "calc(100% - 60px)" }}
+          />
 
-            <div className="flex items-center gap-3">
-              <div className={`h-6 w-6 rounded-md flex items-center justify-center border text-[11px] ${teamSize ? "bg-white border-white text-black font-bold" : "border-zinc-800 text-zinc-600 bg-transparent"}`}>
-                {teamSize ? <Check className="h-3.5 w-3.5 stroke-[3px]" /> : "3"}
+          {STEPS.map((s) => {
+            const Icon     = s.icon;
+            const isDone   = step > s.id;
+            const isActive = step === s.id;
+            return (
+              <div key={s.id} className="relative flex items-start gap-3.5 px-2 min-h-[60px]">
+                {/* Badge — sits on top of track via z-10 + solid bg */}
+                <div className={`shrink-0 mt-3 h-9 w-9 rounded-lg flex items-center justify-center relative z-10 transition-all duration-300 ${
+                  isDone
+                    ? "bg-white text-black shadow-[0_0_18px_rgba(255,255,255,0.18)]"
+                    : isActive
+                    ? "bg-zinc-850 text-white ring-1 ring-white/10"
+                    : "bg-[#070708] border border-zinc-850/60 text-zinc-700"
+                }`}>
+                  {isDone
+                    ? <Check className="h-4 w-4 stroke-[2.5px]" />
+                    : <Icon className="h-4 w-4" />
+                  }
+                </div>
+                {/* Label */}
+                <div className="pt-[18px] pb-3">
+                  <p className={`text-[13px] font-semibold leading-none transition-all duration-200 ${
+                    isDone   ? "text-zinc-500"
+                    : isActive ? "text-white"
+                    : "text-zinc-700"
+                  }`}>{s.label}</p>
+                  {isActive && (
+                    <motion.p
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="text-[11px] text-zinc-500 mt-1.5 leading-snug"
+                    >
+                      {s.desc}
+                    </motion.p>
+                  )}
+                </div>
               </div>
-              <span className={`text-[12px] font-medium ${teamSize ? "text-zinc-300" : "text-zinc-650"}`}>
-                {teamSize ? `${teamSize} Orang` : "team size"}
-              </span>
-            </div>
+            );
+          })}
+        </nav>
 
-            <div className="flex items-center gap-3">
-              <div className={`h-6 w-6 rounded-md flex items-center justify-center border text-[11px] ${toolsUsed.length > 0 ? "bg-white border-white text-black font-bold" : "border-zinc-800 text-zinc-600 bg-transparent"}`}>
-                {toolsUsed.length > 0 ? <Check className="h-3.5 w-3.5 stroke-[3px]" /> : "4"}
-              </div>
-              <span className={`text-[12px] font-medium ${toolsUsed.length > 0 ? `${toolsUsed.length} Tools Terhubung` : "data sources"}`}>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Dynamic active vertical badge */}
-        {businessType && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative z-10 mt-8 p-4 rounded-xl border border-zinc-800 bg-zinc-950/60 flex items-start gap-3"
-          >
-            <Cpu className="h-4 w-4 text-purple-400 mt-0.5 shrink-0" />
-            <div>
-              <p className="text-[11px] font-semibold text-white">Active Playbook</p>
-              <p className="text-[10px] text-zinc-400 mt-1 font-mono uppercase tracking-wider">
-                {businessType} Active Engine
-              </p>
-            </div>
-          </motion.div>
-        )}
-
+        {/* Bottom quote */}
         <div className="relative z-10 mt-auto">
-          <p className="text-[11px] text-zinc-600 italic leading-relaxed">
-            Otak kedua bisnis yang terus belajar dari koordinasi tim Anda.
-          </p>
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-zinc-800/40 to-transparent mb-6" />
+          <blockquote>
+            <p className="text-[14px] text-zinc-400 leading-relaxed italic">
+              &ldquo;Platform ini memantau komunikasi klien secara real-time, mendeteksi risiko lebih dini, dan menyelaraskan keputusan tim.&rdquo;
+            </p>
+            <footer className="font-mono text-[10px] font-bold text-zinc-650 tracking-wider uppercase mt-3">
+              — Julian Albertus
+            </footer>
+          </blockquote>
         </div>
       </aside>
 
-      {/* ── RIGHT PANEL: CONVERSATIONAL CHAT INTERFACE ─────────── */}
-      <div className="relative flex flex-col justify-between h-full overflow-hidden bg-[#0a0a0c]">
-        {/* Chat Messages */}
-        <div className="flex-1 overflow-y-auto px-6 py-8 sm:px-14 lg:px-20 space-y-6 scrollbar-thin">
-          <div className="max-w-2xl mx-auto space-y-6">
-            <AnimatePresence initial={false}>
-              {messages.map((msg) => (
-                <motion.div
-                  key={msg.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-[13.5px] leading-relaxed whitespace-pre-line ${
-                      msg.sender === "user"
-                        ? "bg-zinc-800 text-white rounded-tr-none"
-                        : "bg-zinc-900/60 border border-zinc-800/50 text-zinc-300 rounded-tl-none"
-                    }`}
-                  >
-                    {msg.sender === "ai" && (
-                      <div className="flex items-center gap-1.5 mb-1.5 font-bold font-mono text-[9px] uppercase tracking-wider text-zinc-500">
-                        <Sparkles className="h-3 w-3 text-purple-400" /> Coretify AI
-                      </div>
-                    )}
-                    {msg.text}
-                  </div>
-                </motion.div>
-              ))}
+      {/* ══ RIGHT PANEL ══════════════════════════════════════════ */}
+      <div className="relative flex flex-col justify-center overflow-hidden px-8 sm:px-14 xl:px-20">
 
-              {isTyping && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex justify-start"
-                >
-                  <div className="bg-zinc-900/60 border border-zinc-800/50 text-zinc-400 rounded-2xl rounded-tl-none px-4 py-3 flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                    <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                    <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce" />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+        {/* Subtle corner glow */}
+        <div aria-hidden className="pointer-events-none absolute top-0 right-0 w-[340px] h-[340px] rounded-full opacity-40"
+          style={{ background: "radial-gradient(circle at 80% 20%, rgba(255,255,255,0.02) 0%, transparent 65%)" }} />
 
-            <div ref={chatEndRef} />
+        <div className="w-full max-w-[420px] mx-auto space-y-7">
+
+          {/* Mobile logo */}
+          <div className="flex items-center gap-0.5 lg:hidden mb-2">
+            <img src="/coretify.png" alt="Coretify" className="h-8 w-auto object-contain" />
+            <span className="text-xl font-semibold text-white">Coretify</span>
           </div>
-        </div>
 
-        {/* Input & Option Picker area */}
-        <div className="border-t border-white/[0.04] bg-[#0c0c0e]/80 backdrop-blur-md px-6 py-6 sm:px-14 lg:px-20">
-          <div className="max-w-2xl mx-auto">
-            {/* Step 1 input */}
-            {currentStep === 1 && (
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="space-y-1.5">
-                    <label className="block text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500">
-                      Nama Anda
-                    </label>
-                    <Input
-                      autoFocus
-                      placeholder="e.g. Julian Albertus"
-                      value={inputOwner}
-                      onChange={(e) => setInputOwner(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && inputCompany.trim() && handleStep1Submit()}
-                      className="h-10 bg-[#070708] border-zinc-800 text-slate-100 placeholder:text-zinc-700 focus-visible:ring-0 focus-visible:border-zinc-700 rounded-xl"
-                    />
-                  </div>
+          {/* Heading */}
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.div key={`h-${step}`} custom={dir} variants={slide} initial="enter" animate="center" exit="exit" transition={{ duration: 0.2, ease }}>
+              <p className="text-[10px] font-bold font-mono uppercase tracking-[0.22em] text-zinc-550 mb-3">
+                {String(step).padStart(2, "0")} / {String(STEPS.length).padStart(2, "0")}
+              </p>
+              <h1
+                className="text-[28px] sm:text-[34px] font-semibold tracking-tight text-white leading-[1.15] mb-2.5"
+                style={{ whiteSpace: "pre-line" }}
+              >
+                {current.title}
+              </h1>
+              <p className="text-zinc-450 text-[13px] leading-relaxed">{current.desc}</p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Step body */}
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.div key={`b-${step}`} custom={dir} variants={slide} initial="enter" animate="center" exit="exit" transition={{ duration: 0.2, ease }} className="space-y-4">
+
+              {/* ── Step 1 ── */}
+              {step === 1 && (
+                <div className="space-y-3.5">
                   <div className="space-y-1.5">
                     <label className="block text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500">
                       Nama Bisnis / Workspace
                     </label>
                     <Input
-                      placeholder="e.g. Stravio Labs"
-                      value={inputCompany}
-                      onChange={(e) => setInputCompany(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && inputOwner.trim() && handleStep1Submit()}
-                      className="h-10 bg-[#070708] border-zinc-800 text-slate-100 placeholder:text-zinc-700 focus-visible:ring-0 focus-visible:border-zinc-700 rounded-xl"
+                      autoFocus
+                      placeholder="e.g. Acme Corporation"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && ownerName.trim() && goNext()}
+                      className="h-10.5 bg-[#0c0c0e] border-zinc-850 text-slate-100 placeholder:text-zinc-750 focus-visible:ring-0 focus-visible:border-zinc-700 rounded-xl text-[13px]"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500">
+                      Nama Owner
+                    </label>
+                    <Input
+                      placeholder="e.g. Alex Henderson"
+                      value={ownerName}
+                      onChange={(e) => setOwnerName(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && companyName.trim() && goNext()}
+                      className="h-10.5 bg-[#0c0c0e] border-zinc-850 text-slate-100 placeholder:text-zinc-750 focus-visible:ring-0 focus-visible:border-zinc-700 rounded-xl text-[13px]"
                     />
                   </div>
                 </div>
-                <button
-                  onClick={handleStep1Submit}
-                  disabled={!inputOwner.trim() || !inputCompany.trim()}
-                  className="w-full h-11 flex items-center justify-center gap-2 bg-white hover:bg-zinc-200 text-black font-semibold text-sm rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.08)] disabled:opacity-20 disabled:pointer-events-none"
-                >
-                  Kirim Profil <Send className="h-3.5 w-3.5" />
-                </button>
-              </div>
-            )}
+              )}
 
-            {/* Step 2 options: Vertical playbooks */}
-            {currentStep === 2 && (
-              <div className="space-y-2">
-                <p className="text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500 mb-2">Pilih Vertical Bisnis</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {verticals.map((v) => (
-                    <button
-                      key={v.value}
-                      onClick={() => handleSelectVertical(v.value, v.label)}
-                      className="w-full text-left p-3 border border-zinc-850 hover:border-zinc-700 bg-zinc-900/30 hover:bg-zinc-900/60 rounded-xl group transition-all"
-                    >
-                      <p className="text-[12px] font-semibold text-white group-hover:text-purple-300 transition-colors">{v.label}</p>
-                      <p className="text-[10px] text-zinc-500 mt-0.5 leading-snug">{v.desc}</p>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Step 3 options: Team scale */}
-            {currentStep === 3 && (
-              <div className="space-y-2">
-                <p className="text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500 mb-2">Berapa ukuran tim Anda?</p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  {scales.map((s) => (
-                    <button
-                      key={s.value}
-                      onClick={() => handleSelectScale(s.value, s.label)}
-                      className="w-full text-left p-3.5 border border-zinc-850 hover:border-zinc-700 bg-zinc-900/30 hover:bg-zinc-900/60 rounded-xl group transition-all"
-                    >
-                      <p className="text-[12px] font-semibold text-white group-hover:text-purple-300 transition-colors">{s.label}</p>
-                      <p className="text-[10px] text-zinc-500 mt-1 leading-snug">{s.desc}</p>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Step 4 options: Multi-select tools */}
-            {currentStep === 4 && (
-              <div className="space-y-3">
-                <p className="text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500">Pilih Data Source Utama</p>
-                <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                  {toolsList.map((t) => {
-                    const isSelected = tempMultiSelect.includes(t.value);
+              {/* ── Step 2 ── */}
+              {step === 2 && (
+                <div className="space-y-2">
+                  {verticals.map((v) => {
+                    const sel = businessType === v.value;
                     return (
-                      <button
-                        key={t.value}
-                        onClick={() => handleToggleTool(t.value)}
-                        className={`p-2.5 text-center border rounded-xl transition-all text-[12px] font-medium flex flex-col items-center justify-between gap-2 ${
-                          isSelected
-                            ? "border-white bg-zinc-900 text-white"
-                            : "border-zinc-850 bg-zinc-900/30 hover:bg-zinc-900/50 text-zinc-450 hover:text-zinc-200"
-                        }`}
-                      >
-                        <span>{t.label}</span>
-                        <div className={`h-[14px] w-[14px] rounded-[3px] border flex items-center justify-center transition-all ${
-                          isSelected ? "border-white bg-white" : "border-zinc-700"
-                        }`}>
-                          {isSelected && <Check className="h-[9px] w-[9px] text-black stroke-[3.5px]" />}
+                      <button key={v.value} onClick={() => pickVertical(v.value)} className={`${optBase} px-4 py-3 ${sel ? optOn : optOff}`}>
+                        <div>
+                          <p className="text-[12.5px] font-semibold leading-none">{v.label}</p>
+                          <p className={`text-[10.5px] mt-1 ${sel ? "text-zinc-400" : "text-zinc-600"}`}>{v.desc}</p>
+                        </div>
+                        <div className={`shrink-0 ml-4 h-[16px] w-[16px] rounded-full border-[1.5px] flex items-center justify-center transition-all ${sel ? radioOn : radioOff}`}>
+                          {sel && <div className="h-[6px] w-[6px] rounded-full bg-white" />}
                         </div>
                       </button>
                     );
                   })}
                 </div>
-                <button
-                  onClick={handleConfirmTools}
-                  disabled={tempMultiSelect.length === 0}
-                  className="w-full h-10 mt-2 flex items-center justify-center gap-1.5 bg-white hover:bg-zinc-200 text-black font-semibold text-xs rounded-xl disabled:opacity-20 transition-all"
-                >
-                  Konfirmasi Pilihan Data Source <ArrowRight className="h-3.5 w-3.5" />
-                </button>
-              </div>
-            )}
+              )}
 
-            {/* Step 5 options: Multi-select goals */}
-            {currentStep === 5 && (
-              <div className="space-y-3">
-                <p className="text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500">Pilih Target Outcome / Masalah Utama</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {goalsList.map((g) => {
-                    const isSelected = tempMultiSelect.includes(g.value);
+              {/* ── Step 3 ── */}
+              {step === 3 && (
+                <div className="space-y-2">
+                  {scales.map((s) => {
+                    const sel = teamSize === s.value;
                     return (
-                      <button
-                        key={g.value}
-                        onClick={() => handleToggleGoal(g.value)}
-                        className={`text-left p-3 border rounded-xl transition-all flex items-center justify-between ${
-                          isSelected
-                            ? "border-white bg-zinc-900 text-white"
-                            : "border-zinc-850 bg-zinc-900/30 hover:bg-zinc-900/50 text-zinc-450 hover:text-zinc-200"
-                        }`}
-                      >
-                        <span className="text-[12px] font-semibold">{g.label}</span>
-                        <div className={`shrink-0 h-[14px] w-[14px] rounded-[3px] border flex items-center justify-center transition-all ${
-                          isSelected ? "border-white bg-white" : "border-zinc-700"
-                        }`}>
-                          {isSelected && <Check className="h-[9px] w-[9px] text-black stroke-[3.5px]" />}
+                      <button key={s.value} onClick={() => pickScale(s.value)} className={`${optBase} px-4 py-3.5 ${sel ? optOn : optOff}`}>
+                        <div>
+                          <p className="text-[12.5px] font-semibold leading-none">{s.label}</p>
+                          <p className={`text-[10.5px] mt-1 ${sel ? "text-zinc-400" : "text-zinc-650"}`}>{s.desc}</p>
+                        </div>
+                        <div className={`shrink-0 ml-4 h-[16px] w-[16px] rounded-full border-[1.5px] flex items-center justify-center transition-all ${sel ? radioOn : radioOff}`}>
+                          {sel && <div className="h-[6px] w-[6px] rounded-full bg-white" />}
                         </div>
                       </button>
                     );
                   })}
                 </div>
-                <button
-                  onClick={handleConfirmGoals}
-                  disabled={tempMultiSelect.length === 0}
-                  className="w-full h-10 mt-2 flex items-center justify-center gap-1.5 bg-white hover:bg-zinc-200 text-black font-semibold text-xs rounded-xl disabled:opacity-20 transition-all"
-                >
-                  Konfirmasi Target Outcome <ArrowRight className="h-3.5 w-3.5" />
-                </button>
-              </div>
-            )}
+              )}
 
-            {/* Step 6 options: Redirects */}
-            {currentStep === 6 && (
-              <div className="space-y-2">
-                <p className="text-[10px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-500 mb-2">Tindakan Selanjutnya</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <button
-                    onClick={() => handleFinishRedirect("sandbox")}
-                    className="h-11 flex items-center justify-center gap-2 border border-zinc-750 bg-zinc-900/40 hover:bg-zinc-900/80 text-zinc-200 font-semibold text-xs rounded-xl transition-all"
-                  >
-                    <Sparkles className="h-4 w-4 text-purple-400" /> Coba Sandbox Demo (3 Menit)
-                  </button>
-                  <button
-                    onClick={() => handleFinishRedirect("connect")}
-                    className="h-11 flex items-center justify-center gap-2 bg-white hover:bg-zinc-200 text-black font-semibold text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.08)]"
-                  >
-                    Hubungkan Data Source <ArrowRight className="h-4 w-4" />
-                  </button>
+              {/* ── Step 4 ── */}
+              {step === 4 && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <p className="text-[9.5px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-550">Data Source</p>
+                    <div className="space-y-2">
+                      {toolsList.map((t) => {
+                        const sel = toolsUsed.includes(t.value);
+                        return (
+                          <button key={t.value} onClick={() => toggleTool(t.value)} className={`${optBase} rounded-lg px-3 py-2.5 ${sel ? optOn : optOff}`}>
+                            <span className="text-[11.5px] font-medium">{t.label}</span>
+                            <div className={`shrink-0 h-[14px] w-[14px] rounded-[3px] border flex items-center justify-center transition-all ${sel ? checkOn : checkOff}`}>
+                              {sel && <Check className="h-[9px] w-[9px] text-black stroke-[3.5px]" />}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-[9.5px] font-bold font-mono uppercase tracking-[0.15em] text-zinc-550">Tantangan Utama</p>
+                    <div className="space-y-2">
+                      {goalsList.map((g) => {
+                        const sel = painPoints.includes(g.value);
+                        return (
+                          <button key={g.value} onClick={() => toggleGoal(g.value)} className={`${optBase} rounded-lg px-3 py-2.5 ${sel ? optOn : optOff}`}>
+                            <span className="text-[11.5px] font-medium truncate max-w-[130px]">{g.label}</span>
+                            <div className={`shrink-0 h-[14px] w-[14px] rounded-[3px] border flex items-center justify-center transition-all ${sel ? checkOn : checkOff}`}>
+                              {sel && <Check className="h-[9px] w-[9px] text-black stroke-[3.5px]" />}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
+              )}
+
+              {/* ── Nav buttons ── */}
+              <div className="space-y-2.5 pt-2">
+                <button
+                  onClick={goNext}
+                  disabled={!canAdvance}
+                  className="w-full h-11 flex items-center justify-center gap-2 bg-white hover:bg-zinc-150 text-black font-semibold text-xs rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.06)] disabled:opacity-20 disabled:pointer-events-none cursor-pointer"
+                >
+                  {step === 4 ? "Selesai & Lanjut ke Sandbox" : "Lanjutkan"}
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+
+                {step > 1 && (
+                  <button
+                    onClick={goBack}
+                    className="w-full h-10 flex items-center justify-center gap-2 bg-transparent hover:bg-white/[0.02] text-zinc-500 hover:text-zinc-350 font-semibold text-xs rounded-xl border border-zinc-850 hover:border-zinc-750 transition-all cursor-pointer"
+                  >
+                    <ArrowLeft className="h-3.5 w-3.5" />
+                    Kembali
+                  </button>
+                )}
               </div>
-            )}
-          </div>
+
+            </motion.div>
+          </AnimatePresence>
+
         </div>
       </div>
     </main>

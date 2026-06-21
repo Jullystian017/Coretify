@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
-import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
@@ -15,8 +14,7 @@ import {
   ThumbsDown,
   Coins,
   Cpu,
-  Bookmark,
-  Check,
+  User,
 } from "lucide-react";
 
 interface ChatMessage {
@@ -25,6 +23,7 @@ interface ChatMessage {
   text: string;
   sources?: { title: string; url: string; preview: string }[];
   feedback?: { accuracy?: "up" | "down"; usefulness?: "up" | "down" };
+  time: string;
 }
 
 export default function AskBusinessPage() {
@@ -35,6 +34,11 @@ export default function AskBusinessPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
+
+  const formatTime = () => {
+    const d = new Date();
+    return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  };
 
   // Load configuration from local storage
   useEffect(() => {
@@ -59,6 +63,7 @@ export default function AskBusinessPage() {
         id: "intro",
         sender: "ai",
         text: `Halo! Saya Coretify AI, Otak Kedua bisnis Anda.\n\nMemori untuk **${companyName}** sudah aktif dengan playbook **${playbook}**. Tanyakan apa saja tentang project yang berisiko terlambat, histori revisi klien, komitmen tim di WhatsApp, atau invoice tertunggak.`,
+        time: formatTime(),
       },
     ]);
   }, [companyName, playbook]);
@@ -100,7 +105,10 @@ export default function AskBusinessPage() {
     localStorage.setItem("coretify_credits", nextCredits.toString());
 
     // Add user message
-    setMessages((prev) => [...prev, { id: Math.random().toString(), sender: "user", text }]);
+    setMessages((prev) => [
+      ...prev,
+      { id: Math.random().toString(), sender: "user", text, time: formatTime() },
+    ]);
     setQuery("");
     setIsTyping(true);
 
@@ -141,6 +149,7 @@ export default function AskBusinessPage() {
           sender: "ai",
           text: answerText,
           sources: mockSources,
+          time: formatTime(),
         },
       ]);
     }, 1200);
@@ -171,7 +180,7 @@ export default function AskBusinessPage() {
         <SiteHeader />
 
         <div className="flex flex-1 flex-col overflow-hidden max-w-4xl w-full mx-auto px-6 py-6 md:py-8 justify-between relative h-[calc(100vh-var(--header-height))]">
-          {/* Subtle top bar for Credits and Playbook */}
+          {/* Top Info Bar */}
           <div className="flex items-center justify-between border-b border-zinc-900 pb-3 shrink-0">
             <div className="flex items-center gap-2">
               <Cpu className="h-4 w-4 text-purple-400" />
@@ -179,7 +188,7 @@ export default function AskBusinessPage() {
                 Playbook: {playbook} Engine Active
               </span>
             </div>
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-zinc-800 bg-[#0c0c0e]">
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-zinc-850 bg-[#0c0c0e]">
               <Coins className="h-3.5 w-3.5 text-yellow-500" />
               <span className="text-[11px] font-mono font-bold text-zinc-300">
                 {credits} / 1000 Credits
@@ -187,61 +196,76 @@ export default function AskBusinessPage() {
             </div>
           </div>
 
-          {/* Chat Messages Log */}
+          {/* Unified Feed Chat Log */}
           <div className="flex-1 overflow-y-auto py-6 space-y-6 scrollbar-thin">
             <AnimatePresence initial={false}>
               {messages.map((msg) => (
                 <motion.div
                   key={msg.id}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+                  className="flex items-start gap-4 border-b border-zinc-900/30 pb-6 last:border-b-0"
                 >
-                  <div
-                    className={`max-w-[85%] rounded-2xl p-4 text-[13px] leading-relaxed whitespace-pre-line ${
+                  {/* Avatar */}
+                  <div className={`h-8.5 w-8.5 rounded-xl border flex items-center justify-center shrink-0 text-xs font-bold transition-all ${
+                    msg.sender === "user"
+                      ? "bg-zinc-900 border-zinc-800 text-zinc-300"
+                      : "bg-purple-950/40 border-purple-900/30 text-purple-400"
+                  }`}>
+                    {msg.sender === "user" ? <User className="h-4 w-4 text-zinc-400" /> : <Sparkles className="h-4 w-4" />}
+                  </div>
+
+                  {/* Message Content */}
+                  <div className="flex-1 space-y-2">
+                    {/* Header */}
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-[12.5px] font-bold text-white leading-none">
+                        {msg.sender === "user" ? "Anda" : "Coretify AI Brain"}
+                      </span>
+                      <span className="text-[10px] text-zinc-600 font-mono tracking-wider">
+                        {msg.time}
+                      </span>
+                    </div>
+
+                    {/* Styled Message card */}
+                    <div className={`p-4 rounded-xl border leading-relaxed text-[12.5px] whitespace-pre-line text-zinc-300 ${
                       msg.sender === "user"
-                        ? "bg-zinc-800 text-white rounded-tr-none"
-                        : "bg-zinc-900/60 border border-zinc-800/50 text-zinc-300 rounded-tl-none space-y-3"
-                    }`}
-                  >
-                    {msg.sender === "ai" && msg.id !== "intro" && (
-                      <div className="flex items-center gap-1.5 font-bold font-mono text-[9.5px] uppercase tracking-wider text-zinc-500 mb-1">
-                        <Sparkles className="h-3 w-3 text-purple-400" /> Coretify AI Output
-                      </div>
-                    )}
-                    
-                    <p>{msg.text}</p>
+                        ? "bg-zinc-950/20 border-zinc-900"
+                        : "bg-zinc-900/20 border-zinc-850 shadow-[0_4px_20px_rgba(0,0,0,0.15)] space-y-4"
+                    }`}>
+                      <p>{msg.text}</p>
 
-                    {/* Citations / Sources */}
-                    {msg.sources && msg.sources.length > 0 && (
-                      <div className="pt-3 border-t border-zinc-850 space-y-2">
-                        <p className="text-[10px] font-bold font-mono uppercase tracking-wider text-zinc-500">
-                          Sitasi Sumber Data ({msg.sources.length})
-                        </p>
-                        <div className="space-y-1.5">
-                          {msg.sources.map((src, i) => (
-                            <a
-                              key={i}
-                              href={src.url}
-                              className="flex items-center justify-between p-2 rounded-lg bg-zinc-950 border border-zinc-850/65 hover:border-zinc-700 hover:bg-zinc-900/40 transition-all text-left text-[11px] group"
-                            >
-                              <span className="text-zinc-300 truncate max-w-[240px] font-medium">
-                                📎 {src.title}
-                              </span>
-                              <span className="text-zinc-600 group-hover:text-zinc-450 flex items-center gap-1 shrink-0 text-[10px]">
-                                View Document <ExternalLink className="h-2.5 w-2.5" />
-                              </span>
-                            </a>
-                          ))}
+                      {/* Citations block for AI */}
+                      {msg.sender === "ai" && msg.sources && msg.sources.length > 0 && (
+                        <div className="pt-3 border-t border-zinc-850/60 space-y-2">
+                          <p className="text-[9.5px] font-bold font-mono uppercase tracking-wider text-zinc-500">
+                            Sitasi Rujukan Memori ({msg.sources.length})
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {msg.sources.map((src, i) => (
+                              <a
+                                key={i}
+                                href={src.url}
+                                className="flex items-center justify-between p-2 rounded-lg bg-zinc-950 border border-zinc-850 hover:border-zinc-700 hover:bg-zinc-900/40 transition-all text-[11px] group"
+                              >
+                                <span className="text-zinc-350 truncate max-w-[180px] font-medium">
+                                  📎 {src.title}
+                                </span>
+                                <span className="text-zinc-650 group-hover:text-zinc-400 flex items-center gap-0.5 text-[9.5px]">
+                                  Buka <ExternalLink className="h-2.5 w-2.5" />
+                                </span>
+                              </a>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
 
-                    {/* Feedback system */}
+                    {/* Feedback systems for AI */}
                     {msg.sender === "ai" && msg.id !== "intro" && (
-                      <div className="pt-2 flex items-center justify-between text-[10px] text-zinc-500">
+                      <div className="flex items-center gap-4 text-[10px] text-zinc-550 pt-0.5">
                         <span className="font-mono uppercase tracking-wider text-[9px] text-zinc-650">
-                          Akurasi Jawaban?
+                          Apakah data ini akurat?
                         </span>
                         <div className="flex items-center gap-3">
                           <button
@@ -250,7 +274,7 @@ export default function AskBusinessPage() {
                               msg.feedback?.accuracy === "up" ? "text-emerald-400" : ""
                             }`}
                           >
-                            <ThumbsUp className="h-3 w-3" /> Benar
+                            <ThumbsUp className="h-3.5 w-3.5" /> Benar
                           </button>
                           <button
                             onClick={() => handleFeedback(msg.id, "accuracy", "down")}
@@ -258,7 +282,7 @@ export default function AskBusinessPage() {
                               msg.feedback?.accuracy === "down" ? "text-red-400" : ""
                             }`}
                           >
-                            <ThumbsDown className="h-3 w-3" /> Salah
+                            <ThumbsDown className="h-3.5 w-3.5" /> Salah
                           </button>
                         </div>
                       </div>
@@ -269,14 +293,23 @@ export default function AskBusinessPage() {
 
               {isTyping && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex justify-start"
+                  className="flex items-start gap-4"
                 >
-                  <div className="bg-zinc-900/60 border border-zinc-800/50 text-zinc-400 rounded-2xl rounded-tl-none px-4 py-3 flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                    <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                    <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce" />
+                  <div className="h-8.5 w-8.5 rounded-xl border border-purple-900/30 bg-purple-950/40 flex items-center justify-center shrink-0 text-purple-400">
+                    <Sparkles className="h-4 w-4" />
+                  </div>
+                  <div className="space-y-2 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[12.5px] font-bold text-white">Coretify AI Brain</span>
+                      <span className="text-[10px] text-zinc-600 font-mono">Proses...</span>
+                    </div>
+                    <div className="bg-zinc-900/20 border border-zinc-850 px-4 py-3.5 rounded-xl flex items-center gap-1.5 w-16">
+                      <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                      <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                      <span className="h-1.5 w-1.5 bg-zinc-500 rounded-full animate-bounce" />
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -284,9 +317,8 @@ export default function AskBusinessPage() {
             <div ref={chatEndRef} />
           </div>
 
-          {/* Chat presets & query input */}
+          {/* Input & suggestions footer */}
           <div className="space-y-3 shrink-0 pt-4 bg-[#070708] border-t border-zinc-900">
-            {/* Presets SUGGESTIONS */}
             {messages.length <= 1 && (
               <div className="flex flex-wrap gap-1.5 justify-center sm:justify-start">
                 {presetQuestions.map((q, i) => (
@@ -301,7 +333,6 @@ export default function AskBusinessPage() {
               </div>
             )}
 
-            {/* Input box */}
             <div className="relative border border-zinc-850 rounded-2xl bg-[#0c0c0e] flex items-center p-3">
               <input
                 type="text"
@@ -315,7 +346,7 @@ export default function AskBusinessPage() {
               <button
                 onClick={() => handleSend()}
                 disabled={!query.trim() || credits <= 0}
-                className="absolute right-3 h-8 w-8 rounded-lg bg-white hover:bg-zinc-200 text-black flex items-center justify-center transition-all disabled:opacity-20 shrink-0 shadow-[0_0_12px_rgba(255,255,255,0.06)]"
+                className="absolute right-3 h-8 w-8 rounded-lg bg-white hover:bg-zinc-200 text-black flex items-center justify-center transition-all disabled:opacity-20 shrink-0 shadow-[0_0_12px_rgba(255,255,255,0.06)] cursor-pointer"
               >
                 <Send className="h-3.5 w-3.5" />
               </button>
