@@ -25,152 +25,56 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "#",
+      title: "Dashboard Snapshot",
+      url: "/dashboard",
       icon: (
-        <LayoutDashboardIcon
-        />
+        <LayoutDashboardIcon />
       ),
     },
     {
-      title: "Lifecycle",
-      url: "#",
+      title: "Ask Business (RAG)",
+      url: "/dashboard/ask",
       icon: (
-        <ListIcon
-        />
+        <SearchIcon />
       ),
     },
     {
-      title: "Analytics",
-      url: "#",
+      title: "Memory Graph View",
+      url: "/dashboard/memory",
       icon: (
-        <ChartBarIcon
-        />
+        <DatabaseIcon />
       ),
     },
     {
-      title: "Projects",
-      url: "#",
+      title: "Credits & Billing",
+      url: "/dashboard/billing",
       icon: (
-        <FolderIcon
-        />
+        <FileChartColumnIcon />
       ),
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: (
-        <UsersIcon
-        />
-      ),
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: (
-        <CameraIcon
-        />
-      ),
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: (
-        <FileTextIcon
-        />
-      ),
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: (
-        <FileTextIcon
-        />
-      ),
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
     },
   ],
   navSecondary: [
     {
       title: "Settings",
-      url: "#",
+      url: "/dashboard/billing", // points to billing / settings dashboard
       icon: (
-        <Settings2Icon
-        />
+        <Settings2Icon />
       ),
     },
     {
       title: "Get Help",
       url: "#",
       icon: (
-        <CircleHelpIcon
-        />
-      ),
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: (
-        <SearchIcon
-        />
+        <CircleHelpIcon />
       ),
     },
   ],
   documents: [
     {
-      name: "Data Library",
-      url: "#",
+      name: "Security & Privacy",
+      url: "/privacy",
       icon: (
-        <DatabaseIcon
-        />
-      ),
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: (
-        <FileChartColumnIcon
-        />
-      ),
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: (
-        <FileIcon
-        />
+        <FileTextIcon />
       ),
     },
   ],
