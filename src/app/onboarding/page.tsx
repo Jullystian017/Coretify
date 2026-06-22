@@ -117,7 +117,7 @@ export default function OnboardingPage() {
         painPoints: painPoints,
         createdAt: new Date().toISOString(),
       }));
-      router.push("/sandbox"); // Go to Sandbox Tryout first as specified in PRD v2.0
+      router.push("/connect"); // Go directly to Connect Data page as requested by user
     }
   };
 
