@@ -17,6 +17,7 @@ import {
   QrCode,
   X,
   Phone,
+  RefreshCw,
 } from "lucide-react";
 
 /* ─── Types ──────────────────────────────────────────────────── */
