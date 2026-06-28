@@ -183,10 +183,10 @@ export default function AskBusinessPage() {
         <div className="flex-1 flex flex-col min-h-0 @container/main">
           <div className="flex flex-1 flex-col p-4 md:p-6 min-h-0 max-w-5xl w-full mx-auto justify-between overflow-hidden">
             {/* The beautiful console card */}
-            <Card className="flex flex-col flex-1 overflow-hidden relative bg-gradient-to-br from-[rgba(255,255,255,0.03)] via-[rgba(255,255,255,0.01)] to-transparent border border-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] backdrop-blur-sm">
+            <Card className="flex flex-col flex-1 overflow-hidden relative bg-card border border-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-sm">
               
               {/* Card Header: Top info bar */}
-              <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3 bg-white/[0.01] shrink-0">
+              <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3 bg-zinc-950/40 shrink-0">
                 <div className="flex items-center gap-2">
                   <div className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -238,10 +238,10 @@ export default function AskBusinessPage() {
                         </div>
 
                         {/* Styled Message card */}
-                        <div className={`p-4 rounded-2xl border leading-relaxed text-[13px] whitespace-pre-line text-zinc-350 ${
+                        <div className={`p-4 rounded-2xl border leading-relaxed text-[13px] whitespace-pre-line text-zinc-300 ${
                           msg.sender === "user"
-                            ? "bg-zinc-900/30 border-white/[0.04]"
-                            : "bg-purple-500/[0.01] border-purple-500/10 shadow-[0_4px_24px_rgba(0,0,0,0.15)] space-y-4"
+                            ? "bg-zinc-900/85 border-white/[0.06]"
+                            : "bg-purple-950/20 border-purple-500/15 shadow-[0_4px_24px_rgba(0,0,0,0.15)] space-y-4"
                         }`}>
                           <p className="font-normal text-zinc-200">{msg.text}</p>
 
@@ -320,7 +320,7 @@ export default function AskBusinessPage() {
                           <span className="text-[13px] font-bold text-white">Coretify AI Brain</span>
                           <span className="text-[10px] text-zinc-550 font-mono">Proses...</span>
                         </div>
-                        <div className="bg-purple-500/[0.01] border border-purple-500/10 px-4 py-3.5 rounded-2xl flex items-center gap-1.5 w-16 shadow-[0_4px_24px_rgba(0,0,0,0.15)]">
+                        <div className="bg-purple-950/25 border border-purple-500/15 px-4 py-3.5 rounded-2xl flex items-center gap-1.5 w-16 shadow-[0_4px_24px_rgba(0,0,0,0.15)]">
                           <span className="h-1.5 w-1.5 bg-purple-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
                           <span className="h-1.5 w-1.5 bg-purple-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
                           <span className="h-1.5 w-1.5 bg-purple-400 rounded-full animate-bounce" />
@@ -333,14 +333,14 @@ export default function AskBusinessPage() {
               </div>
 
               {/* Input & suggestions footer */}
-              <div className="p-4 border-t border-white/[0.06] bg-white/[0.01] space-y-4 shrink-0">
+              <div className="p-4 border-t border-white/[0.06] bg-zinc-950/30 space-y-4 shrink-0">
                 {messages.length <= 1 && (
                   <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                     {presetQuestions.map((q, i) => (
                       <button
                         key={i}
                         onClick={() => handleSend(q)}
-                        className="text-xs text-zinc-400 hover:text-white bg-white/[0.02] hover:bg-white/[0.08] border border-white/[0.04] hover:border-white/[0.1] px-3.5 py-1.5 rounded-full transition-all duration-200 cursor-pointer font-medium"
+                        className="text-xs text-zinc-300 hover:text-white bg-zinc-800/40 hover:bg-zinc-800/80 border border-white/[0.06] hover:border-white/[0.1] px-3.5 py-1.5 rounded-full transition-all duration-200 cursor-pointer font-medium"
                       >
                         💡 {q}
                       </button>
@@ -348,7 +348,7 @@ export default function AskBusinessPage() {
                   </div>
                 )}
 
-                <div className="relative border border-white/[0.08] rounded-xl bg-[#0c0c0e]/60 flex items-center p-2.5 focus-within:border-purple-500/40 focus-within:ring-2 focus-within:ring-purple-500/25 transition-all duration-200 shadow-inner">
+                <div className="relative border border-white/[0.08] rounded-xl bg-zinc-950/80 flex items-center p-2.5 focus-within:border-purple-500/40 focus-within:ring-2 focus-within:ring-purple-500/25 transition-all duration-200 shadow-inner">
                   <input
                     type="text"
                     placeholder="Tanyakan status project, keputusan client, invoice, timeline..."
