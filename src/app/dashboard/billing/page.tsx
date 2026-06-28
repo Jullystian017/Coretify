@@ -105,7 +105,7 @@ export default function BillingPage() {
     >
       <AppSidebar variant="inset" />
       <SidebarInset className="bg-[#070708] text-zinc-150">
-        <SiteHeader />
+        <SiteHeader title="Billing & Credits" />
 
         <div className="flex-1 p-6 md:p-8 max-w-5xl w-full mx-auto space-y-8 overflow-y-auto">
           {/* Top Header */}

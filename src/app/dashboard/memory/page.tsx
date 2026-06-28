@@ -169,7 +169,7 @@ export default function MemoryGraphPage() {
     >
       <AppSidebar variant="inset" />
       <SidebarInset className="bg-[#070708] text-zinc-150 relative overflow-hidden flex flex-col h-screen">
-        <SiteHeader />
+        <SiteHeader title="Memory Graph" />
 
         <div className="flex-1 p-6 md:p-8 flex flex-col justify-between overflow-hidden">
           {/* Header */}
